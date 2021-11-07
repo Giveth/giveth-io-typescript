@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 import {Neutral_Gray, Pink} from "./Colors";
 
 interface ITypographyProps {
-	size?: 'xlarge' | 'large' | 'medium' | 'small' | 'xsmall';
-	wight?: 'bold' | 'normal';
 	color?: string;
 }
 
@@ -26,11 +24,12 @@ export const H2 = styled.h2`
 	color: inherit;
 `
 
-export const H3 = styled.h3`
+export const H3 = styled.h3<ITypographyProps>`
   font-family: TeX Gyre Adventor, sans-serif;
   font-size: 41px;
   font-weight: 700;
   line-height: 63px;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H4 = styled.h4`

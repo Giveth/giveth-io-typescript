@@ -2,11 +2,9 @@ import styled from '@emotion/styled';
 import { Pink } from "./Colors";
 
 interface IButtonProps {
-	secondary?: boolean;
-	neutral?: boolean;
-	outline?: boolean;
 	ghost?: boolean;
   medium?: boolean;
+  outline?: boolean
   color?: string;
   background?: string;
 }
@@ -27,15 +25,16 @@ export const Button = styled.button<IButtonProps>`
     else return 'white'
   }};
   height: ${props => {
-    if (props.medium) return '48px'
+    if (props.medium || props.outline) return '48px'
     else return '68px'
   }};
   font-weight: ${props => {
-    if (props.ghost) return '400'
+    if (props.ghost || props.outline) return '400'
     else return '700'
   }};
 	font-size: ${props => {
-    if (props.medium) return '14px'
+    if (props.outline) return '12px'
+    else if (props.medium) return '14px'
     else return '16px'
   }};
 	line-height: 18px;
@@ -43,7 +42,8 @@ export const Button = styled.button<IButtonProps>`
 	cursor: pointer;
 	display: block;
   padding: ${props => {
-    if (props.medium) return '0 20px'
+    if (props.outline) return '0 61px'
+    else if (props.medium) return '0 20px'
     else return '0 80px'
   }};
 `;

@@ -4,6 +4,8 @@ import HomeExploreProjects from "./HomeExploreProjects";
 import HomePurpleSection from "./HomePurpleSection";
 import {IProject} from "../../../types/projectType";
 import HomeFromBlog from "./HomeFromBlog";
+import HomeGetUpdates from "./HomeGetUpdates";
+import Footer from "../../Footer";
 
 interface IHomeView {
   projects: IProject[]
@@ -22,6 +24,8 @@ const HomeView = (props: IHomeView) => {
       <HomePurpleSection />
       <HomeExploreProjects projects={projects.slice(projectsSlice)} noTitle />
       <HomeFromBlog />
+      <HomeGetUpdates />
+      <Footer />
     </>
   )
 }
