@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import HomeView from '../src/components/views/homepage/Home';
 import { client } from '../src/apollo/client'
-import { FETCH_ALL_PROJECTS } from '../src/apollo/gql/gqlProjects'
+import { FETCH_HOME_PROJECTS } from '../src/apollo/gql/gqlProjects'
 import {gqlEnums} from "../src/apollo/gql/gqlEnums";
 import {IProject} from "../src/types/projectType";
 
@@ -13,8 +13,6 @@ interface IHomeRoute {
 }
 
 const HomeRoute = (props: IHomeRoute) => {
-  const { projects, totalCount } = props
-  console.log(projects, totalCount)
   return (
       <>
         <Head>
@@ -27,7 +25,7 @@ const HomeRoute = (props: IHomeRoute) => {
 
 export async function getServerSideProps() {
   const { data } = await client.query({
-    query: FETCH_ALL_PROJECTS,
+    query: FETCH_HOME_PROJECTS,
     variables: {
       limit: projectsToFetch,
       orderBy: { field: gqlEnums.QUALITYSCORE, direction: gqlEnums.DESC }

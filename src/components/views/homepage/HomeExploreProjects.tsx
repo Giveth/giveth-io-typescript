@@ -25,8 +25,8 @@ const HomeExploreProjects = (props: IHomeExploreProjects) => {
       <CardsContainer>
         {projects.map(project => {
         return(
-          <div style={{ margin: cardsMargin }}>
-            <ProjectCard key={project.id} project={project} />
+          <div key={project.id} style={{ margin: cardsMargin }}>
+            <ProjectCard project={project} />
           </div>
         )
       })}

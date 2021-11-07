@@ -5,6 +5,7 @@ import {BodyColor, Cyan, Dark_Gray, Mustard, Pink, Purple} from "../styled-compo
 import ProjectCardBadges from "./ProjectCardBadges";
 import {IProject} from "../../types/projectType";
 import {htmlToText, slugToProjectUrl} from "../../lib/helpers";
+import config from "../../../config";
 
 const noImgColors = [Cyan, Mustard, Purple]
 const cardWidth = '440px'
@@ -18,7 +19,7 @@ interface IProjectCard {
 const randomColor = () => noImgColors[Math.floor(Math.random() * 3)]
 
 const ProjectCard = (props: IProjectCard) => {
-  const { title, description, image, verified, slug, reactions } = props.project
+  const { title, description, image, verified, slug, reactions, users } = props.project
 
   const projectImage = () => {
     if (image && !Number(image)) return <Img src={image} alt='project image'/>
@@ -35,7 +36,7 @@ const ProjectCard = (props: IProjectCard) => {
         <Link href={slugToProjectUrl(slug)} >
           <a>
             <Title>{title}</Title>
-            <Author>Lauren Luz</Author>
+            <Author>{users[0].name}</Author>
             <Description>{htmlToText(description)}</Description>
             <Captions>
               <Caption>Raised: $200</Caption>
@@ -53,7 +54,7 @@ const NoImg = styled.div`
   width: 100%;
   height: 100%;
   border-radius: ${cardRadius} ${cardRadius} 0 0;
-  background-image: url("/images/GIV-icon-text.svg");
+  background-image: url(${config.APP_URL + "/images/GIV-icon-text.svg"});
 `
 
 const Captions = styled.div`
@@ -63,23 +64,25 @@ const Captions = styled.div`
 `
 
 const Description = styled(P)`
-  max-height: 76px;
+  height: 76px;
   overflow: hidden;
   color: ${Dark_Gray};
+  margin-bottom: 20px;
 `
 
 const Body = styled.div`
-  margin: 32px 24px;
+  margin: 20px 24px;
 `
 
 const Author = styled(Link_Big)`
   color: ${Pink};
   margin-bottom: 10px;
-  margin-top: -5px;
 `
 
 const Title = styled(H6)`
   color: ${BodyColor};
+  height: 26px;
+  overflow: hidden;
 `
 
 const Img = styled.img`
