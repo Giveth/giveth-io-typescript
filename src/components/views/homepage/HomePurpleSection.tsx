@@ -108,7 +108,7 @@ const ArcSmall = styled.div`
 `
 
 const ForMakers = styled.div`
-  width: 342px;
+  width: 350px;
 `
 
 const ForMakersGivers = styled.div`

@@ -13,6 +13,20 @@ export interface IProject {
   verified?: boolean
   listed?: boolean
   reactions: {
-    id: string
+    userId?: string
   }[]
+  users: IUser[]
+}
+
+export interface IUser {
+  name?: string
+}
+
+export interface IMediumBlogPost {
+  title: string
+  author: string
+  description: string
+  link: string
+  pubDate: string
+  guid: string
 }

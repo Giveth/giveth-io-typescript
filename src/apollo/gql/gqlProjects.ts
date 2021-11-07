@@ -1,5 +1,33 @@
 import gql from 'graphql-tag'
 
+export const FETCH_HOME_PROJECTS = gql`
+  query FetchAllProjects(
+    $limit: Int
+    $orderBy: OrderBy
+  ) {
+    projects(
+      take: $limit
+      orderBy: $orderBy
+    ) {
+      projects {
+        id
+        users{
+          name
+        }
+        title
+        image
+        slug
+        description
+        verified
+        reactions {
+          userId
+        }
+      }
+      totalCount
+    }
+  }
+`
+
 const FETCH_ALL_PROJECTS = gql`
   query FetchAllProjects(
     $limit: Int
