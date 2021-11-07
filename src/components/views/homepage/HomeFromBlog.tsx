@@ -34,7 +34,7 @@ const HomeFromBlog = () => {
 
 const PostWrapper = styled.div`
   display: flex;
-  gap: 160px 50px;
+  gap: 50px 160px;
   flex-wrap: wrap;
 `
 
@@ -44,7 +44,6 @@ const Title = styled(Overline)`
 
 const Wrapper = styled.div`
   background: url(${config.APP_URL + "/images/curves.svg"});
-  height: 1000px;
   padding: 90px 150px;
 `
 
