@@ -30,3 +30,13 @@ export interface IMediumBlogPost {
   pubDate: string
   guid: string
 }
+
+export interface ICategory {
+  name: string
+}
+
+export interface IProjects {
+  projects: IProject[]
+  totalCount: number
+  categories: ICategory[]
+}

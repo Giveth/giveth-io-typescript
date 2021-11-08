@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import {Neutral_Gray, Pink} from "./Colors";
+import {Gray_700, Pinky_500, Giv_800} from "./Colors";
 
 interface ITypographyProps {
 	color?: string;
+	bold?: boolean
 }
 
 export const H1 = styled.h1<ITypographyProps>`
@@ -69,22 +70,28 @@ export const D3 = styled.div`
   color: inherit;
 `
 
-export const Link_Big = styled.div`
-  font-size: 16px;
-  line-height: 21px;
-`
-
 export const P = styled.p<ITypographyProps>`
   margin: 0;
   font-size: 16px;
   line-height: 24px;
   color: ${props => props.color || 'inherit'};
+  font-weight: ${props => {
+    if (props.bold) return props.bold
+    else return 400
+  }};
 `
 
 export const Caption = styled.div<ITypographyProps>`
   font-size: 14px;
   line-height: 21px;
-  color: ${Neutral_Gray};
+  font-weight: ${props => {
+    if (props.bold) return 500
+    else return 400
+  }};
+  color: ${props => {
+    if (props.color) return props.color
+    else return Gray_700
+  }};
 `
 
 export const Overline_Small = styled.div`
@@ -109,10 +116,20 @@ export const Subline_Bold = styled.div`
   color: inherit;
 `
 
+export const Subline = styled.div`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${props => {
+    if (props.color) return props.color
+    else return Giv_800
+  }};
+`
+
 export const Button_Medium = styled.div`
   font-family: Red Hat Text, sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 18px;
-  color: ${Pink};
+  color: ${Pinky_500};
 `

@@ -1,13 +1,21 @@
-export const Gray = '#E7E1FF'
-export const Pink = '#E1458D'
-export const Purple = '#5326EC'
-export const Mustard = '#FED670'
+export const Pinky_500 = '#E1458D'
+
+export const Giv_800 = '#1B1657'
+export const Giv_500 = '#5326EC'
+export const Purple2 = '#3C14C4'
+
+export const Mustard_500 = '#FED670'
+
 export const Primary_Deep_800 = '#091139'
 export const Primary_Deep_800_Trans = 'rgba(9, 17, 57, 0.6)'
+export const Primary_Deep_500 = '#303B72'
 export const Primary_Deep_200 = '#6879D4'
-export const Dark_Gray = '#1D1E1F'
-export const Neutral_Gray = '#82899a'
+
+export const Gray_900 = '#1D1E1F'
+export const Gray_700 = '#82899A'
+export const Gray_300 = '#EBECF2'
+export const Gray_200 = '#F7F7F9'
+export const Gray = '#E7E1FF'
+
 export const BodyColor = '#303B72'
-export const Cyan = '#2FC8E0'
-export const Purple2 = '#3C14C4'
-export const Primary_Giv_800 = '#1B1657'
+export const Cyan_500 = '#2FC8E0'
