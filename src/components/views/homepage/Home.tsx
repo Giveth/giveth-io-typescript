@@ -2,7 +2,7 @@ import Menubar from '../../Menubar'
 import HomeHeader from "./HomeHeader";
 import HomeExploreProjects from "./HomeExploreProjects";
 import HomePurpleSection from "./HomePurpleSection";
-import {IProject} from "../../../types/projectType";
+import {IProject} from "../../../types/types";
 import HomeFromBlog from "./HomeFromBlog";
 import HomeGetUpdates from "./HomeGetUpdates";
 import Footer from "../../Footer";

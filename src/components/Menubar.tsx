@@ -6,32 +6,72 @@ import { Button } from "./styled-components/Button";
 import {Gray, Primary_Deep_200, Primary_Deep_800} from "./styled-components/Colors";
 import { FlexCenter } from "./styled-components/Grid";
 import Routes from '../lib/constants/Routes'
-import {Link_Big} from "./styled-components/Typography";
+import defaultUserProfile from '../../public/images/defaultUserProfile.png'
+import Link from "next/link";
 
 const Menubar = () => {
   const router = useRouter()
+
+  let activeTab = ''
+  switch(router.pathname) {
+    case '/':
+      activeTab = 'home'
+      break
+    case Routes.Projects:
+      activeTab = 'projects'
+      break
+    case Routes.Join:
+      activeTab = 'join'
+      break
+  }
+
   return (
-    <Wrapper>
-      <LogoBackground onClick={() => router.push('/')}>
-        <Image width={50} height={50} src={Logo} alt={'Logo'} />
-      </LogoBackground>
-      <MainRoutes>
-        <RoutesItem className='active'>Home</RoutesItem>
-        <RoutesItem>Projects</RoutesItem>
-        <RoutesItem>GIVeconomy</RoutesItem>
-        <RoutesItem>Join</RoutesItem>
-      </MainRoutes>
-      <Button medium onClick={() => router.push(Routes.CreateProject)}>CREATE A PROJECT</Button>
-      <WalletDetails className='flex-center'>
-        <UserAvatar></UserAvatar>
-        <div className='pl-2 pr-4'>
-          <UserAddress>0xF278...42cc</UserAddress>
-          <UserNetwork>Connected to xDai</UserNetwork>
-        </div>
-      </WalletDetails>
-    </Wrapper>
+    <>
+      <Arc />
+      <MenuWrapper>
+        <LogoBackground className='shadow_dark_500' onClick={() => router.push('/')}>
+          <Image width={50} height={50} src={Logo} alt='Logo' />
+        </LogoBackground>
+        <MainRoutes className='shadow_dark_500'>
+          <Link href='/' passHref>
+            <RoutesItem className={activeTab === 'home' ? 'active' : ''}>Home</RoutesItem>
+          </Link>
+          <Link href={Routes.Projects} passHref>
+            <RoutesItem className={activeTab === 'projects' ? 'active' : ''}>Projects</RoutesItem>
+          </Link>
+          <Link href='/' >
+            <RoutesItem>GIVeconomy</RoutesItem>
+          </Link>
+          <Link href={Routes.Join} passHref>
+            <RoutesItem className={activeTab === 'join' ? 'active' : ''}>Join</RoutesItem>
+          </Link>
+        </MainRoutes>
+        <Button className='shadow_dark_500' medium onClick={() => router.push(Routes.CreateProject)}>CREATE A PROJECT</Button>
+        <WalletDetails className='flex-center shadow_dark_500'>
+          <UserAvatar src={defaultUserProfile} width='24px' height='24px' />
+          <div className='pl-2 pr-4'>
+            <UserAddress>0xF278...42cc</UserAddress>
+            <UserNetwork>Connected to xDai</UserNetwork>
+          </div>
+        </WalletDetails>
+      </MenuWrapper>
+    </>
   )
 }
+
+const Arc = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  border-width: 250px;
+  border-style: solid;
+  border-color: ${Gray};
+  opacity: 40%;
+  top: -2340px;
+  left: -2500px;
+  width: 3600px;
+  height: 3600px;
+  z-index: -1;
+`
 
 const MenuItem = styled.div`
   border-radius: 72px;
@@ -40,11 +80,8 @@ const MenuItem = styled.div`
   color: ${Primary_Deep_800};
 `
 
-const UserAvatar = styled.div`
+const UserAvatar = styled(Image)`
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  background: green;
 `
 
 const UserAddress = styled.div`
@@ -61,7 +98,7 @@ const WalletDetails = styled(MenuItem)`
   padding: 0 12.5px;
 `
 
-const RoutesItem = styled(Link_Big)`
+const RoutesItem = styled.a`
   padding: 7px 15px;
   font-weight: 400;
   cursor: pointer;
@@ -80,8 +117,10 @@ const MainRoutes = styled(MenuItem)`
   justify-content: space-between;
 `
 
-const Wrapper = styled.div`
+const MenuWrapper = styled.div`
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   display: flex;
   align-items: center;

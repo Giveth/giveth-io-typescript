@@ -1,6 +1,6 @@
 const config = {
   QRAPHQL_SERVER: 'https://serve.giveth.io/graphql',
-  APP_URL: 'https://giveth-io-typescript.vercel.app/'
+  APP_URL: 'https://typescript.giveth.io/'
 }
 
 export default config

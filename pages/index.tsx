@@ -3,7 +3,7 @@ import HomeView from '../src/components/views/homepage/Home';
 import { client } from '../src/apollo/client'
 import { FETCH_HOME_PROJECTS } from '../src/apollo/gql/gqlProjects'
 import {gqlEnums} from "../src/apollo/gql/gqlEnums";
-import {IProject} from "../src/types/projectType";
+import {IProject} from "../src/types/types";
 
 const projectsToFetch = 15
 
@@ -16,7 +16,7 @@ const HomeRoute = (props: IHomeRoute) => {
   return (
       <>
         <Head>
-          <title>Giveth</title>
+          <title>Home | Giveth</title>
         </Head>
         <HomeView {...props} />
       </>

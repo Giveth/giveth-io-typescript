@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import Link from 'next/link'
-import {P, H6, Link_Big, Caption} from "../styled-components/Typography";
-import {BodyColor, Cyan, Dark_Gray, Mustard, Pink, Purple} from "../styled-components/Colors";
+import {P, H6, Caption} from "../styled-components/Typography";
+import {BodyColor, Cyan_500, Gray_900, Mustard_500, Pinky_500, Giv_500} from "../styled-components/Colors";
 import ProjectCardBadges from "./ProjectCardBadges";
-import {IProject} from "../../types/projectType";
+import {IProject} from "../../types/types";
 import {htmlToText, slugToProjectUrl} from "../../lib/helpers";
 import config from "../../../config";
 
-const noImgColors = [Cyan, Mustard, Purple]
+const noImgColors = [Cyan_500, Mustard_500, Giv_500]
 const cardWidth = '440px'
 const cardRadius = '12px'
 const imgHeight = '200px'
@@ -26,8 +26,10 @@ const ProjectCard = (props: IProjectCard) => {
     return <NoImg />
   }
 
+  const name = users.length > 0 && users[0].name
+
   return (
-    <Wrapper>
+    <Wrapper className='shadow_1'>
       <ImagePlaceholder>
         <ProjectCardBadges cardWidth={cardWidth} likes={reactions.length} verified={verified} />
         {projectImage()}
@@ -36,7 +38,7 @@ const ProjectCard = (props: IProjectCard) => {
         <Link href={slugToProjectUrl(slug)} >
           <a>
             <Title>{title}</Title>
-            <Author>{users[0].name}</Author>
+            {name && <Author>{name}</Author>}
             <Description>{htmlToText(description)}</Description>
             <Captions>
               <Caption>Raised: $200</Caption>
@@ -66,7 +68,7 @@ const Captions = styled.div`
 const Description = styled(P)`
   height: 76px;
   overflow: hidden;
-  color: ${Dark_Gray};
+  color: ${Gray_900};
   margin-bottom: 20px;
 `
 
@@ -74,8 +76,8 @@ const Body = styled.div`
   margin: 20px 24px;
 `
 
-const Author = styled(Link_Big)`
-  color: ${Pink};
+const Author = styled(P)`
+  color: ${Pinky_500};
   margin-bottom: 10px;
 `
 
@@ -103,7 +105,6 @@ const Wrapper = styled.div`
   width: ${cardWidth};
   border-radius: ${cardRadius};
   background: white;
-  box-shadow: 0 4px 20px #E5E6E9;
 `
 
 export default ProjectCard

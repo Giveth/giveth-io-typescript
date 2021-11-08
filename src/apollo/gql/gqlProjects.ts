@@ -47,34 +47,19 @@ const FETCH_ALL_PROJECTS = gql`
     ) {
       projects {
         id
+        users{
+          name
+        }
         title
-        balance
         image
         slug
         creationDate
-        admin
         description
-        walletAddress
-        impactLocation
         qualityScore
         verified
-        listed
-        status {
-          id
-          symbol
-          name
-          description
-        }
-        categories {
-          name
-        }
         reactions {
-          reaction
-          id
-          projectUpdateId
           userId
         }
-        qualityScore
       }
       totalCount
       categories {

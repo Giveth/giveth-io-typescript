@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import {useEffect, useState} from "react";
-import {Purple} from "../../styled-components/Colors";
+import {Giv_500} from "../../styled-components/Colors";
 import {Overline} from "../../styled-components/Typography";
 import HomeBlogPost from "./HomeBlogPost";
-import {IMediumBlogPost} from "../../../types/projectType";
+import {IMediumBlogPost} from "../../../types/types";
 import config from "../../../../config";
 
 const HomeFromBlog = () => {
@@ -39,7 +39,7 @@ const PostWrapper = styled.div`
 `
 
 const Title = styled(Overline)`
-  color: ${Purple};
+  color: ${Giv_500};
 `
 
 const Wrapper = styled.div`

@@ -9,5 +9,9 @@ export const htmlToText = (text?: string) => {
   return text
     .replace(/<\/(?:.|\n)*?>/gm, ' ') // replace closing tags w/ a space
     .replace(/<(?:.|\n)*?>/gm, '') // strip opening tags
-    .trim();
+    .trim()
+}
+
+export const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }

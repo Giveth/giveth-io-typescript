@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Pink } from "./Colors";
+import { Pinky_500 } from "./Colors";
 
 interface IButtonProps {
 	ghost?: boolean;
@@ -13,7 +13,7 @@ export const Button = styled.button<IButtonProps>`
 	background: ${props => {
     if (props.background) return props.background
     else if (props.ghost) return 'unset'
-		else return Pink
+		else return Pinky_500
 	}};
 	border-style: none;
 	border-radius: ${props => {

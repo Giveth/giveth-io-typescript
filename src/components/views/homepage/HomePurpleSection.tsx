@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import {Mustard, Purple, Purple2} from "../../styled-components/Colors";
+import {Mustard_500, Giv_500, Purple2} from "../../styled-components/Colors";
 import {D3, H2, H3, H4, Lead} from "../../styled-components/Typography";
 import {Button} from "../../styled-components/Button";
 import TwitterIcon from '../../../../public/images/twitter.svg'
@@ -19,7 +19,7 @@ const HomePurpleSection = () => {
         and people all around the world are rewarded for creating positive change.
       </GivingEffortless>
       <GivingButtons>
-        <Button background={Mustard} color={Purple}>START GIVING</Button>
+        <Button background={Mustard_500} color={Giv_500}>START GIVING</Button>
         <Button ghost>
           <div className='flex-center'>
             <Image src={TwitterIcon} alt='twitter icon' />
@@ -58,7 +58,7 @@ const ArcMustard = styled.div`
   border-radius: 50%;
   border-width: 132px;
   border-style: solid;
-  border-color: transparent transparent ${Mustard} transparent;
+  border-color: transparent transparent ${Mustard_500} transparent;
   top: -50px;
   right: -300px;
   width: 675px;
@@ -72,7 +72,7 @@ const DotMustard = styled.div`
   border-radius: 50%;
   border-width: 71px;
   border-style: solid;
-  border-color: ${Mustard};
+  border-color: ${Mustard_500};
   top: 140px;
   right: 290px;
   width: 142px;
@@ -131,12 +131,12 @@ const GivingButtons = styled.div`
 `
 
 const GivingEffortless = styled(H2)`
-  color: ${Mustard};
+  color: ${Mustard_500};
   max-width: 654px;
 `
 
 const Wrapper = styled.div`
-  background: ${Purple};
+  background: ${Giv_500};
   padding: 90px 120px;
   color: white;
   position: relative;

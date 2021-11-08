@@ -17,6 +17,33 @@ a, a:hover {
   align-items: center;
 }
 
+/* Design System Shadows */
+.shadow_dark_500 {
+  box-shadow: 0 3px 20px rgba(33, 32, 60, 0.24);
+}
+.shadow_1 {
+  box-shadow: 0 4px 20px #E5E6E9;
+}
+
+/* React-Select component */
+.select__menu {
+  z-index: 10 !important;
+}
+.select__control {
+  border: 2px solid #EBECF2;
+  border-radius: 16px !important;
+  height: 54px;
+}
+.select__value-container {
+  padding-left: 16px !important;
+}
+.select__indicator {
+  padding-right: 24px !important;
+}
+.select__indicators > span {
+  display: none;
+}
+
 @font-face {
   font-family: 'Red Hat Text';
   font-style: normal;
