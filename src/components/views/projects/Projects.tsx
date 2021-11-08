@@ -69,12 +69,13 @@ const Projects = (props: IProjects) => {
     } else isFirstRender.current = false
   }, [selectedCategory.value, sortBy.label])
 
-  const fetchProjects = queries => {
+  const fetchProjects = (queries: any) => {
     const { searchQuery, categoryQuery, sortByQuery, skip, filterQuery } = queries
     const variables = {
       orderBy: { field: sortByQuery.value, direction: gqlEnums.DESC },
       limit: projects.length,
-      skip
+      skip,
+      category: undefined
     }
 
     if (sortByQuery.direction) variables.orderBy.direction = sortByQuery.direction
@@ -91,14 +92,14 @@ const Projects = (props: IProjects) => {
         variables,
         fetchPolicy: 'no-cache'
       })
-      .then(res => {
+      .then((res: any) => {
         const data = res.data?.projects?.projects
         const count = res.data?.projects?.totalCount
         if (data) setFilteredProjects(data)
         if (count) setTotalCount(count)
         setIsLoading(false)
       })
-      .catch(err => {
+      .catch(() => {
         setIsLoading(false)
         // Toast({
         //   content: err.message || JSON.stringify(err),
