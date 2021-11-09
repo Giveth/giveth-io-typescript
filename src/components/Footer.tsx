@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Link from 'next/link'
 import Image from 'next/image'
-import {P, Caption, Subline} from "./styled-components/Typography";
+import {Body_P, Caption, Subline} from "./styled-components/Typography";
 import {Pinky_500, Giv_800} from "./styled-components/Colors";
 import Routes from "../lib/constants/Routes";
 import WikiIcon from '../../public/images/wiki.svg'
@@ -64,7 +64,7 @@ const Footer = () => {
           </Link>
         </LinksSection>
       </LinksWrapper>
-      <div>
+      <div className='text-right'>
         <IconsWrapper>
           <Image src={MediumIcon} alt='medium icon' />
           <Image src={GithubIcon} alt='github icon' />
@@ -94,7 +94,7 @@ const LinksWrapper = styled.div`
   gap: 12px 50px;
 `
 
-const LinksSection = styled(P)`
+const LinksSection = styled(Body_P)`
   color: ${Giv_800};
   display: flex;
   flex-direction: column;

@@ -1,7 +1,14 @@
 import styled from "@emotion/styled";
 import Link from 'next/link'
-import {P, H6, Caption} from "../styled-components/Typography";
-import {BodyColor, Cyan_500, Gray_900, Mustard_500, Pinky_500, Giv_500} from "../styled-components/Colors";
+import {Body_P, H6, Caption} from "../styled-components/Typography";
+import {
+  Cyan_500,
+  Gray_900,
+  Mustard_500,
+  Pinky_500,
+  Giv_500,
+  Primary_Deep_500
+} from "../styled-components/Colors";
 import ProjectCardBadges from "./ProjectCardBadges";
 import {IProject} from "../../types/types";
 import {htmlToText, slugToProjectUrl} from "../../lib/helpers";
@@ -65,7 +72,7 @@ const Captions = styled.div`
   margin-top: 14px;
 `
 
-const Description = styled(P)`
+const Description = styled(Body_P)`
   height: 76px;
   overflow: hidden;
   color: ${Gray_900};
@@ -76,13 +83,13 @@ const Body = styled.div`
   margin: 20px 24px;
 `
 
-const Author = styled(P)`
+const Author = styled(Body_P)`
   color: ${Pinky_500};
   margin-bottom: 10px;
 `
 
 const Title = styled(H6)`
-  color: ${BodyColor};
+  color: ${Primary_Deep_500};
   height: 26px;
   overflow: hidden;
 `
@@ -101,6 +108,7 @@ const ImagePlaceholder = styled.div`
 `
 
 const Wrapper = styled.div`
+  position: relative;
   height: 430px;
   width: ${cardWidth};
   border-radius: ${cardRadius};

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled'
 import Logo from '../../public/images/giveth-logo-blue.svg'
 import { Button } from "./styled-components/Button";
-import {Gray, Primary_Deep_200, Primary_Deep_800} from "./styled-components/Colors";
+import {Giv_100, Primary_Deep_200, Primary_Deep_800} from "./styled-components/Colors";
 import { FlexCenter } from "./styled-components/Grid";
 import Routes from '../lib/constants/Routes'
 import defaultUserProfile from '../../public/images/defaultUserProfile.png'
@@ -46,7 +46,7 @@ const Menubar = () => {
             <RoutesItem className={activeTab === 'join' ? 'active' : ''}>Join</RoutesItem>
           </Link>
         </MainRoutes>
-        <Button className='shadow_dark_500' medium onClick={() => router.push(Routes.CreateProject)}>CREATE A PROJECT</Button>
+        <Button className='shadow_dark_500' small onClick={() => router.push(Routes.CreateProject)}>CREATE A PROJECT</Button>
         <WalletDetails className='flex-center shadow_dark_500'>
           <UserAvatar src={defaultUserProfile} width='24px' height='24px' />
           <div className='pl-2 pr-4'>
@@ -64,13 +64,12 @@ const Arc = styled.div`
   border-radius: 50%;
   border-width: 250px;
   border-style: solid;
-  border-color: ${Gray};
+  border-color: ${Giv_100};
   opacity: 40%;
   top: -2340px;
-  left: -2500px;
+  right: 300px;
   width: 3600px;
   height: 3600px;
-  z-index: -1;
 `
 
 const MenuItem = styled.div`
@@ -105,7 +104,7 @@ const RoutesItem = styled.a`
   border-radius: 72px;
 
   &.active {
-    background: ${Gray};
+    background: ${Giv_100};
   }
 `
 

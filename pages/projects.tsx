@@ -4,8 +4,10 @@ import {FETCH_ALL_PROJECTS} from "../src/apollo/gql/gqlProjects";
 import {gqlEnums} from "../src/apollo/gql/gqlEnums";
 import Head from "next/head";
 import ProjectsView from "../src/components/views/projects/Projects";
+import Menubar from "../src/components/Menubar";
+import Footer from "../src/components/Footer";
 
-const projectsToFetch = 9
+const projectsToFetch = 15
 
 const Projects = (props: IProjects) => {
   return(
@@ -13,7 +15,9 @@ const Projects = (props: IProjects) => {
       <Head>
         <title>Projects | Giveth</title>
       </Head>
+      <Menubar />
       <ProjectsView {...props} />
+      <Footer />
     </>
   )
 }

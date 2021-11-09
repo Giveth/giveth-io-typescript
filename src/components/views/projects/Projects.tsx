@@ -1,88 +1,99 @@
 import styled from "@emotion/styled";
 import {useEffect, useRef, useState} from "react";
 import Select from 'react-select'
+import Debounced from 'lodash.debounce'
+import {useRouter} from "next/router";
+
 import {ICategory, IProject, IProjects} from "../../../types/types";
-import {H5, Subline, P} from "../../styled-components/Typography";
-import {Gray_700, Primary_Deep_500} from "../../styled-components/Colors";
-import Menubar from "../../Menubar";
+import {H5, Subline, Body_P} from "../../styled-components/Typography";
+import {
+  Gray_700,
+  Gray_900,
+  Pinky_500,
+  Primary_Deep_500
+} from "../../styled-components/Colors";
+import {Button} from "../../styled-components/Button";
 import ProjectCard from "../../project-card/ProjectCard";
 import {capitalizeFirstLetter} from "../../../lib/helpers";
 import {FETCH_ALL_PROJECTS} from "../../../apollo/gql/gqlProjects";
 import {client} from "../../../apollo/client";
 import {gqlEnums} from "../../../apollo/gql/gqlEnums";
 import SearchBox from "../../SearchBox";
+import Routes from "../../../lib/constants/Routes";
 
-interface ICategoryObj {
+interface ISelectObj {
   value: string
   label: string
+  direction?: string
+}
+
+interface IQueries {
+  orderBy: { field: string, direction: string }
+  skip?: number
+  limit?: number
+  category?: string
+  searchTerm?: string
 }
 
 const cardsMargin = '10px'
-const allCategoryObj = { value: 'All', label: 'All' }
+const allCategoryObj = {value: 'All', label: 'All'}
 const sortByObj = [
-  { label: 'Default', value: gqlEnums.QUALITYSCORE },
-  { label: 'Amount Raised', value: gqlEnums.DONATIONS },
-  { label: 'Hearts', value: gqlEnums.HEARTS },
-  { label: 'Date Created - Descending', value: gqlEnums.CREATIONDATE },
-  { label: 'Date Created - Ascending', value: gqlEnums.CREATIONDATE, direction: gqlEnums.ASC },
-  { label: 'Verified', value: gqlEnums.VERIFIED }
+  {label: 'Default', value: gqlEnums.QUALITYSCORE},
+  {label: 'Amount Raised', value: gqlEnums.DONATIONS},
+  {label: 'Hearts', value: gqlEnums.HEARTS},
+  {label: 'Date Created - Descending', value: gqlEnums.CREATIONDATE},
+  {label: 'Date Created - Ascending', value: gqlEnums.CREATIONDATE, direction: gqlEnums.ASC},
+  {label: 'Verified', value: gqlEnums.VERIFIED}
 ]
 
 const buildCategoryObj = (array: ICategory[]) => {
   let newArray = [allCategoryObj]
   array.forEach(e => {
-    const obj:ICategoryObj = { label: capitalizeFirstLetter(e.name), value: e.name }
+    const obj: ISelectObj = {label: capitalizeFirstLetter(e.name), value: e.name}
     newArray.push(obj)
   })
   return newArray
 }
 
 const Projects = (props: IProjects) => {
-  const { projects, totalCount: _totalCount, categories } = props
+  const {projects, totalCount: _totalCount, categories} = props
 
-  const [categoriesObj, setCategoriesObj] = useState<ICategoryObj[]>()
-  const [selectedCategory, setSelectedCategory] = useState<ICategoryObj>(allCategoryObj)
+  const [categoriesObj, setCategoriesObj] = useState<ISelectObj[]>()
+  const [selectedCategory, setSelectedCategory] = useState<ISelectObj>(allCategoryObj)
   const [isLoading, setIsLoading] = useState(false)
+  const [filteredProjects, setFilteredProjects] = useState<IProject[]>(projects)
+  const [sortBy, setSortBy] = useState<ISelectObj>(sortByObj[0])
+  const [search, setSearch] = useState<string>()
   const [totalCount, setTotalCount] = useState(_totalCount)
-  const [filteredProjects, setFilteredProjects] = useState<IProject[]>()
-  const [sortBy, setSortBy] = useState(sortByObj[0])
-  const [currentPage, setCurrentPage] = useState(0)
-
-  const pageCount = Math.ceil(totalCount / projects.length)
 
   const isFirstRender = useRef(true)
+  const debouncedSearch = useRef<any>()
+  const pageNum = useRef(0)
+
+  const router = useRouter()
 
   useEffect(() => {
     setCategoriesObj(buildCategoryObj(categories))
-    // debouncedSearch.current = Debounced(setSearch, 1000)
+    debouncedSearch.current = Debounced(setSearch, 1000)
   }, [])
 
   useEffect(() => {
-    if (!isFirstRender.current) {
-      fetchProjects({
-        categoryQuery: selectedCategory.value,
-        sortByQuery: sortBy,
-        // searchQuery: search,
-        // skip: itemsPerPage * currentPage,
-        // filterQuery: filterBy.value
-      })
-    } else isFirstRender.current = false
-  }, [selectedCategory.value, sortBy.label])
+    if (!isFirstRender.current) fetchProjects()
+    else isFirstRender.current = false
+  }, [selectedCategory.value, sortBy.label, search])
 
-  const fetchProjects = (queries: any) => {
-    const { searchQuery, categoryQuery, sortByQuery, skip, filterQuery } = queries
-    const variables = {
-      orderBy: { field: sortByQuery.value, direction: gqlEnums.DESC },
+  const fetchProjects = (isLoadMore?: boolean, loadNum?: number ) => {
+    const categoryQuery = selectedCategory.value
+
+    const variables: IQueries = {
+      orderBy: {field: sortBy.value, direction: gqlEnums.DESC},
       limit: projects.length,
-      skip,
-      category: undefined
+      skip: projects.length * (loadNum || 0),
     }
 
-    if (sortByQuery.direction) variables.orderBy.direction = sortByQuery.direction
+    if (sortBy.direction) variables.orderBy.direction = sortBy.direction
     if (categoryQuery && categoryQuery !== 'All') variables.category = categoryQuery
-    // if (searchQuery) variables.searchTerm = searchQuery
-    // if (filterQuery) variables.filterBy = { field: filterQuery, value: true }
-    // else delete variables.filterBy
+    if (search) variables.searchTerm = search
 
     setIsLoading(true)
 
@@ -95,8 +106,11 @@ const Projects = (props: IProjects) => {
       .then((res: any) => {
         const data = res.data?.projects?.projects
         const count = res.data?.projects?.totalCount
-        if (data) setFilteredProjects(data)
         if (count) setTotalCount(count)
+        if (data) {
+          if (isLoadMore) setFilteredProjects(filteredProjects.concat(data))
+          else setFilteredProjects(data)
+        }
         setIsLoading(false)
       })
       .catch(() => {
@@ -108,53 +122,85 @@ const Projects = (props: IProjects) => {
       })
   }
 
-  const selectCategory = (e: any) => {
-    setSelectedCategory(e)
-    setCurrentPage(0)
+  const handleChange = (type: string, input: any) => {
+    pageNum.current = 0
+    if (type === 'search') debouncedSearch.current(input)
+    else if (type === 'sortBy') setSortBy(input)
+    else if (type === 'category') setSelectedCategory(input)
   }
 
-  const selectSortBy = (e: any) => {
-    setSortBy(e)
-    setCurrentPage(0)
+  const loadMore = () => {
+    fetchProjects(true, pageNum.current + 1)
+    pageNum.current = pageNum.current + 1
   }
 
-  console.log(filteredProjects, selectedCategory)
+  const showLoadMore = totalCount > filteredProjects.length
 
-  return(
-    <>
-      <Menubar />
-      <Wrapper>
-        <Title>Explore <span>{totalCount} Projects</span></Title>
-        <FiltersSection>
-          <SelectComponent>
-            <Label>CATEGORY</Label>
-            <Select classNamePrefix="select" value={selectedCategory} onChange={selectCategory} options={categoriesObj}/>
-          </SelectComponent>
-          <SelectComponent>
-            <Label>SORT BY</Label>
-            <Select classNamePrefix="select" value={sortBy} onChange={selectSortBy} options={sortByObj}/>
-          </SelectComponent>
-          <SearchBox />
-        </FiltersSection>
-        <ProjectsContainer>
-          {(filteredProjects || projects).map(project =>
-            <div key={project.id} style={{ margin: cardsMargin }}>
-              <ProjectCard project={project} />
-            </div>
-          )}
-        </ProjectsContainer>
-      </Wrapper>
-    </>
+  return (
+    <Wrapper>
+      <Title>Explore <span>{_totalCount} Projects</span></Title>
+      <FiltersSection>
+        <SelectComponent>
+          <Label>CATEGORY</Label>
+          <Select
+            classNamePrefix="select"
+            value={selectedCategory}
+            onChange={e => handleChange('category', e)}
+            options={categoriesObj}
+          />
+        </SelectComponent>
+        <SelectComponent>
+          <Label>SORT BY</Label>
+          <Select
+            classNamePrefix="select"
+            value={sortBy}
+            onChange={e => handleChange('sortBy', e)}
+            options={sortByObj}
+          />
+        </SelectComponent>
+        <div>
+          <Label/>
+          <SearchBox onChange={(e: string) => handleChange('search', e)}/>
+        </div>
+      </FiltersSection>
+      <ProjectsContainer>
+        {filteredProjects.map(project =>
+          <div key={project.id} style={{margin: cardsMargin}}>
+            <ProjectCard project={project}/>
+          </div>
+        )}
+      </ProjectsContainer>
+      {showLoadMore && (
+        <>
+          <Button
+            onClick={loadMore}
+            className='mx-auto mt-5'
+            outline
+            color={Pinky_500}
+          >
+            LOAD MORE
+          </Button>
+          <Button
+            onClick={() => router.push(Routes.CreateProject)}
+            color={Pinky_500}
+            ghost className='mx-auto mt-2'>
+            Create a Project
+          </Button>
+        </>
+      )}
+    </Wrapper>
   )
 }
 
-const SelectComponent = styled(P)`
+const SelectComponent = styled(Body_P)`
   width: 343px;
   font-weight: 500;
+  color: ${Gray_900};
 `
 
 const Label = styled(Subline)`
   color: ${Primary_Deep_500};
+  height: 18px;
 `
 
 const FiltersSection = styled.div`
@@ -165,6 +211,8 @@ const FiltersSection = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  align-items: center;
+  position: relative;
 `
 
 const ProjectsContainer = styled.div`
@@ -174,8 +222,7 @@ const ProjectsContainer = styled.div`
 `
 
 const Wrapper = styled.div`
-  padding: 166px 30px;
-  background: #00000003;
+  padding: 166px 30px 4px 30px;
 `
 
 const Title = styled(H5)`
