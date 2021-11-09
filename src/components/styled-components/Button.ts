@@ -3,38 +3,49 @@ import { Pinky_500 } from "./Colors";
 
 interface IButtonProps {
 	ghost?: boolean;
-  medium?: boolean;
+  small?: boolean
   outline?: boolean
   color?: string;
   background?: string;
+  normal?: boolean
 }
 
 export const Button = styled.button<IButtonProps>`
 	background: ${props => {
     if (props.background) return props.background
-    else if (props.ghost) return 'unset'
+    else if (props.ghost || props.outline) return 'unset'
 		else return Pinky_500
 	}};
-	border-style: none;
-	border-radius: ${props => {
-	  if (props.medium) return '72px'
-    else return '88px'
+	border-style: ${props => {
+    if (props.outline) return 'solid'
+    else return 'none'
   }};
+  border-width: ${props => {
+    if (props.outline) return '2px'
+    else return '0'
+  }};
+  border-color: ${props => {
+    if (props.outline) {
+      if (props.color) return props.color
+      else return Pinky_500
+    }
+    else return 'transparent'
+  }};
+	border-radius: 48px;
   color: ${props => {
     if (props.color) return props.color
     else return 'white'
   }};
   height: ${props => {
-    if (props.medium || props.outline) return '48px'
-    else return '68px'
+    if (props.small) return '48px'
+    else return '66px'
   }};
   font-weight: ${props => {
-    if (props.ghost || props.outline) return '400'
+    if (props.ghost || props.normal) return '400'
     else return '700'
   }};
 	font-size: ${props => {
-    if (props.outline) return '12px'
-    else if (props.medium) return '14px'
+    if (props.small) return '12px'
     else return '16px'
   }};
 	line-height: 18px;
@@ -42,8 +53,7 @@ export const Button = styled.button<IButtonProps>`
 	cursor: pointer;
 	display: block;
   padding: ${props => {
-    if (props.outline) return '0 61px'
-    else if (props.medium) return '0 20px'
+    if (props.small) return '0 40px'
     else return '0 80px'
   }};
 `;

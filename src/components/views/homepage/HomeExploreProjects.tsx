@@ -58,6 +58,7 @@ const Title = styled(H5)`
 const Wrapper = styled.div`
   margin: 60px 33px;
   color: ${Gray_900};
+  position: relative;
 `
 
 export default HomeExploreProjects
