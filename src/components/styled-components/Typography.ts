@@ -58,8 +58,24 @@ export const H6 = styled.h6<ITypographyProps>`
 `
 
 export const Lead = styled.div`
+  font-family: Red Hat Text, sans-serif;
   font-size: 21px;
+  font-weight: 400;
   line-height: 32px;
+`
+
+export const Lead_Medium = styled.div`
+  font-family: Red Hat Text, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+`
+
+export const Lead_Large = styled.div`
+  font-family: Red Hat Text, sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
 `
 
 export const D3 = styled.div`
@@ -70,13 +86,13 @@ export const D3 = styled.div`
   color: inherit;
 `
 
-export const P = styled.p<ITypographyProps>`
+export const Body_P = styled.div<ITypographyProps>`
   margin: 0;
   font-size: 16px;
   line-height: 24px;
   color: ${props => props.color || 'inherit'};
   font-weight: ${props => {
-    if (props.bold) return props.bold
+    if (props.bold) return 500
     else return 400
   }};
 `
