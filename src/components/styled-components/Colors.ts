@@ -11,6 +11,7 @@ export const Mustard_500 = '#FED670'
 
 export const Primary_Deep_800 = '#091139'
 export const Primary_Deep_800_Trans = 'rgba(9, 17, 57, 0.6)'
+export const Primary_Deep_600 = '#092560'
 export const Primary_Deep_500 = '#303B72'
 export const Primary_Deep_200 = '#6879D4'
 

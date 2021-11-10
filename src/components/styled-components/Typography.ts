@@ -126,6 +126,7 @@ export const Overline = styled.div`
 `
 
 export const Subline_Bold = styled.div`
+  font-family: Red Hat Text, sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;
@@ -133,6 +134,7 @@ export const Subline_Bold = styled.div`
 `
 
 export const Subline = styled.div`
+  font-family: Red Hat Text, sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;

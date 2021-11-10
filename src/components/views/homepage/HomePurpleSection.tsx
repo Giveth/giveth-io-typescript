@@ -4,6 +4,7 @@ import {Mustard_500, Giv_500, Purple2} from "../../styled-components/Colors";
 import {D3, H2, H3, H4, Lead} from "../../styled-components/Typography";
 import {Button} from "../../styled-components/Button";
 import TwitterIcon from '../../../../public/images/twitter.svg'
+import {Arc} from "../../styled-components/Arc";
 
 const HomePurpleSection = () => {
   return(
@@ -53,58 +54,42 @@ const HomePurpleSection = () => {
   )
 }
 
-const ArcMustard = styled.div`
-  position: absolute;
-  border-radius: 50%;
+const ArcMustard = styled(Arc)`
   border-width: 132px;
-  border-style: solid;
   border-color: transparent transparent ${Mustard_500} transparent;
   top: -50px;
   right: -300px;
   width: 675px;
   height: 675px;
-  z-index: -1;
   transform: rotate(31deg);
 `
 
-const DotMustard = styled.div`
-  position: absolute;
-  border-radius: 50%;
+const DotMustard = styled(Arc)`
   border-width: 71px;
-  border-style: solid;
   border-color: ${Mustard_500};
   top: 140px;
   right: 290px;
   width: 142px;
   height: 142px;
-  z-index: -1;
 `
 
-const ArcBig = styled.div`
-  position: absolute;
-  border-radius: 50%;
+const ArcBig = styled(Arc)`
   border-width: 150px;
-  border-style: solid;
   border-color: ${Purple2};
   top: -700px;
   left: -700px;
   width: 1740px;
   height: 1740px;
   opacity: 60%;
-  z-index: -1;
 `
 
-const ArcSmall = styled.div`
-  position: absolute;
-  border-radius: 50%;
+const ArcSmall = styled(Arc)`
   border-width: 50px;
-  border-style: solid;
   border-color: ${Purple2};
   top: -200px;
   left: -550px;
   width: 700px;
   height: 700px;
-  z-index: -1;
 `
 
 const ForMakers = styled.div`

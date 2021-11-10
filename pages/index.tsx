@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import HomeView from '../src/components/views/homepage/Home';
+import HomeIndex from '../src/components/views/homepage/HomeIndex';
 import { client } from '../src/apollo/client'
 import { FETCH_HOME_PROJECTS } from '../src/apollo/gql/gqlProjects'
 import {gqlEnums} from "../src/apollo/gql/gqlEnums";
@@ -16,14 +16,14 @@ interface IHomeRoute {
 
 const HomeRoute = (props: IHomeRoute) => {
   return (
-      <>
-        <Head>
-          <title>Home | Giveth</title>
-        </Head>
-        <Menubar />
-        <HomeView {...props} />
-        <Footer />
-      </>
+    <>
+      <Head>
+        <title>Home | Giveth</title>
+      </Head>
+      <Menubar />
+      <HomeIndex {...props} />
+      <Footer />
+    </>
   );
 }
 

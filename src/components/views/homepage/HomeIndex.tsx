@@ -13,7 +13,7 @@ interface IHomeView {
 
 const projectsSlice = 6
 
-const HomeView = (props: IHomeView) => {
+const HomeIndex = (props: IHomeView) => {
   const { projects, totalCount } = props
   return (
     <>
@@ -28,4 +28,4 @@ const HomeView = (props: IHomeView) => {
   )
 }
 
-export default HomeView;
+export default HomeIndex;
