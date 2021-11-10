@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router';
+import Link from "next/link";
 import styled from '@emotion/styled'
 import Logo from '../../public/images/giveth-logo-blue.svg'
 import { Button } from "./styled-components/Button";
@@ -7,7 +8,7 @@ import {Giv_100, Primary_Deep_200, Primary_Deep_800} from "./styled-components/C
 import { FlexCenter } from "./styled-components/Grid";
 import Routes from '../lib/constants/Routes'
 import defaultUserProfile from '../../public/images/defaultUserProfile.png'
-import Link from "next/link";
+import {Arc} from "./styled-components/Arc";
 
 const Menubar = () => {
   const router = useRouter()
@@ -27,7 +28,7 @@ const Menubar = () => {
 
   return (
     <>
-      <Arc />
+      <BigArc />
       <MenuWrapper>
         <LogoBackground className='shadow_dark_500' onClick={() => router.push('/')}>
           <Image width={50} height={50} src={Logo} alt='Logo' />
@@ -59,17 +60,15 @@ const Menubar = () => {
   )
 }
 
-const Arc = styled.div`
-  position: absolute;
-  border-radius: 50%;
+const BigArc = styled(Arc)`
   border-width: 250px;
-  border-style: solid;
   border-color: ${Giv_100};
   opacity: 40%;
   top: -2340px;
   right: 300px;
   width: 3600px;
   height: 3600px;
+  z-index: 0;
 `
 
 const MenuItem = styled.div`

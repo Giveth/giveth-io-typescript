@@ -55,7 +55,7 @@ const buildCategoryObj = (array: ICategory[]) => {
   return newArray
 }
 
-const Projects = (props: IProjects) => {
+const ProjectsIndex = (props: IProjects) => {
   const {projects, totalCount: _totalCount, categories} = props
 
   const [categoriesObj, setCategoriesObj] = useState<ISelectObj[]>()
@@ -232,4 +232,4 @@ const Title = styled(H5)`
   }
 `
 
-export default Projects
+export default ProjectsIndex

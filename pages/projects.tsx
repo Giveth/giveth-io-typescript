@@ -3,20 +3,20 @@ import {client} from "../src/apollo/client";
 import {FETCH_ALL_PROJECTS} from "../src/apollo/gql/gqlProjects";
 import {gqlEnums} from "../src/apollo/gql/gqlEnums";
 import Head from "next/head";
-import ProjectsView from "../src/components/views/projects/Projects";
+import ProjectsIndex from "../src/components/views/projects/ProjectsIndex";
 import Menubar from "../src/components/Menubar";
 import Footer from "../src/components/Footer";
 
 const projectsToFetch = 15
 
-const Projects = (props: IProjects) => {
+const ProjectsRoute = (props: IProjects) => {
   return(
     <>
       <Head>
         <title>Projects | Giveth</title>
       </Head>
       <Menubar />
-      <ProjectsView {...props} />
+      <ProjectsIndex {...props} />
       <Footer />
     </>
   )
@@ -42,4 +42,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default Projects
+export default ProjectsRoute

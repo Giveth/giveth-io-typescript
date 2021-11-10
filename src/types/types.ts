@@ -22,6 +22,10 @@ export interface IUser {
   name?: string
 }
 
+export interface IAdmin {
+  name?: string
+}
+
 export interface IMediumBlogPost {
   title: string
   author: string
@@ -39,4 +43,9 @@ export interface IProjects {
   projects: IProject[]
   totalCount: number
   categories: ICategory[]
+}
+
+export interface IProjectBySlug {
+  project: IProject
+  admin: IAdmin
 }
