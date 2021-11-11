@@ -7,6 +7,7 @@ import {useRouter} from "next/router";
 import {ICategory, IProject, IProjects} from "../../../types/types";
 import {H5, Subline, Body_P} from "../../styled-components/Typography";
 import {
+  Giv_100,
   Gray_700,
   Gray_900,
   Pinky_500,
@@ -20,6 +21,7 @@ import {client} from "../../../apollo/client";
 import {gqlEnums} from "../../../apollo/gql/gqlEnums";
 import SearchBox from "../../SearchBox";
 import Routes from "../../../lib/constants/Routes";
+import {Arc} from "../../styled-components/Arc";
 
 interface ISelectObj {
   value: string
@@ -137,60 +139,79 @@ const ProjectsIndex = (props: IProjects) => {
   const showLoadMore = totalCount > filteredProjects.length
 
   return (
-    <Wrapper>
-      <Title>Explore <span>{_totalCount} Projects</span></Title>
-      <FiltersSection>
-        <SelectComponent>
-          <Label>CATEGORY</Label>
-          <Select
-            classNamePrefix="select"
-            value={selectedCategory}
-            onChange={e => handleChange('category', e)}
-            options={categoriesObj}
-          />
-        </SelectComponent>
-        <SelectComponent>
-          <Label>SORT BY</Label>
-          <Select
-            classNamePrefix="select"
-            value={sortBy}
-            onChange={e => handleChange('sortBy', e)}
-            options={sortByObj}
-          />
-        </SelectComponent>
-        <div>
-          <Label/>
-          <SearchBox onChange={(e: string) => handleChange('search', e)}/>
-        </div>
-      </FiltersSection>
-      <ProjectsContainer>
-        {filteredProjects.map(project =>
-          <div key={project.id} style={{margin: cardsMargin}}>
-            <ProjectCard project={project}/>
+    <>
+      <BigArc />
+      <Wrapper>
+        <Title>Explore <span>{_totalCount} Projects</span></Title>
+
+        <FiltersSection>
+          <SelectComponent>
+            <Label>CATEGORY</Label>
+            <Select
+              classNamePrefix="select"
+              value={selectedCategory}
+              onChange={e => handleChange('category', e)}
+              options={categoriesObj}
+            />
+          </SelectComponent>
+          <SelectComponent>
+            <Label>SORT BY</Label>
+            <Select
+              classNamePrefix="select"
+              value={sortBy}
+              onChange={e => handleChange('sortBy', e)}
+              options={sortByObj}
+            />
+          </SelectComponent>
+          <div>
+            <Label/>
+            <SearchBox onChange={(e: string) => handleChange('search', e)}/>
           </div>
+        </FiltersSection>
+
+        {isLoading && <div className='dot-flashing mx-auto my-3'/>}
+
+        <ProjectsContainer>
+          {filteredProjects.map(project =>
+            <div key={project.id} style={{margin: cardsMargin}}>
+              <ProjectCard project={project}/>
+            </div>
+          )}
+        </ProjectsContainer>
+
+        {showLoadMore && (
+          <>
+            <Button
+              onClick={loadMore}
+              className='mx-auto mt-5'
+              outline
+              color={Pinky_500}
+            >
+              {isLoading ? <div className='dot-flashing' /> : 'LOAD MORE'}
+            </Button>
+            <Button
+              onClick={() => router.push(Routes.CreateProject)}
+              color={Pinky_500}
+              ghost className='mx-auto mt-2'>
+              Create a Project
+            </Button>
+          </>
         )}
-      </ProjectsContainer>
-      {showLoadMore && (
-        <>
-          <Button
-            onClick={loadMore}
-            className='mx-auto mt-5'
-            outline
-            color={Pinky_500}
-          >
-            LOAD MORE
-          </Button>
-          <Button
-            onClick={() => router.push(Routes.CreateProject)}
-            color={Pinky_500}
-            ghost className='mx-auto mt-2'>
-            Create a Project
-          </Button>
-        </>
-      )}
-    </Wrapper>
+      </Wrapper>
+    </>
   )
 }
+
+const BigArc = styled(Arc)`
+  border-width: 250px;
+  border-color: ${Giv_100};
+  opacity: 40%;
+  top: -2340px;
+  right: 300px;
+  width: 3600px;
+  height: 3600px;
+  z-index: 0;
+`
 
 const SelectComponent = styled(Body_P)`
   width: 343px;
