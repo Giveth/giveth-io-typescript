@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import { H3, Body_P } from "../../styled-components/Typography";
 import {IProjectBySlug} from "../../../types/types";
 import {Pinky_500} from "../../styled-components/Colors";
-import VerificationBadges from "../../VerificationBadges";
+import VerificationBadge from "../../badges/VerificationBadge";
+import {isNoImg, noImgColor, noImgIcon} from "../../../lib/helpers";
 
 const ProjectHeader = (props: IProjectBySlug) => {
   const { title, verified, image } = props.project
@@ -10,8 +11,8 @@ const ProjectHeader = (props: IProjectBySlug) => {
   return(
     <Wrapper image={image}>
       <div className='d-flex'>
-        {verified && <VerificationBadges verified /> }
-        <VerificationBadges trace />
+        {verified && <VerificationBadge verified /> }
+        <VerificationBadge trace />
       </div>
       <div>
         <H3 color='white'>{title}</H3>
@@ -22,15 +23,17 @@ const ProjectHeader = (props: IProjectBySlug) => {
 }
 
 const Wrapper = styled.div<{ image: string | undefined }>`
+  background: ${props => isNoImg(props.image) ? noImgColor() : 'unset'};
   display: flex;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-repeat: ${props => isNoImg(props.image) ? 'repeat' : 'no-repeat'};
+  background-size: ${props => isNoImg(props.image) ? 'unset' : 'cover'};
   flex-direction: column;
   justify-content: space-between;
   height: 360px;
   border-radius: 12px;
   padding: 27px;
-  background-image: ${props => `url(${props.image})`};
+  overflow: hidden;
+  background-image: ${props => `url(${isNoImg(props.image) ? noImgIcon : props.image})`};
 `
 
 export default ProjectHeader

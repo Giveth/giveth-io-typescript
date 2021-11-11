@@ -1,20 +1,17 @@
+import {useState} from "react";
 import styled from "@emotion/styled";
-import Link from 'next/link'
+import { useRouter } from "next/router";
 import {Body_P, H6, Caption} from "../styled-components/Typography";
 import {
-  Cyan_500,
   Gray_900,
-  Mustard_500,
   Pinky_500,
-  Giv_500,
   Primary_Deep_500
 } from "../styled-components/Colors";
 import ProjectCardBadges from "./ProjectCardBadges";
 import {IProject} from "../../types/types";
-import {htmlToText, slugToProjectUrl} from "../../lib/helpers";
-import config from "../../../config";
+import {htmlToText, isNoImg, noImgColor, noImgIcon, slugToProjectDonate, slugToProjectView} from "../../lib/helpers";
+import { Button } from "../styled-components/Button";
 
-const noImgColors = [Cyan_500, Mustard_500, Giv_500]
 const cardWidth = '440px'
 const cardRadius = '12px'
 const imgHeight = '200px'
@@ -23,47 +20,64 @@ interface IProjectCard {
   project: IProject
 }
 
-const randomColor = () => noImgColors[Math.floor(Math.random() * 3)]
-
 const ProjectCard = (props: IProjectCard) => {
   const { title, description, image, verified, slug, reactions, users } = props.project
 
+  const [isHover, setIsHover] = useState(false)
+
+  const router = useRouter()
+
   const projectImage = () => {
-    if (image && !Number(image)) return <Img src={image} alt='project image'/>
-    return <NoImg />
+    if (isNoImg(image)) return <NoImg />
+    return <Img src={image} alt='project image'/>
   }
 
   const name = users.length > 0 && users[0].name
 
   return (
-    <Wrapper className='shadow_1'>
+    <Wrapper
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      className='shadow_1'
+      isHover={isHover}
+    >
       <ImagePlaceholder>
-        <ProjectCardBadges cardWidth={cardWidth} likes={reactions.length} verified={verified} />
+        <ProjectCardBadges isHover={isHover} cardWidth={cardWidth} likes={reactions.length} verified={verified} />
         {projectImage()}
       </ImagePlaceholder>
-      <Body>
-        <Link href={slugToProjectUrl(slug)} >
-          <a>
-            <Title>{title}</Title>
-            {name && <Author>{name}</Author>}
-            <Description>{htmlToText(description)}</Description>
-            <Captions>
-              <Caption>Raised: $200</Caption>
-              <Caption>Last updated: 5 days ago</Caption>
-            </Captions>
-          </a>
-        </Link>
-      </Body>
+      <CardBody>
+        <Title>{title}</Title>
+        {name && <Author>{name}</Author>}
+        <Description>{htmlToText(description)}</Description>
+        <Captions>
+          <Caption>Raised: $200</Caption>
+          <Caption>Last updated: 5 days ago</Caption>
+        </Captions>
+        {isHover && <HoverButtons>
+          <Button onClick={() => router.push(slugToProjectView(slug))} small outline color={Pinky_500}>LEARN MORE</Button>
+          <Button onClick={() => router.push(slugToProjectDonate(slug))} small>DONATE</Button>
+        </HoverButtons>}
+      </CardBody>
     </Wrapper>
   )
 }
 
+const HoverButtons = styled.div`
+  display: flex;
+  margin-top: 16px;
+  gap: 16px;
+
+  button {
+    width: 100%;
+  }
+`
+
 const NoImg = styled.div`
-  background: ${randomColor};
+  background: ${noImgColor};
   width: 100%;
   height: 100%;
   border-radius: ${cardRadius} ${cardRadius} 0 0;
-  background-image: url(${config.APP_URL + "/images/GIV-icon-text.svg"});
+  background-image: url(${noImgIcon});
 `
 
 const Captions = styled.div`
@@ -79,7 +93,7 @@ const Description = styled(Body_P)`
   margin-bottom: 20px;
 `
 
-const Body = styled.div`
+const CardBody = styled.div`
   margin: 20px 24px;
 `
 
@@ -109,7 +123,7 @@ const ImagePlaceholder = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  height: 430px;
+  height: ${(props: { isHover: boolean }) => props.isHover ? '494px' : '430px'};
   width: ${cardWidth};
   border-radius: ${cardRadius};
   background: white;

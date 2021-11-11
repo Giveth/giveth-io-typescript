@@ -108,6 +108,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 70px 20px;
+  position: relative;
 `
 
 export default Footer

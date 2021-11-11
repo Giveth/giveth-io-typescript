@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import {Body_P, Subline_Bold} from "../../styled-components/Typography";
-import {Gray_300, Gray_400, Pinky_500, Primary_Deep_600} from "../../styled-components/Colors";
+import {Gray_400, Pinky_500, Primary_Deep_600} from "../../styled-components/Colors";
 
 const ProjectTabs = () =>{
   return(
@@ -42,9 +42,10 @@ const Tab = styled(Body_P)`
 `
 
 const Wrapper = styled.div`
-  margin: 20px 0;
+  margin: 20px 0 40px 0;
   color: ${Primary_Deep_600};
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 `
 
