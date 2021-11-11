@@ -59,7 +59,7 @@ export const H6 = styled.h6<ITypographyProps>`
 
 export const Lead = styled.div`
   font-family: Red Hat Text, sans-serif;
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 32px;
 `
@@ -98,6 +98,7 @@ export const Body_P = styled.div<ITypographyProps>`
 `
 
 export const Caption = styled.div<ITypographyProps>`
+  font-family: Red Hat Text, sans-serif;
   font-size: 14px;
   line-height: 21px;
   font-weight: ${props => {
@@ -111,6 +112,7 @@ export const Caption = styled.div<ITypographyProps>`
 `
 
 export const Overline_Small = styled.div`
+  font-family: Red Hat Text, sans-serif;
   font-size: 10px;
   font-weight: 500;
   line-height: 13px;

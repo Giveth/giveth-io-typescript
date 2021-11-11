@@ -12,6 +12,7 @@ export interface IProject {
   qualityScore?: number
   verified?: boolean
   listed?: boolean
+  categories: ICategory[]
   reactions: {
     userId?: string
   }[]

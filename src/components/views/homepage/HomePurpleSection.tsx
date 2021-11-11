@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 import Image from "next/image";
-import {Mustard_500, Giv_500, Purple2} from "../../styled-components/Colors";
+import {Mustard_500, Giv_500, Giv_600} from "../../styled-components/Colors";
 import {D3, H2, H3, H4, Lead} from "../../styled-components/Typography";
 import {Button} from "../../styled-components/Button";
 import TwitterIcon from '../../../../public/images/twitter.svg'
 import {Arc} from "../../styled-components/Arc";
+import config from "../../../../config";
 
 const HomePurpleSection = () => {
   return(
@@ -28,27 +29,29 @@ const HomePurpleSection = () => {
           </div>
         </Button>
       </GivingButtons>
-      <HowItWorks>
-        <D3>how it works</D3>
+      <GIVeconomy>
+        <D3>The GIVeconomy</D3>
         <br />
-        <H4>Our system connects the people on the ground directly to the Givers, and provides a level of transparency and accountability no other platform can offer.
+        <H4>Our system connects the people on the ground directly to the Givers with zero added fees. It creates an economy of giving by rewarding donors and encouraging decentralized community governance.
         </H4>
-      </HowItWorks>
+        <br />
+        <GIVeconomyUrl href={config.GIVeconomy_URL} target='_blank' rel='noopener noreferrer'>
+          Learn more about GIVeconomy
+        </GIVeconomyUrl>
+      </GIVeconomy>
       <ForMakersGivers>
-        <ForMakers>
-          <H3>For Makers</H3>
-          <Lead>Create a project and get donations in crypto. Create your project and start raising funds.
-          </Lead>
+        <ForProjects>
+          <H3>For Projects</H3>
+          <Lead>Create a project and start raising funds in crypto within minutes. Get verified to reward your donors with GIVbacks.</Lead>
           <br />
           <Button>CREATE A PROJECT</Button>
-        </ForMakers>
-        <ForMakers>
+        </ForProjects>
+        <ForGivers>
           <H3>For Givers</H3>
-          <Lead>Use our platform to give donations to a cause or a project. Easily donate to the project you most care about.
-          </Lead>
+          <Lead>Donate to change-makers that are working hard to make a difference. Earn GIV from GIVbacks when you donate to verified projects and become a stakeholder in the future of philanthropy.</Lead>
           <br />
           <Button>DONATE TO A PROJECT</Button>
-        </ForMakers>
+        </ForGivers>
       </ForMakersGivers>
     </Wrapper>
   )
@@ -75,7 +78,7 @@ const DotMustard = styled(Arc)`
 
 const ArcBig = styled(Arc)`
   border-width: 150px;
-  border-color: ${Purple2};
+  border-color: ${Giv_600};
   top: -700px;
   left: -700px;
   width: 1740px;
@@ -85,15 +88,21 @@ const ArcBig = styled(Arc)`
 
 const ArcSmall = styled(Arc)`
   border-width: 50px;
-  border-color: ${Purple2};
+  border-color: ${Giv_600};
   top: -200px;
   left: -550px;
   width: 700px;
   height: 700px;
 `
 
-const ForMakers = styled.div`
-  width: 350px;
+const ForProjects = styled.div`
+  min-width: 350px;
+  max-width: 436px;
+`
+
+const ForGivers = styled.div`
+  min-width: 350px;
+  max-width: 443px;
 `
 
 const ForMakersGivers = styled.div`
@@ -104,9 +113,13 @@ const ForMakersGivers = styled.div`
   gap: 200px;
 `
 
-const HowItWorks = styled.div`
+const GIVeconomy = styled.div`
   margin-top: 235px;
-  max-width: 609px;
+  max-width: 800px;
+`
+
+const GIVeconomyUrl = styled.a`
+  color: ${Mustard_500} !important;
 `
 
 const GivingButtons = styled.div`
