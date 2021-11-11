@@ -1,19 +1,35 @@
-import {IProjectBySlug} from "../../../types/types";
+import dynamic from 'next/dynamic'
 import styled from "@emotion/styled";
 import ProjectHeader from "./ProjectHeader";
 import ProjectTabs from "./ProjectTabs";
-import ProjectAbout from "./ProjectAbout";
+import ProjectDonateCard from "./ProjectDonateCard";
+import {IProjectBySlug} from "../../../types/types";
+
+const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
+  ssr: false
+})
 
 const ProjectIndex = (props: IProjectBySlug) => {
   const { project } = props
+  const { categories, slug } = project
+
   return(
     <Wrapper>
       <ProjectHeader {...props} />
-      <ProjectTabs />
-      <ProjectAbout description={project.description} />
+      <BodyWrapper>
+        <div>
+          <ProjectTabs />
+          <RichTextViewer content={project.description} />
+        </div>
+        <ProjectDonateCard categories={categories} slug={slug} />
+      </BodyWrapper>
     </Wrapper>
   )
 }
+
+const BodyWrapper = styled.div`
+  display: flex;
+`
 
 const Wrapper = styled.div`
   margin: 150px 125px;
