@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { client } from '../src/apollo/client'
+import client from '../src/apollo/apolloClient'
 import { FETCH_ALL_PROJECTS } from '../src/apollo/gql/gqlProjects'
 import { gqlEnums } from '../src/apollo/gql/gqlEnums'
 import ProjectsIndex from '../src/components/views/projects/ProjectsIndex'

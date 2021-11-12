@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import HomeIndex from '../src/components/views/homepage/HomeIndex'
-import { client } from '../src/apollo/client'
+import client from '../src/apollo/apolloClient'
 import { FETCH_HOME_PROJECTS } from '../src/apollo/gql/gqlProjects'
 import { gqlEnums } from '../src/apollo/gql/gqlEnums'
 import { IProject } from '../src/types/types'
