@@ -1,16 +1,17 @@
-import {IProjects} from "../src/types/types";
-import {client} from "../src/apollo/client";
-import {FETCH_ALL_PROJECTS} from "../src/apollo/gql/gqlProjects";
-import {gqlEnums} from "../src/apollo/gql/gqlEnums";
-import Head from "next/head";
-import ProjectsIndex from "../src/components/views/projects/ProjectsIndex";
-import Menubar from "../src/components/Menubar";
-import Footer from "../src/components/Footer";
+import React from 'react'
+import Head from 'next/head'
+import { client } from '../src/apollo/client'
+import { FETCH_ALL_PROJECTS } from '../src/apollo/gql/gqlProjects'
+import { gqlEnums } from '../src/apollo/gql/gqlEnums'
+import ProjectsIndex from '../src/components/views/projects/ProjectsIndex'
+import Menubar from '../src/components/Menubar'
+import Footer from '../src/components/Footer'
+import { IFetchAllProjects } from '../src/types/types_graphql'
 
 const projectsToFetch = 15
 
-const ProjectsRoute = (props: IProjects) => {
-  return(
+const ProjectsRoute = (props: IFetchAllProjects) => {
+  return (
     <>
       <Head>
         <title>Projects | Giveth</title>

@@ -1,27 +1,28 @@
-import styled from "@emotion/styled";
-import {useEffect, useRef, useState} from "react";
+import styled from '@emotion/styled'
+import React, { useEffect, useRef, useState } from 'react'
 import Select from 'react-select'
 import Debounced from 'lodash.debounce'
-import {useRouter} from "next/router";
+import { useRouter } from 'next/router'
 
-import {ICategory, IProject, IProjects} from "../../../types/types";
-import {H5, Subline, Body_P} from "../../styled-components/Typography";
+import { ICategory, IProject } from '../../../types/types'
+import { IFetchAllProjects } from '../../../types/types_graphql'
+import { H5, Subline, Body_P } from '../../styled-components/Typography'
 import {
   Giv_100,
   Gray_700,
   Gray_900,
   Pinky_500,
   Primary_Deep_500
-} from "../../styled-components/Colors";
-import {Button} from "../../styled-components/Button";
-import ProjectCard from "../../project-card/ProjectCard";
-import {capitalizeFirstLetter} from "../../../lib/helpers";
-import {FETCH_ALL_PROJECTS} from "../../../apollo/gql/gqlProjects";
-import {client} from "../../../apollo/client";
-import {gqlEnums} from "../../../apollo/gql/gqlEnums";
-import SearchBox from "../../SearchBox";
-import Routes from "../../../lib/constants/Routes";
-import {Arc} from "../../styled-components/Arc";
+} from '../../styled-components/Colors'
+import { Button } from '../../styled-components/Button'
+import ProjectCard from '../../project-card/ProjectCard'
+import { capitalizeFirstLetter } from '../../../lib/helpers'
+import { FETCH_ALL_PROJECTS } from '../../../apollo/gql/gqlProjects'
+import { client } from '../../../apollo/client'
+import { gqlEnums } from '../../../apollo/gql/gqlEnums'
+import SearchBox from '../../SearchBox'
+import Routes from '../../../lib/constants/Routes'
+import { Arc } from '../../styled-components/Arc'
 
 interface ISelectObj {
   value: string
@@ -30,7 +31,7 @@ interface ISelectObj {
 }
 
 interface IQueries {
-  orderBy: { field: string, direction: string }
+  orderBy: { field: string; direction: string }
   skip?: number
   limit?: number
   category?: string
@@ -38,27 +39,27 @@ interface IQueries {
 }
 
 const cardsMargin = '10px'
-const allCategoryObj = {value: 'All', label: 'All'}
+const allCategoryObj = { value: 'All', label: 'All' }
 const sortByObj = [
-  {label: 'Default', value: gqlEnums.QUALITYSCORE},
-  {label: 'Amount Raised', value: gqlEnums.DONATIONS},
-  {label: 'Hearts', value: gqlEnums.HEARTS},
-  {label: 'Date Created - Descending', value: gqlEnums.CREATIONDATE},
-  {label: 'Date Created - Ascending', value: gqlEnums.CREATIONDATE, direction: gqlEnums.ASC},
-  {label: 'Verified', value: gqlEnums.VERIFIED}
+  { label: 'Default', value: gqlEnums.QUALITYSCORE },
+  { label: 'Amount Raised', value: gqlEnums.DONATIONS },
+  { label: 'Hearts', value: gqlEnums.HEARTS },
+  { label: 'Date Created - Descending', value: gqlEnums.CREATIONDATE },
+  { label: 'Date Created - Ascending', value: gqlEnums.CREATIONDATE, direction: gqlEnums.ASC },
+  { label: 'Verified', value: gqlEnums.VERIFIED }
 ]
 
 const buildCategoryObj = (array: ICategory[]) => {
-  let newArray = [allCategoryObj]
+  const newArray = [allCategoryObj]
   array.forEach(e => {
-    const obj: ISelectObj = {label: capitalizeFirstLetter(e.name), value: e.name}
+    const obj: ISelectObj = { label: capitalizeFirstLetter(e.name), value: e.name }
     newArray.push(obj)
   })
   return newArray
 }
 
-const ProjectsIndex = (props: IProjects) => {
-  const {projects, totalCount: _totalCount, categories} = props
+const ProjectsIndex = (props: IFetchAllProjects) => {
+  const { projects, totalCount: _totalCount, categories } = props
 
   const [categoriesObj, setCategoriesObj] = useState<ISelectObj[]>()
   const [selectedCategory, setSelectedCategory] = useState<ISelectObj>(allCategoryObj)
@@ -84,13 +85,13 @@ const ProjectsIndex = (props: IProjects) => {
     else isFirstRender.current = false
   }, [selectedCategory.value, sortBy.label, search])
 
-  const fetchProjects = (isLoadMore?: boolean, loadNum?: number ) => {
+  const fetchProjects = (isLoadMore?: boolean, loadNum?: number) => {
     const categoryQuery = selectedCategory.value
 
     const variables: IQueries = {
-      orderBy: {field: sortBy.value, direction: gqlEnums.DESC},
+      orderBy: { field: sortBy.value, direction: gqlEnums.DESC },
       limit: projects.length,
-      skip: projects.length * (loadNum || 0),
+      skip: projects.length * (loadNum || 0)
     }
 
     if (sortBy.direction) variables.orderBy.direction = sortBy.direction
@@ -105,7 +106,7 @@ const ProjectsIndex = (props: IProjects) => {
         variables,
         fetchPolicy: 'no-cache'
       })
-      .then((res: any) => {
+      .then((res: { data: { projects: IFetchAllProjects } }) => {
         const data = res.data?.projects?.projects
         const count = res.data?.projects?.totalCount
         if (count) setTotalCount(count)
@@ -142,13 +143,15 @@ const ProjectsIndex = (props: IProjects) => {
     <>
       <BigArc />
       <Wrapper>
-        <Title>Explore <span>{_totalCount} Projects</span></Title>
+        <Title>
+          Explore <span>{_totalCount} Projects</span>
+        </Title>
 
         <FiltersSection>
           <SelectComponent>
             <Label>CATEGORY</Label>
             <Select
-              classNamePrefix="select"
+              classNamePrefix='select'
               value={selectedCategory}
               onChange={e => handleChange('category', e)}
               options={categoriesObj}
@@ -157,42 +160,39 @@ const ProjectsIndex = (props: IProjects) => {
           <SelectComponent>
             <Label>SORT BY</Label>
             <Select
-              classNamePrefix="select"
+              classNamePrefix='select'
               value={sortBy}
               onChange={e => handleChange('sortBy', e)}
               options={sortByObj}
             />
           </SelectComponent>
           <div>
-            <Label/>
-            <SearchBox onChange={(e: string) => handleChange('search', e)}/>
+            <Label />
+            <SearchBox onChange={(e: string) => handleChange('search', e)} />
           </div>
         </FiltersSection>
 
-        {isLoading && <div className='dot-flashing mx-auto my-3'/>}
+        {isLoading && <div className='dot-flashing mx-auto my-3' />}
 
         <ProjectsContainer>
-          {filteredProjects.map(project =>
-            <div key={project.id} style={{margin: cardsMargin}}>
-              <ProjectCard project={project}/>
+          {filteredProjects.map(project => (
+            <div key={project.id} style={{ margin: cardsMargin }}>
+              <ProjectCard project={project} />
             </div>
-          )}
+          ))}
         </ProjectsContainer>
 
         {showLoadMore && (
           <>
-            <Button
-              onClick={loadMore}
-              className='mx-auto mt-5'
-              outline
-              color={Pinky_500}
-            >
+            <Button onClick={loadMore} className='mx-auto mt-5' outline color={Pinky_500}>
               {isLoading ? <div className='dot-flashing' /> : 'LOAD MORE'}
             </Button>
             <Button
               onClick={() => router.push(Routes.CreateProject)}
               color={Pinky_500}
-              ghost className='mx-auto mt-2'>
+              ghost
+              className='mx-auto mt-2'
+            >
               Create a Project
             </Button>
           </>

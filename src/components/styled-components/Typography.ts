@@ -1,9 +1,9 @@
-import styled from '@emotion/styled';
-import {Gray_700, Pinky_500, Giv_800} from "./Colors";
+import styled from '@emotion/styled'
+import { Gray_700, Pinky_500, Giv_800 } from './Colors'
 
 interface ITypographyProps {
-	color?: string;
-	bold?: boolean
+  color?: string
+  bold?: boolean
 }
 
 export const H1 = styled.h1<ITypographyProps>`
@@ -18,11 +18,11 @@ export const H1 = styled.h1<ITypographyProps>`
 
 export const H2 = styled.h2`
   font-family: TeX Gyre Adventor, sans-serif;
-	font-weight: 700;
-	font-size: 52px;
-	line-height: 80px;
-	margin: 0;
-	color: inherit;
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 80px;
+  margin: 0;
+  color: inherit;
 `
 
 export const H3 = styled.h3<ITypographyProps>`

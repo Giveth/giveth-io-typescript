@@ -1,12 +1,13 @@
-import styled from "@emotion/styled";
-import Image from "next/image";
-import {FlexCenter} from "../styled-components/Grid";
-import {Primary_Deep_800_Trans} from "../styled-components/Colors";
-import {Overline_Small} from "../styled-components/Typography";
-import TraceIcon from "../../../public/images/trace.svg";
-import VerifiedIcon from "../../../public/images/verified.svg";
+import React from 'react'
+import styled from '@emotion/styled'
+import Image from 'next/image'
+import { FlexCenter } from '../styled-components/Grid'
+import { Primary_Deep_800_Trans } from '../styled-components/Colors'
+import { Overline_Small } from '../styled-components/Typography'
+import TraceIcon from '../../../public/images/trace.svg'
+import VerifiedIcon from '../../../public/images/verified.svg'
 
-const VerificationBadge = (props: { verified?:boolean, trace?: boolean }) => {
+const VerificationBadge = (props: { verified?: boolean; trace?: boolean }) => {
   const { verified, trace } = props
   const text = verified ? 'VERIFIED' : trace ? 'TRACE' : ''
   const icon = verified ? VerifiedIcon : trace ? TraceIcon : ''

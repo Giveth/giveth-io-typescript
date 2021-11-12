@@ -1,11 +1,12 @@
-import styled from "@emotion/styled";
+import React from 'react'
+import styled from '@emotion/styled'
 import Image from 'next/image'
-import {Gray_300, Gray_400, Gray_900} from "./styled-components/Colors";
-import {Body_P} from "./styled-components/Typography";
+import { Gray_300, Gray_400, Gray_900 } from './styled-components/Colors'
+import { Body_P } from './styled-components/Typography'
 import SearchIcon from '../../public/images/search.svg'
 
 const SearchBox = (props: any) => {
-  return(
+  return (
     <Wrapper>
       <Body_P className='w-100 mr-2' color={Gray_900} bold>
         <Input onChange={e => props.onChange(e.target.value)} placeholder='Search Projects...' />

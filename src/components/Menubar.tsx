@@ -1,11 +1,12 @@
+import React from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/router';
-import Link from "next/link";
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 import styled from '@emotion/styled'
 import Logo from '../../public/images/giveth-logo-blue.svg'
-import { Button } from "./styled-components/Button";
-import {Giv_100, Primary_Deep_200, Primary_Deep_800} from "./styled-components/Colors";
-import { FlexCenter } from "./styled-components/Grid";
+import { Button } from './styled-components/Button'
+import { Giv_100, Primary_Deep_200, Primary_Deep_800 } from './styled-components/Colors'
+import { FlexCenter } from './styled-components/Grid'
 import Routes from '../lib/constants/Routes'
 import defaultUserProfile from '../../public/images/defaultUserProfile.png'
 
@@ -13,7 +14,7 @@ const Menubar = () => {
   const router = useRouter()
 
   let activeTab = ''
-  switch(router.pathname) {
+  switch (router.pathname) {
     case '/':
       activeTab = 'home'
       break
@@ -37,14 +38,16 @@ const Menubar = () => {
         <Link href={Routes.Projects} passHref>
           <RoutesItem className={activeTab === 'projects' ? 'active' : ''}>Projects</RoutesItem>
         </Link>
-        <Link href='/' >
+        <Link href='/' passHref>
           <RoutesItem>GIVeconomy</RoutesItem>
         </Link>
         <Link href={Routes.Join} passHref>
           <RoutesItem className={activeTab === 'join' ? 'active' : ''}>Join</RoutesItem>
         </Link>
       </MainRoutes>
-      <Button className='shadow_dark_500' small onClick={() => router.push(Routes.CreateProject)}>CREATE A PROJECT</Button>
+      <Button className='shadow_dark_500' small onClick={() => router.push(Routes.CreateProject)}>
+        CREATE A PROJECT
+      </Button>
       <WalletDetails className='flex-center shadow_dark_500'>
         <UserAvatar src={defaultUserProfile} width='24px' height='24px' />
         <div className='pl-2 pr-4'>

@@ -1,52 +1,67 @@
-import styled from "@emotion/styled";
-import { useRouter } from "next/router";
-import {Cyan_500, Giv_500, Giv_600, Mustard_500} from "../../styled-components/Colors";
-import {D3, Lead_Large, Lead_Medium, H3} from "../../styled-components/Typography";
-import { Button } from "../../styled-components/Button";
-import Routes from "../../../lib/constants/Routes";
-import {Arc} from "../../styled-components/Arc";
-
-interface IContentObj {
-  title: string
-  description: string
-}
+import React from 'react'
+import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
+import { Cyan_500, Giv_500, Giv_600, Mustard_500 } from '../../styled-components/Colors'
+import { D3, Lead_Large, Lead_Medium, H3 } from '../../styled-components/Typography'
+import { Button } from '../../styled-components/Button'
+import Routes from '../../../lib/constants/Routes'
+import { Arc } from '../../styled-components/Arc'
 
 const content = [
-  { title: 'Easy Onboarding', description: 'New to crypto? No Problem. Create a Torus wallet and connect to the DApp by logging in via your favourite web2 platform.' },
-  { title: 'Zero-Added Fees', description: 'Create a Project or donate directly to for-good projects with zero fees added by Giveth.' },
-  { title: 'Project Verification', description: 'Encourage project accountability by donating to trusted projects. Apply for verification to reward your donors with GIVbacks.' },
-  { title: 'The Giving Economy', description: 'Give, Earn and Govern using GIV and the GIVeconomy. Become a stakeholder in the future of philanthropy.' }
+  {
+    title: 'Easy Onboarding',
+    description:
+      'New to crypto? No Problem. Create a Torus wallet and connect to the DApp by logging in via your favourite web2 platform.'
+  },
+  {
+    title: 'Zero-Added Fees',
+    description:
+      'Create a Project or donate directly to for-good projects with zero fees added by Giveth.'
+  },
+  {
+    title: 'Project Verification',
+    description:
+      'Encourage project accountability by donating to trusted projects. Apply for verification to reward your donors with GIVbacks.'
+  },
+  {
+    title: 'The Giving Economy',
+    description:
+      'Give, Earn and Govern using GIV and the GIVeconomy. Become a stakeholder in the future of philanthropy.'
+  }
 ]
 
 const HomeChangeMakers = () => {
   const router = useRouter()
-  return(
+  return (
     <Wrapper>
       <PurpleArc />
       <CyanArc />
       <MustardArc />
       <D3>Calling all Changemakers!</D3>
       <br />
-      <Lead_Large>Do you have for-good project that's creating value for society, for the environment or for the world?
+      <Lead_Large>
+        Do you have for-good project that&apos;s creating value for society, for the environment or
+        for the world?
       </Lead_Large>
       <MiddleSection>
-        <Lead_Medium>Add you project to Giveth to tap into the revolutionary funding opportunities of the Ethereum Ecosystem. Start raising funds within minutes. Creating a project is absolutely free!
+        <Lead_Medium>
+          Add you project to Giveth to tap into the revolutionary funding opportunities of the
+          Ethereum Ecosystem. Start raising funds within minutes. Creating a project is absolutely
+          free!
         </Lead_Medium>
-        <Button onClick={() => router.push(Routes.CreateProject)} className='mt-5'>CREAT A PROJECT</Button>
+        <Button onClick={() => router.push(Routes.CreateProject)} className='mt-5'>
+          CREAT A PROJECT
+        </Button>
       </MiddleSection>
       <EndSection>
-        {content.map(endItem)}
+        {content.map(i => (
+          <EndItem key={i.title}>
+            <H3>{i.title}</H3>
+            <Lead_Medium className='mt-3'>{i.description}</Lead_Medium>
+          </EndItem>
+        ))}
       </EndSection>
     </Wrapper>
-  )
-}
-
-const endItem = (contentObj: IContentObj) => {
-  return(
-    <EndItem>
-      <H3>{contentObj.title}</H3>
-      <Lead_Medium className='mt-3'>{contentObj.description}</Lead_Medium>
-    </EndItem>
   )
 }
 

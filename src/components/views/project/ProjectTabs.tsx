@@ -1,15 +1,20 @@
-import styled from "@emotion/styled";
-import {Body_P, Subline_Bold} from "../../styled-components/Typography";
-import {Gray_400, Pinky_500, Primary_Deep_600} from "../../styled-components/Colors";
+import React from 'react'
+import styled from '@emotion/styled'
+import { Body_P, Subline_Bold } from '../../styled-components/Typography'
+import { Gray_400, Pinky_500, Primary_Deep_600 } from '../../styled-components/Colors'
 
-const ProjectTabs = () =>{
-  return(
+const ProjectTabs = () => {
+  return (
     <Wrapper>
       <Tab className='active'>About</Tab>
       <Separator />
-      <Tab>Updates<Badge>1</Badge></Tab>
+      <Tab>
+        Updates<Badge>1</Badge>
+      </Tab>
       <Separator />
-      <Tab>Donations<Badge>34</Badge></Tab>
+      <Tab>
+        Donations<Badge>34</Badge>
+      </Tab>
     </Wrapper>
   )
 }

@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
+// import { setContext } from '@apollo/client/link/context'
 import gql from 'graphql-tag'
 import { createUploadLink } from 'apollo-upload-client'
 import merge from 'deepmerge'
 import isEqual from 'lodash.isequal'
-import config from "../../config";
+import config from '../../config'
 // import { getLocalStorageTokenLabel, getLocalStorageUserLabel } from '../services/auth'
 
 let apolloClient
@@ -16,7 +16,7 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 function createApolloClient() {
   // Declare variable to store authToken
-  let token
+  // let token
   // const appUser = getLocalStorageUserLabel()
 
   const httpLink = createUploadLink({

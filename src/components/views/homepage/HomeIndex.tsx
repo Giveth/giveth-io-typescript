@@ -1,13 +1,14 @@
-import HomeHeader from "./HomeHeader";
-import HomeExploreProjects from "./HomeExploreProjects";
-import HomePurpleSection from "./HomePurpleSection";
-import HomeFromBlog from "./HomeFromBlog";
-import HomeGetUpdates from "./HomeGetUpdates";
-import HomeChangeMakers from "./HomeChangeMakers";
-import {IProject} from "../../../types/types";
-import styled from "@emotion/styled";
-import {Arc} from "../../styled-components/Arc";
-import {Giv_100} from "../../styled-components/Colors";
+import React from 'react'
+import HomeHeader from './HomeHeader'
+import HomeExploreProjects from './HomeExploreProjects'
+import HomePurpleSection from './HomePurpleSection'
+import HomeFromBlog from './HomeFromBlog'
+import HomeGetUpdates from './HomeGetUpdates'
+import HomeChangeMakers from './HomeChangeMakers'
+import { IProject } from '../../../types/types'
+import styled from '@emotion/styled'
+import { Arc } from '../../styled-components/Arc'
+import { Giv_100 } from '../../styled-components/Colors'
 
 interface IHomeView {
   projects: IProject[]
@@ -43,4 +44,4 @@ const BigArc = styled(Arc)`
   z-index: 0;
 `
 
-export default HomeIndex;
+export default HomeIndex

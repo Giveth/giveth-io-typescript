@@ -1,11 +1,12 @@
-import Head from 'next/head';
-import HomeIndex from '../src/components/views/homepage/HomeIndex';
+import React from 'react'
+import Head from 'next/head'
+import HomeIndex from '../src/components/views/homepage/HomeIndex'
 import { client } from '../src/apollo/client'
 import { FETCH_HOME_PROJECTS } from '../src/apollo/gql/gqlProjects'
-import {gqlEnums} from "../src/apollo/gql/gqlEnums";
-import {IProject} from "../src/types/types";
-import Menubar from "../src/components/Menubar";
-import Footer from "../src/components/Footer";
+import { gqlEnums } from '../src/apollo/gql/gqlEnums'
+import { IProject } from '../src/types/types'
+import Menubar from '../src/components/Menubar'
+import Footer from '../src/components/Footer'
 
 const projectsToFetch = 15
 
@@ -24,7 +25,7 @@ const HomeRoute = (props: IHomeRoute) => {
       <HomeIndex {...props} />
       <Footer />
     </>
-  );
+  )
 }
 
 export async function getServerSideProps() {

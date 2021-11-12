@@ -1,24 +1,27 @@
-import { useRouter } from 'next/router';
-import styled from "@emotion/styled";
-import {Mustard_500, Giv_500} from "../../styled-components/Colors";
-import {H1} from "../../styled-components/Typography";
-import {FlexCenter} from "../../styled-components/Grid";
-import {Button} from "../../styled-components/Button";
-import Routes from "../../../lib/constants/Routes";
-import config from "../../../../config";
-import {Arc} from "../../styled-components/Arc";
+import React from 'react'
+import { useRouter } from 'next/router'
+import styled from '@emotion/styled'
+import { Mustard_500, Giv_500 } from '../../styled-components/Colors'
+import { H1 } from '../../styled-components/Typography'
+import { FlexCenter } from '../../styled-components/Grid'
+import { Button } from '../../styled-components/Button'
+import Routes from '../../../lib/constants/Routes'
+import config from '../../../../config'
+import { Arc } from '../../styled-components/Arc'
 
 const HomeHeader = () => {
   const router = useRouter()
   return (
-      <Wrapper>
-        <H1 className='pt-5'>Welcome to the future of giving</H1>
-        <Subtitle>Donate directly to social good projects with zero added fees.</Subtitle>
-        <Button onClick={() => router.push(Routes.Projects)}>SEE PROJECTS</Button>
-        <Button ghost color={Mustard_500} onClick={() => router.push(Routes.CreateProject)}>Create a Project</Button>
-        <MustardArc />
-      </Wrapper>
-    )
+    <Wrapper>
+      <H1 className='pt-5'>Welcome to the future of giving</H1>
+      <Subtitle>Donate directly to social good projects with zero added fees.</Subtitle>
+      <Button onClick={() => router.push(Routes.Projects)}>SEE PROJECTS</Button>
+      <Button ghost color={Mustard_500} onClick={() => router.push(Routes.CreateProject)}>
+        Create a Project
+      </Button>
+      <MustardArc />
+    </Wrapper>
+  )
 }
 
 const Subtitle = styled.div`

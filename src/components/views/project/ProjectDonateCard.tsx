@@ -1,28 +1,30 @@
-import styled from "@emotion/styled";
+import React from 'react'
+import styled from '@emotion/styled'
 import Link from 'next/link'
-import { useRouter } from "next/router";
-import { Button } from "../../styled-components/Button";
-import {Giv_300, Giv_500, Pinky_500} from "../../styled-components/Colors";
-import ShareLikeBadge from "../../badges/ShareLikeBadge";
-import {Shadow} from "../../styled-components/Shadow";
-import { Caption } from "../../styled-components/Typography";
-import {ICategory} from "../../../types/types";
-import CategoryBadge from "../../badges/CategoryBadge";
-import Routes from "../../../lib/constants/Routes";
-import config from "../../../../config";
-import {slugToProjectDonate} from "../../../lib/helpers";
+import { useRouter } from 'next/router'
+import { Button } from '../../styled-components/Button'
+import { Giv_300, Giv_500, Pinky_500 } from '../../styled-components/Colors'
+import ShareLikeBadge from '../../badges/ShareLikeBadge'
+import { Shadow } from '../../styled-components/Shadow'
+import { Caption } from '../../styled-components/Typography'
+import { ICategory } from '../../../types/types'
+import CategoryBadge from '../../badges/CategoryBadge'
+import Routes from '../../../lib/constants/Routes'
+import config from '../../../../config'
+import { slugToProjectDonate } from '../../../lib/helpers'
 
-const ProjectDonateCard = (props: { categories: ICategory[], slug: string }) => {
+const ProjectDonateCard = (props: { categories: ICategory[]; slug: string }) => {
   const { categories, slug } = props
   const isCategories = categories.length > 0
 
   const router = useRouter()
 
-  return(
+  return (
     <Wrapper>
       <Button
         onClick={() => router.push(slugToProjectDonate(slug))}
-        background={Giv_500} className='w-100'
+        background={Giv_500}
+        className='w-100'
         small
       >
         DONATE
@@ -39,13 +41,13 @@ const ProjectDonateCard = (props: { categories: ICategory[], slug: string }) => 
       </GivBackNotif>
       {isCategories && (
         <CategoryWrapper>
-          {categories.map(i => <CategoryBadge category={i} />)}
+          {categories.map(i => (
+            <CategoryBadge key={i.name} category={i} />
+          ))}
         </CategoryWrapper>
       )}
       <Link href={Routes.Projects} passHref>
-        <Links>
-          View similar projects
-        </Links>
+        <Links>View similar projects</Links>
       </Link>
       <br />
       <Links target='_blank' href={config.REPORT_ISSUE_URL} rel='noreferrer noopener'>
@@ -108,7 +110,7 @@ const Wrapper = styled.div`
   height: fit-content;
   border-radius: 40px;
   position: relative;
-  box-shadow: ${Shadow.Neutral["400"]};
+  box-shadow: ${Shadow.Neutral['400']};
   flex-shrink: 0;
 `
 
