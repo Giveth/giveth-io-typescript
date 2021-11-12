@@ -1,18 +1,17 @@
 {
-  "name": "giveth-next-typescript",
+  "name": "giveth-io-typescript",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
-    "@types/lodash.debounce": "^4.0.6",
     "apollo-upload-client": "^16.0.0",
     "deepmerge": "^4.2.2",
     "graphql": "^16.0.1",
@@ -26,10 +25,18 @@
     "react-select": "^5.2.1"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.6",
     "@types/node": "16.11.6",
     "@types/react": "17.0.34",
-    "eslint": "8.1.0",
-    "eslint-config-next": "12.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "eslint": "^8.2.0",
+    "eslint-config-next": "^12.0.3",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.4.1",
     "typescript": "4.4.4"
   }
 }

@@ -1,14 +1,11 @@
-import {ICategory} from "../../types/types";
-import styled from "@emotion/styled";
-import {Gray_600} from "../styled-components/Colors";
-import {Subline} from "../styled-components/Typography";
+import React from 'react'
+import { ICategory } from '../../types/types'
+import styled from '@emotion/styled'
+import { Gray_600 } from '../styled-components/Colors'
+import { Subline } from '../styled-components/Typography'
 
 const CategoryBadge = (props: { category: ICategory }) => {
-  return(
-    <Wrapper>
-      {props.category.name}
-    </Wrapper>
-  )
+  return <Wrapper>{props.category.name}</Wrapper>
 }
 
 const Wrapper = styled(Subline)`

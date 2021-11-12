@@ -40,12 +40,6 @@ export interface ICategory {
   name: string
 }
 
-export interface IProjects {
-  projects: IProject[]
-  totalCount: number
-  categories: ICategory[]
-}
-
 export interface IProjectBySlug {
   project: IProject
   admin: IAdmin

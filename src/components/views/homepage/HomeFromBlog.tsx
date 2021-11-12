@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import {useEffect, useState} from "react";
-import {Giv_500} from "../../styled-components/Colors";
-import {Overline} from "../../styled-components/Typography";
-import HomeBlogPost from "./HomeBlogPost";
-import {IMediumBlogPost} from "../../../types/types";
-import config from "../../../../config";
+import styled from '@emotion/styled'
+import React, { useEffect, useState } from 'react'
+import { Giv_500 } from '../../styled-components/Colors'
+import { Overline } from '../../styled-components/Typography'
+import HomeBlogPost from './HomeBlogPost'
+import { IMediumBlogPost } from '../../../types/types'
+import config from '../../../../config'
 
 const HomeFromBlog = () => {
   const [mediumPosts, setMediumPosts] = useState<IMediumBlogPost[]>()
@@ -20,12 +20,14 @@ const HomeFromBlog = () => {
     getPosts().then()
   }, [])
 
-  return(
+  return (
     <Wrapper>
       <Title>FROM OUR BLOG</Title>
       {mediumPosts && (
         <PostWrapper>
-          {mediumPosts.map((post: IMediumBlogPost) => <HomeBlogPost key={post.guid} post={post} />)}
+          {mediumPosts.map((post: IMediumBlogPost) => (
+            <HomeBlogPost key={post.guid} post={post} />
+          ))}
         </PostWrapper>
       )}
     </Wrapper>
@@ -43,7 +45,7 @@ const Title = styled(Overline)`
 `
 
 const Wrapper = styled.div`
-  background: url(${config.APP_URL + "/images/curves.svg"});
+  background: url(${config.APP_URL + '/images/curves.svg'});
   padding: 90px 150px;
 `
 

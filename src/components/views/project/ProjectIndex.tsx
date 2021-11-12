@@ -1,9 +1,10 @@
+import React from 'react'
 import dynamic from 'next/dynamic'
-import styled from "@emotion/styled";
-import ProjectHeader from "./ProjectHeader";
-import ProjectTabs from "./ProjectTabs";
-import ProjectDonateCard from "./ProjectDonateCard";
-import {IProjectBySlug} from "../../../types/types";
+import styled from '@emotion/styled'
+import ProjectHeader from './ProjectHeader'
+import ProjectTabs from './ProjectTabs'
+import ProjectDonateCard from './ProjectDonateCard'
+import { IProjectBySlug } from '../../../types/types'
 
 const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
@@ -13,7 +14,7 @@ const ProjectIndex = (props: IProjectBySlug) => {
   const { project } = props
   const { categories, slug } = project
 
-  return(
+  return (
     <Wrapper>
       <ProjectHeader {...props} />
       <BodyWrapper>

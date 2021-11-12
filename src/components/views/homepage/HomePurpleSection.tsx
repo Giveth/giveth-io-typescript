@@ -1,14 +1,15 @@
-import styled from "@emotion/styled";
-import Image from "next/image";
-import {Mustard_500, Giv_500, Giv_600} from "../../styled-components/Colors";
-import {D3, H2, H3, H4, Lead} from "../../styled-components/Typography";
-import {Button} from "../../styled-components/Button";
+import React from 'react'
+import styled from '@emotion/styled'
+import Image from 'next/image'
+import { Mustard_500, Giv_500, Giv_600 } from '../../styled-components/Colors'
+import { D3, H2, H3, H4, Lead } from '../../styled-components/Typography'
+import { Button } from '../../styled-components/Button'
 import TwitterIcon from '../../../../public/images/twitter.svg'
-import {Arc} from "../../styled-components/Arc";
-import config from "../../../../config";
+import { Arc } from '../../styled-components/Arc'
+import config from '../../../../config'
 
 const HomePurpleSection = () => {
-  return(
+  return (
     <Wrapper>
       <ArcSmall />
       <ArcBig />
@@ -17,11 +18,13 @@ const HomePurpleSection = () => {
         <DotMustard />
       </div>
       <GivingEffortless>
-        Giving is effortless
-        and people all around the world are rewarded for creating positive change.
+        Giving is effortless and people all around the world are rewarded for creating positive
+        change.
       </GivingEffortless>
       <GivingButtons>
-        <Button background={Mustard_500} color={Giv_500}>START GIVING</Button>
+        <Button background={Mustard_500} color={Giv_500}>
+          START GIVING
+        </Button>
         <Button ghost>
           <div className='flex-center'>
             <Image src={TwitterIcon} alt='twitter icon' />
@@ -32,7 +35,10 @@ const HomePurpleSection = () => {
       <GIVeconomy>
         <D3>The GIVeconomy</D3>
         <br />
-        <H4>Our system connects the people on the ground directly to the Givers with zero added fees. It creates an economy of giving by rewarding donors and encouraging decentralized community governance.
+        <H4>
+          Our system connects the people on the ground directly to the Givers with zero added fees.
+          It creates an economy of giving by rewarding donors and encouraging decentralized
+          community governance.
         </H4>
         <br />
         <GIVeconomyUrl href={config.GIVeconomy_URL} target='_blank' rel='noopener noreferrer'>
@@ -42,13 +48,20 @@ const HomePurpleSection = () => {
       <ForMakersGivers>
         <ForProjects>
           <H3>For Projects</H3>
-          <Lead>Create a project and start raising funds in crypto within minutes. Get verified to reward your donors with GIVbacks.</Lead>
+          <Lead>
+            Create a project and start raising funds in crypto within minutes. Get verified to
+            reward your donors with GIVbacks.
+          </Lead>
           <br />
           <Button>CREATE A PROJECT</Button>
         </ForProjects>
         <ForGivers>
           <H3>For Givers</H3>
-          <Lead>Donate to change-makers that are working hard to make a difference. Earn GIV from GIVbacks when you donate to verified projects and become a stakeholder in the future of philanthropy.</Lead>
+          <Lead>
+            Donate to change-makers that are working hard to make a difference. Earn GIV from
+            GIVbacks when you donate to verified projects and become a stakeholder in the future of
+            philanthropy.
+          </Lead>
           <br />
           <Button>DONATE TO A PROJECT</Button>
         </ForGivers>

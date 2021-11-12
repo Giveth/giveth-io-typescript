@@ -1,16 +1,19 @@
-import {useState} from "react";
-import styled from "@emotion/styled";
-import { useRouter } from "next/router";
-import {Body_P, H6, Caption} from "../styled-components/Typography";
+import React, { useState } from 'react'
+import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
+import { Body_P, H6, Caption } from '../styled-components/Typography'
+import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
+import ProjectCardBadges from './ProjectCardBadges'
+import { IProject } from '../../types/types'
 import {
-  Gray_900,
-  Pinky_500,
-  Primary_Deep_500
-} from "../styled-components/Colors";
-import ProjectCardBadges from "./ProjectCardBadges";
-import {IProject} from "../../types/types";
-import {htmlToText, isNoImg, noImgColor, noImgIcon, slugToProjectDonate, slugToProjectView} from "../../lib/helpers";
-import { Button } from "../styled-components/Button";
+  htmlToText,
+  isNoImg,
+  noImgColor,
+  noImgIcon,
+  slugToProjectDonate,
+  slugToProjectView
+} from '../../lib/helpers'
+import { Button } from '../styled-components/Button'
 
 const cardWidth = '440px'
 const cardRadius = '12px'
@@ -29,7 +32,7 @@ const ProjectCard = (props: IProjectCard) => {
 
   const projectImage = () => {
     if (isNoImg(image)) return <NoImg />
-    return <Img src={image} alt='project image'/>
+    return <Img src={image} alt='project image' />
   }
 
   const name = users.length > 0 && users[0].name
@@ -42,7 +45,12 @@ const ProjectCard = (props: IProjectCard) => {
       isHover={isHover}
     >
       <ImagePlaceholder>
-        <ProjectCardBadges isHover={isHover} cardWidth={cardWidth} likes={reactions.length} verified={verified} />
+        <ProjectCardBadges
+          isHover={isHover}
+          cardWidth={cardWidth}
+          likes={reactions.length}
+          verified={verified}
+        />
         {projectImage()}
       </ImagePlaceholder>
       <CardBody>
@@ -53,10 +61,21 @@ const ProjectCard = (props: IProjectCard) => {
           <Caption>Raised: $200</Caption>
           <Caption>Last updated: 5 days ago</Caption>
         </Captions>
-        {isHover && <HoverButtons>
-          <Button onClick={() => router.push(slugToProjectView(slug))} small outline color={Pinky_500}>LEARN MORE</Button>
-          <Button onClick={() => router.push(slugToProjectDonate(slug))} small>DONATE</Button>
-        </HoverButtons>}
+        {isHover && (
+          <HoverButtons>
+            <Button
+              onClick={() => router.push(slugToProjectView(slug))}
+              small
+              outline
+              color={Pinky_500}
+            >
+              LEARN MORE
+            </Button>
+            <Button onClick={() => router.push(slugToProjectDonate(slug))} small>
+              DONATE
+            </Button>
+          </HoverButtons>
+        )}
       </CardBody>
     </Wrapper>
   )
@@ -123,7 +142,7 @@ const ImagePlaceholder = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
-  height: ${(props: { isHover: boolean }) => props.isHover ? '494px' : '430px'};
+  height: ${(props: { isHover: boolean }) => (props.isHover ? '494px' : '430px')};
   width: ${cardWidth};
   border-radius: ${cardRadius};
   background: white;

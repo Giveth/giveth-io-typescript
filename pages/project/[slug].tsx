@@ -1,13 +1,14 @@
-import {FETCH_PROJECT_BY_SLUG} from "../../src/apollo/gql/gqlProjects";
-import {client} from "../../src/apollo/client";
-import {IProjectBySlug} from "../../src/types/types";
-import Head from "next/head";
-import Menubar from "../../src/components/Menubar";
-import Footer from "../../src/components/Footer";
-import ProjectIndex from "../../src/components/views/project/ProjectIndex";
+import React from 'react'
+import { FETCH_PROJECT_BY_SLUG } from '../../src/apollo/gql/gqlProjects'
+import { client } from '../../src/apollo/client'
+import { IProjectBySlug } from '../../src/types/types'
+import Head from 'next/head'
+import Menubar from '../../src/components/Menubar'
+import Footer from '../../src/components/Footer'
+import ProjectIndex from '../../src/components/views/project/ProjectIndex'
 
 const ProjectRoute = (props: IProjectBySlug) => {
-  return(
+  return (
     <>
       <Head>
         <title>{props.project.title} | Giveth</title>

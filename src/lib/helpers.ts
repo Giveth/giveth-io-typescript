@@ -1,6 +1,6 @@
-import Routes from "./constants/Routes";
-import {Cyan_500, Giv_500, Mustard_500} from "../components/styled-components/Colors";
-import config from "../../config";
+import Routes from './constants/Routes'
+import { Cyan_500, Giv_500, Mustard_500 } from '../components/styled-components/Colors'
+import config from '../../config'
 
 export const slugToProjectView = (slug: string) => {
   return Routes.Project + '/' + slug
@@ -25,6 +25,6 @@ export const capitalizeFirstLetter = (string: string) => {
 const noImgColors = [Cyan_500, Mustard_500, Giv_500]
 export const noImgColor = () => noImgColors[Math.floor(Math.random() * 3)]
 
-export const noImgIcon = config.APP_URL + "/images/GIV-icon-text.svg"
+export const noImgIcon = config.APP_URL + '/images/GIV-icon-text.svg'
 
 export const isNoImg = (image: string | undefined) => !(image && !Number(image))

@@ -1,12 +1,13 @@
-import styled from "@emotion/styled";
-import {H5} from "../../styled-components/Typography";
-import {Gray_900, Gray_700, Pinky_500} from "../../styled-components/Colors";
-import ProjectCard from "../../project-card/ProjectCard";
-import {IProject} from "../../../types/types";
-import {Button} from "../../styled-components/Button";
-import Routes from "../../../lib/constants/Routes";
-import {useRouter} from "next/router";
-import {FlexCenter} from "../../styled-components/Grid";
+import React from 'react'
+import styled from '@emotion/styled'
+import { H5 } from '../../styled-components/Typography'
+import { Gray_900, Gray_700, Pinky_500 } from '../../styled-components/Colors'
+import ProjectCard from '../../project-card/ProjectCard'
+import { IProject } from '../../../types/types'
+import { Button } from '../../styled-components/Button'
+import Routes from '../../../lib/constants/Routes'
+import { useRouter } from 'next/router'
+import { FlexCenter } from '../../styled-components/Grid'
 
 interface IHomeExploreProjects {
   projects: IProject[]
@@ -21,17 +22,23 @@ const HomeExploreProjects = (props: IHomeExploreProjects) => {
   const router = useRouter()
   return (
     <Wrapper>
-      {!noTitle && <Title>Explore <span>{totalCount} Projects</span></Title>}
+      {!noTitle && (
+        <Title>
+          Explore <span>{totalCount} Projects</span>
+        </Title>
+      )}
       <ProjectsContainer>
-        {projects.map(project =>
+        {projects.map(project => (
           <div key={project.id} style={{ margin: cardsMargin }}>
             <ProjectCard project={project} />
           </div>
-        )}
+        ))}
       </ProjectsContainer>
       <ButtonsWrapper>
         <Button onClick={() => router.push(Routes.Projects)}>SEE ALL PROJECTS</Button>
-        <Button ghost color={Pinky_500} onClick={() => router.push(Routes.CreateProject)}>Create a Project</Button>
+        <Button ghost color={Pinky_500} onClick={() => router.push(Routes.CreateProject)}>
+          Create a Project
+        </Button>
       </ButtonsWrapper>
     </Wrapper>
   )

@@ -1,17 +1,18 @@
-import styled from "@emotion/styled";
-import { H3, Body_P } from "../../styled-components/Typography";
-import {IProjectBySlug} from "../../../types/types";
-import {Pinky_500} from "../../styled-components/Colors";
-import VerificationBadge from "../../badges/VerificationBadge";
-import {isNoImg, noImgColor, noImgIcon} from "../../../lib/helpers";
+import React from 'react'
+import styled from '@emotion/styled'
+import { H3, Body_P } from '../../styled-components/Typography'
+import { Pinky_500 } from '../../styled-components/Colors'
+import VerificationBadge from '../../badges/VerificationBadge'
+import { isNoImg, noImgColor, noImgIcon } from '../../../lib/helpers'
+import { IProjectBySlug } from '../../../types/types'
 
 const ProjectHeader = (props: IProjectBySlug) => {
   const { title, verified, image } = props.project
   const name = props.admin.name
-  return(
+  return (
     <Wrapper image={image}>
       <div className='d-flex'>
-        {verified && <VerificationBadge verified /> }
+        {verified && <VerificationBadge verified />}
         <VerificationBadge trace />
       </div>
       <div>
@@ -23,10 +24,10 @@ const ProjectHeader = (props: IProjectBySlug) => {
 }
 
 const Wrapper = styled.div<{ image: string | undefined }>`
-  background: ${props => isNoImg(props.image) ? noImgColor() : 'unset'};
+  background: ${props => (isNoImg(props.image) ? noImgColor() : 'unset')};
   display: flex;
-  background-repeat: ${props => isNoImg(props.image) ? 'repeat' : 'no-repeat'};
-  background-size: ${props => isNoImg(props.image) ? 'unset' : 'cover'};
+  background-repeat: ${props => (isNoImg(props.image) ? 'repeat' : 'no-repeat')};
+  background-size: ${props => (isNoImg(props.image) ? 'unset' : 'cover')};
   flex-direction: column;
   justify-content: space-between;
   height: 360px;

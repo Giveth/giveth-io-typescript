@@ -1,22 +1,22 @@
-import styled from '@emotion/styled';
-import { Pinky_500 } from "./Colors";
+import styled from '@emotion/styled'
+import { Pinky_500 } from './Colors'
 
 interface IButtonProps {
-	ghost?: boolean;
+  ghost?: boolean
   small?: boolean
   outline?: boolean
-  color?: string;
-  background?: string;
+  color?: string
+  background?: string
   normal?: boolean
 }
 
 export const Button = styled.button<IButtonProps>`
-	background: ${props => {
+  background: ${props => {
     if (props.background) return props.background
     else if (props.ghost || props.outline) return 'unset'
-		else return Pinky_500
-	}};
-	border-style: ${props => {
+    else return Pinky_500
+  }};
+  border-style: ${props => {
     if (props.outline) return 'solid'
     else return 'none'
   }};
@@ -28,10 +28,9 @@ export const Button = styled.button<IButtonProps>`
     if (props.outline) {
       if (props.color) return props.color
       else return Pinky_500
-    }
-    else return 'transparent'
+    } else return 'transparent'
   }};
-	border-radius: 48px;
+  border-radius: 48px;
   color: ${props => {
     if (props.color) return props.color
     else return 'white'
@@ -44,16 +43,16 @@ export const Button = styled.button<IButtonProps>`
     if (props.ghost || props.normal) return '400'
     else return '700'
   }};
-	font-size: ${props => {
+  font-size: ${props => {
     if (props.small) return '12px'
     else return '16px'
   }};
-	line-height: 18px;
-	text-align: center;
-	cursor: pointer;
-	display: block;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+  display: block;
   padding: ${props => {
     if (props.small) return '0 40px'
     else return '0 80px'
   }};
-`;
+`

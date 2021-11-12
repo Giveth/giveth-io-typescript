@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactQuill from 'react-quill'
-import styled from "@emotion/styled";
-import {Primary_Deep_900} from "./styled-components/Colors";
+import styled from '@emotion/styled'
+import { Primary_Deep_900 } from './styled-components/Colors'
 
 const RichTextViewer = (props: { content: string | undefined }) => {
   return (
     <Wrapper>
       <ReactQuill
-        style={{ fontFamily: `Red Hat Text, sans serif` }}
+        style={{ fontFamily: 'Red Hat Text, sans serif' }}
         value={props.content}
         readOnly
         theme='bubble'

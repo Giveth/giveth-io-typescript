@@ -1,17 +1,11 @@
 import gql from 'graphql-tag'
 
 export const FETCH_HOME_PROJECTS = gql`
-  query FetchAllProjects(
-    $limit: Int
-    $orderBy: OrderBy
-  ) {
-    projects(
-      take: $limit
-      orderBy: $orderBy
-    ) {
+  query FetchAllProjects($limit: Int, $orderBy: OrderBy) {
+    projects(take: $limit, orderBy: $orderBy) {
       projects {
         id
-        users{
+        users {
           name
         }
         title
@@ -47,7 +41,7 @@ export const FETCH_ALL_PROJECTS = gql`
     ) {
       projects {
         id
-        users{
+        users {
           name
         }
         title
