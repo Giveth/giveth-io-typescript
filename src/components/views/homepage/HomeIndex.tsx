@@ -6,9 +6,7 @@ import HomeFromBlog from './HomeFromBlog'
 import HomeGetUpdates from './HomeGetUpdates'
 import HomeChangeMakers from './HomeChangeMakers'
 import { IProject } from '../../../types/types'
-import styled from '@emotion/styled'
-import { Arc } from '../../styled-components/Arc'
-import { Giv_100 } from '../../styled-components/Colors'
+import { BigArc } from '../../styled-components/Arc'
 
 interface IHomeView {
   projects: IProject[]
@@ -32,16 +30,5 @@ const HomeIndex = (props: IHomeView) => {
     </>
   )
 }
-
-const BigArc = styled(Arc)`
-  border-width: 250px;
-  border-color: ${Giv_100};
-  opacity: 40%;
-  top: -2340px;
-  right: 300px;
-  width: 3600px;
-  height: 3600px;
-  z-index: 0;
-`
 
 export default HomeIndex

@@ -13,7 +13,7 @@ export const H1 = styled.h1<ITypographyProps>`
   font-weight: 700;
   line-height: 86px;
   letter-spacing: -0.03em;
-  color: inherit;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H2 = styled.h2`
@@ -22,7 +22,7 @@ export const H2 = styled.h2`
   font-size: 52px;
   line-height: 80px;
   margin: 0;
-  color: inherit;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H3 = styled.h3<ITypographyProps>`
@@ -69,6 +69,7 @@ export const Lead_Medium = styled.div`
   font-weight: 400;
   font-size: 20px;
   line-height: 30px;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Lead_Large = styled.div`
@@ -83,18 +84,16 @@ export const D3 = styled.div`
   font-size: 88px;
   font-weight: 700;
   line-height: 106px;
-  color: inherit;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Body_P = styled.div<ITypographyProps>`
+  font-family: Red Hat Text, sans-serif;
   margin: 0;
   font-size: 16px;
   line-height: 24px;
   color: ${props => props.color || 'inherit'};
-  font-weight: ${props => {
-    if (props.bold) return 500
-    else return 400
-  }};
+  font-weight: ${props => (props.bold ? 500 : 400)};
 `
 
 export const Caption = styled.div<ITypographyProps>`
@@ -105,10 +104,7 @@ export const Caption = styled.div<ITypographyProps>`
     if (props.bold) return 500
     else return 400
   }};
-  color: ${props => {
-    if (props.color) return props.color
-    else return Gray_700
-  }};
+  color: ${props => props.color || Gray_700};
 `
 
 export const Overline_Small = styled.div`
