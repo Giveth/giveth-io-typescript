@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 import config from '../../../../config'
 import { Arc } from '../../styled-components/Arc'
@@ -18,6 +19,9 @@ import AboutMission from './AboutMission'
 
 const tabTitles = ['Mission & Vision', 'History', 'Team']
 
+const AboutHistory = dynamic(() => import('./AboutHistory'))
+const AboutTeam = dynamic(() => import('./AboutTeam'))
+
 const AboutIndex = () => {
   const [activeTab, setActiveTab] = useState(tabTitles[0])
 
@@ -28,6 +32,9 @@ const AboutIndex = () => {
       <Upper>
         <ArcMustard />
         <DotMustard />
+        <TeamImageWrapper>
+          <img width='100%' src={config.APP_URL + 'images/giveth-team.jpg'} alt='giveth team' />
+        </TeamImageWrapper>
         <UpperTitle>Building the Future of Giving</UpperTitle>
         <UpperCaption>
           Giveth is a community focused on Building the Future of Giving using blockchain
@@ -75,10 +82,16 @@ const AboutIndex = () => {
           ))}
         </Tabs>
         <TabContent>{activeTab === tabTitles[0] && <AboutMission />}</TabContent>
+        <TabContent>{activeTab === tabTitles[1] && <AboutHistory />}</TabContent>
+        <TabContent>{activeTab === tabTitles[2] && <AboutTeam />}</TabContent>
       </End>
     </>
   )
 }
+
+const TeamImageWrapper = styled.div`
+  margin-top: 120px;
+`
 
 const TabContent = styled.div`
   margin-top: 90px;
@@ -169,7 +182,7 @@ const UpperCaption = styled(Lead_Medium)`
 `
 
 const UpperTitle = styled(D3)`
-  margin-top: 900px;
+  margin-top: 120px;
   margin-bottom: 32px;
   text-align: center;
   color: ${Giv_700};
@@ -183,7 +196,7 @@ const ArcMustard = styled(Arc)`
   width: 500px;
   height: 500px;
   transform: rotate(31deg);
-  z-index: 0;
+  z-index: 1;
 `
 
 const DotMustard = styled(Arc)`
@@ -193,7 +206,7 @@ const DotMustard = styled(Arc)`
   right: 200px;
   width: 87px;
   height: 87px;
-  z-index: 0;
+  z-index: 1;
 `
 
 const Upper = styled.div`

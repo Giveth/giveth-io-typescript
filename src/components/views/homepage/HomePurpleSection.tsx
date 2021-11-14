@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import { Mustard_500, Giv_500, Giv_600 } from '../../styled-components/Colors'
-import { D3, H2, H3, H4, Lead } from '../../styled-components/Typography'
+import { D3, H2, H3, Lead, Lead_Large } from '../../styled-components/Typography'
 import { Button } from '../../styled-components/Button'
 import TwitterIcon from '../../../../public/images/twitter.svg'
 import { Arc } from '../../styled-components/Arc'
@@ -35,11 +35,11 @@ const HomePurpleSection = () => {
       <GIVeconomy>
         <D3>The GIVeconomy</D3>
         <br />
-        <H4>
+        <Lead_Large>
           Our system connects the people on the ground directly to the Givers with zero added fees.
           It creates an economy of giving by rewarding donors and encouraging decentralized
           community governance.
-        </H4>
+        </Lead_Large>
         <br />
         <GIVeconomyUrl href={config.GIVeconomy_URL} target='_blank' rel='noopener noreferrer'>
           Learn more about GIVeconomy

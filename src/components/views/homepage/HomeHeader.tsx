@@ -47,7 +47,7 @@ const Wrapper = styled(FlexCenter)`
   flex-direction: column;
   z-index: 2;
   position: relative;
-  background-image: url(${config.APP_URL + '/images/GIV.svg'});
+  background-image: url(${config.APP_URL + '/images/GIV_homepage.svg'});
 `
 
 export default HomeHeader

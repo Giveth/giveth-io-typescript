@@ -1,5 +1,6 @@
 export const Pinky_500 = '#E1458D'
 
+export const Giv_900 = '#090446'
 export const Giv_800 = '#1B1657'
 export const Giv_700 = '#211985'
 export const Giv_600 = '#3811BF'
