@@ -7,13 +7,7 @@ import { useRouter } from 'next/router'
 import { ICategory, IProject } from '../../../types/types'
 import { IFetchAllProjects } from '../../../types/types_graphql'
 import { H5, Subline, Body_P } from '../../styled-components/Typography'
-import {
-  Giv_100,
-  Gray_700,
-  Gray_900,
-  Pinky_500,
-  Primary_Deep_500
-} from '../../styled-components/Colors'
+import { Gray_700, Gray_900, Pinky_500, Primary_Deep_500 } from '../../styled-components/Colors'
 import { Button } from '../../styled-components/Button'
 import ProjectCard from '../../project-card/ProjectCard'
 import { capitalizeFirstLetter } from '../../../lib/helpers'
@@ -22,7 +16,7 @@ import client from '../../../apollo/apolloClient'
 import { gqlEnums } from '../../../apollo/gql/gqlEnums'
 import SearchBox from '../../SearchBox'
 import Routes from '../../../lib/constants/Routes'
-import { Arc } from '../../styled-components/Arc'
+import { BigArc } from '../../styled-components/Arc'
 
 interface ISelectObj {
   value: string
@@ -201,17 +195,6 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
     </>
   )
 }
-
-const BigArc = styled(Arc)`
-  border-width: 250px;
-  border-color: ${Giv_100};
-  opacity: 40%;
-  top: -2340px;
-  right: 300px;
-  width: 3600px;
-  height: 3600px;
-  z-index: 0;
-`
 
 const SelectComponent = styled(Body_P)`
   width: 343px;

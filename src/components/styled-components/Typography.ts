@@ -13,7 +13,7 @@ export const H1 = styled.h1<ITypographyProps>`
   font-weight: 700;
   line-height: 86px;
   letter-spacing: -0.03em;
-  color: inherit;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H2 = styled.h2`
@@ -22,22 +22,23 @@ export const H2 = styled.h2`
   font-size: 52px;
   line-height: 80px;
   margin: 0;
-  color: inherit;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H3 = styled.h3<ITypographyProps>`
   font-family: TeX Gyre Adventor, sans-serif;
   font-size: 41px;
   font-weight: 700;
-  line-height: 63px;
+  line-height: 56px;
   color: ${props => props.color || 'inherit'};
 `
 
 export const H4 = styled.h4`
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 34px;
-  color: inherit;
+  font-family: TeX Gyre Adventor, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 50px;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H5 = styled.h5<ITypographyProps>`
@@ -69,6 +70,7 @@ export const Lead_Medium = styled.div`
   font-weight: 400;
   font-size: 20px;
   line-height: 30px;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Lead_Large = styled.div`
@@ -83,32 +85,24 @@ export const D3 = styled.div`
   font-size: 88px;
   font-weight: 700;
   line-height: 106px;
-  color: inherit;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Body_P = styled.div<ITypographyProps>`
+  font-family: Red Hat Text, sans-serif;
   margin: 0;
   font-size: 16px;
   line-height: 24px;
   color: ${props => props.color || 'inherit'};
-  font-weight: ${props => {
-    if (props.bold) return 500
-    else return 400
-  }};
+  font-weight: ${props => (props.bold ? 500 : 400)};
 `
 
 export const Caption = styled.div<ITypographyProps>`
   font-family: Red Hat Text, sans-serif;
   font-size: 14px;
   line-height: 21px;
-  font-weight: ${props => {
-    if (props.bold) return 500
-    else return 400
-  }};
-  color: ${props => {
-    if (props.color) return props.color
-    else return Gray_700
-  }};
+  font-weight: ${props => (props.bold ? 500 : 400)};
+  color: ${props => props.color || Gray_700};
 `
 
 export const Overline_Small = styled.div`
@@ -120,11 +114,13 @@ export const Overline_Small = styled.div`
 `
 
 export const Overline = styled.div`
-  font-family: Red Hat Display, sans-serif;
+  font-family: Red Hat Text, sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: inherit;
+  color: ${props => props.color || 'inherit'};
+  letter-spacing: 5px;
+  text-transform: uppercase;
 `
 
 export const Subline_Bold = styled.div`

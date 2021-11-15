@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
 import { Giv_500 } from '../../styled-components/Colors'
-import { Overline } from '../../styled-components/Typography'
+import { Body_P } from '../../styled-components/Typography'
 import HomeBlogPost from './HomeBlogPost'
 import { IMediumBlogPost } from '../../../types/types'
 import config from '../../../../config'
@@ -40,12 +40,12 @@ const PostWrapper = styled.div`
   flex-wrap: wrap;
 `
 
-const Title = styled(Overline)`
+const Title = styled(Body_P)`
   color: ${Giv_500};
 `
 
 const Wrapper = styled.div`
-  background: url(${config.APP_URL + '/images/curves.svg'});
+  background: url(${config.APP_URL + '/images/curves_homepage.svg'});
   padding: 90px 150px;
 `
 
