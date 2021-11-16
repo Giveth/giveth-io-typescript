@@ -68,8 +68,8 @@ const AboutIndex = () => {
       </Middle>
 
       <End>
-        <MustardArc />
-        <PurpleArc />
+        <EndMustardArc />
+        <EndPurpleArc />
         <Tabs>
           {tabTitles.map(i => (
             <TabItem
@@ -121,7 +121,7 @@ const Tabs = styled.div`
   gap: 16px;
 `
 
-const PurpleArc = styled(Arc)`
+const EndPurpleArc = styled(Arc)`
   border-width: 40px;
   border-color: ${Giv_600} ${Giv_600} transparent transparent;
   bottom: 0;
@@ -132,7 +132,7 @@ const PurpleArc = styled(Arc)`
   z-index: 0;
 `
 
-const MustardArc = styled(Arc)`
+const EndMustardArc = styled(Arc)`
   border-width: 40px;
   border-color: transparent transparent ${Mustard_500} ${Mustard_500};
   top: 300px;
