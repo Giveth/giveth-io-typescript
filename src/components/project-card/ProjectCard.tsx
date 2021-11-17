@@ -42,27 +42,26 @@ const ProjectCard = (props: IProjectCard) => {
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       className='shadow_1'
-      isHover={isHover}
     >
-      <ImagePlaceholder>
-        <ProjectCardBadges
-          isHover={isHover}
-          cardWidth={cardWidth}
-          likes={reactions.length}
-          verified={verified}
-        />
-        {projectImage()}
-      </ImagePlaceholder>
-      <CardBody>
-        <Title>{title}</Title>
-        {name && <Author>{name}</Author>}
-        <Description>{htmlToText(description)}</Description>
-        <Captions>
-          <Caption>Raised: $200</Caption>
-          <Caption>Last updated: 5 days ago</Caption>
-        </Captions>
-        {isHover && (
-          <HoverButtons>
+      <Wrapper2 isHover={isHover}>
+        <ImagePlaceholder>
+          <ProjectCardBadges
+            isHover={isHover}
+            cardWidth={cardWidth}
+            likes={reactions.length}
+            verified={verified}
+          />
+          {projectImage()}
+        </ImagePlaceholder>
+        <CardBody>
+          <Title>{title}</Title>
+          {name && <Author>{name}</Author>}
+          <Description>{htmlToText(description)}</Description>
+          <Captions>
+            <Caption>Raised: $200</Caption>
+            <Caption>Last updated: 5 days ago</Caption>
+          </Captions>
+          <HoverButtons isHover={isHover}>
             <Button
               onClick={() => router.push(slugToProjectView(slug))}
               small
@@ -75,16 +74,17 @@ const ProjectCard = (props: IProjectCard) => {
               DONATE
             </Button>
           </HoverButtons>
-        )}
-      </CardBody>
+        </CardBody>
+      </Wrapper2>
     </Wrapper>
   )
 }
 
 const HoverButtons = styled.div`
-  display: flex;
   margin-top: 16px;
   gap: 16px;
+  display: ${(props: { isHover: boolean }) => (props.isHover ? 'flex' : 'none')};
+  animation: fadein 1s;
 
   button {
     width: 100%;
@@ -140,9 +140,20 @@ const ImagePlaceholder = styled.div`
   overflow: hidden;
 `
 
+const Wrapper2 = styled.div`
+  position: ${(props: { isHover: boolean }) => (props.isHover ? 'absolute' : 'relative')};
+  height: ${(props: { isHover: boolean }) => (props.isHover ? '494px' : '430px')};
+  width: ${cardWidth};
+  border-radius: ${cardRadius};
+  background: white;
+  margin-top: ${(props: { isHover: boolean }) => (props.isHover ? '-32px' : '0')};
+  z-index: ${(props: { isHover: boolean }) => (props.isHover ? '3' : '0')};
+  transition: all 0.3s ease;
+`
+
 const Wrapper = styled.div`
   position: relative;
-  height: ${(props: { isHover: boolean }) => (props.isHover ? '494px' : '430px')};
+  height: 430px;
   width: ${cardWidth};
   border-radius: ${cardRadius};
   background: white;
