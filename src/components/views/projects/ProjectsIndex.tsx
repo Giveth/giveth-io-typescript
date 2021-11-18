@@ -103,11 +103,9 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
       .then((res: { data: { projects: IFetchAllProjects } }) => {
         const data = res.data?.projects?.projects
         const count = res.data?.projects?.totalCount
-        if (count) setTotalCount(count)
-        if (data) {
-          if (isLoadMore) setFilteredProjects(filteredProjects.concat(data))
-          else setFilteredProjects(data)
-        }
+        setTotalCount(count)
+        if (isLoadMore) setFilteredProjects(filteredProjects.concat(data))
+        else setFilteredProjects(data)
         setIsLoading(false)
       })
       .catch(() => {
