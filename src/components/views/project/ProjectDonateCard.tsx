@@ -12,6 +12,7 @@ import CategoryBadge from '../../badges/CategoryBadge'
 import Routes from '../../../lib/constants/Routes'
 import config from '../../../../config'
 import { slugToProjectDonate } from '../../../lib/helpers'
+import InfoIcon from '../../InfoIcon'
 
 const ProjectDonateCard = (props: { categories: ICategory[]; slug: string }) => {
   const { categories, slug } = props
@@ -35,9 +36,7 @@ const ProjectDonateCard = (props: { categories: ICategory[]; slug: string }) => 
       </BadgeWrapper>
       <GivBackNotif>
         <Caption color={Giv_300}>When you donate to verified projects, you get GIV back.</Caption>
-        <div>
-          <InfoIcon>?</InfoIcon>
-        </div>
+        <InfoIcon />
       </GivBackNotif>
       {isCategories && (
         <CategoryWrapper>
@@ -72,17 +71,6 @@ const CategoryWrapper = styled.div`
   margin-bottom: 16px;
 `
 
-const InfoIcon = styled.div`
-  border-radius: 50%;
-  border: 1px solid ${Giv_300};
-  width: 16px;
-  text-align: center;
-  height: 16px;
-  font-size: 10px;
-  color: ${Giv_300};
-  font-weight: 500;
-`
-
 const GivBackNotif = styled.div`
   display: flex;
   justify-content: center;
@@ -91,6 +79,7 @@ const GivBackNotif = styled.div`
   border-radius: 8px;
   border: 1px solid ${Giv_300};
   margin-top: 24px;
+  color: ${Giv_300};
 `
 
 const BadgeWrapper = styled.div`

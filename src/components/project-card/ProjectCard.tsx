@@ -125,6 +125,7 @@ const Title = styled(H6)`
   color: ${Primary_Deep_500};
   height: 26px;
   overflow: hidden;
+  margin-bottom: 4px;
 `
 
 const Img = styled.img`

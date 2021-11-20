@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
+
 import { FlexCenter } from '../styled-components/Grid'
 import { Primary_Deep_800_Trans } from '../styled-components/Colors'
 import { Overline_Small } from '../styled-components/Typography'
@@ -14,7 +15,9 @@ const VerificationBadge = (props: { verified?: boolean; trace?: boolean }) => {
   return (
     <Wrapper>
       <Image src={icon} alt='badge icon' />
-      <Overline_Small className='pl-2'>{text}</Overline_Small>
+      <Overline_Small bold className='pl-2'>
+        {text}
+      </Overline_Small>
     </Wrapper>
   )
 }

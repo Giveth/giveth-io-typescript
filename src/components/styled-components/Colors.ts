@@ -17,6 +17,8 @@ export const Primary_Deep_600 = '#092560'
 export const Primary_Deep_500 = '#303B72'
 export const Primary_Deep_200 = '#6879D4'
 
+export const Semantic_Link_500 = '#0A91FE'
+
 export const Gray_900 = '#1D1E1F'
 export const Gray_700 = '#82899A'
 export const Gray_600 = '#A5ADBF'
