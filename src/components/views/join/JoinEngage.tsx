@@ -98,28 +98,28 @@ const consumeArray = [
     title: "Medium",
     caption:
       "Keep up with our Medium blog where we publish regular development and community updates with the latest and greatest.",
-    buttonLabel: "join us on discord",
+    buttonLabel: "join us on medium",
   },
   {
     icon: twitter_icon,
     title: "Twitter",
     caption:
       "Connect with us on Twitter to stay up-to-date on exciting shares about the Future of Giving!",
-    buttonLabel: "join on discourse",
+    buttonLabel: "join on twitter",
   },
   {
     icon: youtube_icon,
     title: "Youtube",
     caption:
       "Check out presentations, interviews, AMAs and more on the Giveth Youtube. Also follow our Transparency channel for recordings of our calls.",
-    buttonLabel: "join us on github",
+    buttonLabel: "join us on youtube",
   },
   {
     icon: reddit_icon,
     title: "Reddit",
     caption:
       "Subscribe to our r/Giveth subreddit to stay abreast of updates, engage in discussions and upvote all the things.",
-    buttonLabel: "join us on telegram",
+    buttonLabel: "join us on reddit",
   },
 ];
 
