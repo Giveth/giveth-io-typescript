@@ -22,44 +22,46 @@ interface IProjectCardBadges {
 
 const ProjectCardBadges = (props: IProjectCardBadges) => {
   const { cardWidth, likes, verified, isHover } = props
+  const active = true
+  const traceable = true
+
   return (
     <BadgeWrapper width={cardWidth}>
       <div className='d-flex'>
         {verified && <VerificationBadge verified />}
-        {<VerificationBadge trace />}
+        {traceable && <VerificationBadge trace />}
       </div>
-      {heartBadge(true, likes, isHover)}
+      <div className='d-flex'>
+        {Number(likes) > 0 && <LikeBadge>{likes}</LikeBadge>}
+        <HeartWrap active={active} isHover={isHover}>
+          <Image src={active ? redHeartIcon : grayHeartIcon} alt='heart icon' />
+          <Image src={shareIcon} alt='share icon' />
+        </HeartWrap>
+      </div>
     </BadgeWrapper>
   )
 }
 
-const heartBadge = (active?: boolean, likes?: number, isHover?: boolean) => {
-  const HeartWrap = styled(FlexCenter)`
-    height: ${() => (isHover ? '72px' : '30px')};
-    width: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border-radius: 56px;
-    background: ${() => (active ? 'white' : Primary_Deep_800_Trans)};
-  `
+const HeartWrap = styled(FlexCenter)<{ active?: boolean; isHover?: boolean }>`
+  height: ${props => (props.isHover ? '72px' : '30px')};
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 56px;
+  background: ${props => (props.active ? 'white' : Primary_Deep_800_Trans)};
+  transition: all 0.3s ease;
 
-  const LikeBadge = styled(Subline_Bold)`
-    color: white;
-    margin-right: 6px;
-    margin-top: 7px;
-  `
+  > span:nth-child(2) {
+    display: ${props => (props.isHover ? 'unset' : 'none !important')};
+  }
+`
 
-  return (
-    <div className='d-flex'>
-      {Number(likes) > 0 && <LikeBadge>{likes}</LikeBadge>}
-      <HeartWrap>
-        <Image src={active ? redHeartIcon : grayHeartIcon} alt='heart icon' />
-        {isHover && <Image src={shareIcon} alt='share icon' />}
-      </HeartWrap>
-    </div>
-  )
-}
+const LikeBadge = styled(Subline_Bold)`
+  color: white;
+  margin-right: 6px;
+  margin-top: 7px;
+`
 
 const BadgeWrapper = styled.div<IBadgeWrapper>`
   width: ${props => props.width || '440px'};

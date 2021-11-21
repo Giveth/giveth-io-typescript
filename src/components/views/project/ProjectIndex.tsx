@@ -5,6 +5,7 @@ import ProjectHeader from './ProjectHeader'
 import ProjectTabs from './ProjectTabs'
 import ProjectDonateCard from './ProjectDonateCard'
 import { IProjectBySlug } from '../../../types/types'
+import { mq } from '../../../lib/helpers'
 
 const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
@@ -30,6 +31,14 @@ const ProjectIndex = (props: IProjectBySlug) => {
 
 const BodyWrapper = styled.div`
   display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+
+  ${mq['xl']} {
+    align-items: unset;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `
 
 const Wrapper = styled.div`
