@@ -81,6 +81,15 @@ a, a:hover {
   animation-delay: 1s;
 }
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes dot-flashing {
   0% {
     background-color: #E1458D;
