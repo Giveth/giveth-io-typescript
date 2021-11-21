@@ -11,10 +11,11 @@ interface IContent {
   title: string;
   caption: string;
   buttonLabel: string;
+  route: string;
 }
 
 const GeneralCard = (props: { content: IContent; isHorizontal?: boolean }) => {
-  const { icon, title, caption, buttonLabel } = props.content;
+  const { icon, title, caption, buttonLabel, route } = props.content;
   let Wrap = Wrapper;
   let TitleBox = TitleSection;
   if (props.isHorizontal) {
@@ -28,7 +29,9 @@ const GeneralCard = (props: { content: IContent; isHorizontal?: boolean }) => {
         <Title>{title}</Title>
         <Body_P>{caption}</Body_P>
       </TitleBox>
-      <ButtonStyled>{buttonLabel}</ButtonStyled>
+      <ButtonStyled onClick={() => window?.open(route, "_blank")?.focus()}>
+        {buttonLabel}
+      </ButtonStyled>
     </Wrap>
   );
 };

@@ -68,6 +68,7 @@ const engageArray = [
     caption:
       "Join the conversation! Discord is where our team communicates. Introduce yourself, give us feedback, find out how to contribute or just say hello!",
     buttonLabel: "join us on discord",
+    route: "https://discord.gg/Uq2TaXP9bC",
   },
   {
     icon: discourse_icon,
@@ -75,6 +76,7 @@ const engageArray = [
     caption:
       "The Giveth forum is where we create discourse around new and existing proposals. We share ideas involving development and governance, cultivating discussions about important topics around our team and community.",
     buttonLabel: "join on discourse",
+    route: "https://forum.giveth.io/",
   },
   {
     icon: github_icon,
@@ -82,6 +84,7 @@ const engageArray = [
     caption:
       "Got some developer skills? Check out our Github! We always welcome new contributors. Please also join one of our dev channels in Discord to say hello!",
     buttonLabel: "join us on github",
+    route: "https://github.com/Giveth/",
   },
   {
     icon: telegram_icon,
@@ -89,6 +92,7 @@ const engageArray = [
     caption:
       "Not on Discord? Join our Telegram! This group is bridged directly to the #general channel in the Giveth discord so we’ll see all of your messages here.",
     buttonLabel: "join us on telegram",
+    route: "https://t.me/Givethio",
   },
 ];
 
@@ -99,6 +103,7 @@ const consumeArray = [
     caption:
       "Keep up with our Medium blog where we publish regular development and community updates with the latest and greatest.",
     buttonLabel: "join us on medium",
+    route: "https://medium.com/giveth/",
   },
   {
     icon: twitter_icon,
@@ -106,6 +111,7 @@ const consumeArray = [
     caption:
       "Connect with us on Twitter to stay up-to-date on exciting shares about the Future of Giving!",
     buttonLabel: "join on twitter",
+    route: "https://twitter.com/Givethio",
   },
   {
     icon: youtube_icon,
@@ -113,6 +119,7 @@ const consumeArray = [
     caption:
       "Check out presentations, interviews, AMAs and more on the Giveth Youtube. Also follow our Transparency channel for recordings of our calls.",
     buttonLabel: "join us on youtube",
+    route: "https://www.youtube.com/channel/UClfutpRoY0WTVnq0oB0E0wQ",
   },
   {
     icon: reddit_icon,
@@ -120,6 +127,7 @@ const consumeArray = [
     caption:
       "Subscribe to our r/Giveth subreddit to stay abreast of updates, engage in discussions and upvote all the things.",
     buttonLabel: "join us on reddit",
+    route: "https://reddit.com/r/giveth",
   },
 ];
 
