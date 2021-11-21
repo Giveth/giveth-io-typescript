@@ -11,7 +11,7 @@ interface IContent {
   title: string;
   caption: string;
   buttonLabel: string;
-  route: string;
+  route?: string;
 }
 
 const GeneralCard = (props: { content: IContent; isHorizontal?: boolean }) => {
