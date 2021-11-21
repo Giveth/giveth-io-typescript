@@ -6,10 +6,15 @@ import { H2, Lead } from "../../styled-components/Typography";
 import Card from "../../GeneralCard";
 import config from "../../../../config";
 import YellowFlower from "../../../../public/images/yellow_flower.svg";
+import BlueFlower from "../../../../public/images/blue_flower.svg";
 import discord_icon from "../../../../public/images/discord_icon.svg";
 import discourse_icon from "../../../../public/images/discourse_icon.svg";
 import github_icon from "../../../../public/images/github_icon.svg";
 import telegram_icon from "../../../../public/images/telegram_icon.svg";
+import medium_icon from "../../../../public/images/medium_icon.svg";
+import twitter_icon from "../../../../public/images/twitter_icon.svg";
+import youtube_icon from "../../../../public/images/youtube_icon.svg";
+import reddit_icon from "../../../../public/images/reddit_icon.svg";
 
 const JoinEngage = () => {
   return (
@@ -30,20 +35,33 @@ const JoinEngage = () => {
         <div style={{ position: "absolute" }}>
           <Image src={YellowFlower} alt="yellowflower" />
         </div>
-        <EngageSection>
+        <Section>
           <Title>Engage</Title>
           <CardsSection>
-            {cardsArray.map((i) => (
+            {engageArray.map((i) => (
               <Card key={i.title} content={i} />
             ))}
           </CardsSection>
-        </EngageSection>
+        </Section>
+        <Section>
+          <Title>Consume</Title>
+          <CardsConsumeSection>
+            {consumeArray.map((i) => (
+              <Card key={i.title} content={i} isHorizontal />
+            ))}
+          </CardsConsumeSection>
+          <div
+            style={{ position: "absolute", right: 0, top: "-100px", zIndex: 0 }}
+          >
+            <Image src={BlueFlower} alt="blueflower" />
+          </div>
+        </Section>
       </UpperSection>
     </>
   );
 };
 
-const cardsArray = [
+const engageArray = [
   {
     icon: discord_icon,
     title: "Discord",
@@ -74,6 +92,37 @@ const cardsArray = [
   },
 ];
 
+const consumeArray = [
+  {
+    icon: medium_icon,
+    title: "Medium",
+    caption:
+      "Keep up with our Medium blog where we publish regular development and community updates with the latest and greatest.",
+    buttonLabel: "join us on discord",
+  },
+  {
+    icon: twitter_icon,
+    title: "Twitter",
+    caption:
+      "Connect with us on Twitter to stay up-to-date on exciting shares about the Future of Giving!",
+    buttonLabel: "join on discourse",
+  },
+  {
+    icon: youtube_icon,
+    title: "Youtube",
+    caption:
+      "Check out presentations, interviews, AMAs and more on the Giveth Youtube. Also follow our Transparency channel for recordings of our calls.",
+    buttonLabel: "join us on github",
+  },
+  {
+    icon: reddit_icon,
+    title: "Reddit",
+    caption:
+      "Subscribe to our r/Giveth subreddit to stay abreast of updates, engage in discussions and upvote all the things.",
+    buttonLabel: "join us on telegram",
+  },
+];
+
 const UpperSection = styled.div`
   padding: 150px 0;
   color: white;
@@ -88,7 +137,7 @@ const Title = styled(H2)`
   color: ${Giv_700};
   margin: 7% 20%;
 `;
-const EngageSection = styled.div`
+const Section = styled.div`
   position: relative;
   text-align: center;
   margin: 2% 0 0 0;
@@ -101,6 +150,12 @@ const CardsSection = styled.div`
   gap: 25px;
   position: relative;
   z-index: 3;
+`;
+const CardsConsumeSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default JoinEngage;
