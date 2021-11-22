@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
+
 import { Body_P, H6, Caption } from '../styled-components/Typography'
 import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
@@ -18,13 +19,14 @@ interface IProjectCard {
 }
 
 const ProjectCard = (props: IProjectCard) => {
-  const { title, description, image, verified, slug, reactions, users } = props.project
+  const { title, description, image, verified, slug, reactions, adminUser, totalDonations } =
+    props.project
 
   const [isHover, setIsHover] = useState(false)
 
   const router = useRouter()
 
-  const name = users.length > 0 && users[0].name
+  const name = adminUser.name
 
   return (
     <Wrapper onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
@@ -43,7 +45,7 @@ const ProjectCard = (props: IProjectCard) => {
           {name && <Author>{name}</Author>}
           <Description>{htmlToText(description)}</Description>
           <Captions>
-            <Caption>Raised: $200</Caption>
+            <Caption>Raised: ${Math.ceil(totalDonations as number)}</Caption>
             <Caption>Last updated: 5 days ago</Caption>
           </Captions>
           <HoverButtons isHover={isHover}>
