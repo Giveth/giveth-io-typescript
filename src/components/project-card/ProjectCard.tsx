@@ -27,11 +27,7 @@ const ProjectCard = (props: IProjectCard) => {
   const name = users.length > 0 && users[0].name
 
   return (
-    <Wrapper
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      className='shadow_1'
-    >
+    <Wrapper onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
       <Wrapper2 isHover={isHover}>
         <ImagePlaceholder>
           <ProjectCardBadges
@@ -124,6 +120,7 @@ const Wrapper2 = styled.div`
   margin-top: ${(props: { isHover: boolean }) => (props.isHover ? '-32px' : '0')};
   z-index: ${(props: { isHover: boolean }) => (props.isHover ? '3' : '0')};
   transition: all 0.3s ease;
+  box-shadow: 0 4px 20px #e5e6e9;
 `
 
 const Wrapper = styled.div`
