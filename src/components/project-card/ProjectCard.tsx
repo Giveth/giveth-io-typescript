@@ -5,15 +5,9 @@ import { Body_P, H6, Caption } from '../styled-components/Typography'
 import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
 import { IProject } from '../../types/types'
-import {
-  htmlToText,
-  isNoImg,
-  noImgColor,
-  noImgIcon,
-  slugToProjectDonate,
-  slugToProjectView
-} from '../../lib/helpers'
+import { htmlToText, slugToProjectDonate, slugToProjectView } from '../../lib/helpers'
 import { Button } from '../styled-components/Button'
+import ProjectCardImage from './ProjectCardImage'
 
 const cardWidth = '440px'
 const cardRadius = '12px'
@@ -29,11 +23,6 @@ const ProjectCard = (props: IProjectCard) => {
   const [isHover, setIsHover] = useState(false)
 
   const router = useRouter()
-
-  const projectImage = () => {
-    if (isNoImg(image)) return <NoImg />
-    return <Img src={image} alt='project image' />
-  }
 
   const name = users.length > 0 && users[0].name
 
@@ -51,7 +40,7 @@ const ProjectCard = (props: IProjectCard) => {
             likes={reactions.length}
             verified={verified}
           />
-          {projectImage()}
+          <ProjectCardImage image={image} cardWidth={cardWidth} cardRadius={cardRadius} />
         </ImagePlaceholder>
         <CardBody>
           <Title>{title}</Title>
@@ -91,14 +80,6 @@ const HoverButtons = styled.div`
   }
 `
 
-const NoImg = styled.div`
-  background: ${noImgColor};
-  width: 100%;
-  height: 100%;
-  border-radius: ${cardRadius} ${cardRadius} 0 0;
-  background-image: url(${noImgIcon});
-`
-
 const Captions = styled.div`
   display: flex;
   justify-content: space-between;
@@ -125,12 +106,6 @@ const Title = styled(H6)`
   color: ${Primary_Deep_500};
   height: 26px;
   overflow: hidden;
-`
-
-const Img = styled.img`
-  border-radius: ${cardRadius} ${cardRadius} 0 0;
-  width: ${cardWidth};
-  height: auto;
 `
 
 const ImagePlaceholder = styled.div`

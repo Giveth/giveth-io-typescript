@@ -5,7 +5,7 @@ import ProjectHeader from './ProjectHeader'
 import ProjectTabs from './ProjectTabs'
 import ProjectDonateCard from './ProjectDonateCard'
 import { IProjectBySlug } from '../../../types/types'
-import { mq } from '../../../lib/helpers'
+import { mediaQueries } from '../../../lib/helpers'
 
 const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
@@ -34,7 +34,7 @@ const BodyWrapper = styled.div`
   align-items: center;
   flex-direction: column-reverse;
 
-  ${mq['xl']} {
+  ${mediaQueries['xl']} {
     align-items: unset;
     flex-direction: row;
     justify-content: space-between;
