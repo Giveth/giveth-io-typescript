@@ -14,7 +14,6 @@ import Routes from '../lib/constants/Routes'
 import { networkIdToName, shortenAddress } from '../lib/helpers'
 import useWallet from '../wallet/walletHooks'
 import WalletModal from '../wallet/WalletModal'
-import { injected } from '../wallet/walletConnectors'
 import defaultUserProfile from '../../public/images/defaultUserProfile.png'
 import Logo from '../../public/images/giveth-logo-blue.svg'
 
@@ -78,7 +77,7 @@ const Menubar = () => {
           </div>
         </WalletDetails>
       ) : (
-        <Button small onClick={() => activate(injected)}>
+        <Button small onClick={() => setShowModal(true)}>
           CONNECT WALLET
         </Button>
       )}

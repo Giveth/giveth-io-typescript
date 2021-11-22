@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
-import { injected } from './walletConnectors'
+import { injectedConnector } from './walletTypes'
 
 const useWallet = () => {
   const context = useWeb3React()
@@ -25,9 +25,9 @@ const useEagerConnect = () => {
   const [tried, setTried] = useState(false)
 
   useEffect(() => {
-    injected.isAuthorized().then((isAuthorized: boolean) => {
+    injectedConnector.isAuthorized().then((isAuthorized: boolean) => {
       if (isAuthorized) {
-        activate(injected, undefined, true).catch(() => setTried(true))
+        activate(injectedConnector, undefined, true).catch(() => setTried(true))
       } else {
         setTried(true)
       }
@@ -49,7 +49,7 @@ const useInactiveListener = (suppress = false) => {
   useEffect(() => {
     const { ethereum } = window as any
     if (ethereum && ethereum.on && !active && !error && !suppress) {
-      const handleActivate = () => activate(injected)
+      const handleActivate = () => activate(injectedConnector)
 
       ethereum.on('connect', handleActivate)
       ethereum.on('chainChanged', handleActivate)

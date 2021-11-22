@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import Modal from 'react-modal'
+import { useWeb3React } from '@web3-react/core'
 
 import backIcon from '../../public/images/back.svg'
 import walletIcon from '../../public/images/wallet.svg'
-import metamaskIcon from '../../public/images/wallets/metamask.svg'
-import torusIcon from '../../public/images/wallets/torus.svg'
 import closeIcon from '../../public/images/close.svg'
+
 import {
   Giv_500,
   Primary_Deep_900,
@@ -17,9 +17,14 @@ import { H6, Body_P, Overline_Small } from '../components/styled-components/Typo
 import ExternalLink from '../components/ExternalLink'
 import InfoIcon from '../components/InfoIcon'
 import { Shadow } from '../components/styled-components/Shadow'
+import { EWallets, TWalletConnector } from './walletTypes'
+import { walletsArray } from './walletTypes'
 
 const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => {
   const { showModal, closeModal } = props
+
+  const { library, activate } = useWeb3React()
+  const selectedWallet = library?.connection?.url
 
   const [showInfo, setShowInfo] = useState(false)
 
@@ -39,6 +44,7 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
           hardware plugged into your computer or even an app on your phone.
           <br />
           <br />
+          {/* TODO fix explanation url*/}
           For more information about wallets, see <ExternalLink href='/' text='this explanation' />
         </InfoBody>
       </>
@@ -54,15 +60,17 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
         </Title>
         <Body_P>Please select a wallet to connect to this DApp</Body_P>
         <IconsContainer>
-          <WalletItem className='active'>
-            <Badge>SELECTED</Badge>
-            <Image src={metamaskIcon} alt='metamask' />
-            <Body_P bold>MetaMask</Body_P>
-          </WalletItem>
-          <WalletItem>
-            <Image src={torusIcon} alt='torus' />
-            <Body_P bold>Torus</Body_P>
-          </WalletItem>
+          {walletsArray.map(i => (
+            <WalletItem
+              onClick={() => handleSelect(i)}
+              key={i.value}
+              className={selectedWallet === i.value ? 'active' : ''}
+            >
+              {selectedWallet === i.value && <Badge>SELECTED</Badge>}
+              <Image src={i.image} alt={i.name} />
+              <Body_P bold>{i.name}</Body_P>
+            </WalletItem>
+          ))}
         </IconsContainer>
         <InfoSection onClick={() => setShowInfo(true)}>
           What is a wallet
@@ -70,6 +78,11 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
         </InfoSection>
       </>
     )
+  }
+
+  const handleSelect = (selected: { connector: TWalletConnector; value: EWallets }) => {
+    if (selectedWallet !== selected.value) activate(selected.connector)
+    closeModal()
   }
 
   if (!showModal) return null
