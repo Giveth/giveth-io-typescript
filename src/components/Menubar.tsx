@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -12,10 +12,10 @@ import { FlexCenter } from './styled-components/Grid'
 import { Shadow } from './styled-components/Shadow'
 import Routes from '../lib/constants/Routes'
 import { networkIdToName, shortenAddress } from '../lib/helpers'
-import useWallet from '../wallet/walletHooks'
 import WalletModal from '../wallet/WalletModal'
 import defaultUserProfile from '../../public/images/defaultUserProfile.png'
 import Logo from '../../public/images/giveth-logo-blue.svg'
+import { Context as UserContext } from '../contextProviders/UserProvider'
 
 const Menubar = () => {
   const [showModal, setShowModal] = useState(false)
@@ -35,7 +35,10 @@ const Menubar = () => {
       break
   }
 
-  useWallet()
+  const {
+    state: { user }
+  } = useContext(UserContext)
+
   const context = useWeb3React()
   const { connector, library, chainId, account, activate, deactivate, active, error } = context
 
@@ -72,7 +75,7 @@ const Menubar = () => {
         <WalletDetails onClick={() => setShowModal(true)}>
           <UserAvatar src={defaultUserProfile} width='24px' height='24px' />
           <div className='pl-2 pr-4'>
-            <Caption color={Primary_Deep_800}>{shortenAddress(account)}</Caption>
+            <Caption color={Primary_Deep_800}>{user?.name || shortenAddress(account)}</Caption>
             <Overline_Small color={Giv_800}>Connected to {networkIdToName(chainId)}</Overline_Small>
           </div>
         </WalletDetails>

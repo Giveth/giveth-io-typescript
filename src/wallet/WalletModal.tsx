@@ -19,12 +19,21 @@ import InfoIcon from '../components/InfoIcon'
 import { Shadow } from '../components/styled-components/Shadow'
 import { EWallets, TWalletConnector } from './walletTypes'
 import { walletsArray } from './walletTypes'
+import { TorusConnector } from '@web3-react/torus-connector'
+import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
+
+const checkWalletName = (context: Web3ReactContextInterface) => {
+  const { library, connector } = context
+  if (connector instanceof TorusConnector) return EWallets.TORUS
+  return library?.connection?.url
+}
 
 const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => {
   const { showModal, closeModal } = props
 
-  const { library, activate } = useWeb3React()
-  const selectedWallet = library?.connection?.url
+  const context = useWeb3React()
+  const { activate } = context
+  const selectedWallet = checkWalletName(context)
 
   const [showInfo, setShowInfo] = useState(false)
 
@@ -81,7 +90,9 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
   }
 
   const handleSelect = (selected: { connector: TWalletConnector; value: EWallets }) => {
-    if (selectedWallet !== selected.value) activate(selected.connector)
+    if (selectedWallet !== selected.value) {
+      activate(selected.connector).then()
+    }
     closeModal()
   }
 

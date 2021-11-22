@@ -1,6 +1,8 @@
 import Routes from './constants/Routes'
 import { Cyan_500, Giv_500, Mustard_500 } from '../components/styled-components/Colors'
 import config from '../../config'
+import { Web3Provider } from '@ethersproject/providers'
+import { keccak256 } from '@ethersproject/keccak256'
 
 export const slugToProjectView = (slug: string) => {
   return Routes.Project + '/' + slug
@@ -78,3 +80,54 @@ export const networkIdToName = (networkId?: number) => {
 
   return networkName
 }
+
+export async function signMessage(
+  message: string,
+  address: string | undefined | null,
+  chainId?: number,
+  web3?: Web3Provider
+) {
+  try {
+    const customPrefix = `\u0019${window.location.hostname} Signed Message:\n`
+    const prefixWithLength = Buffer.from(`${customPrefix}${message.length.toString()}`, 'utf-8')
+    const finalMessage = Buffer.concat([prefixWithLength, Buffer.from(message)])
+
+    const hashedMsg = keccak256(finalMessage)
+    // const provider = web3?.provider.JsonRpcProvider()
+    const msgParams = JSON.stringify({
+      primaryType: 'Login',
+      types: {
+        EIP712Domain: [
+          { name: 'name', type: 'string' },
+          { name: 'chainId', type: 'uint256' },
+          { name: 'version', type: 'string' }
+        ],
+        Login: [{ name: 'user', type: 'User' }],
+        User: [{ name: 'wallets', type: 'address[]' }]
+      },
+      domain: {
+        name: 'Giveth Login',
+        chainId,
+        version: '1'
+      },
+      message: {
+        contents: hashedMsg,
+        user: {
+          wallets: [address]
+        }
+      }
+    })
+    // const { result } = await send({
+    //   method: 'eth_signTypedData_v4',
+    //   params: [address, msgParams],
+    //   from: address
+    // })
+    //
+    // return result
+  } catch (error) {
+    console.log('Signing Error!', { error })
+    return false
+  }
+}
+
+export const LocalStorageTokenLabel = 'userToken'
