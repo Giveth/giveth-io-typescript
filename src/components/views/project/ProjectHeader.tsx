@@ -8,7 +8,7 @@ import { IProject } from '../../../types/types'
 
 const ProjectHeader = (props: { project: IProject }) => {
   const { title, verified, image, adminUser } = props.project
-  const name = adminUser.name
+  const name = adminUser?.name
   const traceable = true
 
   return (

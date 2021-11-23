@@ -20,6 +20,9 @@ export interface IProject {
     name: string
   }
   totalDonations?: number
+  donations: {
+    id: string
+  }[]
 }
 
 export interface IMediumBlogPost {
