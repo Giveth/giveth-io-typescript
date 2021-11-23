@@ -15,6 +15,8 @@ const getLibrary = (provider: ExternalProvider): Web3Provider => {
   return library
 }
 
+/*TODO all content with "Lorem ipsum" should be replaced*/
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>

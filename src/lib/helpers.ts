@@ -37,7 +37,7 @@ const breakpoints: { [index: string]: number } = {
   lg: 992,
   xl: 1200
 }
-export const mq = Object.keys(breakpoints)
+export const mediaQueries = Object.keys(breakpoints)
   .map(key => [key, breakpoints[key]] as [string, number])
   .reduce((prev, [key, breakpoint]) => {
     prev[key] = `@media (min-width: ${breakpoint}px)`

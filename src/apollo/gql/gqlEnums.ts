@@ -5,8 +5,6 @@ export const gqlEnums = {
   VERIFIED: 'Verified',
   HEARTS: 'Reactions',
   DONATIONS: 'Donations',
-  RECENTLYADDED: 'RecentlyAdded',
-  OLD: 'OldProjects',
   DESC: 'DESC',
   ASC: 'ASC'
 }

@@ -109,10 +109,7 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
       })
       .catch(() => {
         setIsLoading(false)
-        // Toast({
-        //   content: err.message || JSON.stringify(err),
-        //   type: 'error'
-        // })
+        /*TODO implement toast here for errors*/
       })
   }
 

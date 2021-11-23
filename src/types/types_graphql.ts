@@ -6,6 +6,10 @@ export interface IFetchAllProjects {
   categories: ICategory[]
 }
 
+export interface IProjectBySlug {
+  project: IProject
+}
+
 export interface IUserByAddress {
   id?: string
   firstName?: string

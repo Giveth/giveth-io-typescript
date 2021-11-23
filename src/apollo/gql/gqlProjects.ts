@@ -5,16 +5,17 @@ export const FETCH_HOME_PROJECTS = gql`
     projects(take: $limit, orderBy: $orderBy) {
       projects {
         id
-        users {
-          name
-        }
         title
         image
         slug
         description
         verified
+        totalDonations
         reactions {
           userId
+        }
+        adminUser {
+          name
         }
       }
       totalCount
@@ -41,16 +42,17 @@ export const FETCH_ALL_PROJECTS = gql`
     ) {
       projects {
         id
-        users {
-          name
-        }
         title
         image
         slug
         description
         verified
+        totalDonations
         reactions {
           userId
+        }
+        adminUser {
+          name
         }
       }
       totalCount
@@ -62,22 +64,20 @@ export const FETCH_ALL_PROJECTS = gql`
 `
 
 export const FETCH_PROJECT_BY_SLUG = gql`
-  query ProjectWithAdminBySlug($slug: String!) {
-    projectWithAdminBySlug(slug: $slug) {
-      project {
-        title
-        image
-        slug
-        description
-        verified
-        reactions {
-          userId
-        }
-        categories {
-          name
-        }
+  query ProjectBySlug($slug: String!) {
+    projectBySlug(slug: $slug) {
+      title
+      image
+      slug
+      description
+      verified
+      reactions {
+        userId
       }
-      admin {
+      categories {
+        name
+      }
+      adminUser {
         name
       }
     }

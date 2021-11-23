@@ -1,19 +1,14 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
+
 import { Body_P, H6, Caption } from '../styled-components/Typography'
 import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
 import { IProject } from '../../types/types'
-import {
-  htmlToText,
-  isNoImg,
-  noImgColor,
-  noImgIcon,
-  slugToProjectDonate,
-  slugToProjectView
-} from '../../lib/helpers'
+import { htmlToText, slugToProjectDonate, slugToProjectView } from '../../lib/helpers'
 import { Button } from '../styled-components/Button'
+import ProjectCardImage from './ProjectCardImage'
 
 const cardWidth = '440px'
 const cardRadius = '12px'
@@ -24,25 +19,17 @@ interface IProjectCard {
 }
 
 const ProjectCard = (props: IProjectCard) => {
-  const { title, description, image, verified, slug, reactions, users } = props.project
+  const { title, description, image, verified, slug, reactions, adminUser, totalDonations } =
+    props.project
 
   const [isHover, setIsHover] = useState(false)
 
   const router = useRouter()
 
-  const projectImage = () => {
-    if (isNoImg(image)) return <NoImg />
-    return <Img src={image} alt='project image' />
-  }
-
-  const name = users.length > 0 && users[0].name
+  const name = adminUser.name
 
   return (
-    <Wrapper
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      className='shadow_1'
-    >
+    <Wrapper onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
       <Wrapper2 isHover={isHover}>
         <ImagePlaceholder>
           <ProjectCardBadges
@@ -51,14 +38,14 @@ const ProjectCard = (props: IProjectCard) => {
             likes={reactions.length}
             verified={verified}
           />
-          {projectImage()}
+          <ProjectCardImage image={image} cardWidth={cardWidth} cardRadius={cardRadius} />
         </ImagePlaceholder>
         <CardBody>
           <Title>{title}</Title>
           {name && <Author>{name}</Author>}
           <Description>{htmlToText(description)}</Description>
           <Captions>
-            <Caption>Raised: $200</Caption>
+            <Caption>Raised: ${Math.ceil(totalDonations as number)}</Caption>
             <Caption>Last updated: 5 days ago</Caption>
           </Captions>
           <HoverButtons isHover={isHover}>
@@ -91,14 +78,6 @@ const HoverButtons = styled.div`
   }
 `
 
-const NoImg = styled.div`
-  background: ${noImgColor};
-  width: 100%;
-  height: 100%;
-  border-radius: ${cardRadius} ${cardRadius} 0 0;
-  background-image: url(${noImgIcon});
-`
-
 const Captions = styled.div`
   display: flex;
   justify-content: space-between;
@@ -128,12 +107,6 @@ const Title = styled(H6)`
   margin-bottom: 4px;
 `
 
-const Img = styled.img`
-  border-radius: ${cardRadius} ${cardRadius} 0 0;
-  width: ${cardWidth};
-  height: auto;
-`
-
 const ImagePlaceholder = styled.div`
   height: ${imgHeight};
   width: 100%;
@@ -150,6 +123,7 @@ const Wrapper2 = styled.div`
   margin-top: ${(props: { isHover: boolean }) => (props.isHover ? '-32px' : '0')};
   z-index: ${(props: { isHover: boolean }) => (props.isHover ? '3' : '0')};
   transition: all 0.3s ease;
+  box-shadow: 0 4px 20px #e5e6e9;
 `
 
 const Wrapper = styled.div`
