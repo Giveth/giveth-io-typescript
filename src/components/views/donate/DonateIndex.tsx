@@ -5,8 +5,13 @@ import ProjectCard from '../../project-card/ProjectCardAlt'
 import CryptoDonation from './CryptoDonation'
 import FiatDonation from './FiatDonation'
 import { IProjectBySlug } from '../../../types/types'
-import { H4, H6, Subline, Body_P } from '../../styled-components/Typography'
-import { Gray_600, Gray_700, Gray_200 } from '../../styled-components/Colors'
+import { H4, H6, Subline, Lead } from '../../styled-components/Typography'
+import {
+  Primary_Deep_900,
+  Gray_600,
+  Gray_700,
+  Gray_200,
+} from '../../styled-components/Colors'
 import { BigArc } from '../../styled-components/Arc'
 import ArrowLeft from '../../../../public/images/arrow_left.svg'
 import RadioOnIcon from '../../../../public/images/radio_on.svg'
@@ -24,6 +29,7 @@ const ProjectsIndex = (props: IProjectBySlug) => {
     const RadioOff = () => <Image src={RadioOffIcon} alt="radio off" />
 
     const RadioTitle = (props: any) => {
+      const isTypeSelected = props.type === donationType
       return (
         <>
           <RadioTitleBox
@@ -34,7 +40,14 @@ const ProjectsIndex = (props: IProjectBySlug) => {
             }
           >
             {props.type === donationType ? <RadioOn /> : <RadioOff />}
-            <RadioTitleText>{props.type}</RadioTitleText>
+            <div style={{ marginLeft: '16px' }}>
+              <RadioTitleText isSelected={isTypeSelected}>
+                {props.type}
+              </RadioTitleText>
+              <RadioSubtitleText isSelected={isTypeSelected}>
+                {props.type === CRYPTO_DONATION ? 'Zero Fees' : 'Bank Fees'}
+              </RadioSubtitleText>
+            </div>
           </RadioTitleBox>
         </>
       )
@@ -84,6 +97,7 @@ const TitleBox = styled.div`
   align-items: center;
   cursor: pointer !important;
   margin-bottom: 26px;
+  min-width: 400px;
 `
 const Wrapper = styled.div`
   text-align: center;
@@ -92,7 +106,7 @@ const Wrapper = styled.div`
 `
 const Sections = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(500px, 1fr));
   grid-auto-rows: minmax(100px, auto);
 `
 const Left = styled.div`
@@ -112,6 +126,8 @@ const Right = styled.div`
   background: white;
   text-align: left;
   padding: 65px 32px 32px;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
 `
 const Title = styled(H6)`
   margin-left: 30.67px;
@@ -119,9 +135,13 @@ const Title = styled(H6)`
     color: ${Gray_700};
   }
 `
-const RadioTitleText = styled(Body_P)`
-  margin-left: 16px;
-  color: ${Gray_600};
+const RadioTitleText = styled(Lead)`
+  color: ${(props: { isSelected: boolean }) =>
+    props.isSelected ? Primary_Deep_900 : Gray_600};
+`
+const RadioSubtitleText = styled(Subline)`
+  color: ${(props: { isSelected: boolean }) =>
+    props.isSelected ? Primary_Deep_900 : Gray_600};
 `
 const RadioBox = styled.div`
   display: flex;
@@ -130,7 +150,7 @@ const RadioBox = styled.div`
   margin-top: 29px;
   margin-bottom: 40px;
   div:first-child {
-    margin-right: 63px;
+    margin-right: 32px;
   }
 `
 const RadioTitleBox = styled.div`

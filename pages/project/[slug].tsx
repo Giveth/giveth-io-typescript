@@ -1,6 +1,6 @@
 import React from 'react'
 import { FETCH_PROJECT_BY_SLUG } from '../../src/apollo/gql/gqlProjects'
-import client from '../../src/apollo/apolloClient'
+import { client } from '../../src/apollo/apolloClient'
 import { IProjectBySlug } from '../../src/types/types'
 import Head from 'next/head'
 import Menubar from '../../src/components/Menubar'

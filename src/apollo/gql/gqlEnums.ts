@@ -1,3 +1,5 @@
+import gql from 'graphql-tag'
+
 export const gqlEnums = {
   QUALITYSCORE: 'QualityScore',
   CREATIONDATE: 'CreationDate',
@@ -8,5 +10,15 @@ export const gqlEnums = {
   RECENTLYADDED: 'RecentlyAdded',
   OLD: 'OldProjects',
   DESC: 'DESC',
-  ASC: 'ASC'
+  ASC: 'ASC',
 }
+
+export const FETCH_LISTED_TOKENS = gql`
+  query FetchListedTokens {
+    tokens {
+      name
+      symbol
+      chainId
+    }
+  }
+`
