@@ -23,6 +23,7 @@ export interface IProject {
   donations: {
     id: string
   }[]
+  traceCampaignId: string | null
 }
 
 export interface IMediumBlogPost {
