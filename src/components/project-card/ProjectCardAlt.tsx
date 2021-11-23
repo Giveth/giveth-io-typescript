@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import { Body_P, H6, Caption } from '../styled-components/Typography'
@@ -28,13 +28,14 @@ interface IProjectCard {
 }
 
 const ProjectCard = (props: IProjectCard) => {
+  const [rndColor, setRndColor] = useState(noImgColor)
   const { title, description, image, verified, slug, reactions, users } =
     props.project
 
   const router = useRouter()
 
   const projectImage = () => {
-    if (isNoImg(image)) return <NoImg />
+    if (isNoImg(image)) return <NoImg rndColor={rndColor} />
     return <Img src={image} alt="project image" />
   }
 
@@ -64,7 +65,7 @@ const ProjectCard = (props: IProjectCard) => {
 }
 
 const NoImg = styled.div`
-  background: ${noImgColor};
+  background: ${(props: { rndColor: string }) => props.rndColor};
   width: 100%;
   height: 100%;
   background-image: url(${noImgIcon});
