@@ -62,22 +62,24 @@ export const FETCH_ALL_PROJECTS = gql`
 `
 
 export const FETCH_PROJECT_BY_SLUG = gql`
-  query ProjectWithAdminBySlug($slug: String!) {
-    projectWithAdminBySlug(slug: $slug) {
-      project {
-        title
-        image
-        slug
-        description
-        verified
-        reactions {
-          userId
-        }
-        categories {
-          name
-        }
+  query projectBySlug($slug: String!) {
+    projectBySlug(slug: $slug) {
+      title
+      image
+      slug
+      description
+      verified
+      reactions {
+        userId
       }
-      admin {
+      categories {
+        name
+      }
+      adminUser {
+        id
+        email
+      }
+      users {
         name
       }
     }

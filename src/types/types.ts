@@ -16,6 +16,10 @@ export interface IProject {
   reactions: {
     userId?: string
   }[]
+  adminUser: {
+    id?: string
+    email?: string
+  }
   users: IUser[]
 }
 
@@ -42,5 +46,4 @@ export interface ICategory {
 
 export interface IProjectBySlug {
   project: IProject
-  admin: IAdmin
 }

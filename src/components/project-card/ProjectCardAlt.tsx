@@ -31,8 +31,6 @@ const ProjectCard = (props: IProjectCard) => {
   const { title, description, image, verified, slug, reactions, users } =
     props.project
 
-  const [isHover, setIsHover] = useState(false)
-
   const router = useRouter()
 
   const projectImage = () => {
@@ -43,21 +41,14 @@ const ProjectCard = (props: IProjectCard) => {
   const name = users?.length > 0 && users[0].name
 
   return (
-    <Wrapper
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      className="shadow_1"
-    >
-      <Wrapper2 isHover={isHover}>
-        <ImagePlaceholder>
-          <ProjectCardBadges
-            isHover={isHover}
-            cardWidth={cardWidth}
-            likes={reactions.length}
-            verified={verified}
-          />
-          {projectImage()}
-        </ImagePlaceholder>
+    <Wrapper>
+      <Wrapper2>
+        <ImagePlaceholder>{projectImage()}</ImagePlaceholder>
+        <ProjectCardBadges
+          cardWidth={cardWidth}
+          likes={reactions.length}
+          verified={verified}
+        />
         <CardBody>
           <Title>{title}</Title>
           {name && <Author>{name}</Author>}
@@ -66,45 +57,16 @@ const ProjectCard = (props: IProjectCard) => {
             <Caption>Raised: $200</Caption>
             <Caption>Last updated: 5 days ago</Caption>
           </Captions>
-          <HoverButtons isHover={isHover}>
-            <Button
-              onClick={() => router.push(slugToProjectView(slug))}
-              small
-              outline
-              color={Pinky_500}
-            >
-              LEARN MORE
-            </Button>
-            <Button
-              onClick={() => router.push(slugToProjectDonate(slug))}
-              small
-            >
-              DONATE
-            </Button>
-          </HoverButtons>
         </CardBody>
       </Wrapper2>
     </Wrapper>
   )
 }
 
-const HoverButtons = styled.div`
-  margin-top: 16px;
-  gap: 16px;
-  display: ${(props: { isHover: boolean }) =>
-    props.isHover ? 'flex' : 'none'};
-  animation: fadein 1s;
-
-  button {
-    width: 100%;
-  }
-`
-
 const NoImg = styled.div`
   background: ${noImgColor};
   width: 100%;
   height: 100%;
-  border-radius: ${cardRadius} ${cardRadius} 0 0;
   background-image: url(${noImgIcon});
 `
 
@@ -122,7 +84,8 @@ const Description = styled(Body_P)`
 `
 
 const CardBody = styled.div`
-  margin: 20px 24px;
+  margin: 70px 24px 0 24px;
+  text-align: left;
 `
 
 const Author = styled(Body_P)`
@@ -147,19 +110,16 @@ const ImagePlaceholder = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
+  border-radius: 16px;
 `
 
 const Wrapper2 = styled.div`
-  position: ${(props: { isHover: boolean }) =>
-    props.isHover ? 'absolute' : 'relative'};
-  height: ${(props: { isHover: boolean }) =>
-    props.isHover ? '494px' : '430px'};
+  position: relative;
+  height: 430px;
   width: ${cardWidth};
   border-radius: ${cardRadius};
-  background: white;
-  margin-top: ${(props: { isHover: boolean }) =>
-    props.isHover ? '-32px' : '0'};
-  z-index: ${(props: { isHover: boolean }) => (props.isHover ? '3' : '0')};
+  margin-top: 0;
+  z-index: 0;
   transition: all 0.3s ease;
 `
 
@@ -168,7 +128,6 @@ const Wrapper = styled.div`
   height: 430px;
   width: ${cardWidth};
   border-radius: ${cardRadius};
-  background: white;
 `
 
 export default ProjectCard
