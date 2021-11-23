@@ -1,24 +1,41 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
 import { Button } from '../../styled-components/Button'
 import { Giv_300, Giv_500, Pinky_500 } from '../../styled-components/Colors'
 import ShareLikeBadge from '../../badges/ShareLikeBadge'
 import { Shadow } from '../../styled-components/Shadow'
 import { Caption } from '../../styled-components/Typography'
-import { ICategory } from '../../../types/types'
 import CategoryBadge from '../../badges/CategoryBadge'
 import Routes from '../../../lib/constants/Routes'
 import config from '../../../../config'
 import { slugToProjectDonate } from '../../../lib/helpers'
 import InfoIcon from '../../InfoIcon'
+import { Context as UserContext } from '../../../contextProviders/UserProvider'
+import { IProjectBySlug } from '../../../types/types_graphql'
 
-const ProjectDonateCard = (props: { categories: ICategory[]; slug: string }) => {
-  const { categories, slug } = props
+const ProjectDonateCard = (props: IProjectBySlug) => {
+  const {
+    state: { user }
+  } = useContext(UserContext)
+
+  const { project } = props
+  const { categories, slug, reactions } = project
+
+  const [heartedByUser, setHeartedByUser] = useState(false)
+
   const isCategories = categories.length > 0
 
   const router = useRouter()
+
+  useEffect(() => {
+    if (user?.id) {
+      const isHearted = !!reactions?.some(i => Number(i.userId) === Number(user.id))
+      setHeartedByUser(isHearted)
+    }
+  }, [user])
 
   return (
     <Wrapper>
@@ -31,8 +48,8 @@ const ProjectDonateCard = (props: { categories: ICategory[]; slug: string }) => 
         DONATE
       </Button>
       <BadgeWrapper>
-        <ShareLikeBadge share />
-        <ShareLikeBadge like />
+        <ShareLikeBadge type='share' />
+        <ShareLikeBadge type='like' active={heartedByUser} />
       </BadgeWrapper>
       <GivBackNotif>
         <Caption color={Giv_300}>When you donate to verified projects, you get GIV back.</Caption>
