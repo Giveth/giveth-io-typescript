@@ -13,13 +13,15 @@ export interface IProject {
   verified?: boolean
   listed?: boolean
   categories: ICategory[]
-  reactions: {
-    userId?: string
-  }[]
+  reactions: IReaction[]
   adminUser: {
     name: string
   }
   totalDonations?: number
+}
+
+export interface IReaction {
+  userId: string
 }
 
 export interface IMediumBlogPost {

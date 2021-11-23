@@ -22,14 +22,6 @@ a, a:hover {
   cursor: pointer;
 }
 
-/* Design System Shadows */
-.shadow_1 {
-  box-shadow: 0 4px 20px #E5E6E9;
-}
-.shadow_dark_500 {
-  box-shadow: 0 3px 20px rgba(33, 32, 60, 0.24);
-}
-
 /* React-Select component */
 .select__menu {
   z-index: 10 !important;

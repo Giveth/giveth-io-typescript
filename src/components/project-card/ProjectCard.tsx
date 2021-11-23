@@ -35,7 +35,7 @@ const ProjectCard = (props: IProjectCard) => {
           <ProjectCardBadges
             isHover={isHover}
             cardWidth={cardWidth}
-            likes={reactions.length}
+            reactions={reactions}
             verified={verified}
           />
           <ProjectCardImage image={image} cardWidth={cardWidth} cardRadius={cardRadius} />
