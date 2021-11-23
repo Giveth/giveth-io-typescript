@@ -16,15 +16,10 @@ export interface IProject {
   reactions: {
     userId?: string
   }[]
-  users: IUser[]
-}
-
-export interface IUser {
-  name?: string
-}
-
-export interface IAdmin {
-  name?: string
+  adminUser: {
+    name: string
+  }
+  totalDonations?: number
 }
 
 export interface IMediumBlogPost {
@@ -38,9 +33,4 @@ export interface IMediumBlogPost {
 
 export interface ICategory {
   name: string
-}
-
-export interface IProjectBySlug {
-  project: IProject
-  admin: IAdmin
 }

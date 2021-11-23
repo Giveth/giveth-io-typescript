@@ -4,8 +4,8 @@ import styled from '@emotion/styled'
 import ProjectHeader from './ProjectHeader'
 import ProjectTabs from './ProjectTabs'
 import ProjectDonateCard from './ProjectDonateCard'
-import { IProjectBySlug } from '../../../types/types'
-import { mq } from '../../../lib/helpers'
+import { IProjectBySlug } from '../../../types/types_graphql'
+import { mediaQueries } from '../../../lib/helpers'
 
 const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
@@ -13,15 +13,15 @@ const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
 
 const ProjectIndex = (props: IProjectBySlug) => {
   const { project } = props
-  const { categories, slug } = project
+  const { categories, slug, description } = project
 
   return (
     <Wrapper>
-      <ProjectHeader {...props} />
+      <ProjectHeader project={project} />
       <BodyWrapper>
         <div>
           <ProjectTabs />
-          <RichTextViewer content={project.description} />
+          <RichTextViewer content={description} />
         </div>
         <ProjectDonateCard categories={categories} slug={slug} />
       </BodyWrapper>
@@ -34,7 +34,7 @@ const BodyWrapper = styled.div`
   align-items: center;
   flex-direction: column-reverse;
 
-  ${mq['xl']} {
+  ${mediaQueries['xl']} {
     align-items: unset;
     flex-direction: row;
     justify-content: space-between;

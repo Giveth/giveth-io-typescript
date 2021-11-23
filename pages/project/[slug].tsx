@@ -1,7 +1,7 @@
 import React from 'react'
 import { FETCH_PROJECT_BY_SLUG } from '../../src/apollo/gql/gqlProjects'
 import client from '../../src/apollo/apolloClient'
-import { IProjectBySlug } from '../../src/types/types'
+import { IProjectBySlug } from '../../src/types/types_graphql'
 import Head from 'next/head'
 import Menubar from '../../src/components/Menubar'
 import Footer from '../../src/components/Footer'
@@ -29,12 +29,10 @@ export async function getServerSideProps(props: { query: { slug: string } }) {
     variables: { slug },
     fetchPolicy: 'no-cache'
   })
-  const { project, admin } = data.projectWithAdminBySlug
 
   return {
     props: {
-      project,
-      admin
+      project: data.projectBySlug
     }
   }
 }
