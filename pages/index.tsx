@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import HomeIndex from '../src/components/views/homepage/HomeIndex'
-import client from '../src/apollo/apolloClient'
+import { client } from '../src/apollo/apolloClient'
 import { FETCH_HOME_PROJECTS } from '../src/apollo/gql/gqlProjects'
 import { gqlEnums } from '../src/apollo/gql/gqlEnums'
 import { IProject } from '../src/types/types'
@@ -33,8 +33,8 @@ export async function getServerSideProps() {
     query: FETCH_HOME_PROJECTS,
     variables: {
       limit: projectsToFetch,
-      orderBy: { field: gqlEnums.QUALITYSCORE, direction: gqlEnums.DESC }
-    }
+      orderBy: { field: gqlEnums.QUALITYSCORE, direction: gqlEnums.DESC },
+    },
   })
 
   const { projects, totalCount } = data.projects
@@ -42,8 +42,8 @@ export async function getServerSideProps() {
   return {
     props: {
       projects,
-      totalCount
-    }
+      totalCount,
+    },
   }
 }
 

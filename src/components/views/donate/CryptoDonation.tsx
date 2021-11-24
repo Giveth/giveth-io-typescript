@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import React from 'react'
 import Select from 'react-select'
 import { useQuery } from '@apollo/client'
-import client from '../../../../src/apollo/apolloClient'
 import { FETCH_LISTED_TOKENS } from '../../../../src/apollo/gql/gqlEnums'
 import { IProjectBySlug } from '../../../types/types'
 
