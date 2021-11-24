@@ -140,6 +140,8 @@ const LeadText = styled(Lead)`
 const Title = styled(H2)`
   color: ${Giv_700};
   margin: 7% 20%;
+  position: relative;
+  z-index: 1;
 `
 const Section = styled.div`
   position: relative;
