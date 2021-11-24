@@ -13,10 +13,8 @@ const JoinIndex = () => {
         <ArcCyan />
         <ArcMustard />
         <TextContainer>
-          <Title>Join our Community</Title>
-          <H4>
-            Building the Future of Giving.
-          </H4>
+          <D3>Join our Community</D3>
+          <H4>Building the Future of Giving.</H4>
         </TextContainer>
       </UpperSection>
     </>
@@ -42,7 +40,7 @@ const ArcCyan = styled(Arc)`
   left: -80px;
   width: 420px;
   height: 420px;
-  z-index: 1;
+  z-index: 0;
 `
 
 const ArcMustard = styled(Arc)`
@@ -53,7 +51,7 @@ const ArcMustard = styled(Arc)`
   right: -100px;
   width: 420px;
   height: 420px;
-  z-index: 1;
+  z-index: 0;
 `
 
 const TextContainer = styled.div`
@@ -63,7 +61,9 @@ const TextContainer = styled.div`
   justify-content: center;
   height: 100%;
   padding: 0;
-  z-index: 2;
+  * {
+    z-index: 2;
+  }
 `
 
 const UpperSection = styled.div`
@@ -74,10 +74,6 @@ const UpperSection = styled.div`
   color: white;
   overflow: hidden;
   position: relative;
-`
-
-const Title = styled(D3)`
-  
 `
 
 export default JoinIndex

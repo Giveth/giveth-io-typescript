@@ -36,7 +36,7 @@ export const H3 = styled.h3<ITypographyProps>`
 export const H4 = styled.h4`
   font-family: TeX Gyre Adventor, sans-serif;
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 50px;
   color: ${props => props.color || 'inherit'};
 `

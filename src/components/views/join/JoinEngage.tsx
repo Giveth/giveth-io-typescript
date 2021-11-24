@@ -1,44 +1,42 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Image from "next/image";
-import { Giv_900, Giv_700 } from "../../styled-components/Colors";
-import { H2, Lead } from "../../styled-components/Typography";
-import Card from "../../GeneralCard";
-import config from "../../../../config";
-import YellowFlower from "../../../../public/images/yellow_flower.svg";
-import BlueFlower from "../../../../public/images/blue_flower.svg";
-import discord_icon from "../../../../public/images/discord_icon.svg";
-import discourse_icon from "../../../../public/images/discourse_icon.svg";
-import github_icon from "../../../../public/images/github_icon.svg";
-import telegram_icon from "../../../../public/images/telegram_icon.svg";
-import medium_icon from "../../../../public/images/medium_icon.svg";
-import twitter_icon from "../../../../public/images/twitter_icon.svg";
-import youtube_icon from "../../../../public/images/youtube_icon.svg";
-import reddit_icon from "../../../../public/images/reddit_icon.svg";
+import React from 'react'
+import styled from '@emotion/styled'
+import Image from 'next/image'
+import { Giv_900, Giv_700 } from '../../styled-components/Colors'
+import { H2, Lead } from '../../styled-components/Typography'
+import Card from '../../GeneralCard'
+import YellowFlower from '../../../../public/images/yellow_flower.svg'
+import BlueFlower from '../../../../public/images/blue_flower.svg'
+import discord_icon from '../../../../public/images/discord_icon.svg'
+import discourse_icon from '../../../../public/images/discourse_icon.svg'
+import github_icon from '../../../../public/images/github_icon.svg'
+import telegram_icon from '../../../../public/images/telegram_icon.svg'
+import medium_icon from '../../../../public/images/medium_icon.svg'
+import twitter_icon from '../../../../public/images/twitter_icon.svg'
+import youtube_icon from '../../../../public/images/youtube_icon.svg'
+import reddit_icon from '../../../../public/images/reddit_icon.svg'
 
 const JoinEngage = () => {
   return (
     <>
       <UpperSection>
         <LeadText>
-          Giveth is first and foremost a community of givers and changemakers.
-          We are passionate people working together to build a crypto-economic
-          system that can reward giving to good causes. Our project is
-          open-source, decentralized, altruistic, and community-led. Want to get
-          more involved?
+          Giveth is first and foremost a community of givers and changemakers. We are passionate
+          people working together to build a crypto-economic system that can reward giving to good
+          causes. Our project is open-source, decentralized, altruistic, and community-led. Want to
+          get more involved?
         </LeadText>
         <br />
         <LeadText>
-          Follow our social media and come say hello in a channel below, we look
-          forward to welcoming you!
+          Follow our social media and come say hello in a channel below, we look forward to
+          welcoming you!
         </LeadText>
-        <div style={{ position: "absolute" }}>
-          <Image src={YellowFlower} alt="yellowflower" />
+        <div style={{ position: 'absolute' }}>
+          <Image src={YellowFlower} alt='yellowflower' />
         </div>
         <Section>
           <Title>Engage</Title>
           <CardsSection>
-            {engageArray.map((i) => (
+            {engageArray.map(i => (
               <Card key={i.title} content={i} />
             ))}
           </CardsSection>
@@ -46,110 +44,108 @@ const JoinEngage = () => {
         <Section>
           <Title>Consume</Title>
           <CardsConsumeSection>
-            {consumeArray.map((i) => (
+            {consumeArray.map(i => (
               <Card key={i.title} content={i} isHorizontal />
             ))}
           </CardsConsumeSection>
-          <div
-            style={{ position: "absolute", right: 0, top: "-100px", zIndex: 0 }}
-          >
-            <Image src={BlueFlower} alt="blueflower" />
-          </div>
+          <BlueFlowerComponent>
+            <Image src={BlueFlower} alt='blueflower' />
+          </BlueFlowerComponent>
         </Section>
       </UpperSection>
     </>
-  );
-};
+  )
+}
 
 const engageArray = [
   {
     icon: discord_icon,
-    title: "Discord",
+    title: 'Discord',
     caption:
-      "Join the conversation! Discord is where our team communicates. Introduce yourself, give us feedback, find out how to contribute or just say hello!",
-    buttonLabel: "join us on discord",
-    route: "https://discord.gg/Uq2TaXP9bC",
+      'Join the conversation! Discord is where our team communicates. Introduce yourself, give us feedback, find out how to contribute or just say hello!',
+    buttonLabel: 'join us on discord',
+    route: 'https://discord.gg/Uq2TaXP9bC'
   },
   {
     icon: discourse_icon,
-    title: "Discourse",
+    title: 'Discourse',
     caption:
-      "The Giveth forum is where we create discourse around new and existing proposals. We share ideas involving development and governance, cultivating discussions about important topics around our team and community.",
-    buttonLabel: "join on discourse",
-    route: "https://forum.giveth.io/",
+      'The Giveth forum is where we create discourse around new and existing proposals. We share ideas involving development and governance, cultivating discussions about important topics around our team and community.',
+    buttonLabel: 'join on discourse',
+    route: 'https://forum.giveth.io/'
   },
   {
     icon: github_icon,
-    title: "Github",
+    title: 'Github',
     caption:
-      "Got some developer skills? Check out our Github! We always welcome new contributors. Please also join one of our dev channels in Discord to say hello!",
-    buttonLabel: "join us on github",
-    route: "https://github.com/Giveth/",
+      'Got some developer skills? Check out our Github! We always welcome new contributors. Please also join one of our dev channels in Discord to say hello!',
+    buttonLabel: 'join us on github',
+    route: 'https://github.com/Giveth/'
   },
   {
     icon: telegram_icon,
-    title: "Telegram",
+    title: 'Telegram',
     caption:
-      "Not on Discord? Join our Telegram! This group is bridged directly to the #general channel in the Giveth discord so we’ll see all of your messages here.",
-    buttonLabel: "join us on telegram",
-    route: "https://t.me/Givethio",
-  },
-];
+      'Not on Discord? Join our Telegram! This group is bridged directly to the #general channel in the Giveth discord so we’ll see all of your messages here.',
+    buttonLabel: 'join us on telegram',
+    route: 'https://t.me/Givethio'
+  }
+]
 
 const consumeArray = [
   {
     icon: medium_icon,
-    title: "Medium",
+    title: 'Medium',
     caption:
-      "Keep up with our Medium blog where we publish regular development and community updates with the latest and greatest.",
-    buttonLabel: "join us on medium",
-    route: "https://medium.com/giveth/",
+      'Keep up with our Medium blog where we publish regular development and community updates with the latest and greatest.',
+    buttonLabel: 'join us on medium',
+    route: 'https://medium.com/giveth/'
   },
   {
     icon: twitter_icon,
-    title: "Twitter",
+    title: 'Twitter',
     caption:
-      "Connect with us on Twitter to stay up-to-date on exciting shares about the Future of Giving!",
-    buttonLabel: "join on twitter",
-    route: "https://twitter.com/Givethio",
+      'Connect with us on Twitter to stay up-to-date on exciting shares about the Future of Giving!',
+    buttonLabel: 'join on twitter',
+    route: 'https://twitter.com/Givethio'
   },
   {
     icon: youtube_icon,
-    title: "Youtube",
+    title: 'Youtube',
     caption:
-      "Check out presentations, interviews, AMAs and more on the Giveth Youtube. Also follow our Transparency channel for recordings of our calls.",
-    buttonLabel: "join us on youtube",
-    route: "https://www.youtube.com/channel/UClfutpRoY0WTVnq0oB0E0wQ",
+      'Check out presentations, interviews, AMAs and more on the Giveth Youtube. Also follow our Transparency channel for recordings of our calls.',
+    buttonLabel: 'join us on youtube',
+    route: 'https://www.youtube.com/channel/UClfutpRoY0WTVnq0oB0E0wQ'
   },
   {
     icon: reddit_icon,
-    title: "Reddit",
+    title: 'Reddit',
     caption:
-      "Subscribe to our r/Giveth subreddit to stay abreast of updates, engage in discussions and upvote all the things.",
-    buttonLabel: "join us on reddit",
-    route: "https://reddit.com/r/giveth",
-  },
-];
+      'Subscribe to our r/Giveth subreddit to stay abreast of updates, engage in discussions and upvote all the things.',
+    buttonLabel: 'join us on reddit',
+    route: 'https://reddit.com/r/giveth'
+  }
+]
 
 const UpperSection = styled.div`
   padding: 150px 0;
   color: white;
   overflow: hidden;
   position: relative;
-`;
+`
 const LeadText = styled(Lead)`
   color: ${Giv_900};
   margin: 0 20%;
-`;
+`
 const Title = styled(H2)`
   color: ${Giv_700};
   margin: 7% 20%;
-`;
+`
 const Section = styled.div`
   position: relative;
   text-align: center;
   margin: 2% 0 0 0;
-`;
+`
 const CardsSection = styled.div`
   display: flex;
   justify-content: center;
@@ -158,12 +154,18 @@ const CardsSection = styled.div`
   gap: 25px;
   position: relative;
   z-index: 3;
-`;
+`
 const CardsConsumeSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
+`
+const BlueFlowerComponent = styled.div`
+  position: absolute;
+  right: 0;
+  top: -100px;
+  z-index: 0;
+`
 
-export default JoinEngage;
+export default JoinEngage
