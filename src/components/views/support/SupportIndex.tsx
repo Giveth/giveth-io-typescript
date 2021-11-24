@@ -7,7 +7,7 @@ import questionIcon from '../../../../public/images/ask_question.svg'
 import feedbackIcon from '../../../../public/images/feedback.svg'
 import reportIcon from '../../../../public/images/report_issue.svg'
 import featureIcon from '../../../../public/images/request_feature.svg'
-import SupportCard from './SupportCard'
+import SupportCard from '../../GeneralCard'
 
 const SupportIndex = () => {
   return (
