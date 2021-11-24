@@ -32,7 +32,6 @@ interface IQueries {
   searchTerm?: string
 }
 
-const cardsMargin = '10px'
 const allCategoryObj = { value: 'All', label: 'All' }
 const sortByObj = [
   { label: 'Default', value: gqlEnums.QUALITYSCORE },
@@ -103,19 +102,14 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
       .then((res: { data: { projects: IFetchAllProjects } }) => {
         const data = res.data?.projects?.projects
         const count = res.data?.projects?.totalCount
-        if (count) setTotalCount(count)
-        if (data) {
-          if (isLoadMore) setFilteredProjects(filteredProjects.concat(data))
-          else setFilteredProjects(data)
-        }
+        setTotalCount(count)
+        if (isLoadMore) setFilteredProjects(filteredProjects.concat(data))
+        else setFilteredProjects(data)
         setIsLoading(false)
       })
       .catch(() => {
         setIsLoading(false)
-        // Toast({
-        //   content: err.message || JSON.stringify(err),
-        //   type: 'error'
-        // })
+        /*TODO implement toast here for errors*/
       })
   }
 
@@ -170,31 +164,29 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
 
         <ProjectsContainer>
           {filteredProjects.map(project => (
-            <div key={project.id} style={{ margin: cardsMargin }}>
-              <ProjectCard project={project} />
-            </div>
+            <ProjectCard key={project.id} project={project} />
           ))}
         </ProjectsContainer>
 
         {showLoadMore && (
           <>
-            <Button onClick={loadMore} className='mx-auto mt-5' outline color={Pinky_500}>
+            <StyledButton onClick={loadMore} outline>
               {isLoading ? <div className='dot-flashing' /> : 'LOAD MORE'}
-            </Button>
-            <Button
-              onClick={() => router.push(Routes.CreateProject)}
-              color={Pinky_500}
-              ghost
-              className='mx-auto mt-2'
-            >
+            </StyledButton>
+            <StyledButton onClick={() => router.push(Routes.CreateProject)} ghost>
               Create a Project
-            </Button>
+            </StyledButton>
           </>
         )}
       </Wrapper>
     </>
   )
 }
+
+const StyledButton = styled(Button)`
+  color: ${Pinky_500};
+  margin: 16px auto;
+`
 
 const SelectComponent = styled(Body_P)`
   width: 343px;
@@ -222,7 +214,8 @@ const FiltersSection = styled.div`
 const ProjectsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-left: -${cardsMargin};
+  gap: 26px 23px;
+  margin-bottom: 64px;
 `
 
 const Wrapper = styled.div`

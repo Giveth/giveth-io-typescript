@@ -23,6 +23,7 @@ const FAQIndex = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lectus urna orci vel commodo.
         </Lead_Medium>
         <SearchStyles>
+          {/*TODO implement search*/}
           <SearchBox onChange={console.log} placeholder='What are you looking for?' />
         </SearchStyles>
         <FAQContainer>
