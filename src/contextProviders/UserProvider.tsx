@@ -55,6 +55,10 @@ const UserProvider = (props: { children: ReactElement }) => {
     return true
   }
 
+  const signer = library?.getSigner()
+  signer?.getAddress().then((res: any) => console.log(res))
+  // console.log(signer?.getAddress())
+
   return (
     <Provider
       value={{

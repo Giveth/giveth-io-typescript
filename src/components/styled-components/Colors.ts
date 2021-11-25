@@ -20,11 +20,11 @@ export const Primary_Deep_200 = '#6879D4'
 export const Semantic_Link_500 = '#0A91FE'
 
 export const Gray_900 = '#1D1E1F'
+export const Gray_800 = '#4F576A'
 export const Gray_700 = '#82899A'
 export const Gray_600 = '#A5ADBF'
 export const Gray_500 = '#BBC3D5'
 export const Gray_400 = '#D7DDEA'
 export const Gray_300 = '#EBECF2'
-export const Gray_200 = '#F7F7F9'
 
 export const Cyan_500 = '#2FC8E0'

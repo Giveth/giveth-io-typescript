@@ -19,14 +19,7 @@ import InfoIcon from '../components/InfoIcon'
 import { Shadow } from '../components/styled-components/Shadow'
 import { EWallets, TWalletConnector } from './walletTypes'
 import { walletsArray } from './walletTypes'
-import { TorusConnector } from '@web3-react/torus-connector'
-import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
-
-const checkWalletName = (context: Web3ReactContextInterface) => {
-  const { library, connector } = context
-  if (connector instanceof TorusConnector) return EWallets.TORUS
-  return library?.connection?.url
-}
+import { checkWalletName } from '../lib/helpers'
 
 const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => {
   const { showModal, closeModal } = props

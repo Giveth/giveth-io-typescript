@@ -1,24 +1,24 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 import { useWeb3React } from '@web3-react/core'
 
-import { Button } from './styled-components/Button'
-import { Giv_100, Giv_800, Primary_Deep_800 } from './styled-components/Colors'
-import { Caption, Overline_Small } from './styled-components/Typography'
-import { FlexCenter } from './styled-components/Grid'
-import { Shadow } from './styled-components/Shadow'
-import Routes from '../lib/constants/Routes'
-import { networkIdToName, shortenAddress } from '../lib/helpers'
-import WalletModal from '../wallet/WalletModal'
-import defaultUserProfile from '../../public/images/defaultUserProfile.png'
-import Logo from '../../public/images/giveth-logo-blue.svg'
-import { Context as UserContext } from '../contextProviders/UserProvider'
+import { Button } from '../styled-components/Button'
+import { Giv_100, Primary_Deep_800 } from '../styled-components/Colors'
+import { FlexCenter } from '../styled-components/Grid'
+import { Shadow } from '../styled-components/Shadow'
+import Routes from '../../lib/constants/Routes'
+import Logo from '../../../public/images/giveth-logo-blue.svg'
+import MenuWallet from './MenuWallet'
+import WalletModal from '../../wallet/WalletModal'
 
-const Menubar = () => {
+const MenuInedx = () => {
   const [showModal, setShowModal] = useState(false)
+
+  const context = useWeb3React()
+  const { active } = context
 
   const router = useRouter()
 
@@ -34,15 +34,6 @@ const Menubar = () => {
       activeTab = 'join'
       break
   }
-
-  const {
-    state: { user }
-  } = useContext(UserContext)
-
-  const context = useWeb3React()
-  const { connector, library, chainId, account, activate, deactivate, active, error } = context
-
-  console.log({ connector, library, chainId, account, activate, deactivate, active, error })
 
   return (
     <Wrapper>
@@ -72,13 +63,7 @@ const Menubar = () => {
       </Button>
 
       {active ? (
-        <WalletDetails onClick={() => setShowModal(true)}>
-          <UserAvatar src={defaultUserProfile} width='24px' height='24px' />
-          <div className='pl-2 pr-4'>
-            <Caption color={Primary_Deep_800}>{user?.name || shortenAddress(account)}</Caption>
-            <Overline_Small color={Giv_800}>Connected to {networkIdToName(chainId)}</Overline_Small>
-          </div>
-        </WalletDetails>
+        <MenuWallet />
       ) : (
         <Button small onClick={() => setShowModal(true)}>
           CONNECT WALLET
@@ -87,22 +72,6 @@ const Menubar = () => {
     </Wrapper>
   )
 }
-
-const MenuItem = styled(FlexCenter)`
-  border-radius: 72px;
-  background: white;
-  height: 48px;
-  color: ${Primary_Deep_800};
-`
-
-const UserAvatar = styled(Image)`
-  border-radius: 50%;
-`
-
-const WalletDetails = styled(MenuItem)`
-  padding: 0 12.5px;
-  cursor: pointer;
-`
 
 const RoutesItem = styled.a`
   padding: 7px 15px;
@@ -115,10 +84,14 @@ const RoutesItem = styled.a`
   }
 `
 
-const MainRoutes = styled(MenuItem)`
+const MainRoutes = styled(FlexCenter)`
   padding: 0 10px;
   width: 408px;
   justify-content: space-between;
+  border-radius: 72px;
+  background: white;
+  height: 48px;
+  color: ${Primary_Deep_800};
 `
 
 const Wrapper = styled.div`
@@ -145,4 +118,4 @@ const LogoBackground = styled(FlexCenter)`
   cursor: pointer;
 `
 
-export default Menubar
+export default MenuInedx

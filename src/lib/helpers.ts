@@ -1,8 +1,14 @@
+import { Web3Provider } from '@ethersproject/providers'
+import { keccak256 } from '@ethersproject/keccak256'
+import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
+import { TorusConnector } from '@web3-react/torus-connector'
+
 import Routes from './constants/Routes'
 import { Cyan_500, Giv_500, Mustard_500 } from '../components/styled-components/Colors'
 import config from '../../config'
-import { Web3Provider } from '@ethersproject/providers'
-import { keccak256 } from '@ethersproject/keccak256'
+import { EWallets } from '../wallet/walletTypes'
+
+declare let window: any
 
 export const slugToProjectView = (slug: string) => {
   return Routes.Project + '/' + slug
@@ -79,6 +85,27 @@ export const networkIdToName = (networkId?: number) => {
   }
 
   return networkName
+}
+
+export const checkWalletName = (Web3ReactContext: Web3ReactContextInterface) => {
+  const { library, connector } = Web3ReactContext
+  if (connector instanceof TorusConnector) return EWallets.TORUS
+  return library?.connection?.url
+}
+
+export const switchNetwork = (currentNetworkId?: number) => {
+  let chainId = config.PRIMARY_NETWORK.chain
+  const defaultNetworkId = config.PRIMARY_NETWORK.id
+  if (currentNetworkId === defaultNetworkId) {
+    chainId = config.SECONDARY_NETWORK.chain
+  }
+
+  window?.ethereum
+    .request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId }]
+    })
+    .then()
 }
 
 export async function signMessage(
