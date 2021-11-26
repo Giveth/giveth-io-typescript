@@ -7,9 +7,9 @@ import { isNoImg, noImgColor, noImgIcon } from '../../../lib/helpers'
 import { IProject } from '../../../types/types'
 
 const ProjectHeader = (props: { project: IProject }) => {
-  const { title, verified, image, adminUser } = props.project
-  const name = adminUser.name
-  const traceable = true
+  const { title, verified, image, adminUser, traceCampaignId } = props.project
+  const name = adminUser?.name
+  const traceable = !!traceCampaignId
 
   return (
     <Wrapper image={image}>

@@ -17,13 +17,13 @@ interface IProjectCardBadges {
   cardWidth?: string
   likes?: number
   verified?: boolean
+  traceable?: boolean
   isHover?: boolean
 }
 
 const ProjectCardBadges = (props: IProjectCardBadges) => {
-  const { cardWidth, likes, verified, isHover } = props
+  const { cardWidth, likes, verified, traceable, isHover } = props
   const active = true
-  const traceable = true
 
   return (
     <BadgeWrapper width={cardWidth}>

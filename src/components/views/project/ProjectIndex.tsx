@@ -20,7 +20,7 @@ const ProjectIndex = (props: IProjectBySlug) => {
       <ProjectHeader project={project} />
       <BodyWrapper>
         <div>
-          <ProjectTabs />
+          <ProjectTabs project={project} />
           <RichTextViewer content={description} />
         </div>
         <ProjectDonateCard categories={categories} slug={slug} />
