@@ -19,8 +19,17 @@ interface IProjectCard {
 }
 
 const ProjectCard = (props: IProjectCard) => {
-  const { title, description, image, verified, slug, reactions, adminUser, totalDonations } =
-    props.project
+  const {
+    title,
+    description,
+    image,
+    verified,
+    slug,
+    reactions,
+    adminUser,
+    totalDonations,
+    traceCampaignId
+  } = props.project
 
   const [isHover, setIsHover] = useState(false)
 
@@ -37,6 +46,7 @@ const ProjectCard = (props: IProjectCard) => {
             cardWidth={cardWidth}
             reactions={reactions}
             verified={verified}
+            traceable={!!traceCampaignId}
           />
           <ProjectCardImage image={image} cardWidth={cardWidth} cardRadius={cardRadius} />
         </ImagePlaceholder>

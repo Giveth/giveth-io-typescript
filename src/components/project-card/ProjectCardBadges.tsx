@@ -19,6 +19,7 @@ interface IProjectCardBadges {
   cardWidth?: string
   reactions?: IReaction[]
   verified?: boolean
+  traceable?: boolean
   isHover?: boolean
 }
 
@@ -29,8 +30,7 @@ const ProjectCardBadges = (props: IProjectCardBadges) => {
 
   const [heartedByUser, setHeartedByUser] = useState(false)
 
-  const { cardWidth, reactions, verified, isHover } = props
-  const traceable = true
+  const { cardWidth, reactions, verified, isHover, traceable } = props
   const likes = reactions?.length
 
   useEffect(() => {

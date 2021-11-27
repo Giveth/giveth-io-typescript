@@ -18,6 +18,10 @@ export interface IProject {
     name: string
   }
   totalDonations?: number
+  donations: {
+    id: string
+  }[]
+  traceCampaignId: string | null
 }
 
 export interface IReaction {

@@ -11,6 +11,7 @@ export const FETCH_HOME_PROJECTS = gql`
         description
         verified
         totalDonations
+        traceCampaignId
         reactions {
           userId
         }
@@ -48,6 +49,7 @@ export const FETCH_ALL_PROJECTS = gql`
         description
         verified
         totalDonations
+        traceCampaignId
         reactions {
           userId
         }
@@ -71,6 +73,7 @@ export const FETCH_PROJECT_BY_SLUG = gql`
       slug
       description
       verified
+      traceCampaignId
       reactions {
         userId
       }
@@ -79,6 +82,9 @@ export const FETCH_PROJECT_BY_SLUG = gql`
       }
       adminUser {
         name
+      }
+      donations {
+        id
       }
     }
   }

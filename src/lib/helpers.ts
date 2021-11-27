@@ -37,18 +37,12 @@ export const noImgIcon = config.APP_URL + '/images/GIV-icon-text.svg'
 
 export const isNoImg = (image: string | undefined) => !(image && !Number(image))
 
-const breakpoints: { [index: string]: number } = {
-  sm: 500,
-  md: 768,
-  lg: 992,
-  xl: 1200
+export const mediaQueries = {
+  sm: '@media (min-width: 500px)',
+  md: '@media (min-width: 768px)',
+  lg: '@media (min-width: 992px)',
+  xl: '@media (min-width: 1200px)'
 }
-export const mediaQueries = Object.keys(breakpoints)
-  .map(key => [key, breakpoints[key]] as [string, number])
-  .reduce((prev, [key, breakpoint]) => {
-    prev[key] = `@media (min-width: ${breakpoint}px)`
-    return prev
-  }, {} as { [index: string]: string })
 
 export const shortenAddress = (address: string | null | undefined, charsLength = 4) => {
   const prefixLength = 2 // "0x"
