@@ -7,7 +7,7 @@ import { Button } from '../../styled-components/Button'
 import { Giv_300, Giv_500, Pinky_500 } from '../../styled-components/Colors'
 import ShareLikeBadge from '../../badges/ShareLikeBadge'
 import { Shadow } from '../../styled-components/Shadow'
-import { Caption } from '../../styled-components/Typography'
+import { Link_Medium } from '../../styled-components/Typography'
 import CategoryBadge from '../../badges/CategoryBadge'
 import Routes from '../../../lib/constants/Routes'
 import config from '../../../../config'
@@ -52,7 +52,9 @@ const ProjectDonateCard = (props: IProjectBySlug) => {
         <ShareLikeBadge type='like' active={heartedByUser} />
       </BadgeWrapper>
       <GivBackNotif>
-        <Caption color={Giv_300}>When you donate to verified projects, you get GIV back.</Caption>
+        <Link_Medium color={Giv_300}>
+          When you donate to verified projects, you get GIV back.
+        </Link_Medium>
         <InfoIcon />
       </GivBackNotif>
       {isCategories && (
@@ -66,7 +68,7 @@ const ProjectDonateCard = (props: IProjectBySlug) => {
         <Links>View similar projects</Links>
       </Link>
       <br />
-      <Links target='_blank' href={config.REPORT_ISSUE_URL} rel='noreferrer noopener'>
+      <Links target='_blank' href={config.LINKS.REPORT_ISSUE} rel='noreferrer noopener'>
         Report an issue
       </Links>
     </Wrapper>

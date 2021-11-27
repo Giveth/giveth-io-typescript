@@ -1,4 +1,3 @@
-import { Web3Provider } from '@ethersproject/providers'
 import { keccak256 } from '@ethersproject/keccak256'
 import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
 import { TorusConnector } from '@web3-react/torus-connector'
@@ -33,7 +32,7 @@ export const capitalizeFirstLetter = (string: string) => {
 const noImgColors = [Cyan_500, Mustard_500, Giv_500]
 export const noImgColor = () => noImgColors[Math.floor(Math.random() * 3)]
 
-export const noImgIcon = config.APP_URL + '/images/GIV-icon-text.svg'
+export const noImgIcon = config.LINKS.FRONTEND + '/images/GIV-icon-text.svg'
 
 export const isNoImg = (image: string | undefined) => !(image && !Number(image))
 
@@ -55,30 +54,32 @@ export const shortenAddress = (address: string | null | undefined, charsLength =
   return `${address.slice(0, charsLength + prefixLength)}…${address.slice(-charsLength)}`
 }
 
-export const networkIdToName = (networkId?: number) => {
-  let networkName
+export const networkIdToName = (
+  networkId?: number
+): { networkToken: string; networkName: string } => {
+  let network = { networkName: '', networkToken: '' }
   switch (networkId) {
     case 1:
-      networkName = 'Mainnet'
+      network = { networkName: 'Mainnet', networkToken: 'ETH' }
       break
     case 3:
-      networkName = 'Ropsten'
+      network = { networkName: 'Ropsten', networkToken: 'ETH' }
       break
     case 4:
-      networkName = 'Rinkeby'
+      network = { networkName: 'Rinkeby', networkToken: 'ETH' }
       break
     case 5:
-      networkName = 'Goerli'
+      network = { networkName: 'Goerli', networkToken: 'ETH' }
       break
     case 42:
-      networkName = 'Kovan'
+      network = { networkName: 'Kovan', networkToken: 'ETH' }
       break
     case 100:
-      networkName = 'xDai'
+      network = { networkName: 'xDAI', networkToken: 'xDAI' }
       break
   }
 
-  return networkName
+  return network
 }
 
 export const checkWalletName = (Web3ReactContext: Web3ReactContextInterface) => {
@@ -106,7 +107,7 @@ export async function signMessage(
   message: string,
   address: string | undefined | null,
   chainId?: number,
-  web3?: Web3Provider
+  signer?: any
 ) {
   try {
     const customPrefix = `\u0019${window.location.hostname} Signed Message:\n`
@@ -114,37 +115,32 @@ export async function signMessage(
     const finalMessage = Buffer.concat([prefixWithLength, Buffer.from(message)])
 
     const hashedMsg = keccak256(finalMessage)
-    // const provider = web3?.provider.JsonRpcProvider()
-    const msgParams = JSON.stringify({
-      primaryType: 'Login',
-      types: {
-        EIP712Domain: [
-          { name: 'name', type: 'string' },
-          { name: 'chainId', type: 'uint256' },
-          { name: 'version', type: 'string' }
-        ],
-        Login: [{ name: 'user', type: 'User' }],
-        User: [{ name: 'wallets', type: 'address[]' }]
-      },
-      domain: {
-        name: 'Giveth Login',
-        chainId,
-        version: '1'
-      },
-      message: {
-        contents: hashedMsg,
-        user: {
-          wallets: [address]
-        }
+
+    // console.log(hashedMsg)
+
+    const domain = {
+      name: 'Giveth Login',
+      chainId,
+      version: '1'
+    }
+    const value = {
+      contents: hashedMsg,
+      user: {
+        wallets: [address]
       }
-    })
-    // const { result } = await send({
-    //   method: 'eth_signTypedData_v4',
-    //   params: [address, msgParams],
-    //   from: address
-    // })
-    //
-    // return result
+    }
+    const types = {
+      EIP712Domain: [
+        { name: 'name', type: 'string' },
+        { name: 'chainId', type: 'uint256' },
+        { name: 'version', type: 'string' }
+        // { name: 'verifyingContract', type: 'address' }
+      ],
+      Login: [{ name: 'user', type: 'User' }],
+      User: [{ name: 'wallets', type: 'address[]' }]
+    }
+
+    return await signer._signTypedData(domain, types, value)
   } catch (error) {
     console.log('Signing Error!', { error })
     return false

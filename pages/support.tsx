@@ -1,12 +1,12 @@
 import React from 'react'
 import Footer from '../src/components/Footer'
-import MenuInedx from '../src/components/menu/MenuInedx'
+import MenuIndex from '../src/components/menu/MenuIndex'
 import SupportIndex from '../src/components/views/support/SupportIndex'
 
 const SupportRoute = () => {
   return (
     <>
-      <MenuInedx />
+      <MenuIndex />
       <SupportIndex />
       <Footer />
     </>

@@ -98,7 +98,7 @@ export const Body_P = styled.div<ITypographyProps>`
   font-weight: ${props => (props.bold ? 500 : 400)};
 `
 
-export const Caption = styled.div<ITypographyProps>`
+export const Link_Medium = styled.div<ITypographyProps>`
   font-family: Red Hat Text, sans-serif;
   font-size: 14px;
   line-height: 21px;

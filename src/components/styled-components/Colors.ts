@@ -26,5 +26,6 @@ export const Gray_600 = '#A5ADBF'
 export const Gray_500 = '#BBC3D5'
 export const Gray_400 = '#D7DDEA'
 export const Gray_300 = '#EBECF2'
+export const Gray_200 = '#F7F7F9'
 
 export const Cyan_500 = '#2FC8E0'

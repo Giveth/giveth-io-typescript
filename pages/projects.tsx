@@ -4,7 +4,7 @@ import client from '../src/apollo/apolloClient'
 import { FETCH_ALL_PROJECTS } from '../src/apollo/gql/gqlProjects'
 import { gqlEnums } from '../src/apollo/gql/gqlEnums'
 import ProjectsIndex from '../src/components/views/projects/ProjectsIndex'
-import MenuInedx from '../src/components/menu/MenuInedx'
+import MenuIndex from '../src/components/menu/MenuIndex'
 import Footer from '../src/components/Footer'
 import { IFetchAllProjects } from '../src/types/types_graphql'
 
@@ -16,7 +16,7 @@ const ProjectsRoute = (props: IFetchAllProjects) => {
       <Head>
         <title>Projects | Giveth</title>
       </Head>
-      <MenuInedx />
+      <MenuIndex />
       <ProjectsIndex {...props} />
       <Footer />
     </>

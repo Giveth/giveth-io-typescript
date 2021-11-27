@@ -4,7 +4,7 @@ import Image from 'next/image'
 import HeartGrayIcon from '../../../public/images/heart_gray.svg'
 import HeartRedIcon from '../../../public/images/heart_red.svg'
 import ShareIcon from '../../../public/images/share.svg'
-import { Caption } from '../styled-components/Typography'
+import { Link_Medium } from '../styled-components/Typography'
 import { Shadow } from '../styled-components/Shadow'
 
 const ShareLikeBadge = (props: { type: 'share' | 'like'; active?: boolean }) => {
@@ -15,9 +15,9 @@ const ShareLikeBadge = (props: { type: 'share' | 'like'; active?: boolean }) => 
   return (
     <Wrapper>
       <Image src={icon} alt='badge icon' />
-      <Caption bold className='mx-auto'>
+      <Link_Medium bold className='mx-auto'>
         {text}
-      </Caption>
+      </Link_Medium>
     </Wrapper>
   )
 }

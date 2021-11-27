@@ -5,7 +5,7 @@ import client from '../src/apollo/apolloClient'
 import { FETCH_HOME_PROJECTS } from '../src/apollo/gql/gqlProjects'
 import { gqlEnums } from '../src/apollo/gql/gqlEnums'
 import { IProject } from '../src/types/types'
-import MenuInedx from '../src/components/menu/MenuInedx'
+import MenuIndex from '../src/components/menu/MenuIndex'
 import Footer from '../src/components/Footer'
 
 const projectsToFetch = 15
@@ -21,7 +21,7 @@ const HomeRoute = (props: IHomeRoute) => {
       <Head>
         <title>Home | Giveth</title>
       </Head>
-      <MenuInedx />
+      <MenuIndex />
       <HomeIndex {...props} />
       <Footer />
     </>

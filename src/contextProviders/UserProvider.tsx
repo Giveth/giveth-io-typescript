@@ -19,11 +19,11 @@ const Context = createContext<IUserContext>({ state: {} })
 const { Provider } = Context
 
 const UserProvider = (props: { children: ReactElement }) => {
-  const [user, setUser] = useState()
+  const [user, setUser] = useState<IUserByAddress | undefined>()
 
   useWallet()
   const context = useWeb3React()
-  const { connector, library, chainId, account, active } = context
+  const { library, chainId, account, active } = context
 
   useEffect(() => {
     localStorage.removeItem(LocalStorageTokenLabel)
@@ -33,6 +33,12 @@ const UserProvider = (props: { children: ReactElement }) => {
       user && setUser(undefined)
     }
   }, [active, account])
+
+  useEffect(() => {
+    if (user) {
+      // setToken().then()
+    }
+  }, [user])
 
   const fetchUser = () => {
     return client
@@ -48,16 +54,19 @@ const UserProvider = (props: { children: ReactElement }) => {
   }
 
   const setToken = async () => {
-    const signedMessage = await signMessage(config.OUR_SECRET, account, chainId, library)
+    const signedMessage = await signMessage(
+      config.OUR_SECRET,
+      account,
+      chainId,
+      library.getSigner()
+    )
+    console.log('signedMessage', signedMessage)
     if (!signedMessage) return false
-    const token = await getToken(account, signedMessage, chainId)
+    const token = await getToken(account, signedMessage, chainId, user)
+    console.log('token', token)
     localStorage.setItem(LocalStorageTokenLabel, token)
     return true
   }
-
-  const signer = library?.getSigner()
-  signer?.getAddress().then((res: any) => console.log(res))
-  // console.log(signer?.getAddress())
 
   return (
     <Provider

@@ -14,7 +14,7 @@ import Logo from '../../../public/images/giveth-logo-blue.svg'
 import MenuWallet from './MenuWallet'
 import WalletModal from '../../wallet/WalletModal'
 
-const MenuInedx = () => {
+const MenuIndex = () => {
   const [showModal, setShowModal] = useState(false)
 
   const context = useWeb3React()
@@ -118,4 +118,4 @@ const LogoBackground = styled(FlexCenter)`
   cursor: pointer;
 `
 
-export default MenuInedx
+export default MenuIndex

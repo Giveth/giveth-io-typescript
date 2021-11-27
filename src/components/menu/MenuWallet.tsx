@@ -1,19 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useWeb3React } from '@web3-react/core'
 import { formatEther } from '@ethersproject/units'
 import { BigNumberish } from '@ethersproject/bignumber'
 
 import defaultUserProfile from '../../../public/images/defaultUserProfile.png'
-import { Body_P, Caption, Overline_Small, Subline } from '../styled-components/Typography'
-import { Giv_800, Gray_800, Pinky_500, Primary_Deep_800 } from '../styled-components/Colors'
+import { Body_P, Link_Medium, Overline_Small, Subline } from '../styled-components/Typography'
+import {
+  Giv_800,
+  Gray_200,
+  Gray_300,
+  Gray_800,
+  Pinky_500,
+  Primary_Deep_800
+} from '../styled-components/Colors'
 import { checkWalletName, networkIdToName, shortenAddress, switchNetwork } from '../../lib/helpers'
 import { Shadow } from '../styled-components/Shadow'
 import { FlexCenter } from '../styled-components/Grid'
 import { Context as UserContext } from '../../contextProviders/UserProvider'
 import WalletModal from '../../wallet/WalletModal'
 import { EWallets } from '../../wallet/walletTypes'
+import Routes from '../../lib/constants/Routes'
+import config from '../../../config'
 
 const MenuWallet = () => {
   const [showModal, setShowModal] = useState(false)
@@ -32,14 +42,13 @@ const MenuWallet = () => {
       library
         .getBalance(account)
         .then((_balance: BigNumberish) => {
-          const roundedBalance = _balance && parseFloat(formatEther(_balance)).toFixed(3)
-          roundedBalance && setBalance(roundedBalance)
+          setBalance(parseFloat(formatEther(_balance)).toFixed(3))
         })
         .catch(() => setBalance(null))
     }
   }, [account, library, chainId])
 
-  const networkName = networkIdToName(chainId)
+  const { networkName, networkToken } = networkIdToName(chainId)
   const isMetaMask = checkWalletName(context) === EWallets.METAMASK
 
   return (
@@ -48,7 +57,9 @@ const MenuWallet = () => {
       <WalletClosed isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
         <UserAvatar src={defaultUserProfile} />
         <div className='pl-2 pr-4'>
-          <Caption color={Primary_Deep_800}>{user?.name || shortenAddress(account)}</Caption>
+          <Link_Medium color={Primary_Deep_800}>
+            {user?.name || shortenAddress(account)}
+          </Link_Medium>
           <Overline_Small color={Giv_800}>Connected to {networkName}</Overline_Small>
         </div>
       </WalletClosed>
@@ -58,8 +69,8 @@ const MenuWallet = () => {
           <Title>WALLET</Title>
           <Subtitle>
             <LeftSection>
-              {balance}
-              <span>{' xDai'}</span>
+              {balance + ' '}
+              <span>{networkToken}</span>
             </LeftSection>
             <StyledButton onClick={() => setShowModal(true)}>Change wallet</StyledButton>
           </Subtitle>
@@ -70,11 +81,51 @@ const MenuWallet = () => {
               <StyledButton onClick={() => switchNetwork(chainId)}>Switch network</StyledButton>
             )}
           </Subtitle>
+          <Menus>
+            {walletMenuArray.map(i => (
+              <Link href={i.url} key={i.title} passHref>
+                <MenuItem>{i.title}</MenuItem>
+              </Link>
+            ))}
+            <MenuItem>Sign out</MenuItem>
+          </Menus>
         </WalletOpened>
       )}
     </>
   )
 }
+
+const walletMenuArray = [
+  { title: 'My Account', url: Routes.MyAccount },
+  { title: 'My Projects', url: Routes.MyProjects },
+  { title: 'My Donations', url: Routes.MyDonations },
+  { title: 'Create a Project', url: Routes.CreateProject },
+  { title: 'Report a bug', url: config.LINKS.REPORT_ISSUE },
+  { title: 'Support', url: Routes.Support }
+]
+
+const MenuItem = styled.a`
+  height: 45px;
+  line-height: 45px;
+  border-top: 2px solid ${Gray_300};
+  color: ${Primary_Deep_800};
+  padding: 0 16px;
+  font-size: 14px;
+  cursor: pointer;
+
+  :hover {
+    background: ${Gray_200};
+    color: ${Pinky_500} !important;
+  }
+`
+
+const Menus = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  padding: 0 !important;
+  border-bottom: 2px solid ${Gray_300};
+`
 
 const UserAvatar = styled(Image)`
   border-radius: 50%;
@@ -97,13 +148,17 @@ const WalletOpened = styled.div`
   border-radius: 12px;
   box-shadow: ${Shadow.Dark[500]};
   width: 250px;
-  height: 453px;
+  height: min-content;
   position: absolute;
   right: 32px;
   top: 55px;
   z-index: -1;
-  padding: 40px 16px;
+  padding: 40px 0;
   color: ${Primary_Deep_800};
+
+  > * {
+    padding: 0 16px;
+  }
 `
 
 const StyledButton = styled(Subline)`
