@@ -68,12 +68,14 @@ export const FETCH_ALL_PROJECTS = gql`
 export const FETCH_PROJECT_BY_SLUG = gql`
   query ProjectBySlug($slug: String!) {
     projectBySlug(slug: $slug) {
+      id
       title
       image
       slug
       description
       verified
       traceCampaignId
+      totalProjectUpdates
       reactions {
         userId
       }
@@ -85,6 +87,19 @@ export const FETCH_PROJECT_BY_SLUG = gql`
       }
       donations {
         id
+      }
+    }
+  }
+`
+
+export const FETCH_PROJECT_UPDATES = gql`
+  query GetProjectUpdates($projectId: Float!, $take: Float!, $skip: Float!) {
+    getProjectUpdates(projectId: $projectId, take: $take, skip: $skip) {
+      projectUpdate {
+        id
+        title
+        content
+        createdAt
       }
     }
   }

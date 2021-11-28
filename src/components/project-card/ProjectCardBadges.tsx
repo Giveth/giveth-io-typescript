@@ -52,7 +52,7 @@ const HeartWrap = styled(FlexCenter)<{ active?: boolean; isHover?: boolean }>`
   background: ${props => (props.active ? 'white' : Primary_Deep_800_Trans)};
   transition: all 0.3s ease;
 
-  > span:nth-child(2) {
+  > span:nth-of-type(2) {
     display: ${props => (props.isHover ? 'unset' : 'none !important')};
   }
 `
