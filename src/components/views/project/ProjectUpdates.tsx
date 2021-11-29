@@ -3,30 +3,31 @@ import styled from '@emotion/styled'
 import client from '../../../apollo/apolloClient'
 import { FETCH_PROJECT_UPDATES } from '../../../apollo/gql/gqlProjects'
 import ProjectTimeline from './ProjectTimeline'
-import { IFetchProjectUpdates } from '../../../types/types_graphql'
+import { IFetchProjectUpdates, IProjectBySlug } from '../../../types/types_graphql'
 
-const ProjectUpdates = (props: { projectId?: string }) => {
-  const { projectId } = props
+const ProjectUpdates = (props: IProjectBySlug) => {
+  const { id, creationDate } = props.project
   const [updates, setUpdates] = useState<IFetchProjectUpdates[]>()
 
   useEffect(() => {
-    if (projectId) {
+    if (id) {
       client
         .query({
           query: FETCH_PROJECT_UPDATES,
-          variables: { projectId: parseInt(projectId), take: 100, skip: 0 },
+          variables: { projectId: parseInt(id), take: 100, skip: 0 },
           fetchPolicy: 'no-cache'
         })
         .then(res => setUpdates(res.data.getProjectUpdates))
         .catch(console.log)
     }
-  }, [projectId])
+  }, [id])
 
   return (
     <Wrapper>
       {updates?.map(i => (
         <ProjectTimeline key={i.projectUpdate.id} projectUpdate={i.projectUpdate} />
       ))}
+      <ProjectTimeline creationDate={creationDate} />
     </Wrapper>
   )
 }

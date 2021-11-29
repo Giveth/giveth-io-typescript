@@ -7,14 +7,14 @@ import ProjectDonateCard from './ProjectDonateCard'
 import { IProjectBySlug } from '../../../types/types_graphql'
 import { mediaQueries } from '../../../lib/helpers'
 
+const ProjectUpdates = dynamic(() => import('./ProjectUpdates'))
 const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
 })
-const ProjectUpdates = dynamic(() => import('./ProjectUpdates'))
 
 const ProjectIndex = (props: IProjectBySlug) => {
   const { project } = props
-  const { categories, slug, description, id } = project
+  const { categories, slug, description } = project
 
   const [activeTab, setActiveTab] = useState(0)
 
@@ -25,7 +25,7 @@ const ProjectIndex = (props: IProjectBySlug) => {
         <div className='w-100'>
           <ProjectTabs activeTab={activeTab} setActiveTab={setActiveTab} project={project} />
           {activeTab === 0 && <RichTextViewer content={description} />}
-          {activeTab === 1 && <ProjectUpdates projectId={id} />}
+          {activeTab === 1 && <ProjectUpdates project={project} />}
         </div>
         <ProjectDonateCard categories={categories} slug={slug} />
       </BodyWrapper>
