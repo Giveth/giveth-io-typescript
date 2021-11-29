@@ -4,12 +4,12 @@ import { H3, Body_P } from '../../styled-components/Typography'
 import { Pinky_500 } from '../../styled-components/Colors'
 import VerificationBadge from '../../badges/VerificationBadge'
 import { isNoImg, noImgColor, noImgIcon } from '../../../lib/helpers'
-import { IProjectBySlug } from '../../../types/types'
+import { IProject } from '../../../types/types'
 
-const ProjectHeader = (props: IProjectBySlug) => {
-  const { title, verified, image } = props.project
-  const name = props.admin.name
-  const traceable = true
+const ProjectHeader = (props: { project: IProject }) => {
+  const { title, verified, image, adminUser, traceCampaignId } = props.project
+  const name = adminUser?.name
+  const traceable = !!traceCampaignId
 
   return (
     <Wrapper image={image}>

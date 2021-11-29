@@ -7,6 +7,8 @@ import '../styles/globals.css'
 import '../styles/bootstrap.min.css'
 import { Pinky_500 } from '../src/components/styled-components/Colors'
 
+/*TODO all content with "Lorem ipsum" should be replaced*/
+
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps)
   return (

@@ -2,8 +2,11 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Body_P, Subline_Bold } from '../../styled-components/Typography'
 import { Gray_400, Pinky_500, Primary_Deep_600 } from '../../styled-components/Colors'
+import { IProjectBySlug } from '../../../types/types_graphql'
 
-const ProjectTabs = () => {
+const ProjectTabs = (props: IProjectBySlug) => {
+  const { project } = props
+  const { donations } = project
   return (
     <Wrapper>
       <Tab className='active'>About</Tab>
@@ -13,7 +16,7 @@ const ProjectTabs = () => {
       </Tab>
       <Separator />
       <Tab>
-        Donations<Badge>34</Badge>
+        Donations<Badge>{donations?.length}</Badge>
       </Tab>
     </Wrapper>
   )

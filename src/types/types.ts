@@ -29,6 +29,11 @@ export interface IUser {
 
 export interface IAdmin {
   name?: string
+  totalDonations?: number
+  donations: {
+    id: string
+  }[]
+  traceCampaignId: string | null
 }
 
 export interface IMediumBlogPost {

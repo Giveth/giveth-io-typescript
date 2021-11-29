@@ -5,3 +5,7 @@ export interface IFetchAllProjects {
   totalCount: number
   categories: ICategory[]
 }
+
+export interface IProjectBySlug {
+  project: IProject
+}
