@@ -30,8 +30,18 @@ interface IProjectCard {
 }
 
 const ProjectCard = (props: IProjectCard) => {
-  const { title, description, image, verified, slug, reactions, users } =
-    props.project
+  const {
+    title,
+    description,
+    image,
+    verified,
+    slug,
+    reactions,
+    users,
+    adminUser,
+    totalDonations,
+    traceCampaignId,
+  } = props.project
 
   const [isHover, setIsHover] = useState(false)
 
@@ -105,6 +115,18 @@ const HoverButtons = styled.div`
   button {
     width: 100%;
   }
+`
+const NoImg = styled.div`
+  background: ${noImgColor};
+  width: 100%;
+  height: 100%;
+  border-radius: ${cardRadius} ${cardRadius} 0 0;
+  background-image: url(${noImgIcon});
+`
+const Img = styled.img`
+  border-radius: ${cardRadius} ${cardRadius} 0 0;
+  width: ${cardWidth};
+  height: auto;
 `
 
 const Captions = styled.div`

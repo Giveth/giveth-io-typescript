@@ -21,8 +21,9 @@ export interface IProject {
     email?: string
   }
   users: IUser[]
+  totalDonations?: number
+  traceCampaignId: string | null
 }
-
 export interface IUser {
   name?: string
 }

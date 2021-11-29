@@ -77,6 +77,8 @@ export const FETCH_PROJECT_BY_SLUG = gql`
         userId
       }
       users {
+        id
+      }
       traceCampaignId
       categories {
         name
