@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import React, { useState, useEffect } from 'react'
 import Select, { components, ControlProps } from 'react-select'
 import InputBox from '../../InputBox'
+import Image from 'next/image'
 import { useQuery } from '@apollo/client'
 import { FETCH_LISTED_TOKENS } from '../../../../src/apollo/gql/gqlEnums'
 import { Gray_300 } from '../../styled-components/Colors'
@@ -23,16 +24,58 @@ interface IToken {
 }
 
 const Control = ({ children, ...props }: ControlProps<ISelectObj, false>) => {
-  // @ts-ignore
   const { value } = props.selectProps
   return (
     <components.Control {...props}>
       <IconContainer>
-        <img src={value?.icon} alt="" />
+        <Img
+          key={value?.symbol}
+          src={!!value?.icon ? value.icon : '/images/tokens/eth.png'}
+          onError={(e) => {
+            e.currentTarget.onerror = null
+            e.currentTarget.src = '/images/tokens/eth.png'
+          }}
+          width="32px"
+          height="32px"
+        />
         {children}
       </IconContainer>
     </components.Control>
   )
+}
+
+const customStyles = {
+  control: (base: any, state: any) => ({
+    ...base,
+    // match with the menu
+    borderRadius: '0 !important',
+    borderRightColor: 'transparent !important',
+    boxShadow: state.isFocused ? null : null,
+    padding: '0 0 0 5px',
+  }),
+  menu: (base: any) => ({
+    ...base,
+    // override border radius to match the box
+    borderRadius: 0,
+    // beautify the word cut by adding a dash see https://caniuse.com/#search=hyphens for the compatibility
+    hyphens: 'auto',
+    // kill the gap
+    marginTop: 0,
+    textAlign: 'left',
+    // prevent menu to scroll y
+    wordWrap: 'break-word',
+  }),
+  menuList: (base: any) => ({
+    ...base,
+    borderRadius: 0,
+
+    // kill the white space on first and last option
+    padding: 0,
+  }),
+  singleValue: (base: any) => ({
+    ...base,
+    padding: 0,
+  }),
 }
 
 const CryptoDonation = (props: IProjectBySlug) => {
@@ -71,10 +114,10 @@ const CryptoDonation = (props: IProjectBySlug) => {
       <SearchContainer>
         <DropdownContainer>
           <Select
+            styles={customStyles}
             classNamePrefix="select"
             value={selectedToken}
             components={{ Control }}
-            // isSearchable={false}
             onChange={(e: any) => setSelectedToken(e)}
             options={tokens}
           />
@@ -87,23 +130,12 @@ const CryptoDonation = (props: IProjectBySlug) => {
   )
 }
 
+const Img = styled.img`
+  margin-right: -10px;
+`
 const IconContainer = styled.div`
   display: flex;
   flex-direction: row;
-  img:before {
-    content: ' ';
-    position: absolute;
-    background-repeat: no-repeat;
-    background-image: url('/images/tokens/eth.png');
-    height: 50px;
-    width: 50px;
-  }
-  img {
-    height: 50px;
-    width: 50px;
-    object-fit: cover;
-    padding: 5px;
-  }
 `
 const TitleBox = styled.div`
   display: flex;
