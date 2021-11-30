@@ -1,11 +1,5 @@
 import styled from '@emotion/styled'
-import {
-  Gray_700,
-  Pinky_500,
-  Giv_800,
-  Primary_Deep_500,
-  Link_500,
-} from './Colors'
+import { Gray_700, Pinky_500, Giv_800, Primary_Deep_500, Link_500 } from './Colors'
 
 interface ITypographyProps {
   color?: string
@@ -19,7 +13,7 @@ export const H1 = styled.h1<ITypographyProps>`
   font-weight: 700;
   line-height: 86px;
   letter-spacing: -0.03em;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H2 = styled.h2`
@@ -28,7 +22,7 @@ export const H2 = styled.h2`
   font-size: 52px;
   line-height: 80px;
   margin: 0;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H3 = styled.h3<ITypographyProps>`
@@ -36,7 +30,7 @@ export const H3 = styled.h3<ITypographyProps>`
   font-size: 41px;
   font-weight: 700;
   line-height: 56px;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H4 = styled.h4`
@@ -44,7 +38,7 @@ export const H4 = styled.h4`
   font-size: 32px;
   font-weight: 700;
   line-height: 50px;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H5 = styled.h5<ITypographyProps>`
@@ -52,7 +46,7 @@ export const H5 = styled.h5<ITypographyProps>`
   font-size: 25px;
   font-weight: 700;
   line-height: 38px;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const H6 = styled.h6<ITypographyProps>`
@@ -61,7 +55,7 @@ export const H6 = styled.h6<ITypographyProps>`
   font-weight: 700;
   line-height: 28px;
   letter-spacing: -0.005em;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Lead = styled.div`
@@ -76,7 +70,7 @@ export const Lead_Medium = styled.div`
   font-weight: 400;
   font-size: 20px;
   line-height: 30px;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Lead_Large = styled.div`
@@ -91,7 +85,7 @@ export const D3 = styled.div`
   font-size: 88px;
   font-weight: 700;
   line-height: 106px;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Body_P = styled.div<ITypographyProps>`
@@ -99,16 +93,16 @@ export const Body_P = styled.div<ITypographyProps>`
   margin: 0;
   font-size: 16px;
   line-height: 24px;
-  color: ${(props) => props.color || 'inherit'};
-  font-weight: ${(props) => (props.bold ? 500 : 400)};
+  color: ${props => props.color || 'inherit'};
+  font-weight: ${props => (props.bold ? 500 : 400)};
 `
 
 export const Caption = styled.div<ITypographyProps>`
   font-family: Red Hat Text, sans-serif;
   font-size: 14px;
   line-height: 21px;
-  font-weight: ${(props) => (props.bold ? 500 : 400)};
-  color: ${(props) => props.color || Gray_700};
+  font-weight: ${props => (props.bold ? 500 : 400)};
+  color: ${props => props.color || Gray_700};
 `
 
 export const Overline_Small = styled.div`
@@ -124,7 +118,7 @@ export const Overline = styled.div`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: ${(props) => props.color || 'inherit'};
+  color: ${props => props.color || 'inherit'};
   letter-spacing: 5px;
   text-transform: uppercase;
 `
@@ -142,7 +136,7 @@ export const Subline = styled.div`
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
-  color: ${(props) => {
+  color: ${props => {
     if (props.color) return props.color
     else return Giv_800
   }};

@@ -12,42 +12,42 @@ interface IButtonProps {
 }
 
 export const Button = styled.button<IButtonProps>`
-  background: ${(props) => {
+  background: ${props => {
     if (props.background) return props.background
     else if (props.ghost || props.outline) return 'unset'
     else return Pinky_500
   }};
-  border-style: ${(props) => {
+  border-style: ${props => {
     if (props.outline) return 'solid'
     else return 'none'
   }};
-  border-width: ${(props) => {
+  border-width: ${props => {
     if (props.outline) return '2px'
     else return '0'
   }};
-  border-color: ${(props) => {
+  border-color: ${props => {
     if (props.outline) {
       if (props.color) return props.color
       else return Pinky_500
     } else return 'transparent'
   }};
   border-radius: 48px;
-  color: ${(props) => {
+  color: ${props => {
     if (props.color) return props.color
     else return 'white'
   }};
-  height: ${(props) => {
+  height: ${props => {
     if (props.small) return '48px'
     else return '66px'
   }};
-  width: ${(props) => {
+  width: ${props => {
     if (props.width) return props.width
   }};
-  font-weight: ${(props) => {
+  font-weight: ${props => {
     if (props.ghost || props.normal) return '400'
     else return '700'
   }};
-  font-size: ${(props) => {
+  font-size: ${props => {
     if (props.small) return '12px'
     else return '16px'
   }};
@@ -55,7 +55,7 @@ export const Button = styled.button<IButtonProps>`
   text-align: center;
   cursor: pointer;
   display: block;
-  padding: ${(props) => {
+  padding: ${props => {
     if (props.small) return '0 40px'
     else return '0 80px'
   }};

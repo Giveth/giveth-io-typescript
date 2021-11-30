@@ -3,11 +3,7 @@ import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 
 import { Body_P, H6, Caption } from '../styled-components/Typography'
-import {
-  Gray_900,
-  Pinky_500,
-  Primary_Deep_500,
-} from '../styled-components/Colors'
+import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
 import { IProject } from '../../types/types'
 import {
@@ -16,7 +12,7 @@ import {
   noImgColor,
   noImgIcon,
   slugToProjectDonate,
-  slugToProjectView,
+  slugToProjectView
 } from '../../lib/helpers'
 import { Button } from '../styled-components/Button'
 import ProjectCardImage from './ProjectCardImage'
@@ -38,19 +34,18 @@ const ProjectCard = (props: IProjectCard) => {
     slug,
     reactions,
     users,
-    adminUser,
     totalDonations,
-    traceCampaignId,
+    traceCampaignId
   } = props.project
 
   const [isHover, setIsHover] = useState(false)
 
   const router = useRouter()
 
-  const projectImage = () => {
-    if (isNoImg(image)) return <NoImg />
-    return <Img src={image} alt="project image" />
-  }
+  // const projectImage = () => {
+  //   if (isNoImg(image)) return <NoImg />
+  //   return <Img src={image} alt='project image' />
+  // }
 
   const name = users?.length > 0 && users[0].name
 
@@ -58,7 +53,7 @@ const ProjectCard = (props: IProjectCard) => {
     <Wrapper
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className="shadow_1"
+      className='shadow_1'
     >
       <Wrapper2 isHover={isHover}>
         <ImagePlaceholder>
@@ -69,11 +64,7 @@ const ProjectCard = (props: IProjectCard) => {
             verified={verified}
             traceable={!!traceCampaignId}
           />
-          <ProjectCardImage
-            image={image}
-            cardWidth={cardWidth}
-            cardRadius={cardRadius}
-          />
+          <ProjectCardImage image={image} cardWidth={cardWidth} cardRadius={cardRadius} />
         </ImagePlaceholder>
         <CardBody>
           <Title>{title}</Title>
@@ -92,10 +83,7 @@ const ProjectCard = (props: IProjectCard) => {
             >
               LEARN MORE
             </Button>
-            <Button
-              onClick={() => router.push(slugToProjectDonate(slug))}
-              small
-            >
+            <Button onClick={() => router.push(slugToProjectDonate(slug))} small>
               DONATE
             </Button>
           </HoverButtons>
@@ -108,8 +96,7 @@ const ProjectCard = (props: IProjectCard) => {
 const HoverButtons = styled.div`
   margin-top: 16px;
   gap: 16px;
-  display: ${(props: { isHover: boolean }) =>
-    props.isHover ? 'flex' : 'none'};
+  display: ${(props: { isHover: boolean }) => (props.isHover ? 'flex' : 'none')};
   animation: fadein 1s;
 
   button {
@@ -165,15 +152,12 @@ const ImagePlaceholder = styled.div`
 `
 
 const Wrapper2 = styled.div`
-  position: ${(props: { isHover: boolean }) =>
-    props.isHover ? 'absolute' : 'relative'};
-  height: ${(props: { isHover: boolean }) =>
-    props.isHover ? '494px' : '430px'};
+  position: ${(props: { isHover: boolean }) => (props.isHover ? 'absolute' : 'relative')};
+  height: ${(props: { isHover: boolean }) => (props.isHover ? '494px' : '430px')};
   width: ${cardWidth};
   border-radius: ${cardRadius};
   background: white;
-  margin-top: ${(props: { isHover: boolean }) =>
-    props.isHover ? '-32px' : '0'};
+  margin-top: ${(props: { isHover: boolean }) => (props.isHover ? '-32px' : '0')};
   z-index: ${(props: { isHover: boolean }) => (props.isHover ? '3' : '0')};
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px #e5e6e9;

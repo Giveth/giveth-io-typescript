@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
-import { useRouter } from 'next/router'
 import { Body_P, H6, Caption } from '../styled-components/Typography'
-import {
-  Gray_900,
-  Pinky_500,
-  Primary_Deep_500,
-} from '../styled-components/Colors'
+import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
 import { IProject } from '../../types/types'
-import {
-  htmlToText,
-  isNoImg,
-  noImgColor,
-  noImgIcon,
-  slugToProjectDonate,
-  slugToProjectView,
-} from '../../lib/helpers'
-import { Button } from '../styled-components/Button'
+import { htmlToText, isNoImg, noImgColor, noImgIcon } from '../../lib/helpers'
 
 const cardWidth = '440px'
 const cardRadius = '12px'
@@ -29,14 +16,11 @@ interface IProjectCard {
 
 const ProjectCard = (props: IProjectCard) => {
   const [rndColor, setRndColor] = useState(noImgColor)
-  const { title, description, image, verified, slug, reactions, users } =
-    props.project
-
-  const router = useRouter()
+  const { title, description, image, verified, reactions, users } = props.project
 
   const projectImage = () => {
     if (isNoImg(image)) return <NoImg rndColor={rndColor} />
-    return <Img src={image} alt="project image" />
+    return <Img src={image} alt='project image' />
   }
 
   const name = users?.length > 0 && users[0].name
@@ -45,11 +29,7 @@ const ProjectCard = (props: IProjectCard) => {
     <Wrapper>
       <Wrapper2>
         <ImagePlaceholder>{projectImage()}</ImagePlaceholder>
-        <ProjectCardBadges
-          cardWidth={cardWidth}
-          likes={reactions.length}
-          verified={verified}
-        />
+        <ProjectCardBadges cardWidth={cardWidth} likes={reactions.length} verified={verified} />
         <CardBody>
           <Title>{title}</Title>
           {name && <Author>{name}</Author>}

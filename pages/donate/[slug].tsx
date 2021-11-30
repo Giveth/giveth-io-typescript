@@ -22,15 +22,15 @@ export async function getServerSideProps(props: { query: { slug: string } }) {
   const { data } = await client.query({
     query: FETCH_PROJECT_BY_SLUG,
     variables: { slug },
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'no-cache'
   })
 
   const project = data.projectBySlug
 
   return {
     props: {
-      project,
-    },
+      project
+    }
   }
 }
 

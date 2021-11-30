@@ -8,7 +8,7 @@ export const gqlEnums = {
   HEARTS: 'Reactions',
   DONATIONS: 'Donations',
   DESC: 'DESC',
-  ASC: 'ASC',
+  ASC: 'ASC'
 }
 
 export const FETCH_LISTED_TOKENS = gql`

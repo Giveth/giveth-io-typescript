@@ -33,8 +33,8 @@ export async function getServerSideProps() {
     query: FETCH_HOME_PROJECTS,
     variables: {
       limit: projectsToFetch,
-      orderBy: { field: gqlEnums.QUALITYSCORE, direction: gqlEnums.DESC },
-    },
+      orderBy: { field: gqlEnums.QUALITYSCORE, direction: gqlEnums.DESC }
+    }
   })
 
   const { projects, totalCount } = data.projects
@@ -42,8 +42,8 @@ export async function getServerSideProps() {
   return {
     props: {
       projects,
-      totalCount,
-    },
+      totalCount
+    }
   }
 }
 
