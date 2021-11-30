@@ -18,6 +18,7 @@ export const Primary_Deep_500 = '#303B72'
 export const Primary_Deep_200 = '#6879D4'
 
 export const Gray_900 = '#1D1E1F'
+export const Gray_800 = '#4F576A'
 export const Gray_700 = '#82899A'
 export const Gray_600 = '#A5ADBF'
 export const Gray_500 = '#BBC3D5'

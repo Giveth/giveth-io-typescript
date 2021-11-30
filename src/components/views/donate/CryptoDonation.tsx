@@ -5,7 +5,14 @@ import InputBox from '../../InputBox'
 import Image from 'next/image'
 import { useQuery } from '@apollo/client'
 import { FETCH_LISTED_TOKENS } from '../../../../src/apollo/gql/gqlEnums'
-import { Gray_300 } from '../../styled-components/Colors'
+import { Button } from '../../styled-components/Button'
+import { Caption, Link_Small } from '../../styled-components/Typography'
+import {
+  Gray_200,
+  Gray_300,
+  Gray_800,
+  Giv_500,
+} from '../../styled-components/Colors'
 import { IProjectBySlug } from '../../../types/types'
 
 interface ISelectObj {
@@ -35,8 +42,8 @@ const Control = ({ children, ...props }: ControlProps<ISelectObj, false>) => {
             e.currentTarget.onerror = null
             e.currentTarget.src = '/images/tokens/eth.png'
           }}
-          width="32px"
-          height="32px"
+          width="24px"
+          height="24px"
         />
         {children}
       </IconContainer>
@@ -46,12 +53,11 @@ const Control = ({ children, ...props }: ControlProps<ISelectObj, false>) => {
 
 const customStyles = {
   control: (base: any, state: any) => ({
-    ...base,
     // match with the menu
     borderRadius: '0 !important',
     borderRightColor: 'transparent !important',
     boxShadow: state.isFocused ? null : null,
-    padding: '0 0 0 5px',
+    padding: '8px 0 0 16px !important',
   }),
   menu: (base: any) => ({
     ...base,
@@ -99,7 +105,7 @@ const CryptoDonation = (props: IProjectBySlug) => {
       newArray.push(obj)
     })
     newArray.sort((a, b) => a.label.localeCompare(b.label))
-    setSelectedToken(newArray && newArray[0])
+    // setSelectedToken(newArray && newArray[0])
     return newArray
   }
 
@@ -110,7 +116,6 @@ const CryptoDonation = (props: IProjectBySlug) => {
 
   return (
     <>
-      <TitleBox>CRYPTO DONATION HERE</TitleBox>
       <SearchContainer>
         <DropdownContainer>
           <Select
@@ -126,23 +131,37 @@ const CryptoDonation = (props: IProjectBySlug) => {
           <InputBox onChange={(e: string) => null} placeholder="Amount" />
         </SearchBarContainer>
       </SearchContainer>
+      <AvText>Available: 0.064208 ETH </AvText>
+      <XDaiContainer>
+        <div>
+          <img src="/images/gas_station.svg" />
+          <Caption color={Gray_800}>
+            Save on gas fees, switch to xDAI network.
+          </Caption>
+        </div>
+        <Caption bold color={Giv_500}>
+          Switch network
+        </Caption>
+      </XDaiContainer>
+      <ButtonContainer>
+        <Button small background={Giv_500} width="100%">
+          CONNECT WALLET
+        </Button>
+      </ButtonContainer>
     </>
   )
 }
 
 const Img = styled.img`
   margin-right: -10px;
+  margin-top: 5px;
 `
 const IconContainer = styled.div`
   display: flex;
   flex-direction: row;
 `
-const TitleBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  cursor: pointer !important;
-  margin-bottom: 26px;
+const AvText = styled(Link_Small)`
+  padding: 4px 0 0 5px;
 `
 const SearchContainer = styled.div`
   display: flex;
@@ -157,4 +176,25 @@ const SearchBarContainer = styled.div`
   width: 65%;
   border: 2px solid ${Gray_300};
 `
+const XDaiContainer = styled.div`
+  display: flex;
+  flex: row;
+  justify-content: space-between;
+  background-color: ${Gray_200};
+  padding: 8px 16px;
+  margin: 24px 0 0 0;
+  cursor: pointer;
+  border-radius: 8px;
+  div:first-child {
+    display: flex;
+    flex-direction: row;
+    img {
+      padding-right: 12px;
+    }
+  }
+`
+const ButtonContainer = styled.div`
+  padding: 51px 0 0 0;
+`
+
 export default CryptoDonation
