@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import React, { useState, useEffect } from 'react'
 import Select, { components, ControlProps } from 'react-select'
 import InputBox from '../../InputBox'
-import Image from 'next/image'
 import { useQuery } from '@apollo/client'
 import { FETCH_LISTED_TOKENS } from '../../../../src/apollo/gql/gqlEnums'
 import { Button } from '../../styled-components/Button'
@@ -84,8 +83,11 @@ const customStyles = {
   }),
 }
 
-const CryptoDonation = (props: IProjectBySlug) => {
-  const { project } = props
+const CryptoDonation = (props: {
+  project: IProjectBySlug
+  setSuccessDonation: any
+}) => {
+  const { project, setSuccessDonation } = props
   const { loading, error, data: tokensList } = useQuery(FETCH_LISTED_TOKENS)
 
   const [tokens, setTokensObject] = useState<ISelectObj[]>()
@@ -144,7 +146,12 @@ const CryptoDonation = (props: IProjectBySlug) => {
         </Caption>
       </XDaiContainer>
       <ButtonContainer>
-        <Button small background={Giv_500} width="100%">
+        <Button
+          small
+          background={Giv_500}
+          width="100%"
+          onClick={() => setSuccessDonation(true)}
+        >
           CONNECT WALLET
         </Button>
       </ButtonContainer>

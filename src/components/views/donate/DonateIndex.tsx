@@ -5,12 +5,20 @@ import ProjectCard from '../../project-card/ProjectCardAlt'
 import CryptoDonation from './CryptoDonation'
 import FiatDonation from './FiatDonation'
 import { IProjectBySlug } from '../../../types/types'
-import { H4, H6, Subline, Lead } from '../../styled-components/Typography'
+import {
+  H4,
+  H6,
+  Subline,
+  Lead,
+  Body_P,
+  Link_Big,
+} from '../../styled-components/Typography'
 import {
   Primary_Deep_900,
   Gray_600,
   Gray_700,
   Gray_200,
+  Success_500,
 } from '../../styled-components/Colors'
 import { BigArc } from '../../styled-components/Arc'
 import ArrowLeft from '../../../../public/images/arrow_left.svg'
@@ -23,6 +31,7 @@ const FIAT_DONATION = 'Credit Card'
 const ProjectsIndex = (props: IProjectBySlug) => {
   const { project } = props
   const [donationType, setDonationType] = useState(CRYPTO_DONATION)
+  const [isSuccess, setSuccess] = useState(false)
 
   const TypeSelection = () => {
     const RadioOn = () => <Image src={RadioOnIcon} alt="radio on" />
@@ -60,11 +69,41 @@ const ProjectsIndex = (props: IProjectBySlug) => {
           <RadioTitle type={FIAT_DONATION} />
         </RadioBox>
         {donationType === CRYPTO_DONATION ? (
-          <CryptoDonation {...props} />
+          <CryptoDonation
+            {...props}
+            setSuccessDonation={() => setSuccess(true)}
+          />
         ) : (
-          <FiatDonation {...props} />
+          <FiatDonation
+            {...props}
+            setSuccessDonation={() => setSuccess(true)}
+          />
         )}
       </>
+    )
+  }
+
+  const SuccessView = () => {
+    return (
+      <SucceessContainer>
+        <H4 color={Success_500}>Successfully donated</H4>
+        <Image
+          src="/images/motivation.svg"
+          alt="motivation"
+          width="121px"
+          height="121px"
+        />
+        <SuccessMessage color={Primary_Deep_900}>
+          We have received your donation, you can see this project on your
+          account under the Donated projects and follow the project updates
+          there or take a shortcut here. Go to
+        </SuccessMessage>
+        <Body_P color={Primary_Deep_900}>Go to</Body_P>
+        <Options>
+          <Link_Big>Check project updates</Link_Big>
+          <Link_Big>Your account</Link_Big>
+        </Options>
+      </SucceessContainer>
     )
   }
 
@@ -82,8 +121,14 @@ const ProjectsIndex = (props: IProjectBySlug) => {
             <ProjectCard key={project.id} project={project} />
           </Left>
           <Right>
-            <H4>Donate With</H4>
-            <TypeSelection />
+            {isSuccess ? (
+              <SuccessView />
+            ) : (
+              <>
+                <H4>Donate With</H4>
+                <TypeSelection />
+              </>
+            )}
           </Right>
         </Sections>
       </Wrapper>
@@ -108,6 +153,7 @@ const Sections = styled.div`
   display: grid;
   grid-template-columns: repeat(2, minmax(500px, 1fr));
   grid-auto-rows: minmax(100px, auto);
+  height: 525px;
 `
 const Left = styled.div`
   display: grid;
@@ -158,5 +204,21 @@ const RadioTitleBox = styled.div`
   flex-direction: row;
   cursor: pointer;
 `
-
+const SucceessContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  height: 400px;
+`
+const SuccessMessage = styled(Body_P)`
+  margin: 20px 0;
+`
+const Options = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+`
 export default ProjectsIndex

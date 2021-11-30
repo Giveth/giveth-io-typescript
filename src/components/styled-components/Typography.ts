@@ -1,5 +1,11 @@
 import styled from '@emotion/styled'
-import { Gray_700, Pinky_500, Giv_800, Primary_Deep_500 } from './Colors'
+import {
+  Gray_700,
+  Pinky_500,
+  Giv_800,
+  Primary_Deep_500,
+  Link_500,
+} from './Colors'
 
 interface ITypographyProps {
   color?: string
@@ -157,4 +163,12 @@ export const Link_Small = styled.div`
   font-size: 12px;
   line-height: 16px;
   color: ${Primary_Deep_500};
+`
+export const Link_Big = styled.div`
+  font-family: Red Hat Text;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  color: ${Link_500};
 `

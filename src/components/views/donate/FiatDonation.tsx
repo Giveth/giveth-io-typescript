@@ -1,23 +1,45 @@
 import styled from '@emotion/styled'
 import React from 'react'
+import Image from 'next/image'
+import { Pinky_500 } from '../../styled-components/Colors'
 import { IProjectBySlug } from '../../../types/types'
+import { Button } from '../../styled-components/Button'
 
-const FiatDonation = (props: IProjectBySlug) => {
-  const { project } = props
+const FiatDonation = (props: {
+  project: IProjectBySlug
+  setSuccessDonation: any
+}) => {
+  const { project, setSuccessDonation } = props
 
   return (
     <>
-      <TitleBox>FIAT WIP</TitleBox>
+      <ButtonContainer>
+        <Button
+          small
+          background={Pinky_500}
+          width="100%"
+          onClick={() => setSuccessDonation(true)}
+        >
+          CONTINUE WITH TRANSAK
+        </Button>
+      </ButtonContainer>
+      <ImageContainer>
+        <Image
+          src="/images/powered_by_transak.svg"
+          width="165px"
+          height="24px"
+        />
+      </ImageContainer>
     </>
   )
 }
 
-const TitleBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  cursor: pointer !important;
-  margin-bottom: 26px;
+const ImageContainer = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-top: 23px;
 `
-
+const ButtonContainer = styled.div`
+  padding: 32px 0 0 0;
+`
 export default FiatDonation

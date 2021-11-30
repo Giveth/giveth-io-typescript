@@ -27,3 +27,7 @@ export const Gray_300 = '#EBECF2'
 export const Gray_200 = '#F7F7F9'
 
 export const Cyan_500 = '#2FC8E0'
+
+export const Link_500 = '#0A91FE'
+
+export const Success_500 = '#37B4A9'
