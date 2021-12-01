@@ -55,6 +55,7 @@ export const H6 = styled.h6<ITypographyProps>`
   font-weight: 700;
   line-height: 28px;
   letter-spacing: -0.005em;
+  margin-bottom: 0;
   color: ${props => props.color || 'inherit'};
 `
 
@@ -97,7 +98,7 @@ export const Body_P = styled.div<ITypographyProps>`
   font-weight: ${props => (props.bold ? 500 : 400)};
 `
 
-export const Caption = styled.div<ITypographyProps>`
+export const Link_Medium = styled.div<ITypographyProps>`
   font-family: Red Hat Text, sans-serif;
   font-size: 14px;
   line-height: 21px;
@@ -105,10 +106,10 @@ export const Caption = styled.div<ITypographyProps>`
   color: ${props => props.color || Gray_700};
 `
 
-export const Overline_Small = styled.div`
+export const Overline_Small = styled.div<ITypographyProps>`
   font-family: Red Hat Text, sans-serif;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: ${props => (props.bold ? 500 : 400)};
   line-height: 13px;
   color: inherit;
 `

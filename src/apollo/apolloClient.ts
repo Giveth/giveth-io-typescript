@@ -4,7 +4,7 @@ import config from '../../config'
 const ssrMode = typeof window === 'undefined'
 
 const httpLink = createHttpLink({
-  uri: config.QRAPHQL_SERVER
+  uri: config.LINKS.BACKEND
 })
 
 const client = new ApolloClient({

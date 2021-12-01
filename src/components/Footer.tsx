@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Body_P, Caption, Subline } from './styled-components/Typography'
+import { Body_P, Link_Medium, Subline } from './styled-components/Typography'
 import { Pinky_500, Giv_800 } from './styled-components/Colors'
 import Routes from '../lib/constants/Routes'
 import WikiIcon from '../../public/images/wiki.svg'
@@ -74,9 +74,9 @@ const Footer = () => {
           <Image src={YouTubeIcon} alt='youtube icon' />
           <Image src={WikiIcon} alt='wiki icon' />
         </IconsWrapper>
-        <Caption className='mb-3' color={Giv_800} bold>
+        <Link_Medium className='mb-3' color={Giv_800} bold>
           Support us with your Donation - <span style={{ color: Pinky_500 }}>revolution.eth</span>
-        </Caption>
+        </Link_Medium>
         <Subline>MMXX - No Rights Reserved - The Giveth DAC</Subline>
       </div>
     </Wrapper>

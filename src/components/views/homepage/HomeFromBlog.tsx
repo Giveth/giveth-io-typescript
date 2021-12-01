@@ -45,7 +45,7 @@ const Title = styled(Body_P)`
 `
 
 const Wrapper = styled.div`
-  background: url(${config.APP_URL + '/images/curves_homepage.svg'});
+  background: url(${config.LINKS.FRONTEND + '/images/curves_homepage.svg'});
   padding: 90px 150px;
 `
 

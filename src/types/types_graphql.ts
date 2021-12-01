@@ -9,3 +9,15 @@ export interface IFetchAllProjects {
 export interface IProjectBySlug {
   project: IProject
 }
+
+export interface IUserByAddress {
+  id?: string
+  firstName?: string
+  lastName?: string
+  name?: string
+  email?: string
+  avatar?: string
+  walletAddress?: string
+  url?: string
+  location?: string
+}

@@ -3,7 +3,7 @@ import { FETCH_PROJECT_BY_SLUG } from '../../src/apollo/gql/gqlProjects'
 import client from '../../src/apollo/apolloClient'
 import { IProjectBySlug } from '../../src/types/types_graphql'
 import Head from 'next/head'
-import Menubar from '../../src/components/Menubar'
+import MenuIndex from '../../src/components/menu/MenuIndex'
 import Footer from '../../src/components/Footer'
 import ProjectIndex from '../../src/components/views/project/ProjectIndex'
 
@@ -13,7 +13,7 @@ const ProjectRoute = (props: IProjectBySlug) => {
       <Head>
         <title>{props.project.title} | Giveth</title>
       </Head>
-      <Menubar />
+      <MenuIndex />
       <ProjectIndex {...props} />
       <Footer />
     </>
