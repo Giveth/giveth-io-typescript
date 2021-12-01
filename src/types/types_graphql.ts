@@ -13,3 +13,15 @@ export interface IProjectBySlug {
 export interface IFetchProjectUpdates {
   projectUpdate: IProjectUpdate
 }
+
+export interface IUserByAddress {
+  id?: string
+  firstName?: string
+  lastName?: string
+  name?: string
+  email?: string
+  avatar?: string
+  walletAddress?: string
+  url?: string
+  location?: string
+}

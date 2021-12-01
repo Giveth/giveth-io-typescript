@@ -14,7 +14,7 @@ const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
 
 const ProjectIndex = (props: IProjectBySlug) => {
   const { project } = props
-  const { categories, slug, description } = project
+  const { description } = project
 
   const [activeTab, setActiveTab] = useState(0)
 
@@ -27,7 +27,7 @@ const ProjectIndex = (props: IProjectBySlug) => {
           {activeTab === 0 && <RichTextViewer content={description} />}
           {activeTab === 1 && <ProjectUpdates project={project} />}
         </div>
-        <ProjectDonateCard categories={categories} slug={slug} />
+        <ProjectDonateCard {...props} />
       </BodyWrapper>
     </Wrapper>
   )

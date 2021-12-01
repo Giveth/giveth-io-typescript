@@ -41,7 +41,7 @@ const HomePurpleSection = () => {
           community governance.
         </Lead_Large>
         <br />
-        <GIVeconomyUrl href={config.GIVeconomy_URL} target='_blank' rel='noopener noreferrer'>
+        <GIVeconomyUrl href={config.LINKS.GIVECONOMY} target='_blank' rel='noopener noreferrer'>
           Learn more about GIVeconomy
         </GIVeconomyUrl>
       </GIVeconomy>

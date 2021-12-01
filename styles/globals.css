@@ -18,9 +18,8 @@ a, a:hover {
   align-items: center;
 }
 
-/* Design System Shadows */
-.shadow_dark_500 {
-  box-shadow: 0 3px 20px rgba(33, 32, 60, 0.24);
+.pointer {
+  cursor: pointer;
 }
 
 /* React-Select component */
