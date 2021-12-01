@@ -55,7 +55,7 @@ const UserProvider = (props: { children: ReactElement }) => {
 
   const setToken = async () => {
     const signedMessage = await signMessage(
-      config.OUR_SECRET,
+      'config.OUR_SECRET',
       account,
       chainId,
       library.getSigner()
