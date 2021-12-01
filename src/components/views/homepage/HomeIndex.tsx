@@ -5,7 +5,7 @@ import HomePurpleSection from './HomePurpleSection'
 import HomeFromBlog from './HomeFromBlog'
 import HomeGetUpdates from './HomeGetUpdates'
 import HomeChangeMakers from './HomeChangeMakers'
-import { IProject } from '../../../types/types'
+import { IProject } from '../../../apollo/types/types'
 import { BigArc } from '../../styled-components/Arc'
 
 interface IHomeView {

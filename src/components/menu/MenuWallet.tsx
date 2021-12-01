@@ -64,33 +64,31 @@ const MenuWallet = () => {
         </div>
       </WalletClosed>
 
-      {isOpen && (
-        <WalletOpened>
-          <Title>WALLET</Title>
-          <Subtitle>
-            <LeftSection>
-              {balance + ' '}
-              <span>{networkToken}</span>
-            </LeftSection>
-            <StyledButton onClick={() => setShowModal(true)}>Change wallet</StyledButton>
-          </Subtitle>
-          <Title>NETWORK</Title>
-          <Subtitle>
-            <LeftSection>{networkName}</LeftSection>
-            {isMetaMask && (
-              <StyledButton onClick={() => switchNetwork(chainId)}>Switch network</StyledButton>
-            )}
-          </Subtitle>
-          <Menus>
-            {walletMenuArray.map(i => (
-              <Link href={i.url} key={i.title} passHref>
-                <MenuItem>{i.title}</MenuItem>
-              </Link>
-            ))}
-            <MenuItem>Sign out</MenuItem>
-          </Menus>
-        </WalletOpened>
-      )}
+      <WalletOpened isOpen={isOpen}>
+        <Title>WALLET</Title>
+        <Subtitle>
+          <LeftSection>
+            {balance + ' '}
+            <span>{networkToken}</span>
+          </LeftSection>
+          <StyledButton onClick={() => setShowModal(true)}>Change wallet</StyledButton>
+        </Subtitle>
+        <Title>NETWORK</Title>
+        <Subtitle>
+          <LeftSection>{networkName}</LeftSection>
+          {isMetaMask && (
+            <StyledButton onClick={() => switchNetwork(chainId)}>Switch network</StyledButton>
+          )}
+        </Subtitle>
+        <Menus>
+          {walletMenuArray.map(i => (
+            <Link href={i.url} key={i.title} passHref>
+              <MenuItem>{i.title}</MenuItem>
+            </Link>
+          ))}
+          <MenuItem>Sign out</MenuItem>
+        </Menus>
+      </WalletOpened>
     </>
   )
 }
@@ -143,20 +141,26 @@ const WalletClosed = styled(FlexCenter)<{ isOpen: boolean }>`
   box-shadow: ${props => (props.isOpen ? 'none' : Shadow.Dark['500'])};
 `
 
-const WalletOpened = styled.div`
+const WalletOpened = styled.div<{ isOpen: boolean }>`
   background: white;
   border-radius: 12px;
   box-shadow: ${Shadow.Dark[500]};
   width: 250px;
-  height: min-content;
   position: absolute;
   right: 32px;
   top: 55px;
   z-index: -1;
   padding: 40px 0;
   color: ${Primary_Deep_800};
+  max-height: ${props => (props.isOpen ? '600px' : '0px')};
+  transition: max-height 0.25s ease-in, opacity 0.25s ease-in;
+  visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
+  opacity: ${props => (props.isOpen ? 1 : 0)};
 
   > * {
+    opacity: ${props => (props.isOpen ? 1 : 0)};
+    transition: opacity 0.25s ease-in;
+    transition-delay: 0.25s;
     padding: 0 16px;
   }
 `

@@ -10,7 +10,7 @@ const config = {
     chain: '0x64'
   },
   LINKS: {
-    BACKEND: 'https://dev.serve.giveth.io/graphql',
+    BACKEND: 'https://serve.giveth.io/graphql',
     FRONTEND: 'https://typescript.giveth.io/',
     REPORT_ISSUE: 'https://github.com/Giveth/giveth-io-typescript/issues/new',
     GIVECONOMY: 'https://liquidity-mining-dapp.vercel.app/',

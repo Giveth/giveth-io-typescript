@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { FlexCenter } from './styled-components/Grid'
+import { FlexCenter } from '../styled-components/Grid'
 
-const InfoIcon = () => {
+const InfoBadge = () => {
   return (
     <div>
       <Circle>?</Circle>
@@ -21,4 +21,4 @@ const Circle = styled(FlexCenter)`
   font-weight: 500;
 `
 
-export default InfoIcon
+export default InfoBadge

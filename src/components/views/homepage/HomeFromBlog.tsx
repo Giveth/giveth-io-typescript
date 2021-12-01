@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Giv_500 } from '../../styled-components/Colors'
 import { Body_P } from '../../styled-components/Typography'
 import HomeBlogPost from './HomeBlogPost'
-import { IMediumBlogPost } from '../../../types/types'
+import { IMediumBlogPost } from '../../../apollo/types/types'
 import config from '../../../../config'
 
 const HomeFromBlog = () => {

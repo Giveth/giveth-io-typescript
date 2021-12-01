@@ -22,6 +22,7 @@ export interface IProject {
     id: string
   }[]
   traceCampaignId: string | null
+  totalProjectUpdates?: number
 }
 
 export interface IReaction {
@@ -39,4 +40,13 @@ export interface IMediumBlogPost {
 
 export interface ICategory {
   name: string
+}
+
+export interface IProjectUpdate {
+  content: string
+  createdAt: string
+  id: string
+  projectId: string
+  title: string
+  userId: string
 }

@@ -8,7 +8,7 @@ import VerificationBadge from '../badges/VerificationBadge'
 import grayHeartIcon from '../../../public/images/heart_gray.svg'
 import redHeartIcon from '../../../public/images/heart_red.svg'
 import shareIcon from '../../../public/images/share.svg'
-import { IReaction } from '../../types/types'
+import { IReaction } from '../../apollo/types/types'
 import { Context as UserContext } from '../../contextProviders/UserProvider'
 
 interface IBadgeWrapper {
@@ -67,7 +67,7 @@ const HeartWrap = styled(FlexCenter)<{ active?: boolean; isHover?: boolean }>`
   background: ${props => (props.active ? 'white' : Primary_Deep_800_Trans)};
   transition: all 0.3s ease;
 
-  > span:nth-child(2) {
+  > span:nth-of-type(2) {
     display: ${props => (props.isHover ? 'unset' : 'none !important')};
   }
 `

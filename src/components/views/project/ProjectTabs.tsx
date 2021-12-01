@@ -1,31 +1,41 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import styled from '@emotion/styled'
 import { Body_P, Subline_Bold } from '../../styled-components/Typography'
-import { Gray_400, Pinky_500, Primary_Deep_600 } from '../../styled-components/Colors'
-import { IProjectBySlug } from '../../../types/types_graphql'
+import { Pinky_500, Primary_Deep_600 } from '../../styled-components/Colors'
+import { Shadow } from '../../styled-components/Shadow'
+import { IProject } from '../../../apollo/types/types'
 
-const ProjectTabs = (props: IProjectBySlug) => {
-  const { project } = props
-  const { donations } = project
+interface IProjectTabs {
+  project: IProject
+  activeTab: number
+  setActiveTab: Dispatch<SetStateAction<number>>
+}
+
+const ProjectTabs = (props: IProjectTabs) => {
+  const { project, activeTab, setActiveTab } = props
+  const { donations, totalProjectUpdates } = project
+
+  const tabsArray = [
+    { title: 'About' },
+    { title: 'Updates', badge: totalProjectUpdates },
+    { title: 'Donations', badge: donations?.length }
+  ]
+
   return (
     <Wrapper>
-      <Tab className='active'>About</Tab>
-      <Separator />
-      <Tab>
-        Updates<Badge>1</Badge>
-      </Tab>
-      <Separator />
-      <Tab>
-        Donations<Badge>{donations?.length}</Badge>
-      </Tab>
+      {tabsArray.map((i, index) => (
+        <Tab
+          onClick={() => setActiveTab(index)}
+          key={i.title}
+          className={activeTab === index ? 'active' : ''}
+        >
+          {i.title}
+          {i.badge && <Badge>{i.badge}</Badge>}
+        </Tab>
+      ))}
     </Wrapper>
   )
 }
-
-const Separator = styled.span`
-  border-right: 2px solid ${Gray_400};
-  height: 28px;
-`
 
 const Badge = styled(Subline_Bold)`
   background: ${Primary_Deep_600};
@@ -40,17 +50,20 @@ const Badge = styled(Subline_Bold)`
 
 const Tab = styled(Body_P)`
   display: flex;
-  padding: 20px 40px;
-  margin: 0 26px;
+  padding: 10px 35px;
+  color: ${Pinky_500};
+  border-radius: 48px;
+  cursor: pointer;
 
   &.active {
-    font-weight: 500;
-    border-bottom: 2px solid ${Pinky_500};
+    color: ${Primary_Deep_600};
+    background: white;
+    box-shadow: ${Shadow.Neutral[400]};
   }
 `
 
 const Wrapper = styled.div`
-  margin: 20px 0 40px 0;
+  margin: 24px 0 40px 0;
   color: ${Primary_Deep_600};
   display: flex;
   flex-wrap: wrap;

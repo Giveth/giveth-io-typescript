@@ -15,7 +15,7 @@ import {
 } from '../components/styled-components/Colors'
 import { H6, Body_P, Overline_Small } from '../components/styled-components/Typography'
 import ExternalLink from '../components/ExternalLink'
-import InfoIcon from '../components/InfoIcon'
+import InfoBadge from '../components/badges/InfoBadge'
 import { Shadow } from '../components/styled-components/Shadow'
 import { EWallets, TWalletConnector } from './walletTypes'
 import { walletsArray } from './walletTypes'
@@ -76,7 +76,7 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
         </IconsContainer>
         <InfoSection onClick={() => setShowInfo(true)}>
           What is a wallet
-          <InfoIcon />
+          <InfoBadge />
         </InfoSection>
       </>
     )

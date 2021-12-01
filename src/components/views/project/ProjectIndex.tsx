@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
 import ProjectHeader from './ProjectHeader'
 import ProjectTabs from './ProjectTabs'
 import ProjectDonateCard from './ProjectDonateCard'
-import { IProjectBySlug } from '../../../types/types_graphql'
+import { IProjectBySlug } from '../../../apollo/types/gqlTypes'
 import { mediaQueries } from '../../../lib/helpers'
 
+const ProjectUpdates = dynamic(() => import('./ProjectUpdates'))
 const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
 })
@@ -15,13 +16,16 @@ const ProjectIndex = (props: IProjectBySlug) => {
   const { project } = props
   const { description } = project
 
+  const [activeTab, setActiveTab] = useState(0)
+
   return (
     <Wrapper>
       <ProjectHeader project={project} />
       <BodyWrapper>
-        <div>
-          <ProjectTabs project={project} />
-          <RichTextViewer content={description} />
+        <div className='w-100'>
+          <ProjectTabs activeTab={activeTab} setActiveTab={setActiveTab} project={project} />
+          {activeTab === 0 && <RichTextViewer content={description} />}
+          {activeTab === 1 && <ProjectUpdates project={project} />}
         </div>
         <ProjectDonateCard {...props} />
       </BodyWrapper>

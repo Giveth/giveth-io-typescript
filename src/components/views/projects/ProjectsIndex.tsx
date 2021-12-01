@@ -4,8 +4,8 @@ import Select from 'react-select'
 import Debounced from 'lodash.debounce'
 import { useRouter } from 'next/router'
 
-import { ICategory, IProject } from '../../../types/types'
-import { IFetchAllProjects } from '../../../types/types_graphql'
+import { ICategory, IProject } from '../../../apollo/types/types'
+import { IFetchAllProjects } from '../../../apollo/types/gqlTypes'
 import { H5, Subline, Body_P } from '../../styled-components/Typography'
 import { Gray_700, Gray_900, Pinky_500, Primary_Deep_500 } from '../../styled-components/Colors'
 import { Button } from '../../styled-components/Button'
@@ -13,7 +13,7 @@ import ProjectCard from '../../project-card/ProjectCard'
 import { capitalizeFirstLetter } from '../../../lib/helpers'
 import { FETCH_ALL_PROJECTS } from '../../../apollo/gql/gqlProjects'
 import client from '../../../apollo/apolloClient'
-import { gqlEnums } from '../../../apollo/gql/gqlEnums'
+import { gqlEnums } from '../../../apollo/types/gqlEnums'
 import SearchBox from '../../SearchBox'
 import Routes from '../../../lib/constants/Routes'
 import { BigArc } from '../../styled-components/Arc'
@@ -39,7 +39,8 @@ const sortByObj = [
   { label: 'Hearts', value: gqlEnums.HEARTS },
   { label: 'Date Created - Descending', value: gqlEnums.CREATIONDATE },
   { label: 'Date Created - Ascending', value: gqlEnums.CREATIONDATE, direction: gqlEnums.ASC },
-  { label: 'Verified', value: gqlEnums.VERIFIED }
+  { label: 'Verified', value: gqlEnums.VERIFIED },
+  { label: 'Traceable', value: gqlEnums.TRACEABLE }
 ]
 
 const buildCategoryObj = (array: ICategory[]) => {
