@@ -1,5 +1,4 @@
 const config = {
-  OUR_SECRET: 'our_secret_message_string',
   PRIMARY_NETWORK: {
     name: 'Mainnet',
     id: 1,
