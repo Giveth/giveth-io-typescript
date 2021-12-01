@@ -11,6 +11,10 @@ interface IProjectTabs {
   setActiveTab: Dispatch<SetStateAction<number>>
 }
 
+const badgeCount = (count?: number) => {
+  return count || null
+}
+
 const ProjectTabs = (props: IProjectTabs) => {
   const { project, activeTab, setActiveTab } = props
   const { donations, totalProjectUpdates } = project
@@ -30,7 +34,7 @@ const ProjectTabs = (props: IProjectTabs) => {
           className={activeTab === index ? 'active' : ''}
         >
           {i.title}
-          {i.badge && <Badge>{i.badge}</Badge>}
+          {badgeCount(i.badge) && <Badge>{i.badge}</Badge>}
         </Tab>
       ))}
     </Wrapper>
