@@ -4,7 +4,7 @@ import { H3, Body_P } from '../../styled-components/Typography'
 import { Pinky_500 } from '../../styled-components/Colors'
 import VerificationBadge from '../../badges/VerificationBadge'
 import { isNoImg, noImgColor, noImgIcon } from '../../../lib/helpers'
-import { IProject } from '../../../types/types'
+import { IProject } from '../../../apollo/types/types'
 
 const ProjectHeader = (props: { project: IProject }) => {
   const { title, verified, image, adminUser, traceCampaignId } = props.project

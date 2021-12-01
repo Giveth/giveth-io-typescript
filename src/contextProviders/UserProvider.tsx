@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import useWallet from '../wallet/walletHooks'
 import client from '../apollo/apolloClient'
 import { GET_USER_BY_ADDRESS } from '../apollo/gql/gqlUser'
-import { IUserByAddress } from '../types/types_graphql'
+import { IUserByAddress } from '../apollo/types/gqlTypes'
 import { LocalStorageTokenLabel, signMessage } from '../lib/helpers'
 import config from '../../config'
 import { getToken } from '../services/token'
@@ -53,20 +53,20 @@ const UserProvider = (props: { children: ReactElement }) => {
       .catch(console.log)
   }
 
-  const setToken = async () => {
-    const signedMessage = await signMessage(
-      'config.OUR_SECRET',
-      account,
-      chainId,
-      library.getSigner()
-    )
-    console.log('signedMessage', signedMessage)
-    if (!signedMessage) return false
-    const token = await getToken(account, signedMessage, chainId, user)
-    console.log('token', token)
-    localStorage.setItem(LocalStorageTokenLabel, token)
-    return true
-  }
+  // const setToken = async () => {
+  //   const signedMessage = await signMessage(
+  //     config.OUR_SECRET,
+  //     account,
+  //     chainId,
+  //     library.getSigner()
+  //   )
+  //   console.log('signedMessage', signedMessage)
+  //   if (!signedMessage) return false
+  //   const token = await getToken(account, signedMessage, chainId, user)
+  //   console.log('token', token)
+  //   localStorage.setItem(LocalStorageTokenLabel, token)
+  //   return true
+  // }
 
   return (
     <Provider

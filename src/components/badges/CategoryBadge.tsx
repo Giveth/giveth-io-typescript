@@ -1,5 +1,5 @@
 import React from 'react'
-import { ICategory } from '../../types/types'
+import { ICategory } from '../../apollo/types/types'
 import styled from '@emotion/styled'
 import { Gray_600 } from '../styled-components/Colors'
 import { Subline } from '../styled-components/Typography'

@@ -2,11 +2,11 @@ import React from 'react'
 import Head from 'next/head'
 import client from '../src/apollo/apolloClient'
 import { FETCH_ALL_PROJECTS } from '../src/apollo/gql/gqlProjects'
-import { gqlEnums } from '../src/apollo/gql/gqlEnums'
+import { gqlEnums } from '../src/apollo/types/gqlEnums'
 import ProjectsIndex from '../src/components/views/projects/ProjectsIndex'
 import MenuIndex from '../src/components/menu/MenuIndex'
 import Footer from '../src/components/Footer'
-import { IFetchAllProjects } from '../src/types/types_graphql'
+import { IFetchAllProjects } from '../src/apollo/types/gqlTypes'
 
 const projectsToFetch = 15
 

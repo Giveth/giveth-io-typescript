@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { Body_P, Subline_Bold } from '../../styled-components/Typography'
 import { Pinky_500, Primary_Deep_600 } from '../../styled-components/Colors'
 import { Shadow } from '../../styled-components/Shadow'
-import { IProject } from '../../../types/types'
+import { IProject } from '../../../apollo/types/types'
 
 interface IProjectTabs {
   project: IProject

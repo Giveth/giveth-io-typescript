@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import ProjectHeader from './ProjectHeader'
 import ProjectTabs from './ProjectTabs'
 import ProjectDonateCard from './ProjectDonateCard'
-import { IProjectBySlug } from '../../../types/types_graphql'
+import { IProjectBySlug } from '../../../apollo/types/gqlTypes'
 import { mediaQueries } from '../../../lib/helpers'
 
 const ProjectUpdates = dynamic(() => import('./ProjectUpdates'))

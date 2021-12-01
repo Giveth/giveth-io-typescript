@@ -1,6 +1,6 @@
 import client from '../apollo/apolloClient'
 import { LOGIN_USER } from '../apollo/gql/gqlAuth'
-import { IUserByAddress } from '../types/types_graphql'
+import { IUserByAddress } from '../apollo/types/gqlTypes'
 
 export async function getToken(
   walletAddress: string | null | undefined,

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 
-import { IProjectUpdate } from '../../../types/types'
+import { IProjectUpdate } from '../../../apollo/types/types'
 import { Body_P, H5, Lead_Large, Subline } from '../../styled-components/Typography'
 import { Button } from '../../styled-components/Button'
 import {

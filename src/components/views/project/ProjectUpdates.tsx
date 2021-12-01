@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import client from '../../../apollo/apolloClient'
 import { FETCH_PROJECT_UPDATES } from '../../../apollo/gql/gqlProjects'
 import ProjectTimeline from './ProjectTimeline'
-import { IFetchProjectUpdates, IProjectBySlug } from '../../../types/types_graphql'
+import { IFetchProjectUpdates, IProjectBySlug } from '../../../apollo/types/gqlTypes'
 
 const ProjectUpdates = (props: IProjectBySlug) => {
   const { id, creationDate } = props.project

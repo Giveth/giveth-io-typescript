@@ -12,9 +12,9 @@ import CategoryBadge from '../../badges/CategoryBadge'
 import Routes from '../../../lib/constants/Routes'
 import config from '../../../../config'
 import { slugToProjectDonate } from '../../../lib/helpers'
-import InfoIcon from '../../InfoIcon'
+import InfoBadge from '../../badges/InfoBadge'
 import { Context as UserContext } from '../../../contextProviders/UserProvider'
-import { IProjectBySlug } from '../../../types/types_graphql'
+import { IProjectBySlug } from '../../../apollo/types/gqlTypes'
 
 const ProjectDonateCard = (props: IProjectBySlug) => {
   const {
@@ -55,7 +55,7 @@ const ProjectDonateCard = (props: IProjectBySlug) => {
         <Link_Medium color={Giv_300}>
           When you donate to verified projects, you get GIV back.
         </Link_Medium>
-        <InfoIcon />
+        <InfoBadge />
       </GivBackNotif>
       {isCategories && (
         <CategoryWrapper>

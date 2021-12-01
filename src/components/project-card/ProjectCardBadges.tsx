@@ -8,7 +8,7 @@ import VerificationBadge from '../badges/VerificationBadge'
 import grayHeartIcon from '../../../public/images/heart_gray.svg'
 import redHeartIcon from '../../../public/images/heart_red.svg'
 import shareIcon from '../../../public/images/share.svg'
-import { IReaction } from '../../types/types'
+import { IReaction } from '../../apollo/types/types'
 import { Context as UserContext } from '../../contextProviders/UserProvider'
 
 interface IBadgeWrapper {
