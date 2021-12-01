@@ -2,23 +2,35 @@ import styled from '@emotion/styled'
 import React from 'react'
 import Image from 'next/image'
 import { Pinky_500 } from '../../styled-components/Colors'
-import { IProjectBySlug } from '../../../types/types'
+import { IProject } from '../../../types/types'
 import { Button } from '../../styled-components/Button'
 
-type SuccessFunction = () => void
+type SuccessFunction = (param: boolean) => void
 
-const FiatDonation = (props: { project: IProjectBySlug; setSuccessDonation: SuccessFunction }) => {
+const FiatDonation = (props: {
+  project: IProject
+  setSuccessDonation: SuccessFunction
+}) => {
   const { setSuccessDonation } = props
 
   return (
     <>
       <ButtonContainer>
-        <Button small background={Pinky_500} width='100%' onClick={() => setSuccessDonation(true)}>
+        <Button
+          small
+          background={Pinky_500}
+          width="100%"
+          onClick={() => setSuccessDonation(true)}
+        >
           CONTINUE WITH TRANSAK
         </Button>
       </ButtonContainer>
       <ImageContainer>
-        <Image src='/images/powered_by_transak.svg' width='165px' height='24px' />
+        <Image
+          src="/images/powered_by_transak.svg"
+          width="165px"
+          height="24px"
+        />
       </ImageContainer>
     </>
   )

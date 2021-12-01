@@ -19,7 +19,11 @@ export interface IProject {
   adminUser: {
     id?: string
     email?: string
+    name?: string
   }
+  donations: {
+    id?: string
+  }[]
   users: IUser[]
   totalDonations?: number
   traceCampaignId: string | null

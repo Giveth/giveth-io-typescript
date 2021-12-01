@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, InMemoryCache, ApolloLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import gql from 'graphql-tag'
 import { createUploadLink } from 'apollo-upload-client'
@@ -19,8 +19,8 @@ function createApolloClient() {
   const appUser = getLocalStorageUserLabel()
 
   const httpLink = createUploadLink({
-    uri: process.env.NEXT_PUBLIC_APOLLO_SERVER
-  })
+    uri: process.env.NEXT_PUBLIC_APOLLO_SERVER,
+  }) as unknown as ApolloLink
 
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
@@ -28,10 +28,11 @@ function createApolloClient() {
 
     // return the headers to the context so httpLink can read them
     const mutation: any = {
-      Authorization: token ? `Bearer ${token}` : ''
+      Authorization: token ? `Bearer ${token}` : '',
     }
     if (!ssrMode && localStorage.getItem(appUser)) {
-      const user = JSON.parse(localStorage.getItem(appUser))
+      const userFromStorage = localStorage.getItem(appUser) as string
+      const user = JSON.parse(userFromStorage)
       const userAddress = user?.addresses && user.addresses[0]
 
       if (userAddress) mutation['wallet-address'] = userAddress
@@ -40,8 +41,8 @@ function createApolloClient() {
     return {
       headers: {
         ...headers,
-        ...mutation
-      }
+        ...mutation,
+      },
     }
   })
 
@@ -51,12 +52,12 @@ function createApolloClient() {
     cache: new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
-        fetchPolicy: 'cache-and-network'
+        fetchPolicy: 'cache-and-network',
       },
       query: {
         fetchPolicy: 'network-only',
-        nextFetchPolicy: 'network-only'
-      }
+        // nextFetchPolicy: 'network-only',
+      },
     },
     typeDefs: gql`
       enum OrderField {
@@ -80,7 +81,6 @@ function createApolloClient() {
         direction: OrderDirection!
       }
     `,
-    fetch
   })
 }
 
@@ -98,8 +98,10 @@ export function initializeApollo(initialState = null) {
       // combine arrays using object equality (like in sets)
       arrayMerge: (destinationArray, sourceArray) => [
         ...sourceArray,
-        ...destinationArray.filter(d => sourceArray.every(s => !isEqual(d, s)))
-      ]
+        ...destinationArray.filter((d) =>
+          sourceArray.every((s) => !isEqual(d, s))
+        ),
+      ],
     })
 
     // Restore the cache with the merged data
@@ -113,7 +115,7 @@ export function initializeApollo(initialState = null) {
   return _apolloClient
 }
 
-export function addApolloState(client, pageProps) {
+export function addApolloState(client: any, pageProps: any) {
   if (pageProps?.props) {
     pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
   }
@@ -121,7 +123,7 @@ export function addApolloState(client, pageProps) {
   return pageProps
 }
 
-export function useApollo(pageProps) {
+export function useApollo(pageProps: any) {
   const state = pageProps[APOLLO_STATE_PROP_NAME]
   return useMemo(() => initializeApollo(state), [state])
 }
