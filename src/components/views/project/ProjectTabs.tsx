@@ -17,12 +17,12 @@ const badgeCount = (count?: number) => {
 
 const ProjectTabs = (props: IProjectTabs) => {
   const { project, activeTab, setActiveTab } = props
-  const { donations, totalProjectUpdates } = project
+  const { totalProjectUpdates } = project
 
   const tabsArray = [
     { title: 'About' },
     { title: 'Updates', badge: totalProjectUpdates },
-    { title: 'Donations', badge: donations?.length }
+    { title: 'Donations', badge: 0 }
   ]
 
   return (
