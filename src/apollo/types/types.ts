@@ -14,19 +14,19 @@ export interface IProject {
   listed?: boolean
   categories: ICategory[]
   reactions: IReaction[]
-  adminUser: {
-    name: string
-  }
+  adminUser: IUser
   totalDonations?: number
-  donations: {
-    id: string
-  }[]
   traceCampaignId: string | null
   totalProjectUpdates?: number
 }
 
 export interface IReaction {
   userId: string
+}
+
+export interface IUser {
+  id: string
+  name: string
 }
 
 export interface IMediumBlogPost {
@@ -49,4 +49,17 @@ export interface IProjectUpdate {
   projectId: string
   title: string
   userId: string
+}
+
+export interface IDonations {
+  id: string
+  anonymous: boolean
+  user: IUser
+  fromWalletAddress: string
+  amount: number
+  valueUsd: number
+  currency: string
+  transactionId: string
+  transactionNetworkId: number
+  createdAt: string
 }

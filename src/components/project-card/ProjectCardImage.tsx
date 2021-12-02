@@ -1,6 +1,6 @@
 import React from 'react'
-import { isNoImg, noImgColor, noImgIcon } from '../../lib/helpers'
 import styled from '@emotion/styled'
+import { isNoImg, noImgColor, noImgIcon } from '../../lib/helpers'
 
 const ProjectCardImage = (props: { image?: string; cardRadius: string; cardWidth: string }) => {
   const { image, cardRadius, cardWidth } = props

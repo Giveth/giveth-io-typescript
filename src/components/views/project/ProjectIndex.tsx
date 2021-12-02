@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import styled from '@emotion/styled'
+
 import ProjectHeader from './ProjectHeader'
 import ProjectTabs from './ProjectTabs'
 import ProjectDonateCard from './ProjectDonateCard'
 import { IProjectBySlug } from '../../../apollo/types/gqlTypes'
 import { mediaQueries } from '../../../lib/helpers'
 
+const ProjectDonations = dynamic(() => import('./ProjectDonations'))
 const ProjectUpdates = dynamic(() => import('./ProjectUpdates'))
 const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
@@ -26,6 +28,7 @@ const ProjectIndex = (props: IProjectBySlug) => {
           <ProjectTabs activeTab={activeTab} setActiveTab={setActiveTab} project={project} />
           {activeTab === 0 && <RichTextViewer content={description} />}
           {activeTab === 1 && <ProjectUpdates project={project} />}
+          {activeTab === 2 && <ProjectDonations />}
         </div>
         <ProjectDonateCard {...props} />
       </BodyWrapper>
