@@ -1,22 +1,22 @@
 import React from 'react'
+import { useQuery } from '@apollo/client'
+
 import HomeHeader from './HomeHeader'
 import HomeExploreProjects from './HomeExploreProjects'
 import HomePurpleSection from './HomePurpleSection'
 import HomeFromBlog from './HomeFromBlog'
 import HomeGetUpdates from './HomeGetUpdates'
 import HomeChangeMakers from './HomeChangeMakers'
-import { IProject } from '../../../apollo/types/types'
 import { BigArc } from '../../styled-components/Arc'
-
-interface IHomeView {
-  projects: IProject[]
-  totalCount: number
-}
+import { FETCH_HOME_PROJECTS } from '../../../apollo/gql/gqlProjects'
+import { OPTIONS_HOME_PROJECTS } from '../../../apollo/gql/gqlOptions'
 
 const projectsSlice = 6
 
-const HomeIndex = (props: IHomeView) => {
-  const { projects, totalCount } = props
+const HomeIndex = () => {
+  const { data } = useQuery(FETCH_HOME_PROJECTS, OPTIONS_HOME_PROJECTS)
+  const { projects, totalCount } = data.projects
+
   return (
     <>
       <BigArc />

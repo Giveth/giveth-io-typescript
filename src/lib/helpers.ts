@@ -9,6 +9,8 @@ import { EWallets } from '../wallet/walletTypes'
 
 declare let window: any
 
+export const isSSRMode = typeof window === 'undefined'
+
 export const slugToProjectView = (slug: string) => {
   return Routes.Project + '/' + slug
 }

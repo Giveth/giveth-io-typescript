@@ -1,50 +1,36 @@
 import React from 'react'
 import Head from 'next/head'
 import HomeIndex from '../src/components/views/homepage/HomeIndex'
-import client from '../src/apollo/apolloClient'
+import { addApolloState, initializeApollo } from '../src/apollo/apolloClient'
 import { FETCH_HOME_PROJECTS } from '../src/apollo/gql/gqlProjects'
-import { gqlEnums } from '../src/apollo/types/gqlEnums'
-import { IProject } from '../src/apollo/types/types'
+import { OPTIONS_HOME_PROJECTS } from '../src/apollo/gql/gqlOptions'
 import MenuIndex from '../src/components/menu/MenuIndex'
 import Footer from '../src/components/Footer'
 
-const projectsToFetch = 15
-
-interface IHomeRoute {
-  projects: IProject[]
-  totalCount: number
-}
-
-const HomeRoute = (props: IHomeRoute) => {
+const HomeRoute = () => {
   return (
     <>
       <Head>
         <title>Home | Giveth</title>
       </Head>
       <MenuIndex />
-      <HomeIndex {...props} />
+      <HomeIndex />
       <Footer />
     </>
   )
 }
 
 export async function getServerSideProps() {
-  const { data } = await client.query({
+  const apolloClient = initializeApollo()
+
+  await apolloClient.query({
     query: FETCH_HOME_PROJECTS,
-    variables: {
-      limit: projectsToFetch,
-      orderBy: { field: gqlEnums.QUALITYSCORE, direction: gqlEnums.DESC }
-    }
+    ...OPTIONS_HOME_PROJECTS
   })
 
-  const { projects, totalCount } = data.projects
-
-  return {
-    props: {
-      projects,
-      totalCount
-    }
-  }
+  return addApolloState(apolloClient, {
+    props: {}
+  })
 }
 
 export default HomeRoute
