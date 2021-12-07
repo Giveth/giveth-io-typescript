@@ -47,10 +47,9 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
           <br />
           <br />
           For more information about wallets, see{' '}
-          <ExternalLink
-            href='https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets'
-            text='this explanation'
-          />
+          <ExternalLink href='https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets'>
+            this explanation
+          </ExternalLink>
         </InfoBody>
       </>
     )
