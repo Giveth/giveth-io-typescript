@@ -15,8 +15,8 @@ export interface IProject {
   categories: ICategory[]
   reactions: IReaction[]
   adminUser: IUser
-  totalDonations?: number
   traceCampaignId: string | null
+  totalDonations?: number
   totalProjectUpdates?: number
 }
 
@@ -51,7 +51,7 @@ export interface IProjectUpdate {
   userId: string
 }
 
-export interface IDonations {
+export interface IDonation {
   id: string
   anonymous: boolean
   user: IUser

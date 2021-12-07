@@ -10,6 +10,7 @@ import ProjectTabs from './ProjectTabs'
 import ProjectDonateCard from './ProjectDonateCard'
 import { mediaQueries } from '../../../lib/helpers'
 import { FETCH_PROJECT_BY_SLUG } from '../../../apollo/gql/gqlProjects'
+import { FETCH_PROJECT_DONATIONS } from '../../../apollo/gql/gqlDonations'
 
 const ProjectDonations = dynamic(() => import('./ProjectDonations'))
 const ProjectUpdates = dynamic(() => import('./ProjectUpdates'))
@@ -23,8 +24,15 @@ const ProjectIndex = () => {
   const { data } = useQuery(FETCH_PROJECT_BY_SLUG, {
     variables: { slug: router.query.slug }
   })
-  const { projectBySlug: project } = data
+  const project = data?.projectBySlug
   const { description, title } = project
+
+  const { data: donationsData } = useQuery(FETCH_PROJECT_DONATIONS, {
+    variables: { projectId: parseInt(project.id) }
+  })
+
+  const donationsByProjectId = donationsData?.donationsByProjectId
+  const totalDonations = donationsByProjectId?.totalCount
 
   const [activeTab, setActiveTab] = useState(0)
 
@@ -36,10 +44,17 @@ const ProjectIndex = () => {
       <ProjectHeader project={project} />
       <BodyWrapper>
         <div className='w-100'>
-          <ProjectTabs activeTab={activeTab} setActiveTab={setActiveTab} project={project} />
+          <ProjectTabs
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            project={project}
+            totalDonations={totalDonations}
+          />
           {activeTab === 0 && <RichTextViewer content={description} />}
           {activeTab === 1 && <ProjectUpdates project={project} />}
-          {activeTab === 2 && <ProjectDonations />}
+          {activeTab === 2 && (
+            <ProjectDonations donationsByProjectId={donationsByProjectId} project={project} />
+          )}
         </div>
         <ProjectDonateCard project={project} />
       </BodyWrapper>

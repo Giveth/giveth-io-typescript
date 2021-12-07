@@ -159,7 +159,10 @@ const ProjectsIndex = () => {
           </SelectComponent>
           <div>
             <Label />
-            <SearchBox onChange={(e: string) => handleChange('search', e)} />
+            <SearchBox
+              onChange={(e: string) => handleChange('search', e)}
+              placeholder='Search Projects ...'
+            />
           </div>
         </FiltersSection>
 
