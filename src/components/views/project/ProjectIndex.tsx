@@ -18,6 +18,8 @@ const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
 })
 
+const donationsPerPage = 3
+
 const ProjectIndex = () => {
   const router = useRouter()
 
@@ -28,7 +30,7 @@ const ProjectIndex = () => {
   const { description, title } = project
 
   const { data: donationsData } = useQuery(FETCH_PROJECT_DONATIONS, {
-    variables: { projectId: parseInt(project.id) }
+    variables: { projectId: parseInt(project.id), skip: 0, take: donationsPerPage }
   })
 
   const donationsByProjectId = donationsData?.donationsByProjectId
