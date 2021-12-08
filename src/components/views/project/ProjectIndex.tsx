@@ -18,7 +18,7 @@ const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
   ssr: false
 })
 
-const donationsPerPage = 3
+const donationsPerPage = 11
 
 const ProjectIndex = () => {
   const router = useRouter()
