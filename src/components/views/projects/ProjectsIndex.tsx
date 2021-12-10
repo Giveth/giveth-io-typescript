@@ -122,6 +122,7 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
   }
 
   const loadMore = () => {
+    if (isLoading) return
     fetchProjects(true, pageNum.current + 1)
     pageNum.current = pageNum.current + 1
   }

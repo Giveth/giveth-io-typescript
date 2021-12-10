@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const FETCH_HOME_PROJECTS = gql`
   query FetchAllProjects($limit: Int, $orderBy: OrderBy) {
