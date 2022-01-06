@@ -11,6 +11,7 @@ import GithubIcon from '../../public/images/github.svg'
 import RedditIcon from '../../public/images/reddit.svg'
 import YouTubeIcon from '../../public/images/youtube.svg'
 import TwitterIcon from '../../public/images/twitter-black.svg'
+import config from '../../config'
 
 const Footer = () => {
   return (
@@ -67,12 +68,11 @@ const Footer = () => {
       </LinksWrapper>
       <div className='text-right'>
         <IconsWrapper>
-          <Image src={MediumIcon} alt='medium icon' />
-          <Image src={GithubIcon} alt='github icon' />
-          <Image src={RedditIcon} alt='reddit icon' />
-          <Image src={TwitterIcon} alt='twitter icon' />
-          <Image src={YouTubeIcon} alt='youtube icon' />
-          <Image src={WikiIcon} alt='wiki icon' />
+          {socialArray.map(elem => (
+            <a key={elem.alt} href={elem.link} target='_blank' rel='noreferer noreferrer'>
+              <Image src={elem.icon} alt={elem.alt} />
+            </a>
+          ))}
         </IconsWrapper>
         <Link_Medium className='mb-3' color={Giv_800} bold>
           Support us with your Donation - <span style={{ color: Pinky_500 }}>revolution.eth</span>
@@ -111,5 +111,13 @@ const Wrapper = styled.div`
   gap: 70px 20px;
   position: relative;
 `
+const socialArray = [
+  { icon: MediumIcon, alt: 'medium icon', link: config.LINKS.MEDIUM },
+  { icon: GithubIcon, alt: 'github icon', link: config.LINKS.GITHUB },
+  { icon: RedditIcon, alt: 'reddit icon', link: config.LINKS.REDDIT },
+  { icon: TwitterIcon, alt: 'twitter icon', link: config.LINKS.TWITTER },
+  { icon: YouTubeIcon, alt: 'youtube icon', link: config.LINKS.YOUTUBE },
+  { icon: WikiIcon, alt: 'wiki icon', link: config.LINKS.WIKI }
+]
 
 export default Footer
