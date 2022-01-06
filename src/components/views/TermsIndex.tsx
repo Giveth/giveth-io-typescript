@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import { D3, Lead_Medium } from '../styled-components/Typography'
 import { Giv_700 } from '../styled-components/Colors'
-import TermsArray from '../../lib/constants/Terms.json'
+import TermsArray from '../../content/Terms.json'
 import Accordion from '../Accordion'
 import FlowerIcon from '../../../public/images/flower_terms.svg'
 

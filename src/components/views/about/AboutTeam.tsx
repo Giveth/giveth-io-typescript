@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import TeamCard from '../../TeamCard'
 import { H2, Lead_Medium } from '../../styled-components/Typography'
 import { Giv_700, Giv_800 } from '../../styled-components/Colors'
-import GivethTeam from '../../../lib/constants/GivethTeam.json'
+import GivethTeam from '../../../content/GivethTeam.json'
 
 const AboutTeam = () => {
   return (
