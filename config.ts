@@ -21,7 +21,8 @@ const config = {
     MEDIUM: 'https://medium.com/giveth/',
     TWITTER: 'https://twitter.com/Givethio',
     YOUTUBE: 'https://www.youtube.com/channel/UClfutpRoY0WTVnq0oB0E0wQ',
-    REDDIT: 'https://reddit.com/r/giveth'
+    REDDIT: 'https://reddit.com/r/giveth',
+    WIKI: 'https://docs.giveth.io/'
   }
 }
 
