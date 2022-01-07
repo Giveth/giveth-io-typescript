@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import tokenAbi from 'human-standard-token-abi'
 import { useWeb3React } from '@web3-react/core'
 import { Contract } from '@ethersproject/contracts'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import tokenAbi from 'human-standard-token-abi'
 
 import { Primary_Deep_800 } from '../styled-components/Colors'
 import { FlexCenter } from '../styled-components/Grid'
