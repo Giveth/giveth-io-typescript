@@ -42,6 +42,7 @@ const MustardArc = styled(Arc)`
 
 const Wrapper = styled(FlexCenter)`
   height: 650px;
+  text-align: center;
   background: ${Giv_500};
   color: white;
   flex-direction: column;

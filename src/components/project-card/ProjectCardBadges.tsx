@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
+
 import { Primary_Deep_800_Trans } from '../styled-components/Colors'
 import { FlexCenter } from '../styled-components/Grid'
 import { Subline_Bold } from '../styled-components/Typography'
@@ -16,7 +17,6 @@ interface IBadgeWrapper {
 }
 
 interface IProjectCardBadges {
-  cardWidth?: string
   reactions?: IReaction[]
   verified?: boolean
   traceable?: boolean
@@ -30,7 +30,7 @@ const ProjectCardBadges = (props: IProjectCardBadges) => {
 
   const [heartedByUser, setHeartedByUser] = useState(false)
 
-  const { cardWidth, reactions, verified, isHover, traceable } = props
+  const { reactions, verified, isHover, traceable } = props
   const likes = reactions?.length
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const ProjectCardBadges = (props: IProjectCardBadges) => {
   }, [user])
 
   return (
-    <BadgeWrapper width={cardWidth}>
+    <BadgeWrapper>
       <div className='d-flex'>
         {verified && <VerificationBadge verified />}
         {traceable && <VerificationBadge trace />}
@@ -79,7 +79,7 @@ const LikeBadge = styled(Subline_Bold)`
 `
 
 const BadgeWrapper = styled.div<IBadgeWrapper>`
-  width: ${props => props.width || '440px'};
+  width: 100%;
   position: absolute;
   z-index: 2;
   display: flex;
