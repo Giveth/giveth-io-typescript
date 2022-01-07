@@ -137,7 +137,7 @@ const Wrapper2 = styled.div`
 const Wrapper = styled.div`
   position: relative;
   height: 430px;
-  max-width: 440px;
+  width: 440px;
   border-radius: ${cardRadius};
   background: white;
 `
