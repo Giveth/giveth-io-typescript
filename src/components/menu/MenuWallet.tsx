@@ -16,13 +16,19 @@ import {
   Pinky_500,
   Primary_Deep_800
 } from '../styled-components/Colors'
-import { checkWalletName, networkIdToName, shortenAddress, switchNetwork } from '../../lib/helpers'
 import { Shadow } from '../styled-components/Shadow'
 import { FlexCenter } from '../styled-components/Grid'
 import { Context as UserContext } from '../../contextProviders/UserProvider'
 import WalletModal from '../../wallet/WalletModal'
 import { EWallets } from '../../wallet/walletTypes'
 import Routes from '../../lib/constants/Routes'
+import {
+  checkWalletName,
+  mediaQueries,
+  networkIdToName,
+  shortenAddress,
+  switchNetwork
+} from '../../lib/helpers'
 import config from '../../../config'
 
 const MenuWallet = () => {
@@ -52,16 +58,16 @@ const MenuWallet = () => {
   const isMetaMask = checkWalletName(context) === EWallets.METAMASK
 
   return (
-    <>
+    <Wrapper onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
       {showModal && <WalletModal showModal={showModal} closeModal={() => setShowModal(false)} />}
-      <WalletClosed isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+      <WalletClosed isOpen={isOpen}>
         <UserAvatar src={defaultUserProfile} />
-        <div className='pl-2 pr-4'>
+        <UserDetails>
           <Link_Medium color={Primary_Deep_800}>
             {user?.name || shortenAddress(account)}
           </Link_Medium>
           <Overline_Small color={Giv_800}>Connected to {networkName}</Overline_Small>
-        </div>
+        </UserDetails>
       </WalletClosed>
 
       <WalletOpened isOpen={isOpen}>
@@ -89,7 +95,7 @@ const MenuWallet = () => {
           <MenuItem>Sign out</MenuItem>
         </Menus>
       </WalletOpened>
-    </>
+    </Wrapper>
   )
 }
 
@@ -101,6 +107,12 @@ const walletMenuArray = [
   { title: 'Report a bug', url: config.LINKS.REPORT_ISSUE },
   { title: 'Support', url: Routes.Support }
 ]
+
+const Wrapper = styled.div`
+  position: relative;
+  z-index: 1000;
+  color: ${Primary_Deep_800};
+`
 
 const MenuItem = styled.a`
   height: 45px;
@@ -131,14 +143,25 @@ const UserAvatar = styled(Image)`
   height: 24px;
 `
 
+const UserDetails = styled.div`
+  display: none;
+
+  ${mediaQueries.sm} {
+    display: unset;
+    padding-left: 8px;
+    padding-right: 13px;
+  }
+`
+
 const WalletClosed = styled(FlexCenter)<{ isOpen: boolean }>`
-  padding: 0 12.5px;
-  cursor: pointer;
+  position: relative;
+  z-index: 1080;
   border-radius: 72px;
   background: white;
   height: 48px;
-  color: ${Primary_Deep_800};
   box-shadow: ${props => (props.isOpen ? 'none' : Shadow.Dark['500'])};
+  padding: 0 12.5px;
+  cursor: pointer;
 `
 
 const WalletOpened = styled.div<{ isOpen: boolean }>`
@@ -147,10 +170,10 @@ const WalletOpened = styled.div<{ isOpen: boolean }>`
   box-shadow: ${Shadow.Dark[500]};
   width: 250px;
   position: absolute;
-  right: 32px;
-  top: 55px;
-  z-index: -1;
-  padding: 40px 0;
+  right: 0;
+  top: 22px;
+  z-index: 1070;
+  padding: 40px 0 5px 0;
   color: ${Primary_Deep_800};
   max-height: ${props => (props.isOpen ? '600px' : '0px')};
   transition: max-height 0.25s ease-in, opacity 0.25s ease-in;
