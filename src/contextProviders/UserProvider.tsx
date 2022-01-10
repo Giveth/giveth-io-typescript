@@ -2,7 +2,7 @@ import React, { createContext, ReactElement, useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
 import useWallet from '../wallet/walletHooks'
-import client from '../apollo/apolloClient'
+import { client } from '../apollo/apolloClient'
 import { GET_USER_BY_ADDRESS } from '../apollo/gql/gqlUser'
 import { IUserByAddress } from '../apollo/types/gqlTypes'
 import { LocalStorageTokenLabel, signMessage } from '../lib/helpers'
@@ -49,7 +49,7 @@ const UserProvider = (props: { children: ReactElement }) => {
         },
         fetchPolicy: 'network-only'
       })
-      .then(res => res.data?.userByAddress)
+      .then((res: any) => res.data?.userByAddress)
       .catch(console.log)
   }
 

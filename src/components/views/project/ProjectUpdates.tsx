@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
-import client from '../../../apollo/apolloClient'
+import { client } from '../../../apollo/apolloClient'
 import { FETCH_PROJECT_UPDATES } from '../../../apollo/gql/gqlProjects'
 import ProjectTimeline from './ProjectTimeline'
 import { IFetchProjectUpdates, IProjectBySlug } from '../../../apollo/types/gqlTypes'
@@ -17,7 +17,7 @@ const ProjectUpdates = (props: IProjectBySlug) => {
           variables: { projectId: parseInt(id), take: 100, skip: 0 },
           fetchPolicy: 'no-cache'
         })
-        .then(res => setUpdates(res.data.getProjectUpdates))
+        .then((res: any) => setUpdates(res.data.getProjectUpdates))
         .catch(console.log)
     }
   }, [id])

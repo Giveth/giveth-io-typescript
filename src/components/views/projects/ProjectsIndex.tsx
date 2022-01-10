@@ -12,7 +12,7 @@ import { Button } from '../../styled-components/Button'
 import ProjectCard from '../../project-card/ProjectCard'
 import { capitalizeFirstLetter } from '../../../lib/helpers'
 import { FETCH_ALL_PROJECTS } from '../../../apollo/gql/gqlProjects'
-import client from '../../../apollo/apolloClient'
+import { client } from '../../../apollo/apolloClient'
 import { gqlEnums } from '../../../apollo/types/gqlEnums'
 import SearchBox from '../../SearchBox'
 import Routes from '../../../lib/constants/Routes'
@@ -46,7 +46,10 @@ const sortByObj = [
 const buildCategoryObj = (array: ICategory[]) => {
   const newArray = [allCategoryObj]
   array.forEach(e => {
-    const obj: ISelectObj = { label: capitalizeFirstLetter(e.name), value: e.name }
+    const obj: ISelectObj = {
+      label: capitalizeFirstLetter(e.name),
+      value: e.name
+    }
     newArray.push(obj)
   })
   return newArray

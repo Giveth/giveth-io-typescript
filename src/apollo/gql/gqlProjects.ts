@@ -74,12 +74,10 @@ export const FETCH_PROJECT_BY_SLUG = gql`
       slug
       description
       verified
-      traceCampaignId
-      totalProjectUpdates
-      creationDate
       reactions {
         userId
       }
+      traceCampaignId
       categories {
         name
       }

@@ -15,8 +15,24 @@ export interface IProject {
   categories: ICategory[]
   reactions: IReaction[]
   adminUser: {
-    name: string
+    id?: string
+    email?: string
+    name?: string
   }
+  donations: {
+    id?: string
+  }[]
+  users: IUser[]
+  totalDonations?: number
+  totalProjectUpdates?: number
+  traceCampaignId: string | null
+}
+export interface IUser {
+  name?: string
+}
+
+export interface IAdmin {
+  name?: string
   totalDonations?: number
   donations: {
     id: string
@@ -40,6 +56,10 @@ export interface IMediumBlogPost {
 
 export interface ICategory {
   name: string
+}
+
+export interface IProjectBySlug {
+  project: IProject
 }
 
 export interface IProjectUpdate {

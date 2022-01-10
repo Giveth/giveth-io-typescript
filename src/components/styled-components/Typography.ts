@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Gray_700, Pinky_500, Giv_800 } from './Colors'
+import { Gray_700, Pinky_500, Giv_800, Primary_Deep_500, Link_500 } from './Colors'
 
 interface ITypographyProps {
   color?: string
@@ -132,6 +132,14 @@ export const Subline_Bold = styled.div`
   color: inherit;
 `
 
+export const Caption = styled.div<ITypographyProps>`
+  font-family: Red Hat Text, sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: ${props => (props.bold ? 500 : 400)};
+  color: ${props => props.color || Gray_700};
+`
+
 export const Subline = styled.div`
   font-family: Red Hat Text, sans-serif;
   font-weight: 400;
@@ -149,4 +157,21 @@ export const Button_Medium = styled.div`
   font-weight: 700;
   line-height: 18px;
   color: ${Pinky_500};
+`
+
+export const Link_Small = styled.div`
+  font-family: Red Hat Text;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: ${Primary_Deep_500};
+`
+export const Link_Big = styled.div`
+  font-family: Red Hat Text;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  color: ${Link_500};
 `

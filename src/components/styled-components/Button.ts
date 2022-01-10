@@ -8,6 +8,7 @@ interface IButtonProps {
   color?: string
   background?: string
   normal?: boolean
+  width?: string
   bold?: boolean
 }
 
@@ -39,6 +40,9 @@ export const Button = styled.button<IButtonProps>`
   height: ${props => {
     if (props.small) return '48px'
     else return '66px'
+  }};
+  width: ${props => {
+    if (props.width) return props.width
   }};
   font-weight: ${props => {
     if (props.ghost || props.normal) return '400'
