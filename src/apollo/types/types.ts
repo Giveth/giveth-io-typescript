@@ -60,6 +60,7 @@ export interface ICategory {
 export interface IProjectBySlug {
   project: IProject
 }
+
 export interface IProjectUpdate {
   content: string
   createdAt: string

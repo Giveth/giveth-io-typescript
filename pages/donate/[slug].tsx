@@ -1,7 +1,7 @@
 import React from 'react'
 import { FETCH_PROJECT_BY_SLUG } from '../../src/apollo/gql/gqlProjects'
 import { client } from '../../src/apollo/apolloClient'
-import { IProjectBySlug } from '../../src/types/types_graphql'
+import { IProjectBySlug } from '../../src/apollo/types/types'
 import Head from 'next/head'
 import DonateIndex from '../../src/components/views/donate/DonateIndex'
 
