@@ -12,9 +12,7 @@ import { Pinky_500 } from '../src/components/styled-components/Colors'
 import UserProvider from '../src/contextProviders/UserProvider'
 
 const getLibrary = (provider: ExternalProvider): Web3Provider => {
-  const library = new Web3Provider(provider)
-  library.pollingInterval = 12000
-  return library
+  return new Web3Provider(provider)
 }
 
 /*TODO all content with "Lorem ipsum" should be replaced*/

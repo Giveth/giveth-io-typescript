@@ -3,20 +3,22 @@ import React, { useEffect, useRef, useState } from 'react'
 import Select from 'react-select'
 import Debounced from 'lodash.debounce'
 import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/client'
 
-import { ICategory, IProject } from '../../../apollo/types/types'
-import { IFetchAllProjects } from '../../../apollo/types/gqlTypes'
 import { H5, Subline, Body_P } from '../../styled-components/Typography'
 import { Gray_700, Gray_900, Pinky_500, Primary_Deep_500 } from '../../styled-components/Colors'
 import { Button } from '../../styled-components/Button'
+import { BigArc } from '../../styled-components/Arc'
 import ProjectCard from '../../project-card/ProjectCard'
-import { capitalizeFirstLetter } from '../../../lib/helpers'
-import { FETCH_ALL_PROJECTS } from '../../../apollo/gql/gqlProjects'
-import { client } from '../../../apollo/apolloClient'
-import { gqlEnums } from '../../../apollo/types/gqlEnums'
 import SearchBox from '../../SearchBox'
 import Routes from '../../../lib/constants/Routes'
-import { BigArc } from '../../styled-components/Arc'
+import { capitalizeFirstLetter } from '../../../lib/helpers'
+import { OPTIONS_HOME_PROJECTS } from '../../../apollo/gql/gqlOptions'
+import { FETCH_ALL_PROJECTS } from '../../../apollo/gql/gqlProjects'
+import { initializeApollo } from '../../../apollo/apolloClient'
+import { ICategory, IProject } from '../../../apollo/types/types'
+import { IFetchAllProjects } from '../../../apollo/types/gqlTypes'
+import { gqlEnums } from '../../../apollo/types/gqlEnums'
 
 interface ISelectObj {
   value: string
@@ -55,8 +57,9 @@ const buildCategoryObj = (array: ICategory[]) => {
   return newArray
 }
 
-const ProjectsIndex = (props: IFetchAllProjects) => {
-  const { projects, totalCount: _totalCount, categories } = props
+const ProjectsIndex = () => {
+  const { data } = useQuery(FETCH_ALL_PROJECTS, OPTIONS_HOME_PROJECTS)
+  const { projects, totalCount: _totalCount, categories } = data.projects
 
   const [categoriesObj, setCategoriesObj] = useState<ISelectObj[]>()
   const [selectedCategory, setSelectedCategory] = useState<ISelectObj>(allCategoryObj)
@@ -97,11 +100,10 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
 
     setIsLoading(true)
 
-    client
+    initializeApollo()
       .query({
         query: FETCH_ALL_PROJECTS,
-        variables,
-        fetchPolicy: 'no-cache'
+        variables
       })
       .then((res: { data: { projects: IFetchAllProjects } }) => {
         const data = res.data?.projects?.projects
@@ -161,7 +163,10 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
           </SelectComponent>
           <div>
             <Label />
-            <SearchBox onChange={(e: string) => handleChange('search', e)} />
+            <SearchBox
+              onChange={(e: string) => handleChange('search', e)}
+              placeholder='Search Projects ...'
+            />
           </div>
         </FiltersSection>
 

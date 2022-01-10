@@ -145,10 +145,7 @@ export const Subline = styled.div`
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
-  color: ${props => {
-    if (props.color) return props.color
-    else return Giv_800
-  }};
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Button_Medium = styled.div`

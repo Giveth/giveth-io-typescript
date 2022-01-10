@@ -45,6 +45,22 @@ export interface IReaction {
   userId: string
 }
 
+export interface IDonation {
+  id: string
+  user: {
+    id?: string
+    email?: string
+    name?: string
+  }
+  fromWalletAddress: string
+  amount: number
+  currency: string
+  valueUsd?: number
+  transactionId?: string
+  transactionNetworkId?: number
+  createdAt: string
+}
+
 export interface IMediumBlogPost {
   title: string
   author: string

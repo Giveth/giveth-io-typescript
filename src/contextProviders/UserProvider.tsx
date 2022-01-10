@@ -2,12 +2,12 @@ import React, { createContext, ReactElement, useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
 import useWallet from '../wallet/walletHooks'
-import { client } from '../apollo/apolloClient'
+import { initializeApollo } from '../apollo/apolloClient'
 import { GET_USER_BY_ADDRESS } from '../apollo/gql/gqlUser'
 import { IUserByAddress } from '../apollo/types/gqlTypes'
 import { LocalStorageTokenLabel, signMessage } from '../lib/helpers'
-import config from '../../config'
-import { getToken } from '../services/token'
+// import config from '../../config'
+// import { getToken } from '../services/token'
 
 interface IUserContext {
   state: {
@@ -18,12 +18,14 @@ interface IUserContext {
 const Context = createContext<IUserContext>({ state: {} })
 const { Provider } = Context
 
+const apolloClient = initializeApollo()
+
 const UserProvider = (props: { children: ReactElement }) => {
   const [user, setUser] = useState<IUserByAddress | undefined>()
 
   useWallet()
   const context = useWeb3React()
-  const { library, chainId, account, active } = context
+  const { account, active } = context
 
   useEffect(() => {
     localStorage.removeItem(LocalStorageTokenLabel)
@@ -41,13 +43,12 @@ const UserProvider = (props: { children: ReactElement }) => {
   }, [user])
 
   const fetchUser = () => {
-    return client
+    return apolloClient
       .query({
         query: GET_USER_BY_ADDRESS,
         variables: {
           address: account?.toLowerCase()
-        },
-        fetchPolicy: 'network-only'
+        }
       })
       .then((res: any) => res.data?.userByAddress)
       .catch(console.log)
