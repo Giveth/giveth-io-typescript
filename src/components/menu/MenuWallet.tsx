@@ -6,7 +6,7 @@ import { useWeb3React } from '@web3-react/core'
 import { formatEther } from '@ethersproject/units'
 import { BigNumberish } from '@ethersproject/bignumber'
 
-import defaultUserProfile from '../../../public/images/defaultUserProfile.png'
+import defaultUserProfile from '../../../public/images/default_user_profile.png'
 import { Body_P, Link_Medium, Overline_Small, Subline } from '../styled-components/Typography'
 import {
   Giv_800,
@@ -22,14 +22,9 @@ import { Context as UserContext } from '../../contextProviders/UserProvider'
 import WalletModal from '../../wallet/WalletModal'
 import { EWallets } from '../../wallet/walletTypes'
 import Routes from '../../lib/constants/Routes'
-import {
-  checkWalletName,
-  mediaQueries,
-  networkIdToName,
-  shortenAddress,
-  switchNetwork
-} from '../../lib/helpers'
+import { checkWalletName, mediaQueries, shortenAddress, switchNetwork } from '../../lib/helpers'
 import config from '../../../config'
+import { networkInfo } from '../../lib/constants/NetworksObj'
 
 const MenuWallet = () => {
   const [showModal, setShowModal] = useState(false)
@@ -54,7 +49,7 @@ const MenuWallet = () => {
     }
   }, [account, library, chainId])
 
-  const { networkName, networkToken } = networkIdToName(chainId)
+  const { networkName, networkToken } = networkInfo(chainId)
   const isMetaMask = checkWalletName(context) === EWallets.METAMASK
 
   return (

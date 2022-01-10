@@ -10,10 +10,7 @@ const SearchBox = (props: { onChange: (e: string) => void; placeholder?: string 
   return (
     <Wrapper>
       <Body_P className='w-100 mr-2' color={Gray_900} bold>
-        <Input
-          onChange={e => onChange(e.target.value)}
-          placeholder={placeholder || 'Search Projects...'}
-        />
+        <Input onChange={e => onChange(e.target.value)} placeholder={placeholder || 'Search ...'} />
       </Body_P>
       <Image src={SearchIcon} alt='Search Icon' />
     </Wrapper>
@@ -49,6 +46,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
+  background: white;
 `
 
 export default SearchBox
