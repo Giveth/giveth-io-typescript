@@ -3,13 +3,13 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import styled from '@emotion/styled'
 import { useQuery } from '@apollo/client'
+import { IProjectBySlug } from '../../../apollo/types/gqlTypes'
 import Head from 'next/head'
 
 import ProjectHeader from './ProjectHeader'
 import ProjectTabs from './ProjectTabs'
 import ProjectDonateCard from './ProjectDonateCard'
 import { mediaQueries } from '../../../lib/helpers'
-import { FETCH_PROJECT_BY_SLUG } from '../../../apollo/gql/gqlProjects'
 import { FETCH_PROJECT_DONATIONS } from '../../../apollo/gql/gqlDonations'
 
 const ProjectDonations = dynamic(() => import('./ProjectDonations'))
@@ -20,17 +20,13 @@ const RichTextViewer = dynamic(() => import('../../RichTextViewer'), {
 
 const donationsPerPage = 11
 
-const ProjectIndex = () => {
+const ProjectIndex = (props: IProjectBySlug) => {
   const router = useRouter()
-
-  const { data } = useQuery(FETCH_PROJECT_BY_SLUG, {
-    variables: { slug: router.query.slug }
-  })
-  const project = data?.projectBySlug
+  const { project } = props
   const { description, title } = project
 
   const { data: donationsData } = useQuery(FETCH_PROJECT_DONATIONS, {
-    variables: { projectId: parseInt(project.id), skip: 0, take: donationsPerPage }
+    variables: { projectId: parseInt(project.id || ''), skip: 0, take: donationsPerPage }
   })
 
   const donationsByProjectId = donationsData?.donationsByProjectId

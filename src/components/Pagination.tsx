@@ -28,7 +28,7 @@ const Pagination = (props: IPagination) => {
         <LiStyled onClick={handlePrev} className={currentPage === 1 ? 'disabled' : ''}>
           {'< Prev'}
         </LiStyled>
-        {[...Array(pageCount)].map((i, index) => {
+        {[...Array(pageCount || [])].map((i, index) => {
           return (
             <LiStyled
               style={{ width: '12px' }}
