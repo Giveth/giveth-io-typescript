@@ -65,7 +65,7 @@ export const formatDate = (date: string) => {
   return month + ' ' + day + ', ' + year
 }
 
-export function formatTxLink(chainId: number, hash: string) {
+export function formatTxLink(chainId: number | undefined, hash: string | undefined) {
   return `${networkInfo(chainId).networkPrefix}tx/${hash}`
 }
 

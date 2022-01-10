@@ -15,7 +15,7 @@ const ProjectDonations = (props: {
   return (
     <Wrapper>
       <ProjectTotalFundCard address={walletAddress} totalFund={totalDonations} />
-      <ProjectDonationTable donations={donationsByProjectId} projectId={project.id} />
+      <ProjectDonationTable donations={donationsByProjectId} projectId={project.id || ''} />
     </Wrapper>
   )
 }
