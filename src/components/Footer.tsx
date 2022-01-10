@@ -75,7 +75,12 @@ const Footer = () => {
           ))}
         </IconsWrapper>
         <Link_Medium className='mb-3' color={Giv_800} bold>
-          Support us with your Donation - <span style={{ color: Pinky_500 }}>revolution.eth</span>
+          <Link href={Routes.Donate}>
+            <a>
+              Support us with your Donation -{' '}
+              <span style={{ color: Pinky_500 }}>revolution.eth</span>
+            </a>
+          </Link>
         </Link_Medium>
         <Subline>MMXX - No Rights Reserved - The Giveth DAC</Subline>
       </div>
