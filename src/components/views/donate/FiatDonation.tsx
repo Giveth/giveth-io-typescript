@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import Image from 'next/image'
 import { Pinky_500 } from '../../styled-components/Colors'
-import { IProject } from '../../../types/types'
+import { IProject } from '../../../apollo/types/types'
 import { Button } from '../../styled-components/Button'
 
 type SuccessFunction = (param: boolean) => void

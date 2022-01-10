@@ -24,6 +24,7 @@ export interface IProject {
   }[]
   users: IUser[]
   totalDonations?: number
+  totalProjectUpdates?: number
   traceCampaignId: string | null
 }
 export interface IUser {

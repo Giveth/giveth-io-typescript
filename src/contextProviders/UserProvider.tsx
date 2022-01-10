@@ -49,7 +49,7 @@ const UserProvider = (props: { children: ReactElement }) => {
         },
         fetchPolicy: 'network-only'
       })
-      .then(res => res.data?.userByAddress)
+      .then((res: any) => res.data?.userByAddress)
       .catch(console.log)
   }
 

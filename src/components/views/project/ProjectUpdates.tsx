@@ -17,7 +17,7 @@ const ProjectUpdates = (props: IProjectBySlug) => {
           variables: { projectId: parseInt(id), take: 100, skip: 0 },
           fetchPolicy: 'no-cache'
         })
-        .then(res => setUpdates(res.data.getProjectUpdates))
+        .then((res: any) => setUpdates(res.data.getProjectUpdates))
         .catch(console.log)
     }
   }, [id])

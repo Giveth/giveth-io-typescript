@@ -1,4 +1,4 @@
-import client from '../apollo/apolloClient'
+import { client } from '../apollo/apolloClient'
 import { LOGIN_USER } from '../apollo/gql/gqlAuth'
 import { IUserByAddress } from '../apollo/types/gqlTypes'
 

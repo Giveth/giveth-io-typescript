@@ -4,7 +4,7 @@ import Image from 'next/image'
 import ProjectCard from '../../project-card/ProjectCardAlt'
 import CryptoDonation from './CryptoDonation'
 import FiatDonation from './FiatDonation'
-import { IProjectBySlug } from '../../../types/types'
+import { IProjectBySlug } from '../../../apollo/types/types'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
 
 import {

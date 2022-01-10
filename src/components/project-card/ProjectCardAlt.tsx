@@ -4,7 +4,7 @@ import { Body_P, H6, Caption } from '../styled-components/Typography'
 import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
 import ProjectCardImage from './ProjectCardImage'
-import { IProject } from '../../types/types'
+import { IProject } from '../../apollo/types/types'
 import { htmlToText, isNoImg, noImgColor, noImgIcon } from '../../lib/helpers'
 
 const cardWidth = '440px'
@@ -18,11 +18,6 @@ interface IProjectCard {
 const ProjectCard = (props: IProjectCard) => {
   const [rndColor, setRndColor] = useState(noImgColor)
   const { title, description, image, verified, reactions, adminUser } = props.project
-
-  const projectImage = () => {
-    if (isNoImg(image)) return <NoImg rndColor={rndColor} />
-    return <Img src={image} alt='project image' />
-  }
 
   const name = adminUser?.name
 
