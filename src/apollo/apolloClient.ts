@@ -6,6 +6,7 @@ import { createUploadLink } from 'apollo-upload-client'
 import merge from 'deepmerge'
 import isEqual from 'lodash.isequal'
 import { getLocalStorageTokenLabel, getLocalStorageUserLabel } from './auth'
+import config from '../../config'
 
 let apolloClient: any
 
@@ -19,7 +20,7 @@ function createApolloClient() {
   const appUser = getLocalStorageUserLabel()
 
   const httpLink = createUploadLink({
-    uri: process.env.NEXT_PUBLIC_APOLLO_SERVER,
+    uri: config.QRAPHQL_SERVER
   }) as unknown as ApolloLink
 
   const authLink = setContext((_, { headers }) => {
@@ -28,7 +29,7 @@ function createApolloClient() {
 
     // return the headers to the context so httpLink can read them
     const mutation: any = {
-      Authorization: token ? `Bearer ${token}` : '',
+      Authorization: token ? `Bearer ${token}` : ''
     }
     if (!ssrMode && localStorage.getItem(appUser)) {
       const userFromStorage = localStorage.getItem(appUser) as string
@@ -41,8 +42,8 @@ function createApolloClient() {
     return {
       headers: {
         ...headers,
-        ...mutation,
-      },
+        ...mutation
+      }
     }
   })
 
@@ -52,12 +53,12 @@ function createApolloClient() {
     cache: new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'cache-and-network'
       },
       query: {
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'network-only'
         // nextFetchPolicy: 'network-only',
-      },
+      }
     },
     typeDefs: gql`
       enum OrderField {
@@ -80,7 +81,7 @@ function createApolloClient() {
         field: OrderField!
         direction: OrderDirection!
       }
-    `,
+    `
   })
 }
 
@@ -98,10 +99,8 @@ export function initializeApollo(initialState = null) {
       // combine arrays using object equality (like in sets)
       arrayMerge: (destinationArray, sourceArray) => [
         ...sourceArray,
-        ...destinationArray.filter((d) =>
-          sourceArray.every((s) => !isEqual(d, s))
-        ),
-      ],
+        ...destinationArray.filter(d => sourceArray.every(s => !isEqual(d, s)))
+      ]
     })
 
     // Restore the cache with the merged data

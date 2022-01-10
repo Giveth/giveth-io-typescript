@@ -8,7 +8,6 @@ import Footer from '../../src/components/Footer'
 import ProjectIndex from '../../src/components/views/project/ProjectIndex'
 
 const ProjectRoute = (props: IProjectBySlug) => {
-  console.log({ props })
   return (
     <>
       <Head>
@@ -28,15 +27,14 @@ export async function getServerSideProps(props: { query: { slug: string } }) {
   const { data } = await client.query({
     query: FETCH_PROJECT_BY_SLUG,
     variables: { slug },
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'no-cache'
   })
   const project = data.projectBySlug
 
   return {
     props: {
-      project,
-      admin: project.adminUser,
-    },
+      project
+    }
   }
 }
 

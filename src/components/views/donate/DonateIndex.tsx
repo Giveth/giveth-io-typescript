@@ -5,6 +5,8 @@ import ProjectCard from '../../project-card/ProjectCardAlt'
 import CryptoDonation from './CryptoDonation'
 import FiatDonation from './FiatDonation'
 import { IProjectBySlug } from '../../../types/types'
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
+
 import {
   H4,
   H6,
@@ -12,13 +14,14 @@ import {
   Lead,
   Body_P,
   Link_Big,
+  Lead_Medium
 } from '../../styled-components/Typography'
 import {
   Primary_Deep_900,
   Gray_600,
   Gray_700,
   Gray_200,
-  Success_500,
+  Success_500
 } from '../../styled-components/Colors'
 import { BigArc } from '../../styled-components/Arc'
 import ArrowLeft from '../../../../public/images/arrow_left.svg'
@@ -33,9 +36,12 @@ const ProjectsIndex = (props: IProjectBySlug) => {
   const [donationType, setDonationType] = useState(CRYPTO_DONATION)
   const [isSuccess, setSuccess] = useState<boolean>(false)
 
+  const shareTitle = `I am a Giver and you can be one too! 💙 @givethio. Let’s Build the Future of Giving together! 🙌 🌈 #maketheworldabetterplace 🌏 💜`
+  const url = typeof window !== 'undefined' ? window?.location?.href : null
+
   const TypeSelection = () => {
-    const RadioOn = () => <Image src={RadioOnIcon} alt="radio on" />
-    const RadioOff = () => <Image src={RadioOffIcon} alt="radio off" />
+    const RadioOn = () => <Image src={RadioOnIcon} alt='radio on' />
+    const RadioOff = () => <Image src={RadioOffIcon} alt='radio off' />
 
     const RadioTitle = (props: { type: string }) => {
       const isTypeSelected = props.type === donationType
@@ -43,16 +49,12 @@ const ProjectsIndex = (props: IProjectBySlug) => {
         <>
           <RadioTitleBox
             onClick={() =>
-              setDonationType(
-                props.type === CRYPTO_DONATION ? CRYPTO_DONATION : FIAT_DONATION
-              )
+              setDonationType(props.type === CRYPTO_DONATION ? CRYPTO_DONATION : FIAT_DONATION)
             }
           >
             {props.type === donationType ? <RadioOn /> : <RadioOff />}
             <div style={{ marginLeft: '16px' }}>
-              <RadioTitleText isSelected={isTypeSelected}>
-                {props.type}
-              </RadioTitleText>
+              <RadioTitleText isSelected={isTypeSelected}>{props.type}</RadioTitleText>
               <RadioSubtitleText isSelected={isTypeSelected}>
                 {props.type === CRYPTO_DONATION ? 'Zero Fees' : 'Bank Fees'}
               </RadioSubtitleText>
@@ -69,15 +71,9 @@ const ProjectsIndex = (props: IProjectBySlug) => {
           <RadioTitle type={FIAT_DONATION} />
         </RadioBox>
         {donationType === CRYPTO_DONATION ? (
-          <CryptoDonation
-            project={project}
-            setSuccessDonation={() => setSuccess(true)}
-          />
+          <CryptoDonation project={project} setSuccessDonation={() => setSuccess(true)} />
         ) : (
-          <FiatDonation
-            project={project}
-            setSuccessDonation={() => setSuccess(true)}
-          />
+          <FiatDonation project={project} setSuccessDonation={() => setSuccess(true)} />
         )}
       </>
     )
@@ -87,16 +83,10 @@ const ProjectsIndex = (props: IProjectBySlug) => {
     return (
       <SucceessContainer>
         <H4 color={Success_500}>Successfully donated</H4>
-        <Image
-          src="/images/motivation.svg"
-          alt="motivation"
-          width="121px"
-          height="121px"
-        />
+        <Image src='/images/motivation.svg' alt='motivation' width='121px' height='121px' />
         <SuccessMessage color={Primary_Deep_900}>
-          We have received your donation, you can see this project on your
-          account under the Donated projects and follow the project updates
-          there or take a shortcut here. Go to
+          We have received your donation, you can see this project on your account under the Donated
+          projects and follow the project updates there or take a shortcut here. Go to
         </SuccessMessage>
         <Body_P color={Primary_Deep_900}>Go to</Body_P>
         <Options>
@@ -112,7 +102,7 @@ const ProjectsIndex = (props: IProjectBySlug) => {
       <BigArc />
       <Wrapper>
         <TitleBox>
-          <Image src={ArrowLeft} alt="arrow left" />
+          <Image src={ArrowLeft} alt='arrow left' />
           <Title>{project.title}</Title>
         </TitleBox>
 
@@ -131,11 +121,53 @@ const ProjectsIndex = (props: IProjectBySlug) => {
             )}
           </Right>
         </Sections>
+        <Social>
+          <Lead_Medium>Can’t donate? Share this page instead.</Lead_Medium>
+          <SocialItems>
+            <SocialItem>
+              <TwitterShareButton title={shareTitle} url={url || ''} hashtags={['Giveth']}>
+                <Image src={'/images/social-tw.svg'} alt='tw' width='44px' height='44px' />
+              </TwitterShareButton>
+            </SocialItem>
+            <SocialItem>
+              <LinkedinShareButton
+                title={shareTitle}
+                summary={project?.description}
+                url={url || ''}
+              >
+                <Image src={'/images/social-linkedin.svg'} alt='lin' width='44px' height='44px' />
+              </LinkedinShareButton>
+            </SocialItem>
+            <SocialItem>
+              <FacebookShareButton quote={shareTitle} url={url || ''} hashtag='#Giveth'>
+                <Image src={'/images/social-fb.svg'} alt='fb' width='44px' height='44px' />
+              </FacebookShareButton>
+            </SocialItem>
+          </SocialItems>
+        </Social>
       </Wrapper>
     </>
   )
 }
 
+const Social = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 24px 0;
+  align-items: center;
+`
+const SocialItems = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin: 8px 0 0 0;
+`
+const SocialItem = styled.div`
+  cursor: pointer;
+  padding: 0 12px;
+`
 const TitleBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -182,12 +214,10 @@ const Title = styled(H6)`
   }
 `
 const RadioTitleText = styled(Lead)`
-  color: ${(props: { isSelected: boolean }) =>
-    props.isSelected ? Primary_Deep_900 : Gray_600};
+  color: ${(props: { isSelected: boolean }) => (props.isSelected ? Primary_Deep_900 : Gray_600)};
 `
 const RadioSubtitleText = styled(Subline)`
-  color: ${(props: { isSelected: boolean }) =>
-    props.isSelected ? Primary_Deep_900 : Gray_600};
+  color: ${(props: { isSelected: boolean }) => (props.isSelected ? Primary_Deep_900 : Gray_600)};
 `
 const RadioBox = styled.div`
   display: flex;

@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { Body_P, H6, Caption } from '../styled-components/Typography'
 import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
+import ProjectCardImage from './ProjectCardImage'
 import { IProject } from '../../types/types'
 import { htmlToText, isNoImg, noImgColor, noImgIcon } from '../../lib/helpers'
 
@@ -16,19 +17,21 @@ interface IProjectCard {
 
 const ProjectCard = (props: IProjectCard) => {
   const [rndColor, setRndColor] = useState(noImgColor)
-  const { title, description, image, verified, reactions, users } = props.project
+  const { title, description, image, verified, reactions, adminUser } = props.project
 
   const projectImage = () => {
     if (isNoImg(image)) return <NoImg rndColor={rndColor} />
     return <Img src={image} alt='project image' />
   }
 
-  const name = users?.length > 0 && users[0].name
+  const name = adminUser?.name
 
   return (
     <Wrapper>
       <Wrapper2>
-        <ImagePlaceholder>{projectImage()}</ImagePlaceholder>
+        <ImagePlaceholder>
+          <ProjectCardImage image={image} cardWidth={cardWidth} cardRadius={cardRadius} />
+        </ImagePlaceholder>
         <ProjectCardBadges cardWidth={cardWidth} likes={reactions.length} verified={verified} />
         <CardBody>
           <Title>{title}</Title>

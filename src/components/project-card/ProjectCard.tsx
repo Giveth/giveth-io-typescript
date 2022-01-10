@@ -8,7 +8,6 @@ import ProjectCardBadges from './ProjectCardBadges'
 import { IProject } from '../../types/types'
 import {
   htmlToText,
-  isNoImg,
   noImgColor,
   noImgIcon,
   slugToProjectDonate,
@@ -33,7 +32,7 @@ const ProjectCard = (props: IProjectCard) => {
     verified,
     slug,
     reactions,
-    users,
+    adminUser,
     totalDonations,
     traceCampaignId
   } = props.project
@@ -41,13 +40,7 @@ const ProjectCard = (props: IProjectCard) => {
   const [isHover, setIsHover] = useState(false)
 
   const router = useRouter()
-
-  // const projectImage = () => {
-  //   if (isNoImg(image)) return <NoImg />
-  //   return <Img src={image} alt='project image' />
-  // }
-
-  const name = users?.length > 0 && users[0].name
+  const name = adminUser?.name
 
   return (
     <Wrapper
