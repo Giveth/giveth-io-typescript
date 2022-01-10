@@ -22,6 +22,7 @@ interface IProjectCardBadges {
   traceable?: boolean
   isHover?: boolean
   likes?: number
+  cardWidth?: string
 }
 
 const ProjectCardBadges = (props: IProjectCardBadges) => {
