@@ -33,7 +33,11 @@ const AboutIndex = () => {
         <ArcMustard />
         <DotMustard />
         <TeamImageWrapper>
-          <img width='100%' src={config.APP_URL + 'images/giveth-team.jpg'} alt='giveth team' />
+          <img
+            width='100%'
+            src={config.LINKS.FRONTEND + 'images/giveth-team.jpg'}
+            alt='giveth team'
+          />
         </TeamImageWrapper>
         <UpperTitle>Building the Future of Giving</UpperTitle>
         <UpperCaption>
@@ -144,7 +148,7 @@ const EndMustardArc = styled(Arc)`
 `
 
 const End = styled.div`
-  background-image: url(${config.APP_URL + 'images/curves_about_us.svg'});
+  background-image: url(${config.LINKS.FRONTEND + 'images/curves_about_us.svg'});
   padding: 90px 150px;
   overflow: hidden;
   position: relative;
@@ -210,7 +214,7 @@ const DotMustard = styled(Arc)`
 `
 
 const Upper = styled.div`
-  background-image: url(${config.APP_URL + 'images/GIV_light.svg'});
+  background-image: url(${config.LINKS.FRONTEND + 'images/GIV_light.svg'});
   overflow: hidden;
   position: relative;
 `

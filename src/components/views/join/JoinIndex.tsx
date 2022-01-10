@@ -68,7 +68,7 @@ const TextContainer = styled.div`
 
 const UpperSection = styled.div`
   background: ${Giv_500};
-  background-image: url(${config.APP_URL + '/images/GIV_homepage.svg'});
+  background-image: url(${config.LINKS.FRONTEND + '/images/GIV_homepage.svg'});
   height: 794px;
   padding: 150px 130px;
   color: white;

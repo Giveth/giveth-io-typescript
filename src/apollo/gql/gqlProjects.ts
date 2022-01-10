@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const FETCH_HOME_PROJECTS = gql`
   query FetchAllProjects($limit: Int, $orderBy: OrderBy) {
@@ -68,6 +68,7 @@ export const FETCH_ALL_PROJECTS = gql`
 export const FETCH_PROJECT_BY_SLUG = gql`
   query ProjectBySlug($slug: String!) {
     projectBySlug(slug: $slug) {
+      id
       title
       image
       slug
@@ -85,6 +86,19 @@ export const FETCH_PROJECT_BY_SLUG = gql`
       }
       donations {
         id
+      }
+    }
+  }
+`
+
+export const FETCH_PROJECT_UPDATES = gql`
+  query GetProjectUpdates($projectId: Float!, $take: Float!, $skip: Float!) {
+    getProjectUpdates(projectId: $projectId, take: $take, skip: $skip) {
+      projectUpdate {
+        id
+        title
+        content
+        createdAt
       }
     }
   }

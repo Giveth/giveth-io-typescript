@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 
-import { Body_P, H6, Caption } from '../styled-components/Typography'
+import { Body_P, H6, Link_Medium } from '../styled-components/Typography'
 import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
-import { IProject } from '../../types/types'
+import { IProject } from '../../apollo/types/types'
 import {
   htmlToText,
   noImgColor,
@@ -53,7 +53,7 @@ const ProjectCard = (props: IProjectCard) => {
           <ProjectCardBadges
             isHover={isHover}
             cardWidth={cardWidth}
-            likes={reactions.length}
+            reactions={reactions}
             verified={verified}
             traceable={!!traceCampaignId}
           />
@@ -64,8 +64,8 @@ const ProjectCard = (props: IProjectCard) => {
           {name && <Author>{name}</Author>}
           <Description>{htmlToText(description)}</Description>
           <Captions>
-            <Caption>Raised: ${Math.ceil(totalDonations as number)}</Caption>
-            <Caption>Last updated: 5 days ago</Caption>
+            <Link_Medium>Raised: ${Math.ceil(totalDonations as number)}</Link_Medium>
+            <Link_Medium>Last updated: 5 days ago</Link_Medium>
           </Captions>
           <HoverButtons isHover={isHover}>
             <Button
@@ -135,6 +135,7 @@ const Title = styled(H6)`
   color: ${Primary_Deep_500};
   height: 26px;
   overflow: hidden;
+  margin-bottom: 4px;
 `
 
 const ImagePlaceholder = styled.div`

@@ -2,20 +2,22 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import HeartGrayIcon from '../../../public/images/heart_gray.svg'
+import HeartRedIcon from '../../../public/images/heart_red.svg'
 import ShareIcon from '../../../public/images/share.svg'
-import { Caption } from '../styled-components/Typography'
+import { Link_Medium } from '../styled-components/Typography'
 import { Shadow } from '../styled-components/Shadow'
 
-const ShareLikeBadge = (props: { share?: boolean; like?: boolean }) => {
-  const { share, like } = props
-  const text = share ? 'Share' : like ? 'Like' : ''
-  const icon = share ? ShareIcon : like ? HeartGrayIcon : ''
+const ShareLikeBadge = (props: { type: 'share' | 'like'; active?: boolean }) => {
+  const { type, active } = props
+  const isShare = type === 'share'
+  const text = isShare ? 'Share' : 'Like'
+  const icon = isShare ? ShareIcon : active ? HeartRedIcon : HeartGrayIcon
   return (
     <Wrapper>
       <Image src={icon} alt='badge icon' />
-      <Caption bold className='mx-auto'>
+      <Link_Medium bold className='mx-auto'>
         {text}
-      </Caption>
+      </Link_Medium>
     </Wrapper>
   )
 }

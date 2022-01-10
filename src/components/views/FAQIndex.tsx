@@ -5,7 +5,7 @@ import { D3, Lead_Medium } from '../styled-components/Typography'
 import { Giv_700, Mustard_500, Primary_Deep_200 } from '../styled-components/Colors'
 import SearchBox from '../SearchBox'
 import Accordion from '../Accordion'
-import FAQArray from '../../lib/constants/FAQs.json'
+import FAQArray from '../../content/FAQs.json'
 import { Arc } from '../styled-components/Arc'
 import FlowerIcon from '../../../public/images/flower_faq.svg'
 

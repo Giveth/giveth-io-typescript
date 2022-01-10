@@ -1,23 +1,41 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
 import { Button } from '../../styled-components/Button'
 import { Giv_300, Giv_500, Pinky_500 } from '../../styled-components/Colors'
 import ShareLikeBadge from '../../badges/ShareLikeBadge'
 import { Shadow } from '../../styled-components/Shadow'
-import { Caption } from '../../styled-components/Typography'
-import { ICategory } from '../../../types/types'
+import { Link_Medium } from '../../styled-components/Typography'
 import CategoryBadge from '../../badges/CategoryBadge'
 import Routes from '../../../lib/constants/Routes'
 import config from '../../../../config'
 import { slugToProjectDonate } from '../../../lib/helpers'
+import InfoBadge from '../../badges/InfoBadge'
+import { Context as UserContext } from '../../../contextProviders/UserProvider'
+import { IProjectBySlug } from '../../../apollo/types/gqlTypes'
 
-const ProjectDonateCard = (props: { categories: ICategory[]; slug: string }) => {
-  const { categories, slug } = props
+const ProjectDonateCard = (props: IProjectBySlug) => {
+  const {
+    state: { user }
+  } = useContext(UserContext)
+
+  const { project } = props
+  const { categories, slug, reactions } = project
+
+  const [heartedByUser, setHeartedByUser] = useState(false)
+
   const isCategories = categories.length > 0
 
   const router = useRouter()
+
+  useEffect(() => {
+    if (user?.id) {
+      const isHearted = !!reactions?.some(i => Number(i.userId) === Number(user.id))
+      setHeartedByUser(isHearted)
+    }
+  }, [user])
 
   return (
     <Wrapper>
@@ -30,14 +48,14 @@ const ProjectDonateCard = (props: { categories: ICategory[]; slug: string }) => 
         DONATE
       </Button>
       <BadgeWrapper>
-        <ShareLikeBadge share />
-        <ShareLikeBadge like />
+        <ShareLikeBadge type='share' />
+        <ShareLikeBadge type='like' active={heartedByUser} />
       </BadgeWrapper>
       <GivBackNotif>
-        <Caption color={Giv_300}>When you donate to verified projects, you get GIV back.</Caption>
-        <div>
-          <InfoIcon>?</InfoIcon>
-        </div>
+        <Link_Medium color={Giv_300}>
+          When you donate to verified projects, you get GIV back.
+        </Link_Medium>
+        <InfoBadge />
       </GivBackNotif>
       {isCategories && (
         <CategoryWrapper>
@@ -50,7 +68,7 @@ const ProjectDonateCard = (props: { categories: ICategory[]; slug: string }) => 
         <Links>View similar projects</Links>
       </Link>
       <br />
-      <Links target='_blank' href={config.REPORT_ISSUE_URL} rel='noreferrer noopener'>
+      <Links target='_blank' href={config.LINKS.REPORT_ISSUE} rel='noreferrer noopener'>
         Report an issue
       </Links>
     </Wrapper>
@@ -72,17 +90,6 @@ const CategoryWrapper = styled.div`
   margin-bottom: 16px;
 `
 
-const InfoIcon = styled.div`
-  border-radius: 50%;
-  border: 1px solid ${Giv_300};
-  width: 16px;
-  text-align: center;
-  height: 16px;
-  font-size: 10px;
-  color: ${Giv_300};
-  font-weight: 500;
-`
-
 const GivBackNotif = styled.div`
   display: flex;
   justify-content: center;
@@ -91,6 +98,7 @@ const GivBackNotif = styled.div`
   border-radius: 8px;
   border: 1px solid ${Giv_300};
   margin-top: 24px;
+  color: ${Giv_300};
 `
 
 const BadgeWrapper = styled.div`

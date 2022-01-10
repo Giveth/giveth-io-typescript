@@ -20,7 +20,7 @@ function createApolloClient() {
   const appUser = getLocalStorageUserLabel()
 
   const httpLink = createUploadLink({
-    uri: config.QRAPHQL_SERVER
+    uri: config.LINKS.BACKEND
   }) as unknown as ApolloLink
 
   const authLink = setContext((_, { headers }) => {

@@ -1,3 +1,5 @@
+const MyAccount = '/account'
+
 const Routes = {
   CreateProject: '/create',
   Projects: '/projects',
@@ -8,7 +10,10 @@ const Routes = {
   Support: '/support',
   Join: '/join',
   Terms: '/terms',
-  Partnerships: '/partnerships'
+  Partnerships: '/partnerships',
+  MyAccount,
+  MyProjects: MyAccount + '/projects',
+  MyDonations: MyAccount + '/donations'
 }
 
 export default Routes

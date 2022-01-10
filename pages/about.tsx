@@ -1,12 +1,12 @@
 import React from 'react'
 import AboutIndex from '../src/components/views/about/AboutIndex'
 import Footer from '../src/components/Footer'
-import Menubar from '../src/components/Menubar'
+import MenuIndex from '../src/components/menu/MenuIndex'
 
 const AboutRoute = () => {
   return (
     <>
-      <Menubar />
+      <MenuIndex />
       <AboutIndex />
       <Footer />
     </>

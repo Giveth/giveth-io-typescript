@@ -8,6 +8,7 @@ import feedbackIcon from '../../../../public/images/feedback.svg'
 import reportIcon from '../../../../public/images/report_issue.svg'
 import featureIcon from '../../../../public/images/request_feature.svg'
 import SupportCard from '../../GeneralCard'
+import config from '../../../../config'
 
 const SupportIndex = () => {
   return (
@@ -55,7 +56,8 @@ const cardsArray = [
     icon: reportIcon,
     title: 'Report an issue',
     caption: 'Having problems with our site? Is something not functioning as expected?',
-    buttonLabel: 'Report an issue'
+    buttonLabel: 'Report an issue',
+    route: config.LINKS.REPORT_ISSUE
   },
   {
     icon: feedbackIcon,

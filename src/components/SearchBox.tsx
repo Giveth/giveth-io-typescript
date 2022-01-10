@@ -5,9 +5,7 @@ import { Gray_300, Gray_400, Gray_500, Gray_900 } from './styled-components/Colo
 import { Body_P } from './styled-components/Typography'
 import SearchIcon from '../../public/images/search.svg'
 
-type OnChangeFunction = (e: any) => void
-
-const SearchBox = (props: { onChange: OnChangeFunction; placeholder?: string }) => {
+const SearchBox = (props: { onChange: (e: string) => void; placeholder?: string }) => {
   const { onChange, placeholder } = props
   return (
     <Wrapper>

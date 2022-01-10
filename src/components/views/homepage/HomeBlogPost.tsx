@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from '@emotion/styled'
-import { Button_Medium, Caption, H5, Body_P } from '../../styled-components/Typography'
+import { Button_Medium, Link_Medium, H5, Body_P } from '../../styled-components/Typography'
 import { Primary_Deep_500 } from '../../styled-components/Colors'
 import { htmlToText } from '../../../lib/helpers'
 
@@ -28,8 +28,8 @@ const HomeBlogPost = (props: IHomeBlogPost) => {
         </a>
       </Link>
       <Description>{htmlToText(description)}</Description>
-      <Caption>{author}</Caption>
-      <Caption>{pubDate.split(' ')[0]}</Caption>
+      <Link_Medium>{author}</Link_Medium>
+      <Link_Medium>{pubDate.split(' ')[0]}</Link_Medium>
       <br />
       <Link href={link}>
         <a>

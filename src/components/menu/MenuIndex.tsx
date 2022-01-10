@@ -1,16 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from '@emotion/styled'
-import Logo from '../../public/images/giveth-logo-blue.svg'
-import { Button } from './styled-components/Button'
-import { Giv_100, Primary_Deep_200, Primary_Deep_800 } from './styled-components/Colors'
-import { FlexCenter } from './styled-components/Grid'
-import Routes from '../lib/constants/Routes'
-import defaultUserProfile from '../../public/images/defaultUserProfile.png'
+import { useWeb3React } from '@web3-react/core'
 
-const Menubar = () => {
+import { Button } from '../styled-components/Button'
+import { Giv_100, Primary_Deep_800 } from '../styled-components/Colors'
+import { FlexCenter } from '../styled-components/Grid'
+import { Shadow } from '../styled-components/Shadow'
+import Routes from '../../lib/constants/Routes'
+import Logo from '../../../public/images/giveth-logo-blue.svg'
+import MenuWallet from './MenuWallet'
+import WalletModal from '../../wallet/WalletModal'
+
+const MenuIndex = () => {
+  const [showModal, setShowModal] = useState(false)
+
+  const context = useWeb3React()
+  const { active } = context
+
   const router = useRouter()
 
   let activeTab = ''
@@ -28,10 +37,13 @@ const Menubar = () => {
 
   return (
     <Wrapper>
-      <LogoBackground className='shadow_dark_500' onClick={() => router.push('/')}>
+      {showModal && <WalletModal showModal={showModal} closeModal={() => setShowModal(false)} />}
+
+      <LogoBackground onClick={() => router.push('/')}>
         <Image width={50} height={50} src={Logo} alt='Logo' />
       </LogoBackground>
-      <MainRoutes className='shadow_dark_500'>
+
+      <MainRoutes>
         <Link href='/' passHref>
           <RoutesItem className={activeTab === 'home' ? 'active' : ''}>Home</RoutesItem>
         </Link>
@@ -45,44 +57,21 @@ const Menubar = () => {
           <RoutesItem className={activeTab === 'join' ? 'active' : ''}>Join</RoutesItem>
         </Link>
       </MainRoutes>
-      <Button className='shadow_dark_500' small onClick={() => router.push(Routes.CreateProject)}>
+
+      <Button small onClick={() => router.push(Routes.CreateProject)}>
         CREATE A PROJECT
       </Button>
-      <WalletDetails className='flex-center shadow_dark_500'>
-        <UserAvatar src={defaultUserProfile} width='24px' height='24px' />
-        <div className='pl-2 pr-4'>
-          <UserAddress>0xF278...42cc</UserAddress>
-          <UserNetwork>Connected to xDai</UserNetwork>
-        </div>
-      </WalletDetails>
+
+      {active ? (
+        <MenuWallet />
+      ) : (
+        <Button small onClick={() => setShowModal(true)}>
+          CONNECT WALLET
+        </Button>
+      )}
     </Wrapper>
   )
 }
-
-const MenuItem = styled.div`
-  border-radius: 72px;
-  background: white;
-  height: 48px;
-  color: ${Primary_Deep_800};
-`
-
-const UserAvatar = styled(Image)`
-  border-radius: 50%;
-`
-
-const UserAddress = styled.div`
-  font-size: 14px;
-  line-height: 22px;
-`
-
-const UserNetwork = styled.div`
-  color: ${Primary_Deep_200};
-  font-size: 10px;
-`
-
-const WalletDetails = styled(MenuItem)`
-  padding: 0 12.5px;
-`
 
 const RoutesItem = styled.a`
   padding: 7px 15px;
@@ -95,12 +84,14 @@ const RoutesItem = styled.a`
   }
 `
 
-const MainRoutes = styled(MenuItem)`
+const MainRoutes = styled(FlexCenter)`
   padding: 0 10px;
   width: 408px;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
+  border-radius: 72px;
+  background: white;
+  height: 48px;
+  color: ${Primary_Deep_800};
 `
 
 const Wrapper = styled.div`
@@ -113,6 +104,10 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding: 28px 32px;
   z-index: 1000;
+
+  > * {
+    box-shadow: ${Shadow.Dark[500]};
+  }
 `
 
 const LogoBackground = styled(FlexCenter)`
@@ -123,4 +118,4 @@ const LogoBackground = styled(FlexCenter)`
   cursor: pointer;
 `
 
-export default Menubar
+export default MenuIndex

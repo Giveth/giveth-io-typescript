@@ -13,9 +13,7 @@ export interface IProject {
   verified?: boolean
   listed?: boolean
   categories: ICategory[]
-  reactions: {
-    userId?: string
-  }[]
+  reactions: IReaction[]
   adminUser: {
     id?: string
     email?: string
@@ -39,6 +37,11 @@ export interface IAdmin {
     id: string
   }[]
   traceCampaignId: string | null
+  totalProjectUpdates?: number
+}
+
+export interface IReaction {
+  userId: string
 }
 
 export interface IMediumBlogPost {
@@ -56,4 +59,12 @@ export interface ICategory {
 
 export interface IProjectBySlug {
   project: IProject
+}
+export interface IProjectUpdate {
+  content: string
+  createdAt: string
+  id: string
+  projectId: string
+  title: string
+  userId: string
 }

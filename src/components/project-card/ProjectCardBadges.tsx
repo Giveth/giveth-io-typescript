@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import { Primary_Deep_800_Trans } from '../styled-components/Colors'
@@ -8,6 +8,8 @@ import VerificationBadge from '../badges/VerificationBadge'
 import grayHeartIcon from '../../../public/images/heart_gray.svg'
 import redHeartIcon from '../../../public/images/heart_red.svg'
 import shareIcon from '../../../public/images/share.svg'
+import { IReaction } from '../../apollo/types/types'
+import { Context as UserContext } from '../../contextProviders/UserProvider'
 
 interface IBadgeWrapper {
   width?: string
@@ -15,15 +17,28 @@ interface IBadgeWrapper {
 
 interface IProjectCardBadges {
   cardWidth?: string
-  likes?: number
+  reactions?: IReaction[]
   verified?: boolean
   traceable?: boolean
   isHover?: boolean
 }
 
 const ProjectCardBadges = (props: IProjectCardBadges) => {
-  const { cardWidth, likes, verified, traceable, isHover } = props
-  const active = true
+  const {
+    state: { user }
+  } = useContext(UserContext)
+
+  const [heartedByUser, setHeartedByUser] = useState(false)
+
+  const { cardWidth, reactions, verified, isHover, traceable } = props
+  const likes = reactions?.length
+
+  useEffect(() => {
+    if (user?.id) {
+      const isHearted = !!reactions?.some(i => Number(i.userId) === Number(user.id))
+      setHeartedByUser(isHearted)
+    }
+  }, [user])
 
   return (
     <BadgeWrapper width={cardWidth}>
@@ -33,8 +48,8 @@ const ProjectCardBadges = (props: IProjectCardBadges) => {
       </div>
       <div className='d-flex'>
         {Number(likes) > 0 && <LikeBadge>{likes}</LikeBadge>}
-        <HeartWrap active={active} isHover={isHover}>
-          <Image src={active ? redHeartIcon : grayHeartIcon} alt='heart icon' />
+        <HeartWrap active={heartedByUser} isHover={isHover}>
+          <Image src={heartedByUser ? redHeartIcon : grayHeartIcon} alt='heart icon' />
           <Image src={shareIcon} alt='share icon' />
         </HeartWrap>
       </div>
@@ -52,7 +67,7 @@ const HeartWrap = styled(FlexCenter)<{ active?: boolean; isHover?: boolean }>`
   background: ${props => (props.active ? 'white' : Primary_Deep_800_Trans)};
   transition: all 0.3s ease;
 
-  > span:nth-child(2) {
+  > span:nth-of-type(2) {
     display: ${props => (props.isHover ? 'unset' : 'none !important')};
   }
 `

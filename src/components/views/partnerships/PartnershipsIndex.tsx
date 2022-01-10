@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { D3, Lead_Medium, H2 } from '../../styled-components/Typography'
 import { Giv_500, Giv_700, Mustard_500 } from '../../styled-components/Colors'
 import { Arc } from '../../styled-components/Arc'
-import PartnershipsArray from '../../../lib/constants/Partnerships'
+import PartnershipsArray from '../../../content/Partnerships'
 import PartnershipsCard from './PartnershipsCard'
 
 const PartnershipsIndex = () => {
