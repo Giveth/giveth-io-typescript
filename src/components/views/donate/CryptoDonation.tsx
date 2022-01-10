@@ -7,7 +7,7 @@ import { FETCH_LISTED_TOKENS } from '../../../../src/apollo/gql/gqlEnums'
 import { Button } from '../../styled-components/Button'
 import { Caption, Link_Small } from '../../styled-components/Typography'
 import { Gray_200, Gray_300, Gray_800, Giv_500 } from '../../styled-components/Colors'
-import { IProject } from '../../../types/types'
+import { IProject } from '../../../apollo/types/types'
 
 type SuccessFunction = (param: boolean) => void
 

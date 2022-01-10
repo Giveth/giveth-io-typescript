@@ -132,6 +132,14 @@ export const Subline_Bold = styled.div`
   color: inherit;
 `
 
+export const Caption = styled.div<ITypographyProps>`
+  font-family: Red Hat Text, sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: ${props => (props.bold ? 500 : 400)};
+  color: ${props => props.color || Gray_700};
+`
+
 export const Subline = styled.div`
   font-family: Red Hat Text, sans-serif;
   font-weight: 400;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
-import client from '../../../apollo/apolloClient'
+import { client } from '../../../apollo/apolloClient'
 import { FETCH_PROJECT_UPDATES } from '../../../apollo/gql/gqlProjects'
 import ProjectTimeline from './ProjectTimeline'
 import { IFetchProjectUpdates, IProjectBySlug } from '../../../apollo/types/gqlTypes'
