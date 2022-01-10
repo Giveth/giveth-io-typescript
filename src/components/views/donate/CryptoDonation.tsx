@@ -6,12 +6,7 @@ import { useQuery } from '@apollo/client'
 import { FETCH_LISTED_TOKENS } from '../../../../src/apollo/gql/gqlEnums'
 import { Button } from '../../styled-components/Button'
 import { Caption, Link_Small } from '../../styled-components/Typography'
-import {
-  Gray_200,
-  Gray_300,
-  Gray_800,
-  Giv_500,
-} from '../../styled-components/Colors'
+import { Gray_200, Gray_300, Gray_800, Giv_500 } from '../../styled-components/Colors'
 import { IProject } from '../../../types/types'
 
 type SuccessFunction = (param: boolean) => void
@@ -39,12 +34,12 @@ const Control = ({ children, ...props }: ControlProps<ISelectObj, false>) => {
         <Img
           key={value?.symbol}
           src={value?.icon ? value.icon : '/images/tokens/eth.png'}
-          onError={(e) => {
+          onError={e => {
             e.currentTarget.onerror = null
             e.currentTarget.src = '/images/tokens/eth.png'
           }}
-          width="24px"
-          height="24px"
+          width='24px'
+          height='24px'
         />
         {children}
       </IconContainer>
@@ -57,7 +52,7 @@ const customStyles = {
     // match with the menu
     borderRadius: '0 !important',
     borderRightColor: 'transparent !important',
-    padding: '8px 0 0 16px !important',
+    padding: '8px 0 0 16px !important'
   }),
   menu: (base: any) => ({
     ...base,
@@ -69,24 +64,21 @@ const customStyles = {
     marginTop: 0,
     textAlign: 'left',
     // prevent menu to scroll y
-    wordWrap: 'break-word',
+    wordWrap: 'break-word'
   }),
   menuList: (base: any) => ({
     ...base,
     borderRadius: 0,
     // kill the white space on first and last option
-    padding: 0,
+    padding: 0
   }),
   singleValue: (base: any) => ({
     ...base,
-    padding: 0,
-  }),
+    padding: 0
+  })
 }
 
-const CryptoDonation = (props: {
-  setSuccessDonation: SuccessFunction
-  project: IProject
-}) => {
+const CryptoDonation = (props: { setSuccessDonation: SuccessFunction; project: IProject }) => {
   const { setSuccessDonation } = props
   const { data: tokensList } = useQuery(FETCH_LISTED_TOKENS)
 
@@ -96,13 +88,13 @@ const CryptoDonation = (props: {
 
   const buildTokensObj = (array: IToken[], chain: number) => {
     const newArray = [tokensList]
-    array.forEach((e) => {
+    array.forEach(e => {
       if (e.chainId !== chain) return
       const obj: ISelectObj = {
         label: e.symbol,
         value: e.symbol,
         chainId: e.chainId,
-        icon: `/images/tokens/${e.symbol?.toLocaleLowerCase()}.png`,
+        icon: `/images/tokens/${e.symbol?.toLocaleLowerCase()}.png`
       }
       newArray.push(obj)
     })
@@ -122,7 +114,7 @@ const CryptoDonation = (props: {
         <DropdownContainer>
           <Select
             styles={customStyles}
-            classNamePrefix="select"
+            classNamePrefix='select'
             value={selectedToken}
             components={{ Control }}
             onChange={(e: any) => setSelectedToken(e)}
@@ -130,28 +122,21 @@ const CryptoDonation = (props: {
           />
         </DropdownContainer>
         <SearchBarContainer>
-          <InputBox onChange={() => null} placeholder="Amount" />
+          <InputBox onChange={() => null} placeholder='Amount' />
         </SearchBarContainer>
       </SearchContainer>
       <AvText>Available: 0.064208 ETH </AvText>
       <XDaiContainer>
         <div>
-          <img src="/images/gas_station.svg" />
-          <Caption color={Gray_800}>
-            Save on gas fees, switch to xDAI network.
-          </Caption>
+          <img src='/images/gas_station.svg' />
+          <Caption color={Gray_800}>Save on gas fees, switch to xDAI network.</Caption>
         </div>
         <Caption bold color={Giv_500}>
           Switch network
         </Caption>
       </XDaiContainer>
       <ButtonContainer>
-        <Button
-          small
-          background={Giv_500}
-          width="100%"
-          onClick={() => setSuccessDonation(true)}
-        >
+        <Button small background={Giv_500} width='100%' onClick={() => setSuccessDonation(true)}>
           CONNECT WALLET
         </Button>
       </ButtonContainer>

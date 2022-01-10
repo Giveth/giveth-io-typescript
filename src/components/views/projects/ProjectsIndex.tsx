@@ -7,12 +7,7 @@ import { useRouter } from 'next/router'
 import { ICategory, IProject } from '../../../types/types'
 import { IFetchAllProjects } from '../../../types/types_graphql'
 import { H5, Subline, Body_P } from '../../styled-components/Typography'
-import {
-  Gray_700,
-  Gray_900,
-  Pinky_500,
-  Primary_Deep_500,
-} from '../../styled-components/Colors'
+import { Gray_700, Gray_900, Pinky_500, Primary_Deep_500 } from '../../styled-components/Colors'
 import { Button } from '../../styled-components/Button'
 import ProjectCard from '../../project-card/ProjectCard'
 import { capitalizeFirstLetter } from '../../../lib/helpers'
@@ -46,17 +41,17 @@ const sortByObj = [
   {
     label: 'Date Created - Ascending',
     value: gqlEnums.CREATIONDATE,
-    direction: gqlEnums.ASC,
+    direction: gqlEnums.ASC
   },
-  { label: 'Verified', value: gqlEnums.VERIFIED },
+  { label: 'Verified', value: gqlEnums.VERIFIED }
 ]
 
 const buildCategoryObj = (array: ICategory[]) => {
   const newArray = [allCategoryObj]
-  array.forEach((e) => {
+  array.forEach(e => {
     const obj: ISelectObj = {
       label: capitalizeFirstLetter(e.name),
-      value: e.name,
+      value: e.name
     }
     newArray.push(obj)
   })
@@ -67,8 +62,7 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
   const { projects, totalCount: _totalCount, categories } = props
 
   const [categoriesObj, setCategoriesObj] = useState<ISelectObj[]>()
-  const [selectedCategory, setSelectedCategory] =
-    useState<ISelectObj>(allCategoryObj)
+  const [selectedCategory, setSelectedCategory] = useState<ISelectObj>(allCategoryObj)
   const [isLoading, setIsLoading] = useState(false)
   const [filteredProjects, setFilteredProjects] = useState<IProject[]>(projects)
   const [sortBy, setSortBy] = useState<ISelectObj>(sortByObj[0])
@@ -97,12 +91,11 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
     const variables: IQueries = {
       orderBy: { field: sortBy.value, direction: gqlEnums.DESC },
       limit: projects.length,
-      skip: projects.length * (loadNum || 0),
+      skip: projects.length * (loadNum || 0)
     }
 
     if (sortBy.direction) variables.orderBy.direction = sortBy.direction
-    if (categoryQuery && categoryQuery !== 'All')
-      variables.category = categoryQuery
+    if (categoryQuery && categoryQuery !== 'All') variables.category = categoryQuery
     if (search) variables.searchTerm = search
 
     setIsLoading(true)
@@ -111,7 +104,7 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
       .query({
         query: FETCH_ALL_PROJECTS,
         variables,
-        fetchPolicy: 'no-cache',
+        fetchPolicy: 'no-cache'
       })
       .then((res: { data: { projects: IFetchAllProjects } }) => {
         const data = res.data?.projects?.projects
@@ -153,18 +146,18 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
           <SelectComponent>
             <Label>CATEGORY</Label>
             <Select
-              classNamePrefix="select"
+              classNamePrefix='select'
               value={selectedCategory}
-              onChange={(e) => handleChange('category', e)}
+              onChange={e => handleChange('category', e)}
               options={categoriesObj}
             />
           </SelectComponent>
           <SelectComponent>
             <Label>SORT BY</Label>
             <Select
-              classNamePrefix="select"
+              classNamePrefix='select'
               value={sortBy}
-              onChange={(e) => handleChange('sortBy', e)}
+              onChange={e => handleChange('sortBy', e)}
               options={sortByObj}
             />
           </SelectComponent>
@@ -174,10 +167,10 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
           </div>
         </FiltersSection>
 
-        {isLoading && <div className="dot-flashing mx-auto my-3" />}
+        {isLoading && <div className='dot-flashing mx-auto my-3' />}
 
         <ProjectsContainer>
-          {filteredProjects.map((project) => (
+          {filteredProjects.map(project => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </ProjectsContainer>
@@ -185,12 +178,9 @@ const ProjectsIndex = (props: IFetchAllProjects) => {
         {showLoadMore && (
           <>
             <StyledButton onClick={loadMore} outline>
-              {isLoading ? <div className="dot-flashing" /> : 'LOAD MORE'}
+              {isLoading ? <div className='dot-flashing' /> : 'LOAD MORE'}
             </StyledButton>
-            <StyledButton
-              onClick={() => router.push(Routes.CreateProject)}
-              ghost
-            >
+            <StyledButton onClick={() => router.push(Routes.CreateProject)} ghost>
               Create a Project
             </StyledButton>
           </>

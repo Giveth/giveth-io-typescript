@@ -7,30 +7,18 @@ import { Button } from '../../styled-components/Button'
 
 type SuccessFunction = (param: boolean) => void
 
-const FiatDonation = (props: {
-  project: IProject
-  setSuccessDonation: SuccessFunction
-}) => {
+const FiatDonation = (props: { project: IProject; setSuccessDonation: SuccessFunction }) => {
   const { setSuccessDonation } = props
 
   return (
     <>
       <ButtonContainer>
-        <Button
-          small
-          background={Pinky_500}
-          width="100%"
-          onClick={() => setSuccessDonation(true)}
-        >
+        <Button small background={Pinky_500} width='100%' onClick={() => setSuccessDonation(true)}>
           CONTINUE WITH TRANSAK
         </Button>
       </ButtonContainer>
       <ImageContainer>
-        <Image
-          src="/images/powered_by_transak.svg"
-          width="165px"
-          height="24px"
-        />
+        <Image src='/images/powered_by_transak.svg' width='165px' height='24px' />
       </ImageContainer>
     </>
   )

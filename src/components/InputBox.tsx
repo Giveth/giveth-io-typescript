@@ -5,14 +5,11 @@ import { Body_P } from './styled-components/Typography'
 
 type OnChangeFunction = (e: any) => void
 
-const InputBox = (props: {
-  onChange: OnChangeFunction
-  placeholder?: string
-}) => {
+const InputBox = (props: { onChange: OnChangeFunction; placeholder?: string }) => {
   const { onChange, placeholder } = props
   return (
     <Wrapper>
-      <Body_P className="w-100 mr-2" color={Gray_900} bold>
+      <Body_P className='w-100 mr-2' color={Gray_900} bold>
         <Input
           onChange={(e: any) => onChange(e.target.value)}
           placeholder={placeholder || 'Search Projects...'}

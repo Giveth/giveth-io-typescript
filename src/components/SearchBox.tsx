@@ -1,31 +1,23 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
-import {
-  Gray_300,
-  Gray_400,
-  Gray_500,
-  Gray_900,
-} from './styled-components/Colors'
+import { Gray_300, Gray_400, Gray_500, Gray_900 } from './styled-components/Colors'
 import { Body_P } from './styled-components/Typography'
 import SearchIcon from '../../public/images/search.svg'
 
 type OnChangeFunction = (e: any) => void
 
-const SearchBox = (props: {
-  onChange: OnChangeFunction
-  placeholder?: string
-}) => {
+const SearchBox = (props: { onChange: OnChangeFunction; placeholder?: string }) => {
   const { onChange, placeholder } = props
   return (
     <Wrapper>
-      <Body_P className="w-100 mr-2" color={Gray_900} bold>
+      <Body_P className='w-100 mr-2' color={Gray_900} bold>
         <Input
-          onChange={(e) => onChange(e.target.value)}
+          onChange={e => onChange(e.target.value)}
           placeholder={placeholder || 'Search Projects...'}
         />
       </Body_P>
-      <Image src={SearchIcon} alt="Search Icon" />
+      <Image src={SearchIcon} alt='Search Icon' />
     </Wrapper>
   )
 }

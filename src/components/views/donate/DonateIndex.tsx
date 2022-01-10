@@ -36,7 +36,8 @@ const ProjectsIndex = (props: IProjectBySlug) => {
   const [donationType, setDonationType] = useState(CRYPTO_DONATION)
   const [isSuccess, setSuccess] = useState<boolean>(false)
 
-  const shareTitle = `I am a Giver and you can be one too! 💙 @givethio. Let’s Build the Future of Giving together! 🙌 🌈 #maketheworldabetterplace 🌏 💜`
+  const shareTitle =
+    'I am a Giver and you can be one too! 💙 @givethio. Let’s Build the Future of Giving together! 🙌 🌈 #maketheworldabetterplace 🌏 💜'
   const url = typeof window !== 'undefined' ? window?.location?.href : null
 
   const TypeSelection = () => {
