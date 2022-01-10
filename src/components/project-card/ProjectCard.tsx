@@ -6,7 +6,13 @@ import { Body_P, H6, Link_Medium } from '../styled-components/Typography'
 import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
 import { IProject } from '../../apollo/types/types'
-import { htmlToText, slugToProjectDonate, slugToProjectView } from '../../lib/helpers'
+import {
+  htmlToText,
+  noImgColor,
+  noImgIcon,
+  slugToProjectDonate,
+  slugToProjectView
+} from '../../lib/helpers'
 import { Button } from '../styled-components/Button'
 import ProjectCardImage from './ProjectCardImage'
 
@@ -34,11 +40,14 @@ const ProjectCard = (props: IProjectCard) => {
   const [isHover, setIsHover] = useState(false)
 
   const router = useRouter()
-
-  const name = adminUser.name
+  const name = adminUser?.name
 
   return (
-    <Wrapper onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+    <Wrapper
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      className='shadow_1'
+    >
       <Wrapper2 isHover={isHover}>
         <ImagePlaceholder>
           <ProjectCardBadges
@@ -86,6 +95,18 @@ const HoverButtons = styled.div`
   button {
     width: 100%;
   }
+`
+const NoImg = styled.div`
+  background: ${noImgColor};
+  width: 100%;
+  height: 100%;
+  border-radius: ${cardRadius} ${cardRadius} 0 0;
+  background-image: url(${noImgIcon});
+`
+const Img = styled.img`
+  border-radius: ${cardRadius} ${cardRadius} 0 0;
+  width: ${cardWidth};
+  height: auto;
 `
 
 const Captions = styled.div`

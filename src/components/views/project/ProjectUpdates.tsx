@@ -11,7 +11,7 @@ const ProjectUpdates = (props: IProjectBySlug) => {
   const { id, creationDate } = props.project
 
   const { data } = useQuery(FETCH_PROJECT_UPDATES, {
-    variables: { projectId: parseInt(id), take: 100, skip: 0 }
+    variables: { projectId: parseInt(id || ''), take: 100, skip: 0 }
   })
   const updates = data?.getProjectUpdates
 

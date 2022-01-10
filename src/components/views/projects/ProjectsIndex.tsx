@@ -48,7 +48,10 @@ const sortByObj = [
 const buildCategoryObj = (array: ICategory[]) => {
   const newArray = [allCategoryObj]
   array.forEach(e => {
-    const obj: ISelectObj = { label: capitalizeFirstLetter(e.name), value: e.name }
+    const obj: ISelectObj = {
+      label: capitalizeFirstLetter(e.name),
+      value: e.name
+    }
     newArray.push(obj)
   })
   return newArray
@@ -124,6 +127,7 @@ const ProjectsIndex = () => {
   }
 
   const loadMore = () => {
+    if (isLoading) return
     fetchProjects(true, pageNum.current + 1)
     pageNum.current = pageNum.current + 1
   }

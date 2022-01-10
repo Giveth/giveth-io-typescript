@@ -1,5 +1,5 @@
 export interface IProject {
-  id: string
+  id?: string
   title?: string
   balance?: number
   image?: string
@@ -14,19 +14,35 @@ export interface IProject {
   listed?: boolean
   categories: ICategory[]
   reactions: IReaction[]
-  adminUser: IUser
-  traceCampaignId: string | null
+  adminUser: {
+    id?: string
+    email?: string
+    name?: string
+  }
+  donations: {
+    id?: string
+  }[]
+  users: IUser[]
   totalDonations?: number
+  totalProjectUpdates?: number
+  traceCampaignId: string | null
+}
+export interface IUser {
+  name?: string
+}
+
+export interface IAdmin {
+  name?: string
+  totalDonations?: number
+  donations: {
+    id: string
+  }[]
+  traceCampaignId: string | null
   totalProjectUpdates?: number
 }
 
 export interface IReaction {
   userId: string
-}
-
-export interface IUser {
-  id: string
-  name: string
 }
 
 export interface IMediumBlogPost {
@@ -42,6 +58,10 @@ export interface ICategory {
   name: string
 }
 
+export interface IProjectBySlug {
+  project: IProject
+}
+
 export interface IProjectUpdate {
   content: string
   createdAt: string
@@ -49,17 +69,4 @@ export interface IProjectUpdate {
   projectId: string
   title: string
   userId: string
-}
-
-export interface IDonation {
-  id: string
-  anonymous: boolean
-  user: IUser
-  fromWalletAddress: string
-  amount: number
-  valueUsd: number
-  currency: string
-  transactionId: string
-  transactionNetworkId: number
-  createdAt: string
 }
