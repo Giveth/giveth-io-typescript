@@ -164,11 +164,11 @@ export const Link_Small = styled.div`
   line-height: 16px;
   color: ${Primary_Deep_500};
 `
-export const Link_Big = styled.div`
+export const Link_Big = styled.div<ITypographyProps>`
   font-family: Red Hat Text;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color: ${Link_500};
+  color: ${props => props.color || Link_500};
 `
