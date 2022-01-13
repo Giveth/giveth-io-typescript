@@ -59,11 +59,12 @@ export const H6 = styled.h6<ITypographyProps>`
   color: ${props => props.color || 'inherit'};
 `
 
-export const Lead = styled.div`
+export const Lead = styled.div<ITypographyProps>`
   font-family: Red Hat Text, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 32px;
+  color: ${props => props.color || 'inherit'};
 `
 
 export const Lead_Medium = styled.div`

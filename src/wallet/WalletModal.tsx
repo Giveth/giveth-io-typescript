@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import Modal from 'react-modal'
 import { useWeb3React } from '@web3-react/core'
 
-import backIcon from '../../public/images/back.svg'
-import walletIcon from '../../public/images/wallet.svg'
 import closeIcon from '../../public/images/close.svg'
 
 import {
   Giv_500,
-  Primary_Deep_900,
-  Semantic_Link_500
+  Gray_200,
+  Gray_600,
+  Primary_Deep_900
 } from '../components/styled-components/Colors'
-import { H6, Body_P, Overline_Small } from '../components/styled-components/Typography'
-import ExternalLink from '../components/ExternalLink'
-import InfoBadge from '../components/badges/InfoBadge'
-import { Shadow } from '../components/styled-components/Shadow'
+import { FlexCenter } from '../components/styled-components/Grid'
+import { Lead, H5, Overline_Small } from '../components/styled-components/Typography'
 import { EWallets, TWalletConnector } from './walletTypes'
 import { walletsArray } from './walletTypes'
-import { checkWalletName } from '../lib/helpers'
+import { checkWalletName, mediaQueries } from '../lib/helpers'
 
 interface IWalletModal {
   showModal?: boolean
@@ -28,73 +25,15 @@ interface IWalletModal {
 }
 
 const WalletModal = ({ showModal, closeModal, closeParentModal }: IWalletModal) => {
-  // const { showModal, closeModal } = props
-
   const context = useWeb3React()
   const { activate } = context
   const selectedWallet = checkWalletName(context)
-
-  const [showInfo, setShowInfo] = useState(false)
-
-  const InfoPage = () => {
-    return (
-      <>
-        <Title>
-          <Image className='pointer' onClick={() => setShowInfo(false)} src={backIcon} alt='back' />
-          <H6>What is a wallet?</H6>
-        </Title>
-        <InfoBody>
-          Wallets are used to send, receive, and store digital assets like Ether. Wallets come in
-          many forms.
-          <br />
-          <br />
-          They are either built into your browser, an extension added to your browser, a piece of
-          hardware plugged into your computer or even an app on your phone.
-          <br />
-          <br />
-          For more information about wallets, see{' '}
-          <ExternalLink href='https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets'>
-            this explanation
-          </ExternalLink>
-        </InfoBody>
-      </>
-    )
-  }
-
-  const WalletsPage = () => {
-    return (
-      <>
-        <Title>
-          <Image src={walletIcon} alt='wallet' />
-          <H6>Select a Wallet</H6>
-        </Title>
-        <Body_P>Please select a wallet to connect to this DApp</Body_P>
-        <IconsContainer>
-          {walletsArray.map(i => (
-            <WalletItem
-              onClick={() => handleSelect(i)}
-              key={i.value}
-              className={selectedWallet === i.value ? 'active' : ''}
-            >
-              {selectedWallet === i.value && <Badge>SELECTED</Badge>}
-              <Image src={i.image} alt={i.name} />
-              <Body_P bold>{i.name}</Body_P>
-            </WalletItem>
-          ))}
-        </IconsContainer>
-        <InfoSection onClick={() => setShowInfo(true)}>
-          What is a wallet
-          <InfoBadge />
-        </InfoSection>
-      </>
-    )
-  }
 
   const handleSelect = (selected: { connector: TWalletConnector; value: EWallets }) => {
     if (selectedWallet !== selected.value) {
       activate(selected.connector)
         .then(() => (closeParentModal ? closeParentModal : undefined))
-        .catch((e: any) => {
+        .catch(e => {
           // toast to inform error
           console.log(e)
         })
@@ -111,14 +50,23 @@ const WalletModal = ({ showModal, closeModal, closeParentModal }: IWalletModal) 
       <CloseButton onClick={closeModal}>
         <Image src={closeIcon} alt='close' />
       </CloseButton>
-      {showInfo ? <InfoPage /> : <WalletsPage />}
+      <IconsContainer>
+        {walletsArray.map(i => (
+          <WalletItem
+            onClick={() => handleSelect(i)}
+            key={i.value}
+            className={selectedWallet === i.value ? 'active' : ''}
+          >
+            {selectedWallet === i.value && <Badge>SELECTED</Badge>}
+            <Image src={i.image} alt={i.name} height={64} width={64} />
+            <H5>{i.name}</H5>
+            <Lead color={Gray_600}>Connect with your {i.name}</Lead>
+          </WalletItem>
+        ))}
+      </IconsContainer>
     </Modal>
   )
 }
-
-const InfoBody = styled(Body_P)`
-  margin-top: 50px;
-`
 
 const CloseButton = styled.div`
   position: absolute;
@@ -127,36 +75,32 @@ const CloseButton = styled.div`
   cursor: pointer;
 `
 
-const InfoSection = styled(Body_P)`
-  display: flex;
+const IconsContainer = styled.div`
+  display: grid;
+  grid-gap: 1px;
+  justify-content: center;
   align-items: center;
-  gap: 4px;
-  color: ${Semantic_Link_500};
-  cursor: pointer;
+  flex-wrap: wrap;
+  background-color: ${Gray_600};
+  max-height: 420px;
+
+  ${mediaQueries.md} {
+    grid-template-columns: repeat(2, 1fr);
+    max-height: none;
+  }
 `
 
-const Badge = styled(Overline_Small)`
-  position: absolute;
-  top: -7px;
-  padding: 0 3px;
-  background: white;
-  font-weight: 500;
-  color: ${Giv_500};
-`
-
-const WalletItem = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 8px 56px 8px 8px;
-  border-radius: 12px;
-  border: 1px solid transparent;
+const WalletItem = styled(FlexCenter)`
+  background-color: white;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 355px;
+  min-height: 190px;
+  padding: 20px 40px;
   cursor: pointer;
-  min-width: 240px;
 
   &:hover {
-    box-shadow: ${Shadow.Neutral[500]};
+    background: radial-gradient(#fff, ${Gray_200});
   }
 
   &.active {
@@ -164,18 +108,15 @@ const WalletItem = styled.div`
   }
 `
 
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 18px;
-`
-
-const IconsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 80px;
-  margin: 40px 10px 50px 10px;
+const Badge = styled(Overline_Small)`
+  position: relative;
+  height: 0px;
+  top: 15px;
+  transform: rotate(-45deg);
+  left: -120px;
+  background: white;
+  font-weight: 700;
+  color: ${Giv_500};
 `
 
 const customStyles = {
@@ -187,12 +128,10 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'white',
-    borderRadius: '8px',
-    maxWidth: '640px',
-    minWidth: '350px',
+    minWidth: '330px',
     boxShadow: '0 5px 16px rgba(0, 0, 0, 0.15)',
     color: Primary_Deep_900,
-    padding: '27px'
+    padding: '0px'
   },
   overlay: {
     backgroundColor: 'rgb(9 4 70 / 70%)',

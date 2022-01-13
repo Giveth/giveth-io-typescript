@@ -2,7 +2,7 @@ import { keccak256 } from '@ethersproject/keccak256'
 import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { PortisConnector } from '@web3-react/portis-connector'
-// import { FortmaticConnector } from '@web3-react/fortmatic-connector'
+import { FortmaticConnector } from '@web3-react/fortmatic-connector'
 import { TorusConnector } from '@web3-react/torus-connector'
 import { AuthereumConnector } from '@web3-react/authereum-connector'
 
@@ -88,7 +88,7 @@ export const checkWalletName = (Web3ReactContext: Web3ReactContextInterface) => 
   const { library, connector } = Web3ReactContext
   if (connector instanceof WalletConnectConnector) return EWallets.WALLETCONNECT
   if (connector instanceof PortisConnector) return EWallets.PORTIS
-  // if (connector instanceof FortmaticConnector) return EWallets.FORTMATIC
+  if (connector instanceof FortmaticConnector) return EWallets.FORTMATIC
   if (connector instanceof TorusConnector) return EWallets.TORUS
   if (connector instanceof AuthereumConnector) return EWallets.AUTHEREUM
   return library?.connection?.url

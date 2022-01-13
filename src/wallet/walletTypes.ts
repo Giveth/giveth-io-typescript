@@ -7,7 +7,7 @@ import { AuthereumConnector } from '@web3-react/authereum-connector'
 import metamaskIcon from '../../public/images/wallets/metamask.svg'
 import walletConnectIcon from '../../public/images/wallets/walletconnect.svg'
 import portisIcon from '../../public/images/wallets/portis.svg'
-// import fortmaticIcon from '../../public/images/wallets/fortmatic.svg'
+import fortmaticIcon from '../../public/images/wallets/fortmatic.svg'
 import torusIcon from '../../public/images/wallets/torus.svg'
 import authereumIcon from '../../public/images/wallets/authereum.svg'
 
@@ -20,10 +20,10 @@ export const portisConnector = new PortisConnector({
   dAppId: process.env.PORTIS_DAPP_ID as string,
   networks: [1, 3, 100]
 })
-// export const fortmaticConnector = new FortmaticConnector({
-//   apiKey: process.env.FORTMATIC_API_KEY as string,
-//   chainId: 1
-// })
+export const fortmaticConnector = new FortmaticConnector({
+  apiKey: process.env.FORTMATIC_API_KEY as string,
+  chainId: 1
+})
 export const torusConnector = new TorusConnector({ chainId: 1 })
 export const authereumConnector = new AuthereumConnector({ chainId: 42 })
 
@@ -31,7 +31,7 @@ export type TWalletConnector =
   | InjectedConnector
   | WalletConnectConnector
   | PortisConnector
-  // | FortmaticConnector
+  | FortmaticConnector
   | TorusConnector
   | AuthereumConnector
 
@@ -39,7 +39,7 @@ export enum EWallets {
   METAMASK = 'metamask',
   WALLETCONNECT = 'wallet connect',
   PORTIS = 'portis',
-  // FORTMATIC = 'fortmatic',
+  FORTMATIC = 'fortmatic',
   TORUS = 'torus',
   AUTHEREUM = 'authereum'
 }
@@ -63,12 +63,12 @@ export const walletsArray = [
     image: portisIcon,
     connector: portisConnector
   },
-  // {
-  //   name: 'Fortmatic',
-  //   value: EWallets.FORTMATIC,
-  //   image: fortmaticIcon,
-  //   connector: fortmaticConnector
-  // },
+  {
+    name: 'Fortmatic',
+    value: EWallets.FORTMATIC,
+    image: fortmaticIcon,
+    connector: fortmaticConnector
+  },
   {
     name: 'Torus',
     value: EWallets.TORUS,
