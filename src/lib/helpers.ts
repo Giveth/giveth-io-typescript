@@ -1,6 +1,10 @@
 import { keccak256 } from '@ethersproject/keccak256'
 import { Web3ReactContextInterface } from '@web3-react/core/dist/types'
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { PortisConnector } from '@web3-react/portis-connector'
+// import { FortmaticConnector } from '@web3-react/fortmatic-connector'
 import { TorusConnector } from '@web3-react/torus-connector'
+import { AuthereumConnector } from '@web3-react/authereum-connector'
 
 import Routes from './constants/Routes'
 import { Cyan_500, Giv_500, Mustard_500 } from '../components/styled-components/Colors'
@@ -11,6 +15,10 @@ import { networkInfo } from './constants/NetworksObj'
 declare let window: any
 
 export const isSSRMode = typeof window === 'undefined'
+
+export const compareAddresses = (add1: string, add2: string) => {
+  return add1?.toLowerCase() === add2?.toLowerCase()
+}
 
 export const slugToProjectView = (slug: string) => {
   return Routes.Project + '/' + slug
@@ -78,7 +86,11 @@ export function formatTxLink(chainId: number | undefined, hash: string | undefin
 
 export const checkWalletName = (Web3ReactContext: Web3ReactContextInterface) => {
   const { library, connector } = Web3ReactContext
+  if (connector instanceof WalletConnectConnector) return EWallets.WALLETCONNECT
+  if (connector instanceof PortisConnector) return EWallets.PORTIS
+  // if (connector instanceof FortmaticConnector) return EWallets.FORTMATIC
   if (connector instanceof TorusConnector) return EWallets.TORUS
+  if (connector instanceof AuthereumConnector) return EWallets.AUTHEREUM
   return library?.connection?.url
 }
 
@@ -110,28 +122,31 @@ export async function signMessage(
 
     const hashedMsg = keccak256(finalMessage)
 
-    // console.log(hashedMsg)
-
     const domain = {
       name: 'Giveth Login',
-      chainId,
-      version: '1'
+      version: '1',
+      chainId
     }
+
+    const types = {
+      // EIP712Domain: [
+      //   { name: 'name', type: 'string' },
+      //   { name: 'chainId', type: 'uint256' },
+      //   { name: 'version', type: 'string' }
+      //   // { name: 'verifyingContract', type: 'address' }
+      // ],
+      User: [{ name: 'wallets', type: 'address[]' }],
+      Login: [
+        { name: 'user', type: 'User' },
+        { name: 'contents', type: 'string' }
+      ]
+    }
+
     const value = {
-      contents: hashedMsg,
       user: {
         wallets: [address]
-      }
-    }
-    const types = {
-      EIP712Domain: [
-        { name: 'name', type: 'string' },
-        { name: 'chainId', type: 'uint256' },
-        { name: 'version', type: 'string' }
-        // { name: 'verifyingContract', type: 'address' }
-      ],
-      Login: [{ name: 'user', type: 'User' }],
-      User: [{ name: 'wallets', type: 'address[]' }]
+      },
+      contents: hashedMsg
     }
 
     return await signer._signTypedData(domain, types, value)
