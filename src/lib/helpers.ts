@@ -5,6 +5,7 @@ import { PortisConnector } from '@web3-react/portis-connector'
 import { FortmaticConnector } from '@web3-react/fortmatic-connector'
 import { TorusConnector } from '@web3-react/torus-connector'
 import { AuthereumConnector } from '@web3-react/authereum-connector'
+import { promisify } from 'util'
 
 import Routes from './constants/Routes'
 import { Cyan_500, Giv_500, Mustard_500 } from '../components/styled-components/Colors'
@@ -116,40 +117,82 @@ export async function signMessage(
   signer?: any
 ) {
   try {
+    // COMMENTING THIS AS BACKEND NEEDS TO BE UPDATED TO THIS WAY
+
+    // const customPrefix = `\u0019${window.location.hostname} Signed Message:\n`
+    // const prefixWithLength = Buffer.from(`${customPrefix}${message.length.toString()}`, 'utf-8')
+    // const finalMessage = Buffer.concat([prefixWithLength, Buffer.from(message)])
+
+    // const hashedMsg = keccak256(finalMessage)
+
+    // const domain = {
+    //   name: 'Giveth Login',
+    //   version: '1',
+    //   chainId
+    // }
+
+    // const types = {
+    //   // EIP712Domain: [
+    //   //   { name: 'name', type: 'string' },
+    //   //   { name: 'chainId', type: 'uint256' },
+    //   //   { name: 'version', type: 'string' }
+    //   //   // { name: 'verifyingContract', type: 'address' }
+    //   // ],
+    //   User: [{ name: 'wallets', type: 'address[]' }],
+    //   Login: [
+    //     { name: 'user', type: 'User' },
+    //     { name: 'contents', type: 'string' }
+    //   ]
+    // }
+
+    // const value = {
+    //   user: {
+    //     wallets: [address]
+    //   },
+    //   contents: hashedMsg
+    // }
+
+    // return await signer._signTypedData(domain, types, value)
+
+    let signedMessage = null
     const customPrefix = `\u0019${window.location.hostname} Signed Message:\n`
     const prefixWithLength = Buffer.from(`${customPrefix}${message.length.toString()}`, 'utf-8')
     const finalMessage = Buffer.concat([prefixWithLength, Buffer.from(message)])
 
     const hashedMsg = keccak256(finalMessage)
-
-    const domain = {
-      name: 'Giveth Login',
-      version: '1',
-      chainId
-    }
-
-    const types = {
-      // EIP712Domain: [
-      //   { name: 'name', type: 'string' },
-      //   { name: 'chainId', type: 'uint256' },
-      //   { name: 'version', type: 'string' }
-      //   // { name: 'verifyingContract', type: 'address' }
-      // ],
-      User: [{ name: 'wallets', type: 'address[]' }],
-      Login: [
-        { name: 'user', type: 'User' },
-        { name: 'contents', type: 'string' }
-      ]
-    }
-
-    const value = {
-      user: {
-        wallets: [address]
+    const send = promisify(signer.provider.provider.sendAsync)
+    const msgParams = JSON.stringify({
+      primaryType: 'Login',
+      types: {
+        EIP712Domain: [
+          { name: 'name', type: 'string' },
+          { name: 'chainId', type: 'uint256' },
+          { name: 'version', type: 'string' }
+          // { name: 'verifyingContract', type: 'address' }
+        ],
+        Login: [{ name: 'user', type: 'User' }],
+        User: [{ name: 'wallets', type: 'address[]' }]
       },
-      contents: hashedMsg
-    }
+      domain: {
+        name: 'Giveth Login',
+        chainId,
+        version: '1'
+      },
+      message: {
+        contents: hashedMsg,
+        user: {
+          wallets: [address]
+        }
+      }
+    })
+    const { result } = await send({
+      method: 'eth_signTypedData_v4',
+      params: [address, msgParams],
+      from: address
+    })
+    signedMessage = result
 
-    return await signer._signTypedData(domain, types, value)
+    return signedMessage
   } catch (error) {
     console.log('Signing Error!', { error })
     return false
