@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import Modal from 'react-modal'
@@ -46,8 +46,10 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
           hardware plugged into your computer or even an app on your phone.
           <br />
           <br />
-          {/* TODO fix explanation url*/}
-          For more information about wallets, see <ExternalLink href='/' text='this explanation' />
+          For more information about wallets, see{' '}
+          <ExternalLink href='https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets'>
+            this explanation
+          </ExternalLink>
         </InfoBody>
       </>
     )
@@ -90,6 +92,9 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
   }
 
   if (!showModal) return null
+
+  Modal.setAppElement('body')
+
   return (
     <Modal isOpen={showModal} onRequestClose={closeModal} style={customStyles}>
       <CloseButton onClick={closeModal}>

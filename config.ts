@@ -13,7 +13,7 @@ const config = {
     BACKEND: 'https://serve.giveth.io/graphql',
     FRONTEND: 'https://typescript.giveth.io/',
     REPORT_ISSUE: 'https://github.com/Giveth/giveth-io-typescript/issues/new',
-    GIVECONOMY: 'https://liquidity-mining-dapp.vercel.app/',
+    GIVECONOMY: 'https://giv.giveth.io/',
     DISCORD: 'https://discord.gg/Uq2TaXP9bC',
     DISCOURSE: 'https://forum.giveth.io/',
     GITHUB: 'https://github.com/Giveth/',
@@ -23,6 +23,10 @@ const config = {
     YOUTUBE: 'https://www.youtube.com/channel/UClfutpRoY0WTVnq0oB0E0wQ',
     REDDIT: 'https://reddit.com/r/giveth',
     WIKI: 'https://docs.giveth.io/'
+  },
+  GIV_TOKEN: {
+    MAINNET: '0x900db999074d9277c5da2a43f252d74366230da0',
+    XDAI: '0x4f4F9b8D5B4d0Dc10506e5551B0513B61fD59e75'
   }
 }
 

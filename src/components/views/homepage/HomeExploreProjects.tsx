@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
+
 import { H5 } from '../../styled-components/Typography'
 import { Gray_900, Gray_700, Pinky_500 } from '../../styled-components/Colors'
 import ProjectCard from '../../project-card/ProjectCard'
 import { IProject } from '../../../apollo/types/types'
 import { Button } from '../../styled-components/Button'
 import Routes from '../../../lib/constants/Routes'
-import { useRouter } from 'next/router'
 import { FlexCenter } from '../../styled-components/Grid'
 
 interface IHomeExploreProjects {
@@ -15,11 +16,10 @@ interface IHomeExploreProjects {
   noTitle?: boolean
 }
 
-const cardsMargin = '10px'
-
 const HomeExploreProjects = (props: IHomeExploreProjects) => {
   const { projects, totalCount, noTitle } = props
   const router = useRouter()
+
   return (
     <Wrapper>
       {!noTitle && (
@@ -29,9 +29,7 @@ const HomeExploreProjects = (props: IHomeExploreProjects) => {
       )}
       <ProjectsContainer>
         {projects.map(project => (
-          <div key={project.id} style={{ margin: cardsMargin }}>
-            <ProjectCard project={project} />
-          </div>
+          <ProjectCard key={project.id} project={project} />
         ))}
       </ProjectsContainer>
       <ButtonsWrapper>
@@ -51,8 +49,8 @@ const ButtonsWrapper = styled(FlexCenter)`
 
 const ProjectsContainer = styled.div`
   display: flex;
+  gap: 23px 26px;
   flex-wrap: wrap;
-  margin-left: -${cardsMargin};
 `
 
 const Title = styled(H5)`

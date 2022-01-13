@@ -1,6 +1,8 @@
-import client from '../apollo/apolloClient'
+import { initializeApollo } from '../apollo/apolloClient'
 import { LOGIN_USER } from '../apollo/gql/gqlAuth'
 import { IUserByAddress } from '../apollo/types/gqlTypes'
+
+const apolloClient = initializeApollo()
 
 export async function getToken(
   walletAddress: string | null | undefined,
@@ -22,7 +24,7 @@ export async function getToken(
           networkId
         }
       }
-      const { data } = await client.mutate(mutate)
+      const { data } = await apolloClient.mutate(mutate)
       return data?.loginWallet?.token
     } catch (error) {
       console.log('Error in token login: ', error)

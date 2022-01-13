@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
-import { useRouter } from 'next/router'
+import Link from 'next/dist/client/link'
 
 import { Body_P, H6, Link_Medium } from '../styled-components/Typography'
 import { Gray_900, Pinky_500, Primary_Deep_500 } from '../styled-components/Colors'
 import ProjectCardBadges from './ProjectCardBadges'
 import { IProject } from '../../apollo/types/types'
-import { htmlToText, slugToProjectDonate, slugToProjectView } from '../../lib/helpers'
+import {
+  htmlToText,
+  noImgColor,
+  noImgIcon,
+  slugToProjectDonate,
+  slugToProjectView
+} from '../../lib/helpers'
 import { Button } from '../styled-components/Button'
 import ProjectCardImage from './ProjectCardImage'
 
@@ -33,43 +39,45 @@ const ProjectCard = (props: IProjectCard) => {
 
   const [isHover, setIsHover] = useState(false)
 
-  const router = useRouter()
-
-  const name = adminUser.name
+  const name = adminUser?.name
 
   return (
-    <Wrapper onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+    <Wrapper
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      className='shadow_1'
+    >
       <Wrapper2 isHover={isHover}>
         <ImagePlaceholder>
           <ProjectCardBadges
             isHover={isHover}
-            cardWidth={cardWidth}
             reactions={reactions}
             verified={verified}
             traceable={!!traceCampaignId}
           />
-          <ProjectCardImage image={image} cardWidth={cardWidth} cardRadius={cardRadius} />
+          <ProjectCardImage image={image} cardRadius={cardRadius} />
         </ImagePlaceholder>
         <CardBody>
           <Title>{title}</Title>
-          {name && <Author>{name}</Author>}
+          <Author>{name || ' '}</Author>
           <Description>{htmlToText(description)}</Description>
           <Captions>
             <Link_Medium>Raised: ${Math.ceil(totalDonations as number)}</Link_Medium>
             <Link_Medium>Last updated: 5 days ago</Link_Medium>
           </Captions>
           <HoverButtons isHover={isHover}>
-            <Button
-              onClick={() => router.push(slugToProjectView(slug))}
-              small
-              outline
-              color={Pinky_500}
-            >
-              LEARN MORE
-            </Button>
-            <Button onClick={() => router.push(slugToProjectDonate(slug))} small>
-              DONATE
-            </Button>
+            <Link href={slugToProjectView(slug)}>
+              <a>
+                <Button small outline color={Pinky_500}>
+                  LEARN MORE
+                </Button>
+              </a>
+            </Link>
+            <Link href={slugToProjectDonate(slug)}>
+              <a>
+                <Button small>DONATE</Button>
+              </a>
+            </Link>
           </HoverButtons>
         </CardBody>
       </Wrapper2>
@@ -83,9 +91,22 @@ const HoverButtons = styled.div`
   display: ${(props: { isHover: boolean }) => (props.isHover ? 'flex' : 'none')};
   animation: fadein 1s;
 
+  > *,
   button {
     width: 100%;
   }
+`
+const NoImg = styled.div`
+  background: ${noImgColor};
+  width: 100%;
+  height: 100%;
+  border-radius: ${cardRadius} ${cardRadius} 0 0;
+  background-image: url(${noImgIcon});
+`
+const Img = styled.img`
+  border-radius: ${cardRadius} ${cardRadius} 0 0;
+  width: ${cardWidth};
+  height: auto;
 `
 
 const Captions = styled.div`
@@ -127,7 +148,7 @@ const ImagePlaceholder = styled.div`
 const Wrapper2 = styled.div`
   position: ${(props: { isHover: boolean }) => (props.isHover ? 'absolute' : 'relative')};
   height: ${(props: { isHover: boolean }) => (props.isHover ? '494px' : '430px')};
-  width: ${cardWidth};
+  width: 100%;
   border-radius: ${cardRadius};
   background: white;
   margin-top: ${(props: { isHover: boolean }) => (props.isHover ? '-32px' : '0')};
@@ -139,7 +160,7 @@ const Wrapper2 = styled.div`
 const Wrapper = styled.div`
   position: relative;
   height: 430px;
-  width: ${cardWidth};
+  width: 440px;
   border-radius: ${cardRadius};
   background: white;
 `

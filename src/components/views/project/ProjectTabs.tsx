@@ -8,6 +8,7 @@ import { IProject } from '../../../apollo/types/types'
 interface IProjectTabs {
   project: IProject
   activeTab: number
+  totalDonations?: number
   setActiveTab: Dispatch<SetStateAction<number>>
 }
 
@@ -16,13 +17,13 @@ const badgeCount = (count?: number) => {
 }
 
 const ProjectTabs = (props: IProjectTabs) => {
-  const { project, activeTab, setActiveTab } = props
-  const { donations, totalProjectUpdates } = project
+  const { project, activeTab, setActiveTab, totalDonations } = props
+  const { totalProjectUpdates } = project
 
   const tabsArray = [
     { title: 'About' },
     { title: 'Updates', badge: totalProjectUpdates },
-    { title: 'Donations', badge: donations?.length }
+    { title: 'Donations', badge: totalDonations }
   ]
 
   return (

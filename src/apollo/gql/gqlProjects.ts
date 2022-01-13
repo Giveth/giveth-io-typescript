@@ -75,19 +75,19 @@ export const FETCH_PROJECT_BY_SLUG = gql`
       description
       verified
       traceCampaignId
+      walletAddress
       totalProjectUpdates
+      totalDonations
       creationDate
       reactions {
         userId
       }
+      traceCampaignId
       categories {
         name
       }
       adminUser {
         name
-      }
-      donations {
-        id
       }
     }
   }
