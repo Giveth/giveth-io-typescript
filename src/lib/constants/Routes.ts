@@ -5,7 +5,11 @@ const Routes = {
   CreateProject: '/create',
   Projects: '/projects',
   Project: '/project',
-  Donate: '/donate',
+  Donate: `/donate/${
+    process.env.NEXT_PUBLIC_ENVIRONMENT === 'develop'
+      ? 'giveth-2021:-retreat-to-the-future'
+      : 'the-giveth-community-of-makers'
+  }`,
   AboutUs: '/about',
   Faq: '/faq',
   Support: '/support',
