@@ -21,8 +21,14 @@ import { EWallets, TWalletConnector } from './walletTypes'
 import { walletsArray } from './walletTypes'
 import { checkWalletName } from '../lib/helpers'
 
-const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => {
-  const { showModal, closeModal } = props
+interface IWalletModal {
+  showModal?: boolean
+  closeModal: () => void
+  closeParentModal?: () => void
+}
+
+const WalletModal = ({ showModal, closeModal, closeParentModal }: IWalletModal) => {
+  // const { showModal, closeModal } = props
 
   const context = useWeb3React()
   const { activate } = context
@@ -86,7 +92,12 @@ const WalletModal = (props: { showModal?: boolean; closeModal: () => void }) => 
 
   const handleSelect = (selected: { connector: TWalletConnector; value: EWallets }) => {
     if (selectedWallet !== selected.value) {
-      activate(selected.connector).then()
+      activate(selected.connector)
+        .then(() => (closeParentModal ? closeParentModal : undefined))
+        .catch((e: any) => {
+          // toast to inform error
+          console.log(e)
+        })
     }
     closeModal()
   }
@@ -142,6 +153,7 @@ const WalletItem = styled.div`
   border-radius: 12px;
   border: 1px solid transparent;
   cursor: pointer;
+  min-width: 240px;
 
   &:hover {
     box-shadow: ${Shadow.Neutral[500]};
@@ -176,7 +188,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'white',
     borderRadius: '8px',
-    maxWidth: '600px',
+    maxWidth: '640px',
     minWidth: '350px',
     boxShadow: '0 5px 16px rgba(0, 0, 0, 0.15)',
     color: Primary_Deep_900,
