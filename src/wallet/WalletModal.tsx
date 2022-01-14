@@ -32,7 +32,7 @@ const WalletModal = ({ showModal, closeModal, closeParentModal }: IWalletModal) 
   const handleSelect = (selected: { connector: TWalletConnector; value: EWallets }) => {
     if (selectedWallet !== selected.value) {
       activate(selected.connector)
-        .then(() => (closeParentModal ? closeParentModal : undefined))
+        .then(() => (closeParentModal ? closeParentModal() : undefined))
         .catch(e => {
           // toast to inform error
           console.log(e)
