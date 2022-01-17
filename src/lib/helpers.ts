@@ -110,8 +110,6 @@ export async function signMessage(
 
     const hashedMsg = keccak256(finalMessage)
 
-    // console.log(hashedMsg)
-
     const domain = {
       name: 'Giveth Login',
       chainId,
@@ -142,3 +140,16 @@ export async function signMessage(
 }
 
 export const LocalStorageTokenLabel = 'userToken'
+
+export const sortObject = (elem1: any, elem2: any, key: string): number => {
+  const firstString = elem1[key].toUpperCase()
+  const secondString = elem2[key].toUpperCase()
+
+  if (firstString > secondString) {
+    return 1
+  }
+  if (firstString < secondString) {
+    return -1
+  }
+  return 0
+}
