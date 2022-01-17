@@ -14,7 +14,7 @@ export interface IPartnershipCard {
 
 export const PartnershipsCard = ({ description, link, logo, name }: IPartnershipCard) => {
   return (
-    <Wrapper>
+    <Wrapper href={link} target='_blank' rel='noreferrer'>
       <IconContainer>
         <Image
           src={`http:${logo.fields.file.url}`}
@@ -49,7 +49,7 @@ const IconContainer = styled.div`
   max-height: 110px;
 `
 
-const Wrapper = styled.div`
+const Wrapper = styled.a`
   display: flex;
   flex-direction: column;
   width: 326px;
@@ -59,4 +59,5 @@ const Wrapper = styled.div`
   border-radius: 12px;
   box-shadow: ${Shadow.Neutral[500]};
   padding: 70px 35px 40px 35px;
+  cursor: pointer;
 `
