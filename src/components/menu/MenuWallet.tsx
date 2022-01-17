@@ -32,7 +32,8 @@ const MenuWallet = () => {
   const [balance, setBalance] = useState<string | null>(null)
 
   const {
-    state: { user }
+    state: { user, isSignedIn },
+    actions: { signIn, signOut }
   } = useContext(UserContext)
 
   const context = useWeb3React()
@@ -55,7 +56,11 @@ const MenuWallet = () => {
   return (
     <Wrapper onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
       {showModal && <WalletModal showModal={showModal} closeModal={() => setShowModal(false)} />}
-      <WalletClosed isOpen={isOpen}>
+      <WalletClosed
+        isOpen={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+        onMouseEnter={() => setIsOpen(true)}
+      >
         <UserAvatar src={defaultUserProfile} />
         <UserDetails>
           <Link_Medium color={Primary_Deep_800}>
@@ -65,7 +70,7 @@ const MenuWallet = () => {
         </UserDetails>
       </WalletClosed>
 
-      <WalletOpened isOpen={isOpen}>
+      <WalletOpened isOpen={isOpen} onMouseLeave={() => setIsOpen(false)}>
         <Title>WALLET</Title>
         <Subtitle>
           <LeftSection>
@@ -87,7 +92,11 @@ const MenuWallet = () => {
               <MenuItem>{i.title}</MenuItem>
             </Link>
           ))}
-          <MenuItem>Sign out</MenuItem>
+          {isSignedIn ? (
+            <MenuItem onClick={signOut}>Sign out</MenuItem>
+          ) : (
+            <MenuItem onClick={signIn}>Sign in</MenuItem>
+          )}
         </Menus>
       </WalletOpened>
     </Wrapper>
