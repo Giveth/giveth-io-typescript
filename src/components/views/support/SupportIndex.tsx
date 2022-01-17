@@ -50,7 +50,8 @@ const cardsArray = [
     icon: questionIcon,
     title: 'Ask us a Question',
     caption: 'Do you have a specific question or a general inquiry that requires a response?',
-    buttonLabel: 'ask us a question'
+    buttonLabel: 'ask us a question',
+    route: config.LINKS.ASK_QUESTION
   },
   {
     icon: reportIcon,
@@ -63,13 +64,15 @@ const cardsArray = [
     icon: feedbackIcon,
     title: 'Leave Feedback',
     caption: 'Let us know how your experience was! \n' + 'How can we improve?',
-    buttonLabel: 'Leave Feedback'
+    buttonLabel: 'Leave Feedback',
+    route: config.LINKS.FEEDBACK
   },
   {
     icon: featureIcon,
     title: 'Request a New Feature',
     caption: 'Want to see a new feature on Giveth? Are we missing a critical functionality?',
-    buttonLabel: 'Request a New Feature'
+    buttonLabel: 'Request a New Feature',
+    route: config.LINKS.FEATURE_REQUEST
   }
 ]
 
