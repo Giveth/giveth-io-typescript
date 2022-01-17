@@ -21,7 +21,7 @@ function createApolloClient() {
   const appUser = getLocalStorageUserLabel()
 
   const httpLink = createUploadLink({
-    uri: process.env.NEXT_PUBLIC_APOLLO_SERVER
+    uri: config.LINKS.BACKEND
   }) as unknown as ApolloLink
 
   const authLink = setContext((_, { headers }) => {
