@@ -29,5 +29,4 @@ export interface IUserByAddress {
   walletAddress?: string
   url?: string
   location?: string
-  token?: string
 }

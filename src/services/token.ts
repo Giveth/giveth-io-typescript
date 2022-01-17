@@ -1,4 +1,3 @@
-import { ethers } from 'ethers'
 import { initializeApollo } from '../apollo/apolloClient'
 import { LOGIN_USER } from '../apollo/gql/gqlAuth'
 import { IUserByAddress } from '../apollo/types/gqlTypes'
@@ -16,7 +15,7 @@ export async function getToken(
       const mutate = {
         mutation: LOGIN_USER,
         variables: {
-          walletAddress: ethers.utils.getAddress(walletAddress),
+          walletAddress,
           signature,
           email: user?.email,
           avatar: user?.avatar,

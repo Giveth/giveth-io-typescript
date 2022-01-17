@@ -14,7 +14,7 @@ import MenuRoutesDesktop from './MenuRoutesDesktop'
 import MenuWallet from './MenuWallet'
 import Logo from '../../../public/images/giveth-logo-blue.svg'
 import MenuGivItem from './MenuGivItem'
-import SignInModal from '../SignInModal'
+import WalletModal from '../../wallet/WalletModal'
 
 const MenuIndex = () => {
   const context = useWeb3React()
@@ -23,7 +23,7 @@ const MenuIndex = () => {
 
   return (
     <Wrapper>
-      {showModal && <SignInModal showModal={showModal} closeModal={() => setShowModal(false)} />}
+      {showModal && <WalletModal showModal={showModal} closeModal={() => setShowModal(false)} />}
 
       <LeftMenus>
         <Link href={Routes.Home}>
@@ -44,11 +44,9 @@ const MenuIndex = () => {
             <Button small>CREATE A PROJECT</Button>
           </LinkStyled>
         </Link>
+        <MenuGivItem />
         {active ? (
-          <WalletWrapper>
-            <MenuGivItem />
-            <MenuWallet />
-          </WalletWrapper>
+          <MenuWallet />
         ) : (
           <Button onClick={() => setShowModal(true)} small>
             SIGN IN
@@ -119,11 +117,6 @@ const LogoBackground = styled(FlexCenter)`
       height: 50px !important;
     }
   }
-`
-
-const WalletWrapper = styled(FlexCenter)`
-  box-shadow: none;
-  gap: 16px;
 `
 
 export default MenuIndex

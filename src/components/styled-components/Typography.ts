@@ -59,12 +59,11 @@ export const H6 = styled.h6<ITypographyProps>`
   color: ${props => props.color || 'inherit'};
 `
 
-export const Lead = styled.div<ITypographyProps>`
+export const Lead = styled.div`
   font-family: Red Hat Text, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 32px;
-  color: ${props => props.color || 'inherit'};
 `
 
 export const Lead_Medium = styled.div`
@@ -165,11 +164,11 @@ export const Link_Small = styled.div`
   line-height: 16px;
   color: ${Primary_Deep_500};
 `
-export const Link_Big = styled.div<ITypographyProps>`
+export const Link_Big = styled.div`
   font-family: Red Hat Text;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 16px;
-  color: ${props => props.color || Link_500};
+  color: ${Link_500};
 `
