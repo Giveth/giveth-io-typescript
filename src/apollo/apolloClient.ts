@@ -5,12 +5,13 @@ import gql from 'graphql-tag'
 import { createUploadLink } from 'apollo-upload-client'
 import merge from 'deepmerge'
 import isEqual from 'lodash.isequal'
-import { getLocalStorageTokenLabel, getLocalStorageUserLabel } from './auth'
+import { getLocalStorageUserLabel } from '../services/auth'
 import config from '../../config'
+import { isSSRMode } from '../lib/helpers'
 
 let apolloClient: any
 
-const ssrMode = typeof window === 'undefined'
+const ssrMode = isSSRMode
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
@@ -25,7 +26,7 @@ function createApolloClient() {
 
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
-    if (!ssrMode) token = localStorage.getItem(getLocalStorageTokenLabel())
+    if (!ssrMode) token = localStorage.getItem(getLocalStorageUserLabel() + '_token')
 
     // return the headers to the context so httpLink can read them
     const mutation: any = {
