@@ -5,16 +5,26 @@ import { H4, Body_P } from '../../styled-components/Typography'
 import { Giv_800, Primary_Deep_800 } from '../../styled-components/Colors'
 import { Shadow } from '../../styled-components/Shadow'
 
-const PartnershipsCard = (props: {
-  content: { icon: string; title: string; description: string }
-}) => {
-  const { icon, title, description } = props.content
+export interface IPartnershipCard {
+  description: string
+  link: string
+  logo: { [key: string]: any }
+  name: string
+}
+
+export const PartnershipsCard = ({ description, link, logo, name }: IPartnershipCard) => {
   return (
     <Wrapper>
       <IconContainer>
-        <Image src={icon} alt={title} />
+        <Image
+          src={`http:${logo.fields.file.url}`}
+          objectFit='contain'
+          height='100'
+          width='100'
+          alt={`${name} logo`}
+        />
       </IconContainer>
-      <Title>{title}</Title>
+      <Title>{name}</Title>
       <Caption>{description}</Caption>
     </Wrapper>
   )
@@ -35,6 +45,8 @@ const Caption = styled(Body_P)`
 
 const IconContainer = styled.div`
   margin-bottom: 35px;
+  max-width: 255px;
+  max-height: 110px;
 `
 
 const Wrapper = styled.div`
@@ -48,5 +60,3 @@ const Wrapper = styled.div`
   box-shadow: ${Shadow.Neutral[500]};
   padding: 70px 35px 40px 35px;
 `
-
-export default PartnershipsCard

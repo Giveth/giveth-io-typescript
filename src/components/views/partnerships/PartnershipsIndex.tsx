@@ -3,10 +3,10 @@ import styled from '@emotion/styled'
 import { D3, Lead_Medium, H2 } from '../../styled-components/Typography'
 import { Giv_500, Giv_700, Mustard_500 } from '../../styled-components/Colors'
 import { Arc } from '../../styled-components/Arc'
-import PartnershipsArray from '../../../content/Partnerships'
-import PartnershipsCard from './PartnershipsCard'
+import { IPartnershipCard, PartnershipsCard } from './PartnershipsCard'
+import { IPartnersProps } from '../../../../pages/partnerships'
 
-const PartnershipsIndex = () => {
+const PartnershipsIndex = ({ friendsLogos, partners }: IPartnersProps) => {
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       <MustardArc />
@@ -17,8 +17,14 @@ const PartnershipsIndex = () => {
         <Caption>We have many partnerships in the Ethereum Community.</Caption>
         <PartnershipsContainer>
           <OurPartners>Our partners and friends</OurPartners>
-          {PartnershipsArray.map(i => (
-            <PartnershipsCard key={i.title} content={i} />
+          {friendsLogos.map((partner: IPartnershipCard) => (
+            <PartnershipsCard
+              key={partner.name}
+              description={partner.description}
+              link={partner.link}
+              logo={partner.logo}
+              name={partner.name}
+            />
           ))}
         </PartnershipsContainer>
       </Wrapper>
