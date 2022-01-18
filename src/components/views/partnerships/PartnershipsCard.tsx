@@ -4,27 +4,15 @@ import Image from 'next/image'
 import { H4, Body_P } from '../../styled-components/Typography'
 import { Giv_800, Primary_Deep_800 } from '../../styled-components/Colors'
 import { Shadow } from '../../styled-components/Shadow'
+import { IPartner } from '../../../content/Partnerships'
 
-export interface IPartnershipCard {
-  description: string
-  link: string
-  logo: { [key: string]: any }
-  name: string
-}
-
-export const PartnershipsCard = ({ description, link, logo, name }: IPartnershipCard) => {
+export const PartnershipsCard = ({ icon, title, description, link }: IPartner) => {
   return (
     <Wrapper href={link} target='_blank' rel='noreferrer'>
       <IconContainer>
-        <Image
-          src={`http:${logo.fields.file.url}`}
-          objectFit='contain'
-          height='100'
-          width='100'
-          alt={`${name} logo`}
-        />
+        <Image src={icon} objectFit='contain' width={100} height={100} alt={`${title} logo`} />
       </IconContainer>
-      <Title>{name}</Title>
+      <Title>{title}</Title>
       <Caption>{description}</Caption>
     </Wrapper>
   )
