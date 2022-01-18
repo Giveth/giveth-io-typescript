@@ -9,6 +9,8 @@ import { Caption, Link_Small } from '../../styled-components/Typography'
 import { Gray_200, Gray_300, Gray_800, Giv_500 } from '../../styled-components/Colors'
 import { IProject } from '../../../apollo/types/types'
 
+import TokenPicker from './TokenPicker'
+
 type SuccessFunction = (param: boolean) => void
 
 interface ISelectObj {
@@ -24,27 +26,6 @@ interface IToken {
   chainId: number
   symbol: string
   icon?: string
-}
-
-const Control = ({ children, ...props }: ControlProps<ISelectObj, false>) => {
-  const { value } = props.selectProps as any
-  return (
-    <components.Control {...props}>
-      <IconContainer>
-        <Img
-          key={value?.symbol}
-          src={value?.icon ? value.icon : '/images/tokens/eth.png'}
-          onError={e => {
-            e.currentTarget.onerror = null
-            e.currentTarget.src = '/images/tokens/eth.png'
-          }}
-          width='24px'
-          height='24px'
-        />
-        {children}
-      </IconContainer>
-    </components.Control>
-  )
 }
 
 const customStyles = {
@@ -64,7 +45,8 @@ const customStyles = {
     marginTop: 0,
     textAlign: 'left',
     // prevent menu to scroll y
-    wordWrap: 'break-word'
+    wordWrap: 'break-word',
+    width: '280px'
   }),
   menuList: (base: any) => ({
     ...base,
@@ -112,14 +94,7 @@ const CryptoDonation = (props: { setSuccessDonation: SuccessFunction; project: I
     <>
       <SearchContainer>
         <DropdownContainer>
-          <Select
-            styles={customStyles}
-            classNamePrefix='select'
-            value={selectedToken}
-            components={{ Control }}
-            onChange={(e: any) => setSelectedToken(e)}
-            options={tokens}
-          />
+          <TokenPicker tokenList={tokens} onChange={(e: any) => setSelectedToken(e)} />
         </DropdownContainer>
         <SearchBarContainer>
           <InputBox onChange={() => null} placeholder='Amount' />
@@ -167,6 +142,7 @@ const SearchBarContainer = styled.div`
   height: 54px;
   width: 65%;
   border: 2px solid ${Gray_300};
+  border-radius: 0px 6px 6px 0px;
 `
 const XDaiContainer = styled.div`
   display: flex;
