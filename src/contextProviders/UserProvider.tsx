@@ -1,6 +1,8 @@
 import React, { createContext, ReactElement, useEffect, useState } from 'react'
+import { ethers } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
-
+import { formatEther } from '@ethersproject/units'
+import { BigNumberish } from '@ethersproject/bignumber'
 import useWallet from '../wallet/walletHooks'
 import { initializeApollo } from '../apollo/apolloClient'
 import { GET_USER_BY_ADDRESS } from '../apollo/gql/gqlUser'
@@ -14,6 +16,7 @@ import User from '../entities/user'
 interface IUserContext {
   state: {
     user?: IUserByAddress
+    balance?: string | null
     isEnabled?: boolean
     isSignedIn?: boolean
   }
@@ -30,13 +33,13 @@ const apolloClient = initializeApollo()
 
 const UserProvider = (props: { children: ReactElement }) => {
   const [user, setUser] = useState<IUserByAddress | undefined>()
+  const [balance, setBalance] = useState<string | null>(null)
 
   useWallet()
   const context = useWeb3React()
   const { account, active, library, chainId, deactivate } = context
-  const isEnabled = !!library?.getSigner() && !!account && !!chainId && !!user
-  const isSignedIn = isEnabled && !!user.token
-
+  const isEnabled = !!library?.getSigner() && !!account && !!chainId
+  const isSignedIn = isEnabled && !!user?.token
   useEffect(() => {
     localStorage.removeItem(LocalStorageTokenLabel)
     if (active && account) {
@@ -45,6 +48,17 @@ const UserProvider = (props: { children: ReactElement }) => {
       user && setUser(undefined)
     }
   }, [active, account])
+
+  useEffect(() => {
+    if (!!account && !!library) {
+      library
+        .getBalance(account)
+        .then((_balance: BigNumberish) => {
+          setBalance(parseFloat(formatEther(_balance)).toFixed(3))
+        })
+        .catch(() => setBalance(null))
+    }
+  }, [account, library, chainId])
 
   useEffect(() => {
     if (user) {
@@ -156,6 +170,7 @@ const UserProvider = (props: { children: ReactElement }) => {
       value={{
         state: {
           user,
+          balance,
           isEnabled,
           isSignedIn
         },

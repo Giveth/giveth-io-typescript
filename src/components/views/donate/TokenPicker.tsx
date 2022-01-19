@@ -16,14 +16,17 @@ const { colors } = defaultTheme
 
 const ImageIcon = ({ ...props }: any) => {
   const { value } = props
+  let image_path = ''
+  try {
+    require(`../../../../public/images/tokens/${value.symbol?.toLowerCase()}.png`)
+    image_path = `/images/tokens/${value.symbol?.toLowerCase()}.png`
+  } catch (err) {
+    image_path = '/images/tokens/eth.png' //set default image path
+  }
   return (
     <Img
       key={value?.symbol}
-      src={value?.icon ? value.icon : '/images/tokens/eth.png'}
-      onError={e => {
-        e.currentTarget.onerror = null
-        e.currentTarget.src = '/images/tokens/eth.png'
-      }}
+      src={image_path}
       style={{ marginRight: '16px' }}
       width='24px'
       height='24px'
@@ -87,8 +90,12 @@ const selectStyles: StylesConfig<ISelectObj, false> = {
   })
 }
 
-const TokenPicker = (props: { tokenList: ISelectObj[] | undefined; onChange: any }) => {
-  const { tokenList, onChange } = props
+const TokenPicker = (props: {
+  tokenList: ISelectObj[] | undefined
+  onChange: any
+  onInputChange: any
+}) => {
+  const { tokenList, onChange, onInputChange } = props
 
   const [value, setValue] = useState<ISelectObj | null>()
   const [isOpen, setIsOpen] = useState(false)
@@ -98,8 +105,8 @@ const TokenPicker = (props: { tokenList: ISelectObj[] | undefined; onChange: any
   }
   const onSelectChange = (value: OnChangeValue<ISelectObj, false>) => {
     toggleOpen()
-    onChange(value)
     setValue(value)
+    onChange(value)
   }
 
   return (
@@ -130,6 +137,7 @@ const TokenPicker = (props: { tokenList: ISelectObj[] | undefined; onChange: any
         isClearable={false}
         menuIsOpen
         onChange={onSelectChange}
+        onInputChange={onInputChange}
         options={tokenList}
         placeholder='Search...'
         styles={selectStyles}

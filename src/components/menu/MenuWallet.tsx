@@ -29,26 +29,14 @@ import { networkInfo } from '../../lib/constants/NetworksObj'
 const MenuWallet = () => {
   const [showModal, setShowModal] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const [balance, setBalance] = useState<string | null>(null)
 
   const {
-    state: { user, isSignedIn },
+    state: { user, balance, isSignedIn },
     actions: { signIn, signOut }
   } = useContext(UserContext)
 
   const context = useWeb3React()
   const { chainId, account, library } = context
-
-  useEffect(() => {
-    if (!!account && !!library) {
-      library
-        .getBalance(account)
-        .then((_balance: BigNumberish) => {
-          setBalance(parseFloat(formatEther(_balance)).toFixed(3))
-        })
-        .catch(() => setBalance(null))
-    }
-  }, [account, library, chainId])
 
   const { networkName, networkToken } = networkInfo(chainId)
   const isMetaMask = checkWalletName(context) === EWallets.METAMASK
