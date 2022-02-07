@@ -21,6 +21,13 @@
     "socialTwitter": "https://twitter.com/amin__dev"
   },
   {
+    "name": "Freshelle",
+    "title": "Accounting and Administration",
+    "image": "https://images.ctfassets.net/movecrqtj4el/5AbQat52Bp1KnuwQMAXBYn/d6cd080977c1d704629ba9c739167304/freshelle.jpg",
+    "socialGithub": "https://github.com/freshelle",
+    "socailTwitter": "https://twitter.com/FreshelleT"
+  },
+  {
     "name": "Kay",
     "title": "devops",
     "image": "https://images.ctfassets.net/movecrqtj4el/2khGR1MokmUb0xZ606Rba/b804d0497c80d0787f36170929faf6b3/teamphoto-kay.jpg",
@@ -30,30 +37,37 @@
   {
     "name": "Ashley",
     "title": "Community Ambassador",
-    "image": "https://images.ctfassets.net/movecrqtj4el/7B4n9f24UizuROm4tgoQUs/fa3fb6df52559ef14813a8603cf84b9f/ashley-square.png",
+    "image": "https://images.ctfassets.net/movecrqtj4el/7B4n9f24UizuROm4tgoQUs/4d992d3501e23247c1018c0b9fc2982f/ashley.jpg",
     "socialGithub": "https://github.com/WhyldWanderer",
     "socialTwitter": "https://twitter.com/WhyldW"
   },
   {
     "name": "Dani Bellavita",
-    "title": "Governance Steward",
+    "title": "Donor Advisor",
     "image": "https://images.ctfassets.net/movecrqtj4el/1y6BX8PUrCYDNBpZGqTt7M/bb84fcf4c96f6aae01a928ff885afd1a/Dani_Headshot_2019_-_Danielle_Gennety.jpg",
     "socialGithub": "https://github.com/Danibelle",
     "socialTwitter": "https://twitter.com/TheOfficeMystic"
   },
   {
     "name": "Lauren Luz",
-    "title": "Communications Steward",
+    "title": "Product Manager & Comms Steward",
     "image": "https://images.ctfassets.net/movecrqtj4el/3DbOjx6wReSUIK7SWhL5OD/314b1ea3638f646fe90ceaf0787ac132/LaurenTeamPic.jpg",
     "socialGithub": "https://github.com/laurenluz",
     "socialTwitter": "https://twitter.com/karmaticacid"
   },
   {
+    "name": "MoeNick",
+    "title": "Product Manager",
+    "image": "https://images.ctfassets.net/movecrqtj4el/VuW8aI5LiuiI2pNbZzSBT/38db263885fdc08bdc739ba16dc29dda/moeNick2.jpg",
+    "socialGithub": "https://github.com/MoeNick",
+    "socialTwitter": "https://twitter.com/moe_nick"
+  },
+  {
     "name": "Mitch",
-    "title": "Writer",
+    "title": "DAO Steward",
     "image": "https://images.ctfassets.net/movecrqtj4el/2YvZ8dTpNsDTBe8A2QMi3d/9a41ec18848ef54093fbf8b26604214a/githubprofile.jpg",
     "socialGithub": "https://github.com/divine-comedian",
-    "socialTwitter": "https://www.theodysseyonline.com/dont-wont-make-twitter-account"
+    "socialTwitter": "https://twitter.com/divine_comedian"
   },
   {
     "name": "Mateo Daza",
@@ -68,6 +82,13 @@
     "image": "https://images.ctfassets.net/movecrqtj4el/2SPuH7gYlMH3B0cIGD4joO/bcc7c03e7981d63c11e4381df1dac2ee/IMG-20200604-WA0005_-_Marko_Prlji__.jpg",
     "socialGithub": "https://github.com/markoprljic",
     "socialTwitter": "https://twitter.com/@markoprljic"
+  },
+  {
+    "name": "Mohammad Ranjbar",
+    "title": "backend developer",
+    "image": "https://images.ctfassets.net/movecrqtj4el/6L8PRenLtB7kBlfreYGWGy/defd3896dd6adde4273d8a865fe0e1ff/mohammad.jpeg",
+    "socialGithub": "https://github.com/mohammadranjbarz",
+    "socailTwitter": "https://twitter.com/MZaferanie"
   },
   {
     "name": "Forest Soleil",

@@ -9,24 +9,19 @@ const AboutHistory = () => {
     <>
       <Upper>
         <Rect>
-          <span>The Giveth</span> Decentralized Altruistic Community (DAC) is an eclectic mix of
-          people from the Ethereum and nonprofit worlds.
+          <span>Giveth</span> has been around the block since 2016 and over the years has played a
+          crucial role in the development of Ethereum and it's community.
         </Rect>
-        <UpperText>
-          They are dedicated to building the tools that will make it easy for anyone to build a
-          global community around a cause. In fact, this core team is using the Giveth Platform to
-          build a community around the Giveth idea itself! If you want to help create the solution,
-          join our community.
-        </UpperText>
+        <UpperText></UpperText>
       </Upper>
       <End>
-        <Title>Some title goes here</Title>
+        <Title>The Enduring Pillar of #Blockchain4Good</Title>
         <Lead_Medium>
-          We are Altruistic, we are entirely open-source and love to reach out proactively to
-          similar initiatives, which we see as potential collaborators as opposed to competitors.
-          The Giveth DAC works with volunteers, and genius developers who are working for a fraction
-          of what they could be earning at for-profit Ethereum projects. To help us in building
-          Giveth, please visit the contributors guide.
+          From rescuing funds from the DAO hack to writing the Minime Contracts to building the
+          first Ethereum Bridge. Giveth has been a steadfast champion of public goods and
+          crypto-philanthropy. Our History is rich and expansive; from the first DApp, Giveth TRACE,
+          in 2017 to the launch of Giveth.io and the GIVeconomy in 2021, Giveth is a recognized and
+          respected mover in the Ethereum ecosystem.
         </Lead_Medium>
         <SliderButtons>
           <SliderButton className='active' />
